@@ -8,7 +8,7 @@ I like working with people - that's why I put quite some effort into studying Ch
 If you like Chatbots, you should pay my [Facebook Page a visit](https://m.me/mobrueckner).
 Since I like putting up bots and trying to have them do more and more tricks, you will see plenty of automated activity on my [Twitter feed](https://twitter.com/moebruec), too.
 
-Some tech related articles are available via dev.to and my old Wordpress blog. I mainly write on LinkedIn, however.
+Some tech related articles are available via [dev.to](https://dev.to/mrbrue) and my old [Wordpress blog](https://ideasopensourced.wordpress.com). I mainly write on LinkedIn, however.
 
 One of my favorite topics is [Platform Economies](https://platformeconomies.com).
 
