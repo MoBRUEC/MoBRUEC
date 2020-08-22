@@ -12,6 +12,8 @@ Some tech related articles are available via [dev.to](https://dev.to/mrbrue) and
 
 One of my favorite topics is [Platform Economies](https://platformeconomies.com).
 
+Like Al Bundy will never forget about this one time he scored three touchdowns in one game, I will never forget about the time when [I won a Microsoft CloudShow contest and donated the price to a child hospital](https://www.facebook.com/MicrosoftCloudShow/photos/pcb.1486882274730662/1486881964730693/). Yes, still proud of that one!
+
 ![alt text](https://media.giphy.com/media/Id0WsC08hT20ywyYHE/giphy.gif "Creators Have To Create")
 
 Get in touch - I am always curious and eager to collaborate!
