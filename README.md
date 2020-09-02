@@ -1,6 +1,7 @@
 ### Hello, friend!
 
 I am Mohammed Brueckner. You can find out about me on my [professional LinkedIn work profile](https://www.linkedin.com/in/mbrueckner).
+![a fairly younger version of me](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1599076157/Bildschirmfoto_2020-09-02_um_21.46.48.png "Creators Have To Create")
 
 In short, I am a technology enthusiast who is putting his feet into business topics as well hardcore tech challenges.
 I like working with people - that's why I put quite some effort into studying Change Management and a little bit in Coaching.
@@ -14,6 +15,6 @@ One of my favorite topics is [Platform Economies](https://platformeconomies.com)
 
 Like Al Bundy will never forget about this one time he scored three touchdowns in one game, I will never forget about the time when [I won a Microsoft CloudShow contest and donated the price to a child hospital](https://www.facebook.com/MicrosoftCloudShow/photos/pcb.1486882274730662/1486881964730693/). Yes, still proud of that one!
 
-![alt text](https://media.giphy.com/media/Id0WsC08hT20ywyYHE/giphy.gif "Creators Have To Create")
+![always create](https://media.giphy.com/media/Id0WsC08hT20ywyYHE/giphy.gif "Creators Have To Create")
 
 Get in touch - I am always curious and eager to collaborate!
