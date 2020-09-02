@@ -2,8 +2,6 @@
 
 I am Mohammed Brueckner. You can find out about me on my [professional LinkedIn work profile](https://www.linkedin.com/in/mbrueckner).
 
-![a fairly younger version of me](https://res.cloudinary.com/dm5qhwg4t/image/upload/c_scale,w_217/v1599076157/Bildschirmfoto_2020-09-02_um_21.46.48.jpg "a younger version of me")
-
 In short, I am a technology enthusiast who is putting his feet into business topics as well hardcore tech challenges.
 I like working with people - that's why I put quite some effort into studying Change Management and a little bit in Coaching.
 
