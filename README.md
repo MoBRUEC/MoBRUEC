@@ -6,7 +6,7 @@ In short, I am a technology enthusiast who is putting his feet into business top
 I like working with people - that's why I put quite some effort into studying Change Management and a little bit in Coaching.
 
 If you like Chatbots, you should pay my [Facebook Message bot a visit](https://m.me/mobrueckner).
-Since I like putting up bots and trying to have them do more and more tricks, you will see plenty of automated activity on my [Twitter feed](https://twitter.com/moebruec), too.
+Since I like putting up bots and trying to have them do more and more tricks, you will see plenty of automated activity on my **[Twitter feed](https://twitter.com/moebruec)**, too.
 
 Some tech or IT strategy related articles are available via [dev.to](https://dev.to/mrbrue) and my old [Wordpress blog](https://ideasopensourced.wordpress.com). Sometimes on [Medium](https://medium.com/@mohammedbrueckner). I mainly write on LinkedIn, however.
 
