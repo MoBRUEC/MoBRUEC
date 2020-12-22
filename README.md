@@ -1,6 +1,6 @@
 ### Hello, friend!
 
-I am Mohammed Brueckner. You can find out about me on my [professional LinkedIn work profile](https://www.linkedin.com/in/mbrueckner).
+I am Mohammed Brueckner. You can find out what interests me by checking out my [LinkedIn articles](https://www.linkedin.com/today/author/mbrueckner).
 
 In short, I am a technology enthusiast who is putting his feet into business topics as well hardcore tech challenges.
 I like working with people - that's why I put quite some effort into studying Change Management and am open for coaching.
