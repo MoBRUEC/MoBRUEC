@@ -2,7 +2,7 @@
 
 I am Mohammed Brueckner. You can find out what interests me by checking out my [LinkedIn articles](https://www.linkedin.com/today/author/mbrueckner).
 
-In short, I am a technology enthusiast who is putting his feet into business topics as well hardcore tech challenges.
+In short, I am a technology enthusiast who is putting his feet into business topics as well as hardcore tech challenges.
 I like working with people - that's why I put quite some effort into studying Change Management and am open for coaching.
 
 If you like Chatbots, you should pay my [Facebook Message bot a visit](https://m.me/mobrueckner).
