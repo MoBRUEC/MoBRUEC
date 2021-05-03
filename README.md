@@ -27,3 +27,25 @@ Well, with that, I bid you a great day:
 ![always create](https://media.giphy.com/media/Id0WsC08hT20ywyYHE/giphy.gif "Creators Have To Create")
 
 Get in touch - I am always curious and eager to collaborate!
+
+__
+I am a Technology and in particular Cloud architect and overall Technology lead vast experience with all kinds of Sales, Service, Marketing Enterprise tools. Teamplayer. Track record of improving system landscapes: Scalability, Resilience, Data Management. Track record of improving on marketing KPIs. Collaborative and adaptable. Certified Change Manager (APMG) + Project Manager (Prince2). TOGAF certified. Native German, excellent English.
+
+Things I can help you with, be it freelancing or permanent:
+Technical Management & Oversight
+Technical Strategy & Consulting
+Technical Integrations & Customizations
+Digital Marketing Strategy
+Vendor and tooling evaluation
+Marketing Automation
+Enterprise Architecture
+
+If you’d like to get in touch, feel free to say hello through any of the social links below. LinkedIn is always a good starting point.
+
+Feel free to try my Facebook Messenger chatbot.
+
+Certified AWS Architect and with 70-534: Architecting Microsoft Azure Solutions.
+
+Also trained in Change Management and TOGAF.
+
+Want to see me give a talk? Acquia Engage 2018 Talk, at your service.
