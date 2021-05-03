@@ -20,6 +20,7 @@ Like Al Bundy will never forget about this one time he scored three touchdowns i
 
 I like to tinker with technology in my spare time, and sometimes I win some contests along the way.
 Like the IFTTT XMAS 2020 challenge. If you like low-code automation, you might enjoy this one.
+
 [![IFTTT XMAS CONTEST 2020](https://img.youtube.com/vi/namYiCXgRIk/0.jpg)](https://www.youtube.com/watch?v=namYiCXgRIk)
 
 Well, with that, I bid you a great day:
