@@ -20,7 +20,7 @@ Like Al Bundy will never forget about this one time he scored three touchdowns i
 
 I like to tinker with technology in my spare time, and sometimes I win some contests along the way.
 Like the IFTTT XMAS 2020 challenge. If you like low-code automation, you might enjoy this one.
-xx
+[![IFTTT XMAS CONTEST 2020](https://img.youtube.com/vi/namYiCXgRIk/0.jpg)](https://www.youtube.com/watch?v=namYiCXgRIk)
 
 Well, with that, I bid you a great day:
 
@@ -42,12 +42,7 @@ Vendor and tooling evaluation
 Marketing Automation
 Enterprise Architecture
 
-If you’d like to get in touch, feel free to say hello through any of the social links below. LinkedIn is always a good starting point.
+If you’d like to get in touch, feel free to say hello through any of the social links below. **[LinkedIn](https://linkedin.com/in/mbrueckner)** is always a good starting point.
 
-Feel free to try my Facebook Messenger chatbot.
-
-Certified AWS Architect and with 70-534: Architecting Microsoft Azure Solutions.
-
-Also trained in Change Management and TOGAF.
-
-Want to see me give a talk? Acquia Engage 2018 Talk, at your service.
+Want to see me give a talk on a **massive transformation project** I initiated and led? Acquia Engage 2018 Talk, at your service.
+[![Acquia Engage presentation on massive transformation project](https://img.youtube.com/vi/ix98TGcaoMo/0.jpg)](https://www.youtube.com/watch?v=ix98TGcaoMo)
