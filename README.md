@@ -5,8 +5,7 @@ I am Mohammed Brueckner. You can find out what interests me by checking out my *
 In short, I am a technology enthusiast who is putting his feet into business topics as well as hardcore tech challenges.
 I like working with people - that's why I put quite some effort into studying Change Management and am open for coaching.
 
-If you like Chatbots, you should pay my [Facebook Message bot a visit](https://m.me/mobrueckner).
-Since I like putting up bots and trying to have them do more and more tricks, you will see plenty of automated activity on my **[Twitter feed](https://twitter.com/moebruec)**, too.
+Since I like putting up bots and trying to have them do more and more tricks, you will see plenty of automated activity on my **[Twitter feed](https://twitter.com/moebruec)**.
 
 Some tech or IT strategy related articles are available via [dev.to](https://dev.to/mrbrue) and my old [Wordpress blog](https://ideasopensourced.wordpress.com). Sometimes on [Medium](https://medium.com/@mohammedbrueckner). I mainly write on LinkedIn, however.
 
@@ -19,7 +18,7 @@ In this video - sorry, only in German! - I talk with peers from OPITZ CONSULTING
 Like Al Bundy will never forget about this one time he scored three touchdowns in one game, I will never forget about the time when [I won a Microsoft CloudShow contest and donated the price to a child hospital](https://www.facebook.com/MicrosoftCloudShow/photos/pcb.1486882274730662/1486881964730693/). Yes, still proud of that one!
 
 I like to tinker with technology in my spare time, and sometimes I win some contests along the way.
-Like the IFTTT XMAS 2020 challenge. If you like low-code automation, you might enjoy this one.
+Like the IFTTT XMAS 2020 challenge. [If you like low-code automation, you might enjoy this one.](https://www.youtube.com/watch?v=namYiCXgRIk)
 
 [![IFTTT XMAS CONTEST 2020](https://img.youtube.com/vi/namYiCXgRIk/0.jpg)](https://www.youtube.com/watch?v=namYiCXgRIk)
 
@@ -45,5 +44,6 @@ Enterprise Architecture
 
 If you’d like to get in touch, feel free to say hello through any of the social links below. **[LinkedIn](https://linkedin.com/in/mbrueckner)** is always a good starting point.
 
-Want to see me give a talk on a **massive transformation project** I initiated and led? Acquia Engage 2018 Talk, at your service.
+Want to see me give a talk on a **massive transformation project** I initiated and led? [Acquia Engage 2018 Talk, at your service](https://www.youtube.com/watch?v=ix98TGcaoMo).
+
 [![Acquia Engage presentation on massive transformation project](https://img.youtube.com/vi/ix98TGcaoMo/0.jpg)](https://www.youtube.com/watch?v=ix98TGcaoMo)
