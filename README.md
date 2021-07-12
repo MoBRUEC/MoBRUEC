@@ -31,7 +31,7 @@ Get in touch - I am always curious and eager to collaborate!
 __
 
 
-I am a Technology and in particular Cloud architect and overall Technology lead vast experience with all kinds of Sales, Service, Marketing Enterprise tools. Teamplayer. Track record of improving system landscapes: Scalability, Resilience, Data Management. Track record of improving on marketing KPIs. Collaborative and adaptable. Certified Change Manager (APMG) + Project Manager (Prince2). TOGAF certified. Native German, excellent English.
+I am a Technology and in particular Cloud architect and overall Technology lead with vast experience with all kinds of Sales, Service, Marketing Enterprise tools. Teamplayer. Track record of improving system landscapes: Scalability, Resilience, Data Management. Track record of improving on marketing KPIs. Collaborative and adaptable. Certified Change Manager (APMG) + Project Manager (Prince2). TOGAF certified. Native German, excellent English.
 
 Things I can help you with, be it freelancing or permanent:
 Technical Management & Oversight
