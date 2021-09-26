@@ -20,6 +20,9 @@ Like the IFTTT XMAS 2020 challenge. [If you like low-code automation, you might 
 
 [![IFTTT XMAS CONTEST 2020](https://img.youtube.com/vi/namYiCXgRIk/0.jpg)](https://www.youtube.com/watch?v=namYiCXgRIk)
 
+Or the Integromat contest of 2021, which I won as well. [Learn how to create a virtual gallery using nothing but Low Code tools now!](https://medium.com/serverless-and-lowocode-pioneers/winning-with-low-code-the-integromat-contest-of-2021-a1a9df445795)
+[![Integromat contest won in 2021!](https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/fr3k19weeykl/b/goodiesgalore/o/Bildschirmfoto%202021-09-26%20um%2019.52.35.png)](https://medium.com/serverless-and-lowocode-pioneers/winning-with-low-code-the-integromat-contest-of-2021-a1a9df445795)
+
 Since I am into bots and am trying to have them do more and more tricks, you will see plenty of automated activity on my **[Twitter feed](https://twitter.com/moebruec)**.
 
 Well, with that, I bid you a great day:
