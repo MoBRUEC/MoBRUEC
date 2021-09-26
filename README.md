@@ -25,9 +25,7 @@ Or the Integromat contest of 2021, which I won as well. [Learn how to create a v
 
 Since I am into bots and am trying to have them do more and more tricks, you will see plenty of automated activity on my **[Twitter feed](https://twitter.com/moebruec)**.
 
-Well, with that, I bid you a great day:
-
-![always create](https://media.giphy.com/media/Id0WsC08hT20ywyYHE/giphy.gif "Creators Have To Create")
+Well, with that, I bid you a great day.
 
 Get in touch - I am always curious and eager to collaborate!
 
