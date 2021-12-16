@@ -48,3 +48,6 @@ If you’d like to get in touch, feel free to say hello through any of the socia
 Want to see me give a talk on a **massive transformation project** I initiated and led? [Acquia Engage 2018 Talk, at your service](https://www.youtube.com/watch?v=ix98TGcaoMo).
 
 [![Acquia Engage presentation on massive transformation project](https://img.youtube.com/vi/ix98TGcaoMo/0.jpg)](https://www.youtube.com/watch?v=ix98TGcaoMo)
+
+By the way - I am a keen supporter of the Xbox Game Pass, formerly known as XCloud Project. It's fun. Try it out.
+[![Xcloud Founder Seal](https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/fr3k19weeykl/b/goodiesgalore/o/Project-xCloud-Gru%CC%88ndungsmitgliedsausweis.png)](https://www.xbox.com/en-US/xbox-game-pass?xr=shellnav)
