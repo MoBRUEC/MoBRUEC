@@ -2,7 +2,7 @@
 
 I am Mohammed Brueckner. You can find out what interests me by checking out my **[LinkedIn articles](https://www.linkedin.com/today/author/mbrueckner)**.
 
-In short, I am a technology enthusiast who is putting his feet into business topics as well as hardcore tech challenges.
+In short, I am a technology enthusiast who is putting his feet into business topics as well as tech challenges in the machine room.
 I like working with people - that's why I put quite some effort into studying Change Management and am open for coaching.
 
 Some tech or IT strategy related articles are available via [dev.to](https://dev.to/mrbrue) and my old [Wordpress blog](https://ideasopensourced.wordpress.com). Sometimes on [Medium](https://medium.com/@mohammedbrueckner). I mainly write on LinkedIn, however.
