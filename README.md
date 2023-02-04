@@ -3,11 +3,12 @@
 I am Mohammed Brueckner. You can find out what interests me by checking out my **[LinkedIn articles](https://www.linkedin.com/today/author/mbrueckner)**.
 
 In short, I am a technology enthusiast who is putting his feet into business topics as well as tech challenges in the machine room.
-I like working with people - that's why I put quite some effort into studying Change Management and am open for coaching.
+I like working with people - that's why I put quite some effort into studying Change Management and am open for coaching. Automation and AI are topics of love to me I dedicated quite some time to - (and this collection here could help you getting going)[https://github.com/MoBRUEC/AI-how-to-get-started]. Likewise, (the one on Power Automate)[https://github.com/MoBRUEC/powerautomaterecipes].
+
 
 Some tech or IT strategy related articles are available via [dev.to](https://dev.to/mrbrue) and my old [Wordpress blog](https://ideasopensourced.wordpress.com). Sometimes on [Medium](https://medium.com/@mohammedbrueckner). I mainly write on LinkedIn, however.
 
-One of my favorite topics is [Platform Economies](https://platformeconomies.com).
+One of my favorite topics is around the omnipresent [Platform Economies](https://platformeconomies.com).
 
 Enterprise Architecture is a domain of activities and responsibilities that sits with me for what feels like an eternity.
 In this video - sorry, only in German! - [I talk with friends from OPITZ CONSULTING about the modern day EA role:](https://www.youtube.com/watch?v=7n0MBTRpND4)
