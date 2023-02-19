@@ -16,6 +16,8 @@ And some related reads:
 Are you a pro-coder and want to get going with the Graph API faster? AI could get you there faster:
 [M365 Graph API and integration with Azure thanks to ChatGTP](https://mohammedbrueckner.medium.com/integrating-m365-graph-api-using-chatgpt-b22a15dc6ff)
 
+Did you like my DallE2 bear pictures used in my presentation(s)? [Well, then these free give-aways are for you.](/opensourcedalle2bearpictures)
+
 And even more reads:
 
 **LinkedIn** > [LinkedIn Articles about Business & Tech](https://www.linkedin.com/today/author/mbrueckner)
