@@ -22,5 +22,7 @@ And even more reads (of mine):
 
 **DevTo** > [Even more detailed articles on topics like using AI Services](https://dev.to/mrbrue)
 
+Did you like my DallE2 bear pictures used in my presentation(s)? [Well, then these free give-aways are for you.](/opensourcedalle2bearpictures)
+
 Cheers!
 [Mo](https://github.com/MoBRUEC)
