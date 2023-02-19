@@ -7,6 +7,7 @@ Some books you should love and cherish with regards to integration and organizin
 * [Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions](https://amzn.to/3ElH5d7)
 * [Project to Product: How to Survive and Thrive in the Age of Digital Disruption with the Flow Framework](https://amzn.to/3XDvTz7)
 * [A Seat at the Table: IT Leadership in the Age of Agility](https://amzn.to/3lLz0I8)
+* [The Software Architect Elevator: Redefining the Architect's Role in the Digital Enterprise](https://amzn.to/3SjtF75)
 
 The reason is simple - architecture and team dynamics always matters and your team composition or your development philosohphy doesn't change that.
 
