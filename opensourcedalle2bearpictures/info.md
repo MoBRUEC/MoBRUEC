@@ -1,4 +1,4 @@
-Pictures & the prompts for generating them in this folder are free to use. Shout-out to OpenAI for their great services.
+Pictures & the prompts for generating them in DallE2 in this folder are free to use. Shout-out to OpenAI for their great services.
 
 Want to learn something new today?
 [Advanced Automation using Azure & serverless services](https://medium.com/serverless-and-lowocode-pioneers/using-logic-apps-to-orchestrate-a-complex-video-processing-process-flow-a0ef20237511)
