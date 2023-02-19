@@ -22,6 +22,7 @@ Like the IFTTT XMAS 2020 challenge. [If you like low-code automation, you might 
 [![IFTTT XMAS CONTEST 2020](https://img.youtube.com/vi/namYiCXgRIk/0.jpg)](https://www.youtube.com/watch?v=namYiCXgRIk)
 
 Or the Integromat contest of 2021, which I won as well. [Learn how to create a virtual gallery using nothing but Low Code tools now!](https://medium.com/serverless-and-lowocode-pioneers/winning-with-low-code-the-integromat-contest-of-2021-a1a9df445795)
+
 [![Integromat contest won in 2021!](https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/fr3k19weeykl/b/goodiesgalore/o/integromat-contest-2021.jpg)](https://medium.com/serverless-and-lowocode-pioneers/winning-with-low-code-the-integromat-contest-of-2021-a1a9df445795)
 
 Want to pick up a great No-Code Automation Tool? Why not start with Power Automate? [I have some recipes for you.](https://github.com/MoBRUEC/powerautomaterecipes) -- If you are into serverless cloud architecture, you might [enjoy these write-ups here.](https://medium.com/serverless-and-lowocode-pioneers)
