@@ -31,6 +31,8 @@ And that's enough of that -
 I had/have the great honor of working for companies ike [Microsoft](https://www.linkedin.com/feed/update/urn:li:activity:7014115289978011648/), Bosch, Teradata and others. Being eternally grateful for that.
 
 I bid you a great day!
+
+
 __
 
 Certifications to date as follow.
