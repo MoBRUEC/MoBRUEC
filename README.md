@@ -8,7 +8,7 @@ I like working with people - that's why I put quite some effort into studying Ch
 
 Some tech or IT strategy related articles are available via [dev.to](https://dev.to/mrbrue) and my old [Wordpress blog](https://ideasopensourced.wordpress.com). Sometimes on [Medium](https://medium.com/@mohammedbrueckner). I mainly write on LinkedIn, however.
 
-One of my favorite topics is around the omnipresent [Platform Economies](https://platformeconomies.com).
+One of my favorite topics is around the omnipresent [Platform Economies](https://www.linkedin.com/pulse/defining-value-age-platforms-apis-mohammed-brueckner).
 
 Enterprise Architecture is a domain of activities and responsibilities that sits with me for what feels like an eternity.
 In this video - sorry, only in German! - [I talk with friends from OPITZ CONSULTING about the modern day EA role:](https://www.youtube.com/watch?v=7n0MBTRpND4)
