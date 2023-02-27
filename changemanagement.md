@@ -2,7 +2,7 @@
 
 Yes of course, even the academia behind Change Management is evolving. It is true though some underliyng principles do not go away. Even **ChatGPT** was eventually kind enough to [admit that the change management efforts required for a "Tech" project is comparable to any other change management project to the greatest extent](https://www.linkedin.com/posts/mbrueckner_chatgpt-on-change-management-and-why-do-not-activity-7028610804652371968-3gok).
 
-The amazing fact that more than 70% of all "projects" fail still stands - [read up my LinkedIn article on the matter, why that is and what we need to take into consideration to change that!](https://www.linkedin.com/pulse/transformation-compass-how-tell-youre-nailing-mohammed-brueckner)
+The amazing fact that more than 70% of all "projects" fail still stands - **[read up my LinkedIn article on the matter, why that is and what we need to take into consideration to change that!](https://www.linkedin.com/pulse/transformation-compass-how-tell-youre-nailing-mohammed-brueckner)**
 You see, change is a recurring theme here, all along.
 
 One of the most important take-aways for anybody willing to get better at Change Management is that in order to achieve that you need to change **yourself** first.
