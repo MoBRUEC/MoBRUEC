@@ -16,7 +16,7 @@ The reason is simple - architecture and team dynamics always matters and your te
 
 During the **Azure Summit Event Mid-March 2023** you would have seen the [German version of that presentation](/presentations/Integration%20in%20einer%20serverlosen%20Welt%20M%20Brueckner%2015-03-2023%20MSFT-1005-Azure-Summit-PPT_DE.pdf).
 
-Are you a pro-coder and want to get sombe backup like low-code devs get with their fancy drag & drop tools? Don't fret, AI could be that booster you need:
+Are you a pro-coder and want to get some backup like low-code devs get with their fancy drag & drop tools? Don't fret, AI could be that booster you need:
 [M365 Graph API and integration with Azure thanks to ChatGTP](https://mohammedbrueckner.medium.com/integrating-m365-graph-api-using-chatgpt-b22a15dc6ff)
 
 Did you like my DallE2 bear pictures used in my presentation(s)? [Well, then these free give-aways are for you.](/opensourcedalle2bearpictures)
