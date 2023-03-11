@@ -3,7 +3,7 @@
 I am Mohammed Brueckner. You can find out what interests me by checking out my **[LinkedIn articles](https://www.linkedin.com/today/author/mbrueckner)**.
 
 In short, I am a technology enthusiast who is putting his feet into business topics as well as tech challenges in the machine room.
-I like working with people - that's why I put quite some effort into studying [Change Management](/changemanagement.md) and am open for coaching. Automation and AI are topics of love to me I dedicated quite some time to - [learn more about that here](https://github.com/MoBRUEC/AI-how-to-get-started). Likewise, [the one on Power Automate](https://github.com/MoBRUEC/powerautomaterecipes). Integration is anyway a topic I could go on and on about and sometimes I do, like when I give an [Azure Solution Summit presentation](/azsummit23.md).
+I like working with people - that's why I put quite some effort into studying [Change Management](/changemanagement.md) and am open for coaching. Automation and AI are topics of love to me I dedicated quite some time to - [learn more about that here](https://github.com/MoBRUEC/AI-how-to-get-started). Likewise, [the one on Power Automate](https://github.com/MoBRUEC/powerautomaterecipes). Integration is anyway a topic I could go on and on about and sometimes I do, like when I give an [Azure Solution Summit presentation](/azsummit23.md). Not only integration of systems but as well interdisciplinary teams.
 
 Make sure to check out my articles on [Medium](https://medium.com/@mohammedbrueckner).
 
