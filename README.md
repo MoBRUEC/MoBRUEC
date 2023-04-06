@@ -69,4 +69,7 @@ Want to see me give a talk on a **massive transformation project** I initiated a
 By the way - I am a keen supporter of the Xbox Game Pass, formerly known as XCloud Project. It's fun. Try it out.
 [![Xcloud Founder Seal](https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/fr3k19weeykl/b/goodiesgalore/o/Project-xCloud-Gru%CC%88ndungsmitgliedsausweis_small.png)](https://www.xbox.com/en-US/xbox-game-pass?xr=shellnav)
 
+What else? Oh yeah, I love supporting creative people with visions:
+![Garage Hack Microsoft Badge](https://images.credly.com/size/680x680/images/cc7f97d3-75bd-4479-a8e7-beac4470e860/image.png)
+
 Cheers!
