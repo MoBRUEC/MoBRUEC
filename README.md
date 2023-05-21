@@ -29,10 +29,6 @@ Want to pick up a great No-Code Automation Tool? Why not start with Power Automa
 And that's enough of that - 
 I had/have the great honor of working for companies ike [Microsoft](https://www.linkedin.com/feed/update/urn:li:activity:7014115289978011648/), Bosch, Teradata and others. Being eternally grateful for that.
 
-I bid you a great day!
-
-
-__
 
 Certifications to date as follow.
 
@@ -47,18 +43,6 @@ Certifications to date as follow.
 * [SAP Cloud Platform Essentials (Update Q2/2019)](https://open.sap.com/verify/xeseh-dylam-magor-gobyd-sanar)
 * [AI Design Sprint Facilitator (33A)](https://www.linkedin.com/feed/update/urn:li:activity:6841081782889259008/)
 
-__
-
-I am a Technology and in particular Cloud architect and overall Technology lead with vast experience with all kinds of Sales, Service, Marketing Enterprise tools. Teamplayer. Track record of improving system landscapes: Scalability, Resilience, Data Management. Track record of improving on marketing KPIs. Collaborative and adaptable. Certified Change Manager (APMG) + Project Manager (Prince2). TOGAF certified. Native German, excellent English.
-
-Things I can help you with, be it freelancing or permanent:
-Technical Management & Oversight
-Technical Strategy & Consulting
-Technical Integrations & Customizations
-Digital Marketing Strategy
-Vendor and tooling evaluation
-Marketing Automation
-Enterprise Architecture
 
 If you’d like to get in touch, feel free to say hello through any of the social links below. **[LinkedIn](https://linkedin.com/in/mbrueckner)** is always a good starting point.
 
