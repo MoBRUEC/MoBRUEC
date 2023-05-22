@@ -9,7 +9,7 @@ Integration is a topic that particularly fascinates me, whether it's [integratin
 One of my favorite subjects to explore is the ever-evolving world of **Platform Economies** - a topic that continues to shape the future of e-commerce and beyond!
 Platform economies refer to the business models and ecosystems that are built around digital platforms, where multiple parties interact and exchange goods, services, or data. These platforms have disrupted traditional business models and transformed entire industries by enabling more efficient transactions and fostering greater collaboration among participants.
 
-Enterprise Architecture is a domain of activities and responsibilities that sits with me for what feels like an eternity.
+**Enterprise Architecture** is a domain of activities and responsibilities that sits with me for what feels like an eternity.
 In this video - sorry, only in German! - [I talk with friends from OPITZ CONSULTING about the modern day EA role:](https://www.youtube.com/watch?v=7n0MBTRpND4)
 [![EAM Reloaded](https://img.youtube.com/vi/7n0MBTRpND4/0.jpg)](https://www.youtube.com/watch?v=7n0MBTRpND4)
 
