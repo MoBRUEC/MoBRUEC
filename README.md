@@ -3,11 +3,11 @@
 My name is Mohammed Brueckner and my passion for [technology and strategy shines through in my work](https://www.linkedin.com/today/author/mbrueckner). 
 
 Discover more about my interests by browsing through my articles on LinkedIn where I delve into both business and tech-related challenges, from [Change Management](https://github.com/MoBRUEC/MoBRUEC/blob/master/changemanagement.md) to the [intricacies of AI and automation](https://github.com/MoBRUEC/AI-how-to-get-started). 
-As an advocate for teamwork, I am always open to coaching opportunities that enable me to collaborate effectively with interdisciplinary teams. 
+
 Integration is a topic that particularly fascinates me, whether it's [integrating systems or bringing diverse teams together for successful outcomes](https://github.com/MoBRUEC/MoBRUEC/blob/master/azsummit23.md). You can catch some of my [insights on Medium as well](https://medium.com/@mohammedbrueckner).
 
 One of my favorite subjects to explore is the ever-evolving world of **Platform Economies** - a topic that continues to shape the future of e-commerce and beyond!
-Platform economies refer to the business models and ecosystems that are built around digital platforms, where multiple parties interact and exchange goods, services, or data. These platforms have disrupted traditional business models and transformed entire industries by enabling more efficient transactions and fostering greater collaboration among participants. Platform economies matter because they provide new opportunities for innovation, competition, and growth in the digital age.
+Platform economies refer to the business models and ecosystems that are built around digital platforms, where multiple parties interact and exchange goods, services, or data. These platforms have disrupted traditional business models and transformed entire industries by enabling more efficient transactions and fostering greater collaboration among participants.
 
 Enterprise Architecture is a domain of activities and responsibilities that sits with me for what feels like an eternity.
 In this video - sorry, only in German! - [I talk with friends from OPITZ CONSULTING about the modern day EA role:](https://www.youtube.com/watch?v=7n0MBTRpND4)
