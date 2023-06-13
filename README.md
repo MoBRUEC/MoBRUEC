@@ -39,10 +39,13 @@ Certifications to date as follow.
 * [APM Group: Prince 2 Practitioner](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/AB1_P2.pdf)
 * [Togaf 9](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537643/moassets/AB2_TogafF.pdf)
 * ["Security in Google Cloud Platform" Coursera Certificate](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1598464557/moassets/security%20gcp.jpg)
-* [Various Google Cloud Coursera Certificates](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/cloudera-courses.jpg)
-* [SAP Cloud Platform Essentials (Update Q2/2019)](https://open.sap.com/verify/xeseh-dylam-magor-gobyd-sanar)
 * [AI Design Sprint Facilitator (33A)](https://www.linkedin.com/feed/update/urn:li:activity:6841081782889259008/)
 
+And many, many courses, just a selection as follow.
+* [Various Google Cloud Coursera Certificates](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/cloudera-courses.jpg)
+* [SAP Cloud Platform Essentials (Update Q2/2019)](https://open.sap.com/verify/xeseh-dylam-magor-gobyd-sanar)
+* [Microsoft MCAPS Envisioning Workshop Participation](https://www.credly.com/badges/a6bce78f-7a10-4e27-a2f9-8ec9b4e9356b)
+* [Other Credly badges, e.g. AWS related](https://www.credly.com/users/mohammed-bruckner/badges)
 
 If you’d like to get in touch, feel free to say hello through any of the social links below. **[LinkedIn](https://linkedin.com/in/mbrueckner)** is always a good starting point.
 
