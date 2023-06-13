@@ -53,10 +53,4 @@ Want to see me give a talk on a **massive transformation project** I initiated a
 
 [![Acquia Engage presentation on massive transformation project](https://img.youtube.com/vi/ix98TGcaoMo/0.jpg)](https://www.youtube.com/watch?v=ix98TGcaoMo)
 
-By the way - I am a keen supporter of the Xbox Game Pass, formerly known as XCloud Project. It's fun. Try it out.
-[![Xcloud Founder Seal](https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/fr3k19weeykl/b/goodiesgalore/o/Project-xCloud-Gru%CC%88ndungsmitgliedsausweis_small.png)](https://www.xbox.com/en-US/xbox-game-pass?xr=shellnav)
-
-What else? Oh yeah, I love [supporting creative people with visions](https://www.credly.com/badges/e0edf438-9bd1-4c29-ae97-eb212c061aa6/public_url):
-![Garage Hack Microsoft Badge](https://images.credly.com/size/680x680/images/cc7f97d3-75bd-4479-a8e7-beac4470e860/image.png)
-
 Cheers!
