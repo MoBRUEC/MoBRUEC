@@ -40,6 +40,7 @@ Certifications to date as follow.
 * [Togaf 9](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537643/moassets/AB2_TogafF.pdf)
 * ["Security in Google Cloud Platform" Coursera Certificate](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1598464557/moassets/security%20gcp.jpg)
 * [AI Design Sprint Facilitator (33A)](https://www.linkedin.com/feed/update/urn:li:activity:6841081782889259008/)
+* [Azure AI Engineer Associate](https://learn.microsoft.com/api/credentials/share/de-de/MohammedBrueckner-9106/BE78C6DFA17BD1B5?sharingId=4ACDD85742880269)
 
 And many, many courses, just a selection as follow.
 * [Various Google Cloud Coursera Certificates](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/cloudera-courses.jpg)
