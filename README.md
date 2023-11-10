@@ -13,7 +13,7 @@ Platform economies refer to the business models and ecosystems that are built ar
 In this video - sorry, only in German! - [I talk with friends from OPITZ CONSULTING about the modern day EA role:](https://www.youtube.com/watch?v=7n0MBTRpND4)
 [![EAM Reloaded](https://img.youtube.com/vi/7n0MBTRpND4/0.jpg)](https://www.youtube.com/watch?v=7n0MBTRpND4)
 
-When I am not advising partners or clients, [I like to try out my skills e.g. in low-code contests](https://github.com/MoBRUEC/MoBRUEC/blob/master/changemanagement.md).
+When I am not advising partners or clients, [I like to try out my skills e.g. in low-code contests](https://github.com/MoBRUEC/MoBRUEC/blob/master/contests.md).
 
 Certifications to date as follow.
 
