@@ -30,6 +30,7 @@ Certifications to date as follow.
 * [Azure AI Engineer Associate](https://learn.microsoft.com/api/credentials/share/de-de/MohammedBrueckner-9106/BE78C6DFA17BD1B5?sharingId=4ACDD85742880269)
 
 And many, many courses, just a selection as follow.
+* [Career Essentials in Sustainable Tech by Microsoft and LinkedIn](https://www.linkedin.com/learning/certificates/b8ad4ac34267be7af9c4c37b97ec3f2b4275db639453cc3e935203c5a1d57098)
 * [Various Google Cloud Coursera Certificates](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/cloudera-courses.jpg)
 * [SAP Cloud Platform Essentials (Update Q2/2019)](https://open.sap.com/verify/xeseh-dylam-magor-gobyd-sanar)
 * [Microsoft MCAPS Envisioning Workshop Participation](https://www.credly.com/badges/a6bce78f-7a10-4e27-a2f9-8ec9b4e9356b)
