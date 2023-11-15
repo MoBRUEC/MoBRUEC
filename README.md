@@ -10,6 +10,8 @@ One of my favorite subjects to explore is the ever-evolving world of **Platform 
 Platform economies refer to the business models and ecosystems that are built around digital platforms, where multiple parties interact and exchange goods, services, or data. These platforms have disrupted traditional business models and transformed entire industries by enabling more efficient transactions and fostering greater collaboration among participants.
 [Learn more about platforms from these folks from FAZ](https://www.linkedin.com/showcase/fazdeconomy/) or the [great Gregor Hophe and his book on the topic](https://leanpub.com/platformstrategy). :)
 
+And now there is an [OpenAI GPT Chat I created that can answer all your questions regarding the Platform Economies, too](https://chat.openai.com/g/g-ZcYuscMSi-platform-economist).
+
 **Enterprise Architecture** is a domain of activities and responsibilities that sits with me for what feels like an eternity.
 In this video - sorry, only in German! - [I talk with friends from OPITZ CONSULTING about the modern day EA role:](https://www.youtube.com/watch?v=7n0MBTRpND4)
 
