@@ -15,15 +15,3 @@ Some books you should love and cherish with regards to integration and organizin
 
 Here is a [presentation of mine on the topic of Change Management](presentations/Change%20Management%20a%20pragmatic%20take%20M%20Brueckner.pdf), based on the already [mentioned article](https://www.linkedin.com/pulse/transformation-compass-how-tell-youre-nailing-mohammed-brueckner).
 
-And even more reads (of mine):
-
-**LinkedIn** > [LinkedIn Articles about Business & Tech](https://www.linkedin.com/today/author/mbrueckner)
-
-**Medium** > [Articles about detailed topics around Cloud Computing and more](https://medium.com/@mohammedbrueckner)
-
-**DevTo** > [Even more detailed articles on topics like using AI Services](https://dev.to/mrbrue)
-
-Did you like my DallE2 bear pictures used in my presentation(s)? [Well, then these free give-aways are for you.](/opensourcedalle2bearpictures)
-
-Cheers!
-[Mo](https://github.com/MoBRUEC)
