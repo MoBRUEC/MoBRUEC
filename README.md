@@ -1,6 +1,13 @@
 ### Hello, friend!
 
-My name is Mohammed Brueckner and my passion for [technology and strategy shines through in my work](https://www.linkedin.com/today/author/mbrueckner). 
+My name is Mohammed Brueckner and my passion for [technology and strategy shines through in my work](https://www.linkedin.com/today/author/mbrueckner).
+
+I am the author of "IT's not magic, it's architecture"  and "The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts.".
+
+[![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.youtube.com/watch?v=7n0MBTRpND4)
+[![Dall-E Cookbook](https://m.media-amazon.com/images/I/91ff7xcipwL._SY522_.jpg)](https://www.youtube.com/watch?v=7n0MBTRpND4)
+
+One deals with Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI. The other one with the democratiziation of art! (And I mean art in the sense of classic art as well as modern art.)
 
 Discover more about my interests by browsing through my articles on LinkedIn where I delve into both business and tech-related challenges, from [Change Management](https://github.com/MoBRUEC/MoBRUEC/blob/master/changemanagement.md) to the [intricacies of AI and automation](https://github.com/MoBRUEC/AI-how-to-get-started). 
 
