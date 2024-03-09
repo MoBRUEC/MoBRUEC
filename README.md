@@ -2,7 +2,7 @@
 
 My name is Mohammed Brueckner and my passion for [technology and strategy shines through in my work](https://www.linkedin.com/today/author/mbrueckner).
 
-I am the author of "IT's not magic, it's architecture"  and "The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts.", both available via Amazon:
+I am the author of "IT's not magic, it's architecture"  and "The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts.", both available via Amazon - just click/ap on the images if you are interested:
 
 [![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
 [![Dall-E Cookbook](https://m.media-amazon.com/images/I/91ff7xcipwL._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)
