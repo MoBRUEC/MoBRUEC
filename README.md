@@ -28,8 +28,8 @@ When I am not advising partners or clients, [I like to try out my skills e.g. in
 
 Certifications to date as follow.
 
-* [Aprimo ARM](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537643/moassets/AB4_ARM_Certificate.pdf)
 * [Architecting Microsoft Azure Solutions (70-534)](https://www.credly.com/badges/b1921aed-a23e-45dd-833b-d2ee52925f00/public_url)
+* [Various (Other) Active Microsoft Certifications](https://learn.microsoft.com/en-us/users/mohammedbrueckner-9106/transcript/vnm84ajlg233618)
 * [AWS Solution Architect Associate](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537645/moassets/awsSolutionsArchitect_AE.pdf)
 * [APMG International: Change Management Practitioner](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/2000690216-CMP15.pdf)
 * [APM Group: Prince 2 Practitioner](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/AB1_P2.pdf)
@@ -37,6 +37,7 @@ Certifications to date as follow.
 * ["Security in Google Cloud Platform" Coursera Certificate](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1598464557/moassets/security%20gcp.jpg)
 * [AI Design Sprint Facilitator (33A)](https://www.linkedin.com/feed/update/urn:li:activity:6841081782889259008/)
 * [Azure AI Engineer Associate](https://learn.microsoft.com/api/credentials/share/de-de/MohammedBrueckner-9106/BE78C6DFA17BD1B5?sharingId=4ACDD85742880269)
+* [Aprimo ARM](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537643/moassets/AB4_ARM_Certificate.pdf)
 
 And many, many courses, just a selection as follow.
 * [Career Essentials in Sustainable Tech by Microsoft and LinkedIn](https://www.linkedin.com/learning/certificates/b8ad4ac34267be7af9c4c37b97ec3f2b4275db639453cc3e935203c5a1d57098)
