@@ -15,7 +15,7 @@ Integration is a topic that particularly fascinates me, whether it's [integratin
 
 One of my favorite subjects to explore is the ever-evolving world of **Platform Economies** - a topic that continues to shape the future of e-commerce and beyond!
 Platform economies refer to the business models and ecosystems that are built around digital platforms, where multiple parties interact and exchange goods, services, or data. These platforms have disrupted traditional business models and transformed entire industries by enabling more efficient transactions and fostering greater collaboration among participants.
-[Learn more about platforms from these folks from FAZ](https://www.linkedin.com/showcase/fazdeconomy/) or the [great Gregor Hophe and his book on the topic](https://leanpub.com/platformstrategy). :)
+[Learn more about platforms from these folks from FAZ](https://www.linkedin.com/showcase/fazdeconomy/) or the [great Gregor Hophe and his book "𝗣𝗹𝗮𝘁𝗳𝗼𝗿𝗺 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝘆: 𝗜𝗻𝗻𝗼𝘃𝗮𝘁𝗶𝗼𝗻 𝗧𝗵𝗿𝗼𝘂𝗴𝗵 𝗛𝗮𝗿𝗺𝗼𝗻𝗶𝘇𝗮𝘁𝗶𝗼𝗻"](https://www.amazon.de/Platform-Strategy-Innovation-Harmonization-Architect/dp/B0D1R6DX2M?&linkCode=sl1&tag=platformecono-21&linkId=1f662b17554c13558e98b21b838a7260&language=de_DE&ref_=as_li_ss_tl). 
 
 And now there is an [OpenAI GPT Chat I created that can answer all your questions regarding the Platform Economies, too](https://chat.openai.com/g/g-ZcYuscMSi-platform-economist).
 
