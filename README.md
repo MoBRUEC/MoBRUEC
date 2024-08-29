@@ -10,6 +10,7 @@ Speaking of writing: I am the author of **["IT's not magic, it's architecture"](
 One deals with Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI. The other one with the democratiziation of art! (And I mean art in the sense of classic art as well as modern art.)
 
 Discover more about my interests by browsing through my articles on LinkedIn where I delve into both business and tech-related challenges, from [Change Management](https://github.com/MoBRUEC/MoBRUEC/blob/master/changemanagement.md) to the [intricacies of AI and automation](https://github.com/MoBRUEC/AI-how-to-get-started). 
+[One of my whitepapers deals with a fascinating cloud SAAS: Microsoft Fabric](https://www.ascent.io/insight/composable-it-architectures-for-data-management-and-analytics-using-microsoft-fabric/). Why care? Read for yourself, please. ;)
 
 Integration is a topic that particularly fascinates me, whether it's [integrating systems or bringing diverse teams together for successful outcomes](https://github.com/MoBRUEC/MoBRUEC/blob/master/azsummit23.md). You can catch some of my [insights on Medium as well](https://medium.com/@mohammedbrueckner).
 
