@@ -2,7 +2,7 @@
 
 Welcome to my digital workspace. I'm Mohammed Brueckner, focusing on enterprise architecture, digital transformation, and innovative technology solutions that drive business value.
 
-## Strategic Publications
+## Highlighted Publications
 
 [![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
 
