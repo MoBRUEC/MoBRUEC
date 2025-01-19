@@ -32,7 +32,6 @@ Watch my strategic discussion on modern enterprise architecture with OPITZ CONSU
 - [Microsoft Fabric architecture strategies](https://www.ascent.io/insight/composable-it-architectures-for-data-management-and-analytics-using-microsoft-fabric/)
 - [Change Management frameworks](https://github.com/MoBRUEC/MoBRUEC/blob/master/changemanagement.md)
 - [AI implementation roadmaps](https://github.com/MoBRUEC/AI-how-to-get-started)
-- [Digital transformation insights](https://medium.com/@mohammedbrueckner)
 
 ### Transformation Experience
 Learn about leading enterprise-scale transformation initiatives:
@@ -55,6 +54,10 @@ Learn about leading enterprise-scale transformation initiatives:
 
 ### Professional Development
 My commitment to innovation extends through [continuous learning](https://www.credly.com/users/mohammed-bruckner/badges) and practical application. Recent achievements include [low-code development competitions](https://github.com/MoBRUEC/MoBRUEC/blob/master/contests.md) and sustainable technology initiatives.
+
+## Blogging & More
+
+Explore my thoughts on technology, society, and economics in my Medium magazine: [Digital transformation insights](https://medium.com/micromusings).
 
 ## Professional Engagement
 
