@@ -1,77 +1,82 @@
-# Zahlenzauberer Zappelfix: Wo Mathe auf Heiterkeit trifft! 🎉
+# Zahlenzauberer Zappelfix: Ein modularer Ansatz für grundlegende Arithmetik
 
-_Von Mo, inspiriert von Onkel Bob Martin, aber viel lustiger_
+_Von Mo, IT- & Enterprise-Architekt_
 
-Hallo, liebe Code-Schleuderer, Zahlenknacker und Kicher-Suchende!
+Dieses Dokument umreißt den Zweck, die Struktur und die beabsichtigte Verwendung von `Zahlenzauberer Zappelfix`, einer frei lizenzierten Bildungsanwendung, die entwickelt wurde, um Lernenden grundlegende mathematische Operationen auf ansprechende und intuitive Weise zu vermitteln. Unter Beibehaltung einer benutzerfreundlichen Oberfläche ist die Architektur der Anwendung modular und erweiterbar aufgebaut.
 
-Seid ihr bereit für eine mathematische Reise, die so aufregend, so herrlich verrückt ist, dass ihr am Ende "Heureka!" (oder vielleicht "Ich habe es gefunden!") ruft? Dann sucht nicht weiter! Erfreut eure Augen an **Zahlenzauberer Zappelfix**, der App, die garantiert dafür sorgt, dass Mathe lernen nicht nur erträglich, sondern *geradezu spielerisch* wird!
+## Kernprinzipien
 
-## Was ist dieses magische Wunderwerk?
+`Zahlenzauberer Zappelfix` (ungefähr übersetzt als "Zahlenzauberer Zappelfix") wurde mit den folgenden Kernprinzipien entwickelt:
 
-Zahlenzauberer Zappelfix ist eine Mathe-Lern-App, die mit einer Prise Laune und einer ganzen Menge Herz geschaffen wurde. Ich stelle sie mir gern als Willy Wonkas Schokoladenfabrik der Arithmetik vor; wenn Willy eine Leidenschaft für Primzahlen und nicht für Oompa Loompas gehabt hätte.
+*   **Einfachheit:** Die Benutzeroberfläche ist bewusst minimalistisch gehalten, um kognitive Überlastung zu vermeiden und sich stattdessen auf die grundlegenden Rechenoperationen zu konzentrieren.
+*   **Modularität:** Die Anwendung ist mit einer modularen Architektur konzipiert, die eine einfache Erweiterung und Anpassung der Lerninhalte ermöglicht.
+*   **Zugänglichkeit:** Die Anwendung zielt darauf ab, auf verschiedenen Plattformen leicht zugänglich zu sein und gleichzeitig eine intuitive Benutzererfahrung zu gewährleisten.
+*   **Open Source:** Das Projekt ist unter der GPL lizenziert und betont die Freiheit, die Anwendung und ihren Quellcode zu verwenden, anzupassen und zu teilen.
 
-Wir haben die trockenen, verstaubten Lehrbücher von einst genommen und in einen lebendigen Spielplatz verwandelt, mit solchen mathematischen Meistern wie:
+## Funktionale Komponenten
 
-*   **Multys Multiplikation**: Macht euch bereit, eure Freude zu multiplizieren! (und, ihr wisst schon, auch Zahlen)
-*   **Divis Division**: Wo wir die Kunst des Dividierens mit entzückender Geschicklichkeit meistern.
-*   **Rundys Runderei**: Für all die herrlichen Rundungen, von denen ihr nie wusstet, dass ihr sie liebt!
+Die Anwendung bietet drei Hauptfunktionsmodule:
 
-Aber wartet, es gibt noch mehr! (Ich weiß, ich bin gut, oder?)
+*   `Multys Multiplikation`: Ermöglicht das Üben der Multiplikation mit einer Oberfläche, die das algorithmische Denken fördert.
+*   `Divis Division`: Ermöglicht es den Lernenden, durch interaktive Übungen ein solides Verständnis der Division zu entwickeln.
+*   `Rundys Runderei`: Bietet eine kontrollierte Umgebung, um die Fähigkeit der numerischen Rundung zu meistern.
 
-Unsere Benutzeroberfläche ist so intuitiv, dass sie ein Eichhörnchen bedienen könnte (obwohl ich dringend davon abrate, einem Eichhörnchen den Zugang zu eurem Gerät zu gewähren, aus Gründen). Wählt einfach euer arithmetisches Abenteuer aus, pickt eure Zahlen aus dem Dropdown-Menü und lasst euch verzaubern, während Zappelfix euch zur mathematischen Meisterschaft führt. Und wenn ihr ins Straucheln geratet, keine Sorge; unser "Prüfen!"-Button ist da, um euch mit positiver Verstärkung zu überschütten.
+Jedes Modul arbeitet mit dem gleichen benutzerseitigen Mechanismus, der es den Lernenden ermöglicht, die zu übende Operation auszuwählen, Zahlen über ein intuitives Spinner-Steuerelement einzugeben und durch eine definierte Prüfschaltfläche sofortiges Feedback zu erhalten.
 
-## Warum Zappelfix wählen?
+## Architektur
 
-Seien wir ehrlich, Mathe kann echt anstrengend sein, eine echte "Zahlen-Betäubung". Aber mit Zappelfix ist es, als würde man ein bisschen Feenstaub in eure Gleichung geben. Hier ist, was es so wunderbar... nun ja, *wunderbar* macht:
+Die zugrunde liegende Architektur der Anwendung betont die klare Trennung der Zuständigkeiten:
 
-*   **Einfachheit**: Wir haben die Benutzeroberfläche so einfach gehalten, dass selbst meine Oma, die noch ein Wählscheibentelefon benutzt, sie verwenden kann!
-*   **Fesselnd**: Das lebendige Design und die fröhlichen Interaktionen werden euch garantiert ein Lächeln ins Gesicht zaubern, selbst wenn ihr mit Dezimalzahlen arbeitet!
-*   **Frei wie ein Vogel**: Unter dem glorreichen Banner der GPL-Lizenz steht es euch frei, diese App zu nutzen, zu verändern und nach Herzenslust zu verbessern. Es ist wie eine Matheparty, und jeder ist eingeladen!
-*   **Habe ich SPASS erwähnt?!**: Weil es Spaß macht. Ihr *werdet* lachen und lernen. Und vielleicht sogar ein wenig weinen vor lauter Freude an der reinen, unverfälschten Freude, Mathe zu meistern.
+*   **Präsentationsschicht:** Die Benutzeroberfläche ist mit einem Schwerpunkt auf Reaktionsfähigkeit und Klarheit aufgebaut.
+*   **Logikschicht:** Die arithmetischen Operationen sind in eigenständigen Modulen gekapselt, die leicht modifiziert oder erweitert werden können, ohne die breitere Struktur zu beeinträchtigen.
 
-## Los geht's!
+Dieser Ansatz gewährleistet, dass die Anwendung nicht nur leicht erweiterbar ist, sondern auch der Weiterentwicklung und Integration förderlich ist.
 
-Seid ihr bereit, einzutauchen? Es ist so einfach wie 1, 2, 3 (denn das lehren wir ja schließlich hier!).
+## Nutzung
 
-1.  Klont das Repo!
-2.  Startet es!
-3.  Beginnt eure Suche nach mathematischem Wissen (und ein paar Kichern).
+Der Einstieg ist unkompliziert:
 
-## Beiträge sind willkommen!
+1.  Klonen Sie das Repository.
+2.  Führen Sie die Anwendung in der von Ihnen gewählten Umgebung aus.
+3.  Beginnen Sie mit dem Üben der ausgewählten Rechenoperationen mit der interaktiven Benutzeroberfläche.
 
-Wir sind ganz im Sinne des gemeinschaftlichen Geistes! Wenn ihr Fehler findet, Ideen habt oder einfach nur am Spaß teilnehmen wollt, dann reicht gerne eine Pull Request ein! Alle Ergänzungen sind willkommen, denkt nur daran, die Wortspiele so zahlreich zu halten wie die Möglichkeiten.
+Die Anwendung ist für den Einsatz in formalen und informellen Lernumgebungen gedacht. Der Schwerpunkt liegt weiterhin auf der Bereitstellung eines zugänglichen und dennoch effektiven Werkzeugs für die grundlegende mathematische Entwicklung.
 
-## Links! Denn die Zukunft ist jetzt!
-<br />
+## Gemeinschaft und Beiträge
 
-Ich denke, dies könnte ein guter Zeitpunkt sein, um einige sehr wichtige Dinge hinzuzufügen... Ihr wisst schon, Ressourcen, die jedem helfen können, der an diesem Projekt interessiert ist. Ich meine, wenn ihr das hier lest, müsst ihr doch interessiert sein, oder? (sagt mir nicht, dass ihr es nicht seid!)
-<br />
+Wir begrüßen Beiträge aus der Open-Source-Community. Wenn Sie Fehler identifiziert, Verbesserungen haben oder neue Funktionen einführen möchten, reichen Sie bitte eine Pull Request in das Repository ein. Unser Team überprüft alle Einsendungen und stellt sicher, dass sie mit den architektonischen Prinzipien der Anwendung übereinstimmen.
 
-*   **Schaut euch das Original-Spielbuch an!**
+## Ressourcen und zusätzliche Lektüre
+
+Für diejenigen, die ihr Verständnis erweitern möchten, haben wir die folgenden Ressourcen bereitgestellt:
+
+*   **Original-Spielbuch:** _Das Büroabenteuer Digitale Transformationsquest_
     *   [https://a.co/d/78M1J9s](https://a.co/d/78M1J9s)
-    *   Erlebt die ganze Geschichte im Druckformat
-    
-*  **Abonniert unseren LinkedIn-Newsletter**
+    *   Tauchen Sie ein in das komplette narrative Erlebnis in seiner originalen, gedruckten Form.
+
+*   **LinkedIn-Newsletter:**
     *   [https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673](https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673)
-    *   Bleibt mit den neuesten Erkenntnissen zur digitalen Transformation auf dem Laufenden
-    
-*   **Meistert IT-Architektur - Holt euch das Buch!**
+    *   Bleiben Sie mit unseren Einblicken in die digitale Transformation und ihre Auswirkungen auf dem Laufenden.
+
+*   **Lehrbuch IT-Architektur:**
     *   [https://a.co/d/ceXtKTW](https://a.co/d/ceXtKTW)
-    *  Lernt die Prinzipien der modernen IT-Architektur kennen
+    *   Erweitern Sie Ihr Verständnis der Prinzipien moderner IT-Architektur mit dieser umfassenden Ressource.
 
-*  **Hört euch unseren Podcast an**
-    *  [https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw](https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw)
-    *   Taucht tief ein in Geschichten über die digitale Transformation
+*   **Podcast-Reihe:**
+    *   [https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw](https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw)
+    *   Erkunden Sie das Thema der digitalen Transformation in einem tiefergehenden, eher konversationellen Format.
 
-## Abschließend
+## Fazit
 
-Zahlenzauberer Zappelfix ist mehr als nur eine App; es ist eine Bewegung, eine Revolution, ein freudiges Fest in der Welt der Mathematik. Also, worauf wartet ihr noch? Lasst uns das Lernen wieder zum Spaß machen! (und vielleicht sogar ein bisschen verrückt).
+`Zahlenzauberer Zappelfix` dient sowohl als praktisches Lehrmittel als auch als Demonstration einer prinzipientreuen Softwareentwicklung. Durch die Kombination von Benutzerfreundlichkeit mit einer robusten und erweiterbaren Architektur wollen wir eine wertvolle Ressource sowohl für Lernende als auch für die Open-Source-Community bereitstellen.
 
-Fröhliches Programmieren (und Zählen!),
+Mit freundlichen Grüßen,
 
 Mo
 
-_P.S. Denkt immer daran, es gibt kein Problem, das nicht mit ein wenig Humor, einigen rigorosen Tests und einer großzügigen Prise Code gelöst werden kann!_
+_IT- & Enterprise-Architekt_
+
+_P.S. Kontinuierliche Verbesserung und ein kompromissloses Streben nach Klarheit und Präzision im Code sind grundlegende Elemente dieses Projekts._
 
 <br/>
 
@@ -79,77 +84,82 @@ _P.S. Denkt immer daran, es gibt kein Problem, das nicht mit ein wenig Humor, ei
 
 <br/>
 
-# Zahlenzauberer Zappelfix: Where Math Meets Mirth! 🎉
+# Zahlenzauberer Zappelfix: A Modular Approach to Foundational Arithmetic
 
-_By Mo, Inspired by Uncle Bob Martin, but way more fun_
+_By Mo, IT & Enterprise Architect_
 
-Hello, fellow code-slingers, number-crunchers, and giggle-seekers!
+This document outlines the purpose, structure, and intended use of `Zahlenzauberer Zappelfix`, a freely licensed educational application designed to provide an engaging and intuitive experience for learners of fundamental mathematical operations. While maintaining a user-friendly interface, the architecture of the application is built to be modular and extensible.
 
-Are you ready to embark on a mathematical journey so exhilarating, so delightfully daffy, that it'll leave you saying, "Eureka!" (or maybe, "Ich habe es gefunden!")? Then look no further! Feast your eyes upon **Zahlenzauberer Zappelfix**, the app that’s guaranteed to make learning math not just palatable, but *positively playful*!
+## Core Principles
 
-## What Is This Magical Marvel?
+`Zahlenzauberer Zappelfix` (loosely translated as "Number Wizard Zappelfix") was developed with the following core principles in mind:
 
-Zahlenzauberer Zappelfix, which loosely translates to "Number Wizard Zappelfix," is a math learning app crafted with a dash of whimsy and a whole heap of heart. I like to think of it as the Willy Wonka’s Chocolate Factory of arithmetic; if Willy had a passion for prime numbers and not Oompa Loompas. 
+*   **Simplicity:** The user interface is intentionally minimalist to avoid cognitive overload, focusing instead on the core arithmetic operations.
+*   **Modularity:** The application is designed with a modular architecture that allows for easy extension and customization of the learning content.
+*   **Accessibility:** The application aims to be readily accessible across various platforms while ensuring an intuitive user experience.
+*   **Open Source:** The project is licensed under the GPL, emphasizing the freedom to use, adapt, and share the application and its source code.
 
-We’ve taken the dry, dusty textbooks of yore and turned them into a vibrant playground, featuring such mathematical maestros as:
+## Functional Components
 
-*   **Multy’s Multiplikation**: Get ready to multiply your joy! (and, you know, numbers too)
-*   **Divi’s Division**: Where we conquer the art of dividing with delightful dexterity.
-*   **Rundy’s Runderei**: For all those delightful roundings you never knew you loved!
+The application provides three main operational modules:
 
-But wait, there's more! (I know, I'm good, right?)
+*   `Multy's Multiplikation`: Facilitates the practice of multiplication, with an interface designed to encourage algorithmic thinking.
+*   `Divi's Division`: Enables learners to develop a solid understanding of division through interactive exercises.
+*   `Rundy's Runderei`: Provides a controlled environment for mastering the skill of numerical rounding.
 
-Our interface is so intuitive, a squirrel could use it (though, I strongly advise against giving a squirrel access to your device, for reasons). Just choose your arithmetic adventure, pick your numbers from the dropdown, and prepare to be amazed as Zappelfix guides you to mathematical mastery. And if you stumble, don't worry; our "Prüfen!" (Check!) button is there, ready to sprinkle you with positive reinforcement.
+Each module operates on the same user-facing mechanism, allowing learners to select the operation they wish to practice, input numbers using an intuitive spinner control, and receive immediate feedback through a designated check button.
 
-## Why Choose Zappelfix?
+## Architecture
 
-Let's face it, math can be a real grind, a real "number-numbing" experience. But with Zappelfix, it’s like adding a pinch of pixiedust to your equation. Here’s what makes it so wonderfully…well, *wonderful*:
+The underlying architecture of the application emphasizes clear separation of concerns:
 
-*   **Simplicity**: We’ve kept the UI so simple even my grandma, who still uses a rotary phone, can use it!
-*   **Engaging**: The lively design and joyful interactions are sure to put a smile on your face, even while working with decimals!
-*   **Free as a Bird**: Under the glorious banner of the GPL license, this app is yours to use, modify, and improve to your heart’s content. It's like a math party, and everyone's invited!
-*   **Did I mention FUN?!**: Because it's fun. You *will* laugh and learn. And maybe even cry a little from the pure, unadulterated joy of mastering math.
+*   **Presentation Layer:** The user interface is built with an emphasis on responsiveness and clarity.
+*   **Logic Layer:** The arithmetic operations are encapsulated within self-contained modules that can be easily modified or extended without affecting the broader structure.
 
-## Getting Started
+This approach ensures that the application is not only easily extensible but is also conducive to further development and integration.
 
-Ready to dive in? It's as easy as 1, 2, 3 (because that's what we teach here, after all!). 
+## Usage
 
-1.  Clone the repo!
-2.  Run it!
-3.  Begin your quest for mathematical knowledge (and a few chuckles).
+Getting started is straightforward:
 
-## Contributions Welcome!
+1.  Clone the repository.
+2.  Run the application using your chosen environment.
+3.  Begin practicing the selected arithmetic operations with the interactive user interface.
 
-We're all about the collaborative spirit here! If you find bugs, have ideas, or just want to join the fun, then by all means, submit a pull request! All additions are welcome, just remember to keep the puns as plentiful as the possibilities.
+The application is intended for use in both formal and informal learning environments. The focus remains on providing an approachable, yet effective, tool for fundamental mathematical development.
 
-## Links! Because the Future is Now!
-<br />
+## Community and Contribution
 
-I think this might be a great time to add some very important stuff... You know, resources that can really help anyone who is interested in this project. I mean, if you're reading this, you must be interested, right? (don't tell me you are not!)
-<br />
+We welcome contributions from the open-source community. If you have identified bugs, have improvements, or would like to introduce new features, please submit a pull request to the repository. Our team reviews all submissions, ensuring alignment with the architectural principles of the application.
 
-*   **Check out the original game book!**
+## Resources and Additional Reading
+
+For those interested in broadening their understanding, we have provided the following resources:
+
+*   **Original Game Book:** _The Office Adventure Digital Transformation Quest_
     *   [https://a.co/d/78M1J9s](https://a.co/d/78M1J9s)
-    *   Experience the full story in print format
-    
-*  **Subscribe to our LinkedIn newsletter**
+    *   Dive into the complete narrative experience in its original, printed form.
+
+*   **LinkedIn Newsletter:**
     *   [https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673](https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673)
-    *   Stay updated with the latest digital transformation insights
-    
-*   **Master IT Architecture - Get the book!**
+    *   Stay informed with our insights on digital transformation and its impact.
+
+*   **IT Architecture Textbook:**
     *   [https://a.co/d/ceXtKTW](https://a.co/d/ceXtKTW)
-    *  Learn the principles of modern IT architecture
+    *   Enhance your understanding of modern IT architecture principles with this comprehensive resource.
 
-*  **Listen to our podcast**
+*  **Podcast Series:**
     *  [https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw](https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw)
-    *   Deep dive into digital transformation stories
+    *   Explore the subject of digital transformation in a deeper, more conversational format.
 
-## In Conclusion
+## Conclusion
 
-Zahlenzauberer Zappelfix is more than just an app; it’s a movement, a revolution, a joyous jamboree in the world of math. So, what are you waiting for? Let’s make learning fun again! (and maybe even a little bit zany.)
+`Zahlenzauberer Zappelfix` serves as both a practical educational tool and a demonstration of principled software development. By combining ease of use with a robust and extensible architecture, we aim to provide a valuable resource for both learners and the open-source community.
 
-Happy coding (and counting!),
+Sincerely,
 
 Mo
 
-_P.S. Always remember, there’s no problem that can’t be solved with a little bit of humor, some rigorous testing and a generous dash of code!_
+_IT & Enterprise Architect_
+
+_P.S. Continual improvement, and an uncompromising pursuit of clarity and precision in code, are foundational elements of this project._
