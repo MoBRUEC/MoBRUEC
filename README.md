@@ -20,17 +20,17 @@ Welcome to my digital workspace. I'm Mohammed Brueckner, focusing on enterprise 
 
 My career is marked by a commitment to innovation and delivering business value, including:
 
-*   With many years of experience in IT strategy, customer advisory, and architecture across complex organizations, I've seen a thing or two.
-*   My track record demonstrates a knack for improving key performance indicators and reducing costs—because who doesn't love a good ROI and less COPEX?
-*   I've successfully led and managed teams across Europe, proving that distance is just a number (and sometimes a timezone headache).
-*  I possess a deep understanding of cloud architecture with Azure and AWS, including hybrid setups, data wrangling, analytics, security, and sustainability—basically, I speak cloud.
-*   My experience includes leading design thinking workshops and AI opportunity mapping sessions, turning "what ifs" into "why nots?".
-*   I've applied change management in complex digital transformation scenarios, because let's face it, change is the only constant...and sometimes the biggest headache.
-*   My communication skills and ability to orchestrate interdisciplinary teams ensure smooth sailing (well, mostly) and successful outcomes.
-*   I was recognized as the winner of the Microsoft internal "AI Pitch Perfect" Contest, proving I can make AI sound exciting even to the uninitiated.
-*   My career includes strategic technology roles with leading companies— I've seen both sides of the tech coin, and I'm happy to say it's not counterfeit.
-*   I have a proven ability to articulate architectural differences and drive cost savings, making even the most complex tech understandable (and budget-friendly).
-*   I am committed to ongoing learning and development, particularly in emerging tech platforms, which you can see on my [Credly profile](https://www.credly.com/users/mohammed-bruckner/badges).
+*   With many years of experience in IT strategy, customer advisory, and architecture <br> across complex organizations, I've seen a thing or two.
+*   My track record demonstrates a knack for improving key performance indicators <br> and reducing costs—because who doesn't love a good ROI and less COPEX?
+*   I've successfully led and managed teams across Europe, <br> proving that distance is just a number (and sometimes a timezone headache).
+*  I possess a deep understanding of cloud architecture with Azure and AWS, <br> including hybrid setups, data wrangling, analytics, security, and sustainability—basically, I speak cloud.
+*   My experience includes leading design thinking workshops and AI opportunity mapping sessions, <br> turning "what ifs" into "why nots?".
+*   I've applied change management in complex digital transformation scenarios, <br> because let's face it, change is the only constant...and sometimes the biggest headache.
+*   My communication skills and ability to orchestrate interdisciplinary teams ensure <br> smooth sailing (well, mostly) and successful outcomes.
+*   I was recognized as the winner of the Microsoft internal "AI Pitch Perfect" Contest, <br> proving I can make AI sound exciting even to the uninitiated.
+*   My career includes strategic technology roles with leading companies— <br> I've seen both sides of the tech coin, and I'm happy to say it's not counterfeit.
+*   I have a proven ability to articulate architectural differences and drive cost savings, <br> making even the most complex tech understandable (and budget-friendly).
+*   I am committed to ongoing learning and development, particularly in emerging tech platforms, <br> which you can see on my [Credly profile](https://www.credly.com/users/mohammed-bruckner/badges).
 
 ## Innovation Leadership
 
