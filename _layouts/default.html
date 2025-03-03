@@ -29,9 +29,6 @@
         color: #ffffff;
         font-size: 1.2em;
       }
-      .social-links a:hover {
-        color: #dddddd;
-      }
       .social-links i {
         margin-right: 8px;
       }
@@ -42,21 +39,46 @@
         color: #ffffff;
         padding: 40px 0;
       }
-      header a {
-        color: #ffffff;
+      header .inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      header .title-section {
+        flex: 1 1 60%;
+      }
+      header .image-section {
+        flex: 1 1 35%;
+        text-align: center;
       }
       header h1, header h2 {
         margin: 0;
       }
-      
+      header h1 {
+        font-size: 2.5em;
+      }
+      header h2 {
+        font-size: 1.2em;
+        margin-top: 10px;
+      }
+      header img {
+        max-width: 100%;
+        height: auto;
+      }
+      /* Remove link from header title */
+      header h1 {
+        color: #ffffff;
+        text-decoration: none;
+      }
       /* Sidebar Styles */
       #sidebar {
         padding: 20px;
         background-color: #f7f7f7;
+        text-align: center;
       }
       #sidebar p {
         font-size: 1.1em;
-        text-align: center;
       }
       
       /* Button Style */
@@ -70,8 +92,9 @@
         margin: 10px auto 0; /* Center the button */
         font-weight: bold;
       }
+      /* Remove mouse-over effect */
       .button:hover {
-        background-color: #005582;
+        background-color: #0077b5; /* Keep the same color on hover */
       }
       .button i {
         margin-right: 8px;
@@ -86,22 +109,23 @@
   <body>
     <header>
       <div class="inner">
-        <a href="{{ '/' | absolute_url }}">
+        <div class="title-section">
           <h1>{{ site.title }}</h1>
-        </a>
-        <h2>{{ site.description }}</h2>
-        
-        <!-- Social Links -->
-        <ul class="social-links">
-          {% for link in site.social_links %}
-            <li>
-              <a href="{{ link.url }}" target="_blank">
-                <i class="{{ link.icon }}"></i> {{ link.name }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-        
+          <h2>{{ site.description }}</h2>
+          <!-- Social Links -->
+          <ul class="social-links">
+            {% for link in site.social_links %}
+              <li>
+                <a href="{{ link.url }}" target="_blank">
+                  <i class="{{ link.icon }}"></i> {{ link.name }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="image-section">
+          <img src="https://via.placeholder.com/150x300" alt="Your Image">
+        </div>
       </div>
     </header>
 
@@ -111,10 +135,10 @@
           {{ content }}
         </section>
 
-        <!-- Sidebar with Optional Enhancements -->
+        <!-- Sidebar -->
         <aside id="sidebar">
           <p>
-            My LinkedIn Newsletter gives you regular news and thought pieces for IT pros.
+            My <strong>LinkedIn Newsletter</strong> gives you regular news and thought pieces for IT pros.
           </p>
           <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673" target="_blank" class="button">
             <i class="fab fa-linkedin"></i> Subscribe on LinkedIn
