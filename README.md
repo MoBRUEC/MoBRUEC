@@ -1,6 +1,6 @@
 # Technology Strategy and Digital Innovation
 
-Welcome to my digital workspace. I'm Mohammed Brueckner, focusing on enterprise architecture, digital transformation, and innovative technology solutions that drive business value.
+Welcome to my digital workspace. I'm Mohammed Brueckner (or Mohammed BRÜCKNER as it were in German), focusing on enterprise architecture, digital transformation, and innovative technology solutions that drive business value.
 
 ## Technical Expertise
 
