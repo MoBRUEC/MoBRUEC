@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: 'en-US' }}">
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
+
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
-    <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
-    
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen">
+    <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
+
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+
     <!-- Custom Styles -->
     <style>
       /* Social Links Styles */
@@ -32,7 +32,7 @@
       .social-links i {
         margin-right: 8px;
       }
-      
+
       /* Header Styles */
       header {
         background-color: #0a2a43;
@@ -43,7 +43,6 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: space-between;
       }
       header .title-section {
         flex: 1 1 60%;
@@ -52,25 +51,19 @@
         flex: 1 1 35%;
         text-align: center;
       }
-      header h1, header h2 {
-        margin: 0;
-      }
       header h1 {
+        margin: 0;
         font-size: 2.5em;
       }
       header h2 {
+        margin: 10px 0 0;
         font-size: 1.2em;
-        margin-top: 10px;
       }
       header img {
         max-width: 100%;
         height: auto;
       }
-      /* Remove link from header title */
-      header h1 {
-        color: #ffffff;
-        text-decoration: none;
-      }
+
       /* Sidebar Styles */
       #sidebar {
         padding: 20px;
@@ -80,24 +73,35 @@
       #sidebar p {
         font-size: 1.1em;
       }
-      
+
       /* Button Style */
       .button {
         display: inline-block;
         padding: 10px 20px;
-        background-color: #0077b5; /* LinkedIn blue */
+        background-color: #0077b5;
         color: #ffffff;
         text-decoration: none;
         border-radius: 5px;
-        margin: 10px auto 0; /* Center the button */
+        margin: 10px auto 0;
         font-weight: bold;
+        border: none;
+        cursor: pointer;
       }
-      /* Remove mouse-over effect */
-      .button:hover {
-        background-color: #0077b5; /* Keep the same color on hover */
+      .button:hover,
+      .button:focus,
+      .button:active {
+        background-color: #0077b5;
+        color: #ffffff;
+        text-decoration: none;
+        border: none;
+        outline: none;
+        box-shadow: none;
       }
-      .button i {
-        margin-right: 8px;
+
+      /* Optional: Adjust image size for square image */
+      header .image-section img {
+        max-width: 200px; /* Adjust as needed */
+        border-radius: 50%; /* Make it circular if desired */
       }
     </style>
 
@@ -116,7 +120,7 @@
           <ul class="social-links">
             {% for link in site.social_links %}
               <li>
-                <a href="{{ link.url }}" target="_blank">
+                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
                   <i class="{{ link.icon }}"></i> {{ link.name }}
                 </a>
               </li>
@@ -124,7 +128,7 @@
           </ul>
         </div>
         <div class="image-section">
-          <img src="https://via.placeholder.com/150x300" alt="Your Image">
+          <img src="https://m.media-amazon.com/images/S/amzn-author-media-prod/6u2sv6ns24vdsr9c9r7r15amtm._SX300_CR0%2C0%2C300%2C300_.jpg" alt="Mohammed Brueckner">
         </div>
       </div>
     </header>
@@ -140,12 +144,19 @@
           <p>
             My <strong>LinkedIn Newsletter</strong> gives you regular news and thought pieces for IT pros.
           </p>
-          <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673" target="_blank" class="button">
+          <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673" target="_blank" rel="noopener noreferrer" class="button">
             <i class="fab fa-linkedin"></i> Subscribe on LinkedIn
           </a>
         </aside>
       </div>
     </div>
 
+    <!-- Optional JavaScript to set all external links to open in a new tab -->
+    <script>
+      document.querySelectorAll('a[href^="http"]').forEach(function(anchor) {
+        anchor.setAttribute('target', '_blank');
+        anchor.setAttribute('rel', 'noopener noreferrer');
+      });
+    </script>
   </body>
 </html>
