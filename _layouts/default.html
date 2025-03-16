@@ -64,17 +64,59 @@
         height: auto;
       }
 
-      /* Sidebar Styles */
+      /* Updated Sidebar Styles */
       #sidebar {
         padding: 20px;
         background-color: #f7f7f7;
-        text-align: center;
-      }
-      #sidebar p {
-        font-size: 1.1em;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       }
 
-      /* Button Style */
+      .sidebar-section {
+        margin-bottom: 25px;
+      }
+
+      #sidebar h3 {
+        font-size: 1.3em;
+        margin-top: 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e1e1e1;
+        color: #0a2a43;
+      }
+
+      /* Navigation Links in Sidebar */
+      .nav-links {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav-links li {
+        margin-bottom: 10px;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 8px 10px;
+        text-decoration: none;
+        color: #333;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        background-color: #e0e0e0;
+        padding-left: 15px;
+        color: #0077b5;
+      }
+
+      .nav-links i {
+        margin-right: 8px;
+        width: 16px;
+        text-align: center;
+      }
+
+      /* Improved Button Style */
       .button {
         display: inline-block;
         padding: 10px 20px;
@@ -86,16 +128,14 @@
         font-weight: bold;
         border: none;
         cursor: pointer;
+        transition: all 0.3s ease;
       }
+
       .button:hover,
-      .button:focus,
-      .button:active {
-        background-color: #0077b5;
-        color: #ffffff;
-        text-decoration: none;
-        border: none;
-        outline: none;
-        box-shadow: none;
+      .button:focus {
+        background-color: #005582; /* Darker shade on hover */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       }
 
       /* Optional: Adjust image size for square image */
@@ -139,14 +179,30 @@
           {{ content }}
         </section>
 
-        <!-- Sidebar -->
+        <!-- Updated Sidebar -->
         <aside id="sidebar">
-          <p>
-            My <strong>LinkedIn Newsletter</strong> gives you regular news and thought pieces for IT pros.
-          </p>
-          <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673" target="_blank" rel="noopener noreferrer" class="button">
-            <i class="fab fa-linkedin"></i> Subscribe on LinkedIn
-          </a>
+          <!-- Navigation Links Section -->
+          <div class="sidebar-section">
+            <h3>Navigation</h3>
+            <ul class="nav-links">
+              <li><a href="https://mobruec.github.io/MoBRUEC/"><i class="fas fa-home"></i> Home</a></li>
+              <li><a href="https://mobruec.github.io/MoBRUEC/changemanagement"><i class="fas fa-sync-alt"></i> Change Management</a></li>
+              <li><a href="https://mobruec.github.io/MoBRUEC/how-to-ai/"><i class="fas fa-robot"></i> How-to AI</a></li>
+              <li><a href="https://mobruec.github.io/MoBRUEC/power-automate-recipes/"><i class="fas fa-cogs"></i> Power Automate Recipes</a></li>
+              <li><a href="https://mobruec.github.io/MoBRUEC/won-contests-mohammed-brueckner/"><i class="fas fa-trophy"></i> Achievements</a></li>
+            </ul>
+          </div>
+          
+          <!-- LinkedIn Newsletter Section -->
+          <div class="sidebar-section">
+            <h3>Newsletter</h3>
+            <p>
+              My <strong>LinkedIn Newsletter</strong> gives you regular news and thought pieces for IT pros.
+            </p>
+            <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673" target="_blank" rel="noopener noreferrer" class="button">
+              <i class="fab fa-linkedin"></i> Subscribe on LinkedIn
+            </a>
+          </div>
         </aside>
       </div>
     </div>
