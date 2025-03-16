@@ -21,7 +21,7 @@ The reason is simple - architecture and team dynamics always matters and your te
 **Here is my presentation** on ["Integration in a serverless world"](/presentations/Integration%20in%20a%20serverless%20world%20combining%20pro%20code%20and%20low%20code%20for%20the%20win.pdf), based on this article:
 [Advanced Automation using Azure & serverless services](https://medium.com/serverless-and-lowocode-pioneers/using-logic-apps-to-orchestrate-a-complex-video-processing-process-flow-a0ef20237511)
 
-During the **Azure Summit Event Mid-March 2023** you would have seen the [German version of that presentation](/presentations/Integration%20in%20einer%20serverlosen%20Welt%20M%20Brueckner%2015-03-2023%20MSFT-1005-Azure-Summit-PPT_DE.pdf).
+During the **Azure Summit Event Mid-March 2023** you would have seen the [German version of that presentation](../presentations/Integration%20in%20einer%20serverlosen%20Welt%20M%20Brueckner%2015-03-2023%20MSFT-1005-Azure-Summit-PPT_DE.pdf).
 
 Are you a pro-coder and want to get some backup like low-code devs get with their fancy drag & drop tools? Don't fret, AI could be that booster you need:
 [M365 Graph API and integration with Azure thanks to ChatGTP](https://mohammedbrueckner.medium.com/integrating-m365-graph-api-using-chatgpt-b22a15dc6ff)
