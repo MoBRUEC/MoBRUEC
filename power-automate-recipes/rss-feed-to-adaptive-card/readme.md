@@ -10,14 +10,20 @@ In the compose step, the expression would therefore be:
 
 ``` 
 replace(variables('myInputString'),decodeUriComponent('%0A'),' ')
+``` 
 As for designing the Adaptive Card, all you need is some valid JSON generated via the Adaptive Card Designer. Visually drag & drop what you need and then insert the data properties you want to add wherever you want them to add. Important though: Make sure to set "version" to 1.2! (At least that was necessary as of 2nd of Feb 2023.) Otherwise the Adaptive Card will not render in Teams. Check out the documentation to find out which version is supported in Teams currently at the time of you reading this. ![Composing content for a new Adaptive Card](../images/14.png)
 
 Want to learn more? Check out my many other articles:
 
-LinkedIn > LinkedIn Articles about Business & Tech
+[Advanced Automation using Azure & serverless services](https://medium.com/serverless-and-lowocode-pioneers/using-logic-apps-to-orchestrate-a-complex-video-processing-process-flow-a0ef20237511)
 
-Medium > Articles about detailed topics around Cloud Computing and more
+And even more:
 
-DevTo > Even more detailed articles on topics like using AI Services
+**LinkedIn** > [LinkedIn Articles about Business & Tech](https://www.linkedin.com/today/author/mbrueckner)
 
-Cheers! Mo
+**Medium** > [Articles about detailed topics around Cloud Computing and more](https://medium.com/@mohammedbrueckner)
+
+**DevTo** > [Even more detailed articles on topics like using AI Services](https://dev.to/mrbrue)
+
+Cheers!
+[Mo](https://platformeconomies.com)
