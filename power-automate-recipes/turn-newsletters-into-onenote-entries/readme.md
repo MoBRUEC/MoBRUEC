@@ -2,7 +2,7 @@
 
 Want to save newsletters or any other precious mails you receive to OneNote, where they're indexed?
 Easy job with Power Automate:
-![Time Zone Conversion in Power Automate](/images/03.png)
+![Time Zone Conversion in Power Automate](../images/03.png)
 
 The compose step "peeked code" looks like this:
 
