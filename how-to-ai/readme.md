@@ -16,7 +16,7 @@ Some related  reads as follow.
 
 Want to learn more? Well, you probably need to integrate some tools and sytems, so why not pick up some integration tricks while you're learning:
 
-[Integration in a serverless world](https://github.com/MoBRUEC/MoBRUEC/blob/master/azsummit23.md)
+[Integration in a serverless world](https://mobruec.github.io/MoBRUEC/integration/)
 
 And even more reads:
 
