@@ -56,9 +56,15 @@ Watch my strategic discussion on modern enterprise architecture with OPITZ CONSU
 
 ### Transformation Experience
 
-Learn about leading enterprise-scale transformation initiatives:
+Learn about mastering enterprise-scale data governance:
 
-[![Transformation Project](https://img.youtube.com/vi/ix98TGcaoMo/0.jpg)](https://www.youtube.com/watch?v=ix98TGcaoMo)
+[![Data Governance Webinar](https://img.youtube.com/vi/exDlh2MPrX4/0.jpg)](https://www.youtube.com/watch?v=exDlh2MPrX4)
+
+> **Daten in den Griff bekommen – ein Kinderspiel?  Nicht ganz – aber mit den richtigen Strategien und Tools wird Data Governance machbar.**  In diesem Webinar teilen wir unsere Erfahrungen und Best Practices rund um effektive Data-Governance-Strategien – praxisnah und verständlich erklärt.
+> 🔹 Wie lässt sich Data Governance in den Arbeitsalltag integrieren, ohne Teams zu überfordern?
+> 🔹 Was tun bei globalen Herausforderungen wie unterschiedlichen Gesetzen oder Zeitzonen?
+> 🔹 Welche Tools helfen, den Reifegrad des Datenmanagements zu messen und erste Verbesserungen umzusetzen?
+> 🔹 Und wie unterstützt der Azure Purview Data Catalog bei der Datenkatalogisierung?
 
 ## Blogging & More
 
