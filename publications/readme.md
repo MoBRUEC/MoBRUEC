@@ -1,35 +1,29 @@
-# Publications
+# Publications  
+This repository summarizes my published works, spanning Generative AI and software architecture.  
 
-This repository provides a summary of my publications, covering topics from Generative AI to software architecture.
+## Books  
 
-## Books
+### German Market  
+* **DallE**: A concise explanation of DallE's capabilities and practical implications.  
+  [Amazon Link](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)  
 
-### German Market
+* **Architecture**: A straightforward guide to software architecture principles and real-world practice.  
+  [Amazon Link](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)  
 
-* **DallE:** A book exploring the capabilities and implications of DallE.
-    [Amazon Link](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)
+### US Market  
+* **DallE**: Focuses on DallE's practical applications and its influence across industries in the US context.  
+  [Amazon Link](https://a.co/d/bOqXOoB)  
 
-* **Architecture:** A book delving into principles and practices of software architecture.
-    [Amazon Link](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
+* **Architecture**: Addresses core architectural patterns and decision-making challenges specific to US tech ecosystems.  
+  [Amazon Link](https://a.co/d/gK7YzOL)  
 
-### US Market
+## Other Publications  
 
-* **DallE:** An exploration of DallE's potential and its impact, tailored for the US market.
-    [Amazon Link](https://a.co/d/bOqXOoB)
+* **Gen AI Studie: Zwischen Hype und Implementierung** ([Ascent.io](https://www.ascent.io/insight/gen-ai-studie/))  
+  Analyzes how businesses are adopting Generative AI, cutting through the hype to highlight gaps between expectations and real-world integration. Discusses strategic steps to align AI initiatives with production workflows.  
 
-* **Architecture:** Insights into software architecture, addressing key considerations for the US context.
-    [Amazon Link](https://a.co/d/gK7YzOL)
+* **GenAI in Unternehmen: Roadblocks und Lessons Learned** ([ITWELT](https://itwelt.at/news/kommentar/genai-in-unternehmen-roadblocks-und-lessons-learned/))  
+  Shares lessons from early adopters of Generative AI, focusing on common pitfalls like data quality issues, integration complexity, and the importance of defining tangible use cases.  
 
-## Other Publications
-
-* **Gen AI Studie: Zwischen Hype und Implementierung** ([Ascent.io](https://www.ascent.io/insight/gen-ai-studie/))
-
-    This study from Ascent.io examines the current state of Generative AI adoption in businesses, moving beyond the initial hype to explore practical implementation challenges and opportunities. It highlights the gap between the perceived potential and the actual integration into enterprise workflows, emphasizing the need for strategic planning and realistic expectations.
-
-* **GenAI in Unternehmen: Roadblocks und Lessons Learned** ([ITWELT](https://itwelt.at/news/kommentar/genai-in-unternehmen-roadblocks-und-lessons-learned/))
-
-    An article in ITWELT discussing the real-world obstacles encountered when implementing Generative AI within organizations. It provides valuable lessons learned from early adopters, focusing on practical advice for navigating challenges related to data quality, integration with existing systems, and the need for clear use cases to drive successful adoption.
-
-* **The Microsoft Cloud Ecosystem** ([Insider Finance](https://wire.insiderfinance.io/the-microsoft-cloud-ecosystem-b79726b95bf4))
-
-    This piece on Insider Finance delves into the intricacies of the Microsoft cloud ecosystem. It analyzes the various components and their interrelationships, offering insights into the strategic importance of this ecosystem for businesses leveraging cloud technologies. The article emphasizes the breadth and depth of Microsoft's offerings and their impact on the broader tech landscape.
+* **The Microsoft Cloud Ecosystem** ([Insider Finance](https://wire.insiderfinance.io/the-microsoft-cloud-ecosystem-b79726b95bf4))  
+  Breaks down Microsoft’s cloud infrastructure, emphasizing how its components interconnect and why the ecosystem matters for enterprises adopting cloud-first strategies.  
