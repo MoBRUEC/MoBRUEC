@@ -93,3 +93,7 @@ Connect on [LinkedIn](https://linkedin.com/in/mbrueckner) to discuss enterprise 
 ---
 
 *Driving enterprise innovation through strategic technology leadership*
+
+---
+
+*Imprint / Impressum -- This website is operated by: Mohammed Brückner | Johann-Clanze-Str 46 Munich | Email: impressum@mohammed-brueckner.com*
