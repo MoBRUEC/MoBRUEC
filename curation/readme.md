@@ -1,4 +1,4 @@
-# Enterprise Technology Leadership Insights 2024
+# Enterprise Technology Leadership Insights
 
 *Strategic frameworks for cloud architecture, analytics platforms, and AI implementation*
 
