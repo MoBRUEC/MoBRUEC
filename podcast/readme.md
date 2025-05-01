@@ -94,7 +94,7 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 
 > "The Platform Economist bridges the gap between technology implementation and business outcomes, providing actionable insights for technology leaders." — *Industry Expert*
 
-## 🚀 Latest Episodes
+## 🚀 A selection of Episodes
 
 <div class="episodes-container">
 
