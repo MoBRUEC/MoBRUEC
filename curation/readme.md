@@ -8,6 +8,10 @@
 ✅ Production-Grade LLM Implementation  
 ✅ Business-Technology Alignment Strategies  
 
+Looking for more great reads than the ones below? 
+* **[Here is a collection of great books for every IT Architect!](https://itbookhub.com)**
+
+
 ---
 
 ## 🏆 Cloud Analytics Platform Analysis
