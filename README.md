@@ -96,4 +96,4 @@ Connect on [LinkedIn](https://linkedin.com/in/mbrueckner) to discuss enterprise 
 
 ---
 
-Imprint / Impressum -- This website is operated by: Mohammed Brückner | Johann-Clanze-Str 42 Munich | Email: impressum@mohammed-brueckner.com
+Imprint / Impressum -- This website is operated by: Mohammed Brückner | Johann-Clanze-Str 42c Munich | Email: impressum@mohammed-brueckner.com
