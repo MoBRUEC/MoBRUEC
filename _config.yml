@@ -1,16 +1,42 @@
+# Site Settings
 title: "Mohammed Brueckner, passionate Leader, Advisor and IT Architect"
 description: "Results-oriented tech leader driving innovation and transformative growth through strategic alignment of business objectives with cutting-edge cloud (Azure/AWS), AI/IoT/Data solutions. Specializes in practical AI (GenAI/MLOps) implementation for Azure-driven strategic advantage. Empowers high-performing teams, communicates complex concepts effectively, and adapts quickly to dynamic environments to deliver exceptional outcomes."
-url: "https://mobruec.github.io/MoBRUEC/"
+url: "https://mobruec.github.io"   # CORRECTED: Only the base domain
+baseurl: "/MoBRUEC"               # CORRECTED: The subpath/repository name
+author: "Mohammed Brueckner"
+
+# Jekyll Theme
 theme: jekyll-theme-architect
 
-# Social Links
+# Keywords for SEO and Crawlers
+keywords: >-
+  Mohammed Brueckner, Leader, Advisor, IT Architect, Tech Leader, Innovation,
+  Cloud, Azure, AWS, AI, Artificial Intelligence, IoT, Internet of Things, Data,
+  GenAI, Generative AI, MLOps, Strategic Advantage, High-performing teams,
+  IT Consulting, Architecture, Information Security, Custom Software Development,
+  Program Management, Change Management, Management Consulting, Research Skills,
+  Cloud Management, Public Speaking, Tech Visionary, Microsoft, Bosch, adidas,
+  Automation, Team Leadership, Retail, Finance, Insurance, Strategic Planning,
+  Enterprise Architecture, Design Thinking, Cloud Computing, CRM, Sales,
+  Software Solution Architect, German, English
+
+# Social Links (Keeping your original links - please verify Spotify)
 social_links:
   - name: LinkedIn
     url: "https://www.linkedin.com/in/mbrueckner/"
     icon: "fab fa-linkedin"
   - name: Spotify
-    url: "https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw"
+    url: "https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW?si=-X6NRDacSeCOvHizduAUzw" # As provided, please double-check if this is the intended URL
     icon: "fab fa-spotify"
   - name: Medium
     url: "https://medium.com/@mohammedbrueckner"
     icon: "fab fa-medium"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Recommended: Ensure jekyll-seo-tag is in your Gemfile or enabled by GitHub Pages
+# plugins:
+#   - jekyll-seo-tag
