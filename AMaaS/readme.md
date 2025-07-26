@@ -43,14 +43,14 @@ AMaaS transforms individual account management into systematic, repeatable servi
 
 #### Intelligent Segmentation Strategy
 
-```mermaid
+<div class="mermaid">
 graph TD
     A[Customer/Partner] --> B{Potential Check}
     B -->|High Potential + Large Customer| C[Key Account Treatment]
     B -->|Medium Potential| D[Standardized Approach]
     C --> E[Personalized Strategy<br/>Customer Intimacy<br/>Innovation Collaboration]
     D --> F[Marketing-Oriented<br/>Automated Processes<br/>Efficient Delivery]
-```
+</div>
 
 **Tier 1: Large Potential/Large Customer Segment**
 - **Treatment**: Personalized "Key Account Treatment"
@@ -69,14 +69,14 @@ graph TD
 #### Core Principle: "Data, Data, Data!"
 All AMaaS operations built on extensive data analysis, recognizing actionable insights drive effective account management strategies.
 
-```mermaid
+<div class="mermaid">
 graph TD
     G[Historical Deals & Projects] --> H[Market Observation]
     H --> I[Pattern Recognition]
     I --> J[Extensive Data Analysis]
     J --> K[Strategy Development]
     K --> L[Implementation & Optimization]
-```
+</div>
 
 #### Data Sources and Analysis Framework
 
