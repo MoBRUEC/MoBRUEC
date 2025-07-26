@@ -3,6 +3,10 @@ description: "Results-oriented tech leader driving innovation and transformative
 url: "https://mobruec.github.io/MoBRUEC/"
 theme: jekyll-theme-architect
 
+# Mermaid support
+plugins:
+  - jekyll-mermaid
+
 # Social Links
 social_links:
   - name: LinkedIn
