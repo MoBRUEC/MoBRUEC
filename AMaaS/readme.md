@@ -328,4 +328,4 @@ This open-source business plan welcomes contributions, feedback, and discussions
 
 ---
 
-⭐ **Post about this repository on LinkedIn (and thanks for mentioning me :)) ** if you find this business plan valuable for your strategic thinking or professional development!
+⭐ **Post about this repository on LinkedIn (and thanks for mentioning me :))** if you find this business plan valuable for your strategic thinking or professional development!
