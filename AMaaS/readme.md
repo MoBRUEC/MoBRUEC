@@ -117,55 +117,18 @@ graph TD
 
 ---
 
-## 💼 Service Architecture & Pricing
+### Service Architecture & Pricing
 
-### Tier 1: Strategic Intelligence Foundation
-**Target**: Mid-market (100-400 customers) | **Hours**: 25-35/month | **Price**: $6,500-$8,200/month
+| Service Tier | Target Market | Monthly Hours | Pricing Range | Key Features |
+|--------------|---------------|---------------|---------------|--------------|
+| **Strategic Intelligence** | Mid-market (100-400 customers) | 25-35 hours | $6,500-$8,200 | Data analysis, segmentation, stakeholder mapping |
+| **Advanced Treatment** | Larger mid-market (400-1K customers) | 40-60 hours | $9,800-$14,500 | Pattern recognition, C-level engagement, innovation support |
+| **Enterprise Intelligence** | Enterprise divisions | 60-80 hours | $18,000-$26,000 | Real-time intelligence, ML analytics, strategic partnerships |
 
-**Core Services:**
-- Comprehensive historical data analysis and pattern recognition
-- Client segmentation based on potential and value assessment
-- Stakeholder ecosystem mapping and influence analysis
-- Market intelligence integration and competitive landscape assessment
-- Basic predictive modeling for account behavior
-
-**ROI Metrics:** 15-20% retention improvement, 10-15% account value increase
-
-### Tier 2: Advanced Account Treatment
-**Target**: Larger mid-market (400-1,000 customers) | **Hours**: 40-60/month | **Price**: $9,800-$14,500/month
-
-**Enhanced Services:**
-- Advanced pattern recognition with hypothesis testing
-- 3-Horizon innovation opportunity identification
-- Deep company intelligence with financial analysis
-- Technology transformation opportunity analysis
-- C-level engagement strategy development
-
-**ROI Metrics:** 20-25% retention improvement, 15-25% account value increase
-
-### Tier 3: Enterprise Account Intelligence
-**Target**: Enterprise divisions/large accounts | **Hours**: 60-80/month | **Price**: $18,000-$26,000/month
-
-**Comprehensive Services:**
-- Real-time market intelligence integration
-- Advanced predictive analytics with ML pattern recognition
-- Complex stakeholder ecosystem management
-- Strategic partnership development
-- Multi-horizon strategic planning
-
-**ROI Metrics:** 25-35% retention improvement, 20-30% account value increase
-
-### Specialized Extensions
-
-#### Partner Intelligence Service ($3,500-$7,500/month)
-- High-influence partner treatment
-- Standardized partner engagement protocols
-- Data-driven partner impact assessment
-
-#### Innovation Collaboration Support ($250-$400/hour)
-- 3-Horizon innovation workshops
-- Proof of Concept development support
-- Technology transformation guidance
+#### Service Extensions
+- **Partner Intelligence Service**: $3,500-$7,500/month
+- **Innovation Collaboration Support**: $250-$400/hour  
+- **Market Intelligence Integration**: $2,000-$4,000/month
 
 ---
 
@@ -184,20 +147,21 @@ graph TD
 - 15-20% retention improvement using predictive analytics
 - B2B purchase decisions involve average 6.8 stakeholders
 
-### Revenue Projections (3-Year Forecast)
+### Financial Projections
 
-| Year | Clients | Avg Monthly Revenue | Annual Revenue | Growth Rate |
-|------|---------|-------------------|----------------|-------------|
-| 1    | 12-15   | $8,500            | $1,275,000     | 15% MoM     |
-| 2    | 25-30   | $10,200           | $3,060,000     | 8% MoM      |
-| 3    | 45-55   | $12,500           | $6,875,000     | 5% MoM      |
+| Metric | Year 1 | Year 2 | Year 3 |
+|--------|--------|--------|--------|
+| **Clients** | 12-15 | 25-30 | 45-55 |
+| **Avg Monthly Revenue** | $8,500 | $10,200 | $12,500 |
+| **Annual Revenue** | $1,275,000 | $3,060,000 | $6,875,000 |
+| **Growth Rate** | 15% MoM | 8% MoM | 5% MoM |
+| **Gross Margin** | 35% | 38% | 42% |
 
-### Unit Economics (Tier 2 Example)
+**Unit Economics Example (Tier 2)**
 - Monthly Revenue: $12,200
-- Delivery Cost (50 hours @ $150/hour): $7,500
+- Delivery Cost: $7,500 (50 hours @ $150/hour)
 - Gross Margin: $4,700 (38.5%)
-- Customer Acquisition Cost: $1,200
-- Net Monthly Profit: $3,500 after year 1
+- Net Monthly Profit: $3,500 (after year 1)
 
 ---
 
@@ -242,41 +206,46 @@ graph TD
 
 ---
 
-## 📈 Success Metrics & KPIs
+### Success Metrics Dashboard
 
-### Client Success Metrics
-- **Customer Retention Rate**: Target 92%+ (industry benchmark: 85%)
-- **Account Value Growth**: 20-30% increase year-over-year
-- **Stakeholder Satisfaction**: Net Promoter Score 75+
-- **Time to Strategic Value**: Under 45 days for all implementations
-
-### Business Performance Metrics
-- **Monthly Recurring Revenue Growth**: 8-15% month-over-month
-- **Client Churn Rate**: Under 3% monthly
-- **Average Revenue Per Client**: $12,000+ by year 2
-- **Gross Margin**: 80%+ at scale
+| Category | Metric | Target | Industry Benchmark |
+|----------|--------|--------|-------------------|
+| **Client Success** | Customer Retention Rate | 92%+ | 85% |
+| | Account Value Growth | 20-30% YoY | 10-15% |
+| | Stakeholder Satisfaction (NPS) | 75+ | 50 |
+| | Time to Strategic Value | <45 days | 90 days |
+| **Business Performance** | Monthly Churn Rate | <3% | 5-8% |
+| | Average Revenue Per Client | $12,000+ | $6,000 |
+| | Gross Margin at Scale | 80%+ | 60-70% |
+| | MRR Growth Rate | 8-15% MoM | 5-10% |
 
 ---
 
 ## 🚀 Implementation Roadmap
 
 ### Phase 1: Foundation (Months 1-6)
-- [ ]  Core team assembly and methodology development
-- [ ]  Technology platform selection and integration
-- [ ]  Pilot client acquisition and service validation
-- [ ]  Process documentation and optimization
+
+**Core Infrastructure Development**
+- Core team assembly and methodology development
+- Technology platform selection and integration
+- Pilot client acquisition and service validation
+- Process documentation and optimization
 
 ### Phase 2: Market Entry (Months 4-12)
-- [ ]  Service delivery refinement based on pilot feedback
-- [ ]  Case study development and thought leadership content
-- [ ]  Strategic partnership establishment
-- [ ]  Team expansion and capability building
+
+**Service Validation & Refinement**
+- Service delivery refinement based on pilot feedback
+- Case study development and thought leadership content
+- Strategic partnership establishment
+- Team expansion and capability building
 
 ### Phase 3: Scale (Months 10-24)
-- [ ]  Geographic expansion and market penetration
-- [ ]  Advanced analytics platform development
-- [ ]  Industry vertical specialization
-- [ ]  Strategic acquisition opportunities evaluation
+
+**Growth & Expansion**
+- Geographic expansion and market penetration
+- Advanced analytics platform development
+- Industry vertical specialization
+- Strategic acquisition opportunities evaluation
 
 ---
 
