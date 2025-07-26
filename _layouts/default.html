@@ -17,6 +17,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="https://raw.githubusercontent.com/MoBRUEC/MoBRUEC/refs/heads/master/mohammed-brueckner-fav.ico" type="image/x-icon">
+    
+    <!-- Mermaid.js Support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    
     <style>
       /* Social Links Styles */
       .social-links { list-style-type: none; padding: 0; margin: 20px 0; }
@@ -46,6 +50,23 @@
       .button:hover, .button:focus { background-color: #005582; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
       /* Optional: Adjust image size for square image */
       header .image-section img { max-width: 200px; border-radius: 50%; }
+      
+      /* Mermaid Diagram Styling */
+      .mermaid {
+        text-align: center;
+        margin: 20px 0;
+        background-color: #ffffff;
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      /* Ensure Mermaid diagrams are responsive */
+      .mermaid svg {
+        max-width: 100%;
+        height: auto;
+      }
     </style>
 
     {% seo %}
@@ -147,7 +168,28 @@
       </div>
     </div>
 
+    <!-- Mermaid Initialization Script -->
     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'default',
+          flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+          },
+          themeVariables: {
+            primaryColor: '#0a2a43',
+            primaryTextColor: '#333333',
+            primaryBorderColor: '#0077b5',
+            lineColor: '#666666',
+            secondaryColor: '#f7f7f7',
+            tertiaryColor: '#ffffff'
+          }
+        });
+      });
+
       document.querySelectorAll('a[href^="http"]').forEach(function(anchor) {
         anchor.setAttribute('target', '_blank');
         anchor.setAttribute('rel', 'noopener noreferrer');
