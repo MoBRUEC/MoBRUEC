@@ -278,15 +278,6 @@ This open-source business plan welcomes contributions, feedback, and discussions
 
 ---
 
-## 📚 Additional Resources
-
-- [Market Research Data & Sources](./docs/market-research.md)
-- [Technical Architecture Details](./docs/technical-architecture.md)
-- [Financial Model Templates](./docs/financial-models.md)
-- [Implementation Playbooks](./docs/implementation-guides.md)
-
----
-
 **License**: MIT License - Free for commercial and non-commercial use
 
 **Disclaimer**: This business plan is based on market research and professional experience. Actual results may vary based on execution, market conditions, and competitive factors.
