@@ -13,4 +13,5 @@ Some books you should love and cherish with regards to integration and organizin
 * [Project to Product: How to Survive and Thrive in the Age of Digital Disruption with the Flow Framework](https://amzn.to/3XDvTz7)
 * [A Seat at the Table: IT Leadership in the Age of Agility](https://amzn.to/3lLz0I8)
 
-Here is a [presentation of mine on the topic of Change Management](presentations/Change%20Management%20a%20pragmatic%20take%20M%20Brueckner.pdf), based on the already [mentioned article](https://www.linkedin.com/pulse/transformation-compass-how-tell-youre-nailing-mohammed-brueckner).
+📌 Dive deeper into why 70% of transformation projects struggle—and what it really takes to shift that statistic—in my LinkedIn article: [**The Transformation Compass: How to Tell You're Nailing Change**](https://www.linkedin.com/pulse/transformation-compass-how-tell-youre-nailing-mohammed-brueckner)
+
