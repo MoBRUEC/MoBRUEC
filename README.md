@@ -60,8 +60,6 @@ Current business growth calls for **platform-driven plans**. Explore the details
 
 Watch my discussion on modern **enterprise architecture** with OPITZ CONSULTING, exploring how to build adaptable and strong IT structures:
 
-[![EAM Reloaded](https://img.youtube.com/vi/7n0MBTRpND4/0.jpg)](https://www.youtube.com/watch?v=7n0MBTRpND4)
-
 ## Strategic Insights
 
 ### Technical Leadership
@@ -76,8 +74,6 @@ Watch my discussion on modern **enterprise architecture** with OPITZ CONSULTING,
 
 Learn about managing **enterprise-scale data governance** and using your data assets to their full potential:
 
-[![Data Governance Webinar](https://img.youtube.com/vi/exDlh2MPrX4/0.jpg)](https://www.youtube.com/watch?v=exDlh2MPrX4)
-
 > **Getting Data Under Control – A Simple Task? Not quite – but with the right strategies and tools, data governance becomes achievable.** In this webinar, we share our experiences and good methods for effective data governance strategies – explained practically and clearly.
 > 🔹 How can data governance be put into daily work without overwhelming teams?
 > 🔹 What to do with global challenges like different laws or time zones?
@@ -88,13 +84,13 @@ Learn about managing **enterprise-scale data governance** and using your data as
 
 Explore key topics on **technology strategy**, **AI innovation**, and **leadership** with these informative podcast episodes from my "Platform Economies" series:
 
-🎧 **Platform Economics & Cloud Transformation** 👉 [https://open.spotify.com/episode/0Uta648a12bgT6x6v0XFXE?si=DZDDYHzhTJmppy01tK6dGQ]
+* 🎧 [**Platform Economics & Cloud Transformation**](https://open.spotify.com/episode/0Uta648a12bgT6x6v0XFXE?si=DZDDYHzhTJmppy01tK6dGQ) 👉
 This episode looks at the intersection of platform economics and cloud transformation, exploring how smart cloud use can power platform growth and create new business options.
 
-🎧 **AI's Role in Modern Enterprise Architecture** 👉 [https://open.spotify.com/episode/5GPzIee2Q0PREXjGSt83tg?si=RRPTWwSRQZOLvfz62BdeVA]
+* 🎧 [**AI's Role in Modern Enterprise Architecture**](https://open.spotify.com/episode/5GPzIee2Q0PREXjGSt83tg?si=RRPTWwSRQZOLvfz62BdeVA) 👉
 Discover how artificial intelligence is changing enterprise architecture, from automating design processes to aiding decision-making and guiding smarter system designs.
 
-🎧 **Navigating Digital Transformation Challenges** 👉 [https://open.spotify.com/episode/3a6FpbumwmJhoaw6nWQGKS?si=RYgx1Nn0R2Sb_5fFttE44g]
+* 🎧 [**Navigating Digital Transformation Challenges**](https://open.spotify.com/episode/3a6FpbumwmJhoaw6nWQGKS?si=RYgx1Nn0R2Sb_5fFttE44g) 👉
 This episode provides useful advice for overcoming common difficulties in digital transformation, focusing on leadership approaches, cultural shifts, and using technology for successful business change.
 
 ## Blogging & More
@@ -107,19 +103,13 @@ Connect on [LinkedIn](https://linkedin.com/in/mbrueckner) to discuss **enterpris
 
 ## Highlighted Publications
 
-[![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
-
-**[IT's not magic, it's architecture](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** guides organizations through current IT environments, bringing together principles, adaptability, and AI to create lasting business advantages. This practical guide makes complex architectural ideas into clear plans—because even the best tech needs a solid design. The foreword is written by my friend and Master Data expert, Tiankai Feng – you can see his thoughts [here](https://www.linkedin.com/posts/tiankaifeng_book-itarchitecture-tiankaistuff-activity-7188812661340467200-0KUW). I am happy about the good Amazon review from Tobias Zwingmann, the AI expert behind those LinkedIn courses on making money with AI, who said:
+[**IT's not magic, it's architecture**](https://www.amazon.com/-/de/dp/B0CVZ1BWPN) guides organizations through current IT environments, bringing together principles, adaptability, and AI to create lasting business advantages. This practical guide makes complex architectural ideas into clear plans—because even the best tech needs a solid design. The foreword is written by my friend and Master Data expert, Tiankai Feng – you can see his thoughts [here](https://www.linkedin.com/posts/tiankaifeng_book-itarchitecture-tiankaistuff-activity-7188812661340467200-0KUW). I am happy about the good Amazon review from Tobias Zwingmann, the AI expert behind those LinkedIn courses on making money with AI, who said:
 
 > "This book is a quick but important read for anyone who wants to understand IT architecture better, especially in company settings. With a great mix of theory and practice, the book covers the main patterns of IT architecture and strategy, giving IT architects clear directions to bring real value within their organizations. The chapter on "Agility and IT Architecture" is gold as most organizations cannot link being flexible and structured / organized at a large scale. I liked the Lego examples the author used. On every page, the author's practical experience and deep knowledge show through, without making it sound too technical or difficult. I strongly suggest reading this book!!"
 
-[![The Office Adventure](https://m.media-amazon.com/images/I/71WOnsWAQZL._SY522_.jpg)](https://a.co/d/iSCChrf)
+[**The Office Adventure Digital Transformation Quest**](https://a.co/d/iSCChrf) changes how teams approach digital transformation. This new gamebook makes organizational change an engaging trip. Players go through real-world situations while putting AI to use, handling cloud moves, and building digital abilities. Teams find practical transformation plans through interactive stories and choice-making tasks. You can try a [digital version of this adventure](https://platformeconomies.com/gamebook25webapp), based on the [book](https://platformeconomies.com/gamebook25).
 
-**[The Office Adventure Digital Transformation Quest](https://a.co/d/iSCChrf)** changes how teams approach digital transformation. This new gamebook makes organizational change an engaging trip. Players go through real-world situations while putting AI to use, handling cloud moves, and building digital abilities. Teams find practical transformation plans through interactive stories and choice-making tasks. You can try a [digital version of this adventure](https://platformeconomies.com/gamebook25webapp), based on the [book](https://platformeconomies.com/gamebook25).
-
-[![Dall-E Cookbook](https://m.media-amazon.com/images/I/91ff7xcipwL._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)
-
-**[The DALL-E Cookbook For Great AI Art](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)** connects traditional art rules with AI newness. This complete guide helps creators use AI tools while keeping their art spirit and creative view.
+[**The DALL-E Cookbook For Great AI Art**](https://www.amazon.com/-/de/dp/B0CVVXKSNF/) connects traditional art rules with AI newness. This complete guide helps creators use AI tools while keeping their art spirit and creative view.
 
 ---
 
