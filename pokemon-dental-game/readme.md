@@ -1,6 +1,8 @@
 # 🦷 Pokémon Dental Battle – Fun Gaming for Healthy Smiles
 
-[**▶ Play Now – Pokémon Dental Battle**](https://dental-duels-web.lovable.app/)  
+> ⚠️ **Disclaimer**  
+> I did **not** create this game. It was developed by a reader of my work who wanted to demonstrate what’s possible using technologies like **Lovable**. I found it genuinely fun and creative — and because it’s completely free, ad-free, and educational, I’m happy to support it by featuring it here.  
+> Go ahead and enjoy it: [**▶ Play Now – Pokémon Dental Battle**](https://dental-duels-web.lovable.app/)
 
 ![Pokémon Dental Battle Screenshot](https://github.com/MoBRUEC/MoBRUEC/blob/master/pokemon-dental-game/dental-game-screenshot.png?raw=true)
 
@@ -62,4 +64,4 @@ Pokémon dental game, kids dental hygiene game, educational Pokémon game, Poké
 
 ---
 
-**Disclaimer:** Pokémon and Pokémon character names are trademarks of Nintendo, Game Freak, and Creatures Inc. This is a fan-made educational project intended for non-commercial use.
+**Another Disclaimer:** Pokémon and Pokémon character names are trademarks of Nintendo, Game Freak, and Creatures Inc. This is a fan-made educational project intended for non-commercial use.
