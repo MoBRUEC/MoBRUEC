@@ -1,6 +1,10 @@
 title: "Mohammed Brueckner, passionate Leader, Advisor and IT Architect"
 description: "Results-oriented tech leader driving innovation and transformative growth through strategic alignment of business objectives with cutting-edge cloud (Azure/AWS), AI/IoT/Data solutions. Specializes in practical AI (GenAI/MLOps) implementation for Azure-driven strategic advantage. Empowers high-performing teams, communicates complex concepts effectively, and adapts quickly to dynamic environments to deliver exceptional outcomes."
-url: "https://mobruec.github.io/MoBRUEC/"
+
+# Use your custom domain here
+url: "https://mohammed-brueckner.com"
+baseurl: ""  # leave empty for root of the domain
+
 theme: jekyll-theme-architect
 
 # Social Links
@@ -14,3 +18,7 @@ social_links:
   - name: Medium
     url: "https://medium.com/@mohammedbrueckner"
     icon: "fab fa-medium"
+
+# Ensure Jekyll includes your PDF in the build
+include:
+  - changemanagement/presentations/Change Management a pragmatic take M Brueckner.pdf
