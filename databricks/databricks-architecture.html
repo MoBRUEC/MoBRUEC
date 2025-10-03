@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databricks Architecture Overview - Interactive Visual Guide | mohammed-brueckner.com</title>
+    <meta name="description" content="Comprehensive visual guide to Databricks architecture. Explore core building blocks including Unity Catalog, Delta Lake, MLflow, Photon Engine, and more. Interactive LEGO-style visualization of data lakehouse components.">
+    <meta name="keywords" content="Databricks, architecture, data engineering, Delta Lake, Unity Catalog, MLflow, Photon Engine, data lakehouse, Apache Spark, DBFS, Delta Live Tables, data platform, cloud computing, big data">
+    <meta name="author" content="Mohammed Brueckner">
+    <meta property="og:title" content="Databricks Architecture Overview - Interactive Visual Guide">
+    <meta property="og:description" content="Explore Databricks core building blocks with an interactive LEGO-style visualization. Learn about Unity Catalog, Delta Lake, MLflow, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohammed-brueckner.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Databricks Architecture Overview">
+    <meta name="twitter:description" content="Interactive guide to Databricks architecture components and their interactions">
+    <link rel="canonical" href="https://mohammed-brueckner.com">
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+        const { useState } = React;
+
+        // Lucide React icons as inline SVG components
+        const FolderKanban = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/>
+                <path d="M9 13h6"/>
+                <path d="M9 17h3"/>
+            </svg>
+        );
+
+        const Shield = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+        );
+
+        const Cpu = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                <rect x="9" y="9" width="6" height="6"/>
+                <path d="M15 2v2"/>
+                <path d="M15 20v2"/>
+                <path d="M2 15h2"/>
+                <path d="M2 9h2"/>
+                <path d="M20 15h2"/>
+                <path d="M20 9h2"/>
+                <path d="M9 2v2"/>
+                <path d="M9 20v2"/>
+            </svg>
+        );
+
+        const Zap = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+        );
+
+        const BarChart3 = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 3v18h18"/>
+                <path d="M18 17V9"/>
+                <path d="M13 17V5"/>
+                <path d="M8 17v-3"/>
+            </svg>
+        );
+
+        const Brain = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
+                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
+            </svg>
+        );
+
+        const Workflow = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="6" height="6" rx="1"/>
+                <rect x="15" y="3" width="6" height="6" rx="1"/>
+                <rect x="9" y="15" width="6" height="6" rx="1"/>
+                <path d="M6 9v6"/>
+                <path d="M18 9v6"/>
+                <path d="M12 15V9"/>
+            </svg>
+        );
+
+        const Layers = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+            </svg>
+        );
+
+        const Database = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+            </svg>
+        );
+
+        const FileCode = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <path d="m10 13-2 2 2 2"/>
+                <path d="m14 17 2-2-2-2"/>
+            </svg>
+        );
+
+        const Info = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4"/>
+                <path d="M12 8h.01"/>
+            </svg>
+        );
+
+        function DatabricksArchitecture() {
+            const [selectedComponent, setSelectedComponent] = useState(null);
+
+            const components = [
+                {
+                    id: 'workspace',
+                    name: 'Workspace',
+                    fullName: 'Workspace',
+                    icon: FolderKanban,
+                    color: 'bg-blue-500',
+                    shadowColor: 'shadow-blue-600',
+                    description: 'Collaborative Environment',
+                    explanation: 'The central hub where data engineers, scientists, and analysts collaborate. It provides notebooks for interactive coding, folders for organization, and integration with version control systems.',
+                    layer: 'interface'
+                },
+                {
+                    id: 'unity',
+                    name: 'Unity Catalog',
+                    fullName: 'Unity Catalog',
+                    icon: Shield,
+                    color: 'bg-purple-500',
+                    shadowColor: 'shadow-purple-600',
+                    description: 'Governance & Security',
+                    explanation: 'A unified governance solution that manages who can access what data across your entire organization. Think of it as a security guard and librarian combined, controlling access and keeping track of all data assets.',
+                    layer: 'governance'
+                },
+                {
+                    id: 'compute',
+                    name: 'Compute (Clusters)',
+                    fullName: 'Compute Clusters',
+                    icon: Cpu,
+                    color: 'bg-orange-500',
+                    shadowColor: 'shadow-orange-600',
+                    description: 'Processing Engine',
+                    explanation: 'The computational power behind Databricks. Clusters are groups of virtual machines that work together to process large amounts of data. They can scale up or down based on your needs.',
+                    layer: 'compute'
+                },
+                {
+                    id: 'photon',
+                    name: 'Photon Engine',
+                    fullName: 'Photon Engine',
+                    icon: Zap,
+                    color: 'bg-yellow-500',
+                    shadowColor: 'shadow-yellow-600',
+                    description: 'Query Acceleration',
+                    explanation: 'A high-performance query engine that makes data processing significantly faster. Named "Photon" because it speeds up queries at nearly the speed of light compared to traditional engines.',
+                    layer: 'compute'
+                },
+                {
+                    id: 'dbsql',
+                    name: 'Databricks SQL',
+                    fullName: 'Databricks SQL (DB SQL)',
+                    icon: BarChart3,
+                    color: 'bg-green-500',
+                    shadowColor: 'shadow-green-600',
+                    description: 'BI & Analytics',
+                    explanation: 'A specialized interface optimized for running SQL queries and creating business intelligence dashboards. It connects with popular BI tools like Tableau and Power BI.',
+                    layer: 'analytics'
+                },
+                {
+                    id: 'mlflow',
+                    name: 'MLflow',
+                    fullName: 'MLflow (Machine Learning Flow)',
+                    icon: Brain,
+                    color: 'bg-pink-500',
+                    shadowColor: 'shadow-pink-600',
+                    description: 'ML Lifecycle',
+                    explanation: 'An open-source platform for managing the complete machine learning lifecycle. It tracks experiments, packages models, and manages deployment from development to production.',
+                    layer: 'ml'
+                },
+                {
+                    id: 'workflows',
+                    name: 'Workflows',
+                    fullName: 'Databricks Workflows',
+                    icon: Workflow,
+                    color: 'bg-indigo-500',
+                    shadowColor: 'shadow-indigo-600',
+                    description: 'Orchestration',
+                    explanation: 'An orchestration tool that automates and schedules data pipelines and jobs. It manages dependencies between tasks and ensures they run in the correct order.',
+                    layer: 'orchestration'
+                },
+                {
+                    id: 'dlt',
+                    name: 'Delta Live Tables',
+                    fullName: 'Delta Live Tables (DLT)',
+                    icon: Layers,
+                    color: 'bg-teal-500',
+                    shadowColor: 'shadow-teal-600',
+                    description: 'Pipeline Framework',
+                    explanation: 'A declarative framework for building reliable data pipelines. Instead of writing complex code, you declare what you want, and DLT handles the how, including error handling and data quality checks.',
+                    layer: 'pipelines'
+                },
+                {
+                    id: 'delta',
+                    name: 'Delta Lake',
+                    fullName: 'Delta Lake',
+                    icon: Database,
+                    color: 'bg-red-500',
+                    shadowColor: 'shadow-red-600',
+                    description: 'Storage Layer',
+                    explanation: 'An open-source storage layer that brings database-like reliability to data lakes. It provides ACID transactions, time travel (accessing previous versions of data), and handles both streaming and batch data.',
+                    layer: 'storage'
+                },
+                {
+                    id: 'dbfs',
+                    name: 'DBFS',
+                    fullName: 'Databricks File System (DBFS)',
+                    icon: FileCode,
+                    color: 'bg-gray-600',
+                    shadowColor: 'shadow-gray-700',
+                    description: 'File System',
+                    explanation: 'A distributed file system that simplifies working with cloud storage. It abstracts away the complexity of cloud storage systems like AWS S3 or Azure Blob Storage, making them easier to work with.',
+                    layer: 'storage'
+                }
+            ];
+
+            return (
+                <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-4 sm:p-6 lg:p-8">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-8 lg:mb-12">
+                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-2">Databricks Architecture</h1>
+                            <p className="text-base sm:text-lg text-gray-600 mb-1">Core Building Blocks & Their Interactions</p>
+                            <p className="text-sm text-gray-500">
+                                Presented to you by{' '}
+                                <a 
+                                    href="https://mohammed-brueckner.com" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-blue-600 hover:text-blue-800 underline font-medium"
+                                >
+                                    mohammed-brueckner.com
+                                </a>
+                            </p>
+                        </div>
+
+                        <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-8 flex items-start gap-3">
+                            <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                            <p className="text-sm text-gray-700">
+                                <span className="font-semibold">Click on any LEGO brick</span> to learn what the abbreviations stand for and get detailed explanations of each component.
+                            </p>
+                        </div>
+
+                        <div className="space-y-6 lg:space-y-8">
+                            <LayerSection title="Interface Layer" color="bg-blue-400">
+                                <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+                                    {components.filter(c => c.layer === 'interface').map(component => (
+                                        <LegoBrick 
+                                            key={component.id} 
+                                            component={component}
+                                            onClick={() => setSelectedComponent(component)}
+                                        />
+                                    ))}
+                                </div>
+                            </LayerSection>
+
+                            <LayerSection title="Governance Layer" color="bg-purple-400">
+                                <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+                                    {components.filter(c => c.layer === 'governance').map(component => (
+                                        <LegoBrick 
+                                            key={component.id} 
+                                            component={component}
+                                            onClick={() => setSelectedComponent(component)}
+                                        />
+                                    ))}
+                                </div>
+                            </LayerSection>
+
+                            <LayerSection title="Processing & Analytics Layer" color="bg-orange-400">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
+                                    {components.filter(c => ['compute', 'analytics', 'ml', 'orchestration', 'pipelines'].includes(c.layer)).map(component => (
+                                        <LegoBrick 
+                                            key={component.id} 
+                                            component={component}
+                                            onClick={() => setSelectedComponent(component)}
+                                        />
+                                    ))}
+                                </div>
+                            </LayerSection>
+
+                            <LayerSection title="Storage Layer" color="bg-red-400">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-md mx-auto">
+                                    {components.filter(c => c.layer === 'storage').map(component => (
+                                        <LegoBrick 
+                                            key={component.id} 
+                                            component={component}
+                                            onClick={() => setSelectedComponent(component)}
+                                        />
+                                    ))}
+                                </div>
+                            </LayerSection>
+                        </div>
+
+                        <div className="mt-8 lg:mt-12 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 lg:p-8 border-2 border-gray-200">
+                            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 lg:mb-6">Key Data Flows</h3>
+                            <div className="grid sm:grid-cols-2 gap-4 lg:gap-6 text-sm">
+                                <DataFlow 
+                                    color="bg-blue-500"
+                                    title="Workspace → Compute Clusters"
+                                    description="Users create notebooks and run interactive code on clusters"
+                                />
+                                <DataFlow 
+                                    color="bg-purple-500"
+                                    title="Unity Catalog → Delta Lake"
+                                    description="Governs access control and metadata for all data assets"
+                                />
+                                <DataFlow 
+                                    color="bg-green-500"
+                                    title="Databricks SQL (DB SQL) → Photon Engine"
+                                    description="Leverages the Photon high-performance query engine (a vectorized engine for faster SQL processing) for Business Intelligence workloads"
+                                />
+                                <DataFlow 
+                                    color="bg-indigo-500"
+                                    title="Workflows → Delta Live Tables (DLT)"
+                                    description="Orchestrates data pipelines with dependencies and scheduling"
+                                />
+                                <DataFlow 
+                                    color="bg-pink-500"
+                                    title="MLflow (Machine Learning Flow) → Compute Clusters"
+                                    description="Tracks experiments and deploys models on cluster infrastructure"
+                                />
+                                <DataFlow 
+                                    color="bg-red-500"
+                                    title="Delta Lake → Databricks File System (DBFS)"
+                                    description="Stores versioned data on distributed cloud storage"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {selectedComponent && (
+                        <ComponentDetailModal 
+                            component={selectedComponent}
+                            onClose={() => setSelectedComponent(null)}
+                        />
+                    )}
+                </div>
+            );
+        }
+
+        function LayerSection({ title, color, children }) {
+            return (
+                <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 border-2 border-gray-200 shadow-sm">
+                    <h3 className="text-xs sm:text-sm font-bold text-gray-500 mb-4 lg:mb-6 uppercase tracking-wide flex items-center gap-2">
+                        <div className={`w-3 h-3 ${color} rounded-full`}></div>
+                        {title}
+                    </h3>
+                    {children}
+                </div>
+            );
+        }
+
+        function LegoBrick({ component, onClick }) {
+            const Icon = component.icon;
+            
+            return (
+                <div 
+                    className="relative group cursor-pointer"
+                    onClick={onClick}
+                >
+                    <div className="absolute -top-2 sm:-top-3 left-1/2 transform -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
+                        <div className={`w-3 h-3 sm:w-4 sm:h-4 ${component.color} rounded-full border-2 border-white shadow-md`}></div>
+                        <div className={`w-3 h-3 sm:w-4 sm:h-4 ${component.color} rounded-full border-2 border-white shadow-md`}></div>
+                    </div>
+                    
+                    <div className={`${component.color} ${component.shadowColor} shadow-lg rounded-lg p-4 sm:p-6 border-4 border-white transform transition-all duration-200 hover:scale-105 hover:shadow-xl relative min-w-[140px] sm:min-w-[180px]`}>
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-md pointer-events-none"></div>
+                        
+                        <div className="relative z-10">
+                            <div className="bg-white/90 backdrop-blur-sm p-2 sm:p-3 rounded-lg mb-2 sm:mb-3 inline-block shadow-sm">
+                                <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-800" />
+                            </div>
+                            <h4 className="font-bold text-white text-sm sm:text-base mb-1 sm:mb-2 drop-shadow-md">{component.name}</h4>
+                            <p className="text-white/90 text-xs font-medium drop-shadow">{component.description}</p>
+                        </div>
+                        
+                        <div className="absolute -bottom-1.5 sm:-bottom-2 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3">
+                            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-300 rounded-full border-2 border-gray-400 shadow"></div>
+                            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-300 rounded-full border-2 border-gray-400 shadow"></div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function DataFlow({ color, title, description }) {
+            return (
+                <div className="flex items-start gap-3 sm:gap-4 bg-white rounded-lg p-3 sm:p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div className={`${color} w-3 h-3 rounded-full mt-1.5 flex-shrink-0 shadow`}></div>
+                    <div>
+                        <p className="font-bold text-gray-800 text-xs sm:text-sm mb-1">{title}</p>
+                        <p className="text-gray-600 text-xs leading-relaxed">{description}</p>
+                    </div>
+                </div>
+            );
+        }
+
+        function ComponentDetailModal({ component, onClose }) {
+            const Icon = component.icon;
+            
+            return (
+                <div 
+                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                    onClick={onClose}
+                >
+                    <div 
+                        className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className={`${component.color} p-6 sm:p-8 rounded-t-2xl`}>
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="bg-white/90 p-3 sm:p-4 rounded-xl shadow-lg">
+                                    <Icon className="w-10 h-10 sm:w-12 sm:h-12 text-gray-800" />
+                                </div>
+                                <div>
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-white drop-shadow-md">{component.fullName}</h2>
+                                    <p className="text-white/90 text-sm sm:text-base font-medium">{component.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="p-6 sm:p-8">
+                            <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">What does this mean?</h3>
+                            <p className="text-gray-700 leading-relaxed text-sm sm:text-base mb-6">
+                                {component.explanation}
+                            </p>
+                            
+                            <button
+                                onClick={onClose}
+                                className="w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<DatabricksArchitecture />);
+    </script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>
