@@ -2,9 +2,9 @@
 
 # Machine Learning Operations (MLOps) with Databricks on Azure End-to-End
 
-This document contains a complete compilation of all the code snippets from the "Machine Learning Operations (MLOps) with Databricks on Azure End-to-End" guide. The code is organized by chapter for easy reference.
+This document contains a complete compilation of all the code snippets from the "Machine Learning Operations (MLOps) with Databricks on Azure End-to-End" guide by Mohammed Brückner. The code is organized by chapter for easy reference.
 
-
+**📚 [Get the complete book on Amazon](https://www.amazon.com/dp/B0FTSY78DR)** for detailed explanations, architectural insights, and production MLOps best practices.
 
 # Table of Contents
 
