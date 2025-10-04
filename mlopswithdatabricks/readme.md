@@ -1215,17 +1215,3 @@ The book provides:
 **License**: All code samples are provided for reference and learning purposes. Please review the book's license terms for usage rights.
 
 **Support**: For questions or issues with the code samples, refer to the book's companion resource at: https://mohammed-brueckner.com/mlopswithdatabricks/
-
----
-
-*Last Updated: October 2025*
-```python
-serving_patterns = {
-    "blue_green": {
-        "strategy": "full_traffic_shift",
-        "versions": [
-            {"name": "blue", "model_version": "v1", "traffic": 100},
-            {"name": "green", "model_version": "v2", "traffic": 0}
-        ]
-    },
-    "ab
