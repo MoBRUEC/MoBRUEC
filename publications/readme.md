@@ -24,10 +24,6 @@ Some books you should love and cherish with regards to integration and organizin
     Elevate your architectural impact! This book redefines the software architect's pivotal role, emphasizing the crucial need to bridge the gap between high-level business strategy and low-level technical execution. It's an **indispensable guide** for architects looking to expand their influence, drive organizational alignment, and lead successful digital transformations.
 
 The reason is simple - architecture and team dynamics always matters and your team composition or your development philosohphy doesn't change that.
-
-**Here is my presentation** on ["Integration in a serverless world"](../presentations/Integration%20in%20a%20serverlosen%20Welt%20M%20Brueckner%2015-03-2023%20MSFT-1005-Azure-Summit-PPT_DE.pdf), based on this article:
-[Advanced Automation using Azure & serverless services](https://medium.com/serverless-and-lowocode-pioneers/using-logic-apps-to-orchestrate-a-complex-video-processing-process-flow-a0ef20237511)
-
 During the **Azure Summit Event Mid-March 2023** you would have seen the [German version of that presentation](../presentations/Integration%20in%20einer%20serverlosen%20Welt%20M%20Brueckner%2015-03-2023%20MSFT-1005-Azure-Summit-PPT_DE.pdf).
 
 Are you a pro-coder and want to get some backup like low-code devs get with their fancy drag & drop tools? Don't fret, AI could be that booster you need:
