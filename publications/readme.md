@@ -1,11 +1,11 @@
 # Integration in a serverless world
 
-I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** and **["The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts."](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)**, both available via Amazon.
+I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** and **["Machine Learning Operations (MLOps) with Databricks on Azure End-to-End"](https://www.amazon.com/dp/B0FTSY78DR)**, both available via Amazon.
 
 [![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
-[![Dall-E Cookbook](https://m.media-amazon.com/images/I/91ff7xcipwL._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)
+[![Machine Learning Operations (MLOps) with Databricks on Azure End-to-End](https://m.media-amazon.com/images/I/81+EfK4Yv2L._SY522_.jpg)](https://www.amazon.com/dp/B0FTSY78DR)
 
-One deals with Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI. The other one with the democratiziation of art! (And I mean art in the sense of classic art as well as modern art.)
+One deals with Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI. The other one with building production-grade MLOps systems on Databricks and Azure!
 
 **Thanks for your interest in my take on modern integration. And why lowcode and serverless are part of the equation.**
 
@@ -21,7 +21,7 @@ Some books you should love and cherish with regards to integration and organizin
     For IT leaders navigating the agile landscape, this book is your **roadmap to relevance**. It challenges conventional command-and-control methods, guiding you to evolve into a servant leader who empowers teams, fosters innovation, and drives continuous value. Secure your **critical influence** in the digital enterprise by mastering this new style of leadership.
 
 * **[The Software Architect Elevator: Redefining the Architect's Role in the Digital Enterprise](https://amzn.to/3SjtF75)**
-    Elevate your architectural impact! This book redefines the software architect's pivotal role, emphasizing the crucial need to bridge the gap between high-level business strategy and low-level technical execution. It’s an **indispensable guide** for architects looking to expand their influence, drive organizational alignment, and lead successful digital transformations.
+    Elevate your architectural impact! This book redefines the software architect's pivotal role, emphasizing the crucial need to bridge the gap between high-level business strategy and low-level technical execution. It's an **indispensable guide** for architects looking to expand their influence, drive organizational alignment, and lead successful digital transformations.
 
 The reason is simple - architecture and team dynamics always matters and your team composition or your development philosohphy doesn't change that.
 
