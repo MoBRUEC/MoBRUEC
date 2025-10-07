@@ -109,7 +109,7 @@ Connect on [LinkedIn](https://linkedin.com/in/mbrueckner) to discuss **enterpris
 
 [**The Office Adventure Digital Transformation Quest**](https://a.co/d/iSCChrf) changes how teams approach digital transformation. This new gamebook makes organizational change an engaging trip. Players go through real-world situations while putting AI to use, handling cloud moves, and building digital abilities. Teams find practical transformation plans through interactive stories and choice-making tasks. You can try a [digital version of this adventure](https://platformeconomies.com/gamebook25webapp), based on the [book](https://platformeconomies.com/gamebook25).
 
-[**The DALL-E Cookbook For Great AI Art**](https://www.amazon.com/-/de/dp/B0CVVXKSNF/) connects traditional art rules with AI newness. This complete guide helps creators use AI tools while keeping their art spirit and creative view.
+[**Machine Learning Operations (MLOps) with Databricks on Azure End-To-End**](https://www.amazon.com/dp/B0FTSY78DR) is your hands-on guide to mastering Databricks in 2025. Whether you're a data engineer, analyst, or ML enthusiast, this book shows you how to build scalable pipelines, harness Delta Lake, deploy reproducible ML models, and avoid common pitfalls — all with real-world clarity and speed.
 
 ---
 
