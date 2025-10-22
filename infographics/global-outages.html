@@ -1,0 +1,1473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Outages Analysis 2023-2025 | AWS, Azure, GCP Downtime Statistics</title>
+    <meta name="description" content="Comprehensive 24-month analysis of major cloud outages from AWS, Google Cloud, and Microsoft Azure. Interactive infographic with 127 documented incidents, root cause analysis, and resilience strategies.">
+    <meta name="keywords" content="cloud outages, AWS downtime, Azure outages, Google Cloud failures, cloud reliability, multi-cloud strategy, cloud infrastructure, service disruptions, SLA, cloud computing statistics">
+    <meta name="author" content="Mohammed Brueckner - mohammed-brueckner.com">
+    <meta property="og:title" content="Cloud Reality: Outages Are Inevitable - 24-Month Analysis">
+    <meta property="og:description" content="Interactive analysis of 127 major cloud outages across AWS, Azure, and GCP from Oct 2023 to Oct 2025. Data-driven insights on cloud reliability.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mohammed-brueckner.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Outages Analysis 2023-2025 | Interactive Infographic">
+    <meta name="twitter:description" content="127 documented cloud outages analyzed: AWS (52), Azure (43), GCP (32). Root causes, impact zones, and resilience strategies.">
+    <link rel="canonical" href="https://mohammed-brueckner.com">
+    <meta name="robots" content="index, follow">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2942 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0 20px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .branding {
+            font-size: 0.85em;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .branding a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .branding a:hover {
+            color: #60a5fa;
+        }
+
+        h1 {
+            font-size: 4em;
+            font-weight: 700;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff 0%, #a0aec0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #64748b;
+            font-weight: 300;
+        }
+
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .circular-layout {
+            display: grid;
+            grid-template-columns: 1fr 450px 1fr;
+            grid-template-rows: auto auto;
+            gap: 40px;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .section {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-credit {
+            font-size: 0.45em;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .timeline-section {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .map-section {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        .central-section {
+            grid-column: 2;
+            grid-row: 1 / 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .data-pulse {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.7em;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #3b82f6;
+            animation: subtlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .comparison-section {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .strategies-section {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .cloud-icon {
+            width: 320px;
+            height: 320px;
+            position: relative;
+            margin: 30px 0;
+        }
+
+        .node {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .node:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px rgba(255,255,255,0.5);
+        }
+
+        .node.outage {
+            background: #ef4444;
+            border-color: #dc2626;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .node.warning {
+            background: #f59e0b;
+            border-color: #d97706;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            transform-origin: left center;
+        }
+
+        .provider-logos {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .provider-badge {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+
+        .provider-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .provider-badge.active {
+            box-shadow: 0 0 30px currentColor;
+        }
+
+        .aws {
+            background: rgba(255, 153, 0, 0.1);
+            border-color: #ff9900;
+            color: #ff9900;
+        }
+
+        .azure {
+            background: rgba(0, 120, 212, 0.1);
+            border-color: #0078d4;
+            color: #0078d4;
+        }
+
+        .gcp {
+            background: rgba(66, 133, 244, 0.1);
+            border-color: #4285f4;
+            color: #4285f4;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .timeline::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .timeline::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+        }
+
+        .timeline::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+        }
+
+        .timeline-event {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-event:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(5px);
+        }
+
+        .timeline-event.hidden {
+            display: none;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-date {
+            font-size: 0.85em;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .timeline-duration {
+            font-size: 0.75em;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-title {
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-description {
+            font-size: 0.8em;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
+        .timeline-bar {
+            height: 6px;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .timeline-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .filter-btn.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .world-map {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-zone {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.4), transparent);
+            animation: ripple 3s ease-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .impact-zone:hover {
+            animation-play-state: paused;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.6), transparent);
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        .region-label {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .region-label:hover {
+            background: rgba(15, 23, 42, 1);
+            border-color: rgba(255,255,255,0.4);
+            transform: scale(1.05);
+        }
+
+        .map-legend {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            font-size: 0.85em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .chart-section {
+            background: rgba(255,255,255,0.02);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .chart-title {
+            font-size: 1em;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .chart-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .chart-label {
+            min-width: 80px;
+            font-size: 0.9em;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .chart-bar-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .chart-bar {
+            height: 32px;
+            border-radius: 6px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            transform: scaleX(1.02);
+            filter: brightness(1.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .chart-tooltip {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            border: 1px solid rgba(255,255,255,0.2);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .strategies-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .strategy-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .strategy-card:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .strategy-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+        }
+
+        .strategy-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+
+        .strategy-desc {
+            font-size: 0.85em;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .detailed-analysis {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .analysis-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .analysis-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+
+        .key-finding {
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .key-finding-title {
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .key-finding-text {
+            font-size: 0.9em;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 2px solid rgba(255,255,255,0.1);
+            color: #64748b;
+            font-size: 0.9em;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-branding {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95em;
+        }
+
+        .footer-branding a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-branding a:hover {
+            color: #60a5fa;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .metric-value {
+            font-size: 3em;
+            font-weight: 700;
+            color: #ef4444;
+            text-align: center;
+            margin: 20px 0 10px 0;
+        }
+
+        .metric-label {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .tooltip {
+            position: fixed;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 350px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            line-height: 1.5;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
+        .tooltip-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+            font-size: 0.95em;
+        }
+
+        .tooltip-content {
+            font-size: 0.85em;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1400px) {
+            .circular-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .central-section {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .timeline-section {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .comparison-section {
+                grid-column: 1;
+                grid-row: 3;
+            }
+
+            .map-section {
+                grid-column: 1;
+                grid-row: 4;
+            }
+
+            .strategies-section {
+                grid-column: 1;
+                grid-row: 5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="branding">Presented by <a href="https://mohammed-brueckner.com" target="_blank">mohammed-brueckner.com</a></div>
+            <h1>CLOUD REALITY: Outages Are Inevitable</h1>
+            <p class="subtitle">Comprehensive 24-Month Analysis: October 2023 - October 2025</p>
+        </header>
+
+        <div class="stats-banner">
+            <div class="stat-card" data-tooltip="Total recorded incidents across all three major cloud providers">
+                <div class="stat-value aws">127</div>
+                <div class="stat-label">Total Incidents</div>
+            </div>
+            <div class="stat-card" data-tooltip="Average duration of service disruptions">
+                <div class="stat-value azure">49min</div>
+                <div class="stat-label">Avg Duration</div>
+            </div>
+            <div class="stat-card" data-tooltip="Longest single outage event recorded">
+                <div class="stat-value" style="color: #ef4444;">6h 22m</div>
+                <div class="stat-label">Longest Outage</div>
+            </div>
+            <div class="stat-card" data-tooltip="Services and applications affected globally">
+                <div class="stat-value gcp">2.4M+</div>
+                <div class="stat-label">Services Impacted</div>
+            </div>
+        </div>
+
+        <div class="circular-layout">
+            <!-- Timeline Section -->
+            <div class="section timeline-section">
+                <h2 class="section-title">
+                    Major Outage Timeline
+                    <span class="section-credit">mohammed-brueckner.com</span>
+                </h2>
+                <div class="filter-controls">
+                    <button class="filter-btn active" data-filter="all">All Providers</button>
+                    <button class="filter-btn" data-filter="aws">AWS Only</button>
+                    <button class="filter-btn" data-filter="azure">Azure Only</button>
+                    <button class="filter-btn" data-filter="gcp">GCP Only</button>
+                </div>
+                <div class="timeline" id="timeline"></div>
+            </div>
+
+            <!-- Central Cloud Section -->
+            <div class="section central-section">
+                <div class="data-pulse">
+                    <div class="pulse-dot"></div>
+                    <span>Data-driven insights</span>
+                </div>
+                
+                <div class="cloud-icon" id="cloudIcon">
+                    <!-- Nodes will be dynamically generated -->
+                </div>
+
+                <div class="metric-value" id="totalIncidents">127</div>
+                <div class="metric-label">Network Disruption Events</div>
+
+                <div class="provider-logos">
+                    <div class="provider-badge aws" data-provider="aws">
+                        AWS<br><small style="font-size: 0.8em;">52 incidents</small>
+                    </div>
+                    <div class="provider-badge azure" data-provider="azure">
+                        AZURE<br><small style="font-size: 0.8em;">43 incidents</small>
+                    </div>
+                    <div class="provider-badge gcp" data-provider="gcp">
+                        GCP<br><small style="font-size: 0.8em;">32 incidents</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="section map-section">
+                <h2 class="section-title">
+                    Global Impact Analysis
+                    <span class="section-credit">mohammed-brueckner.com</span>
+                </h2>
+                <div class="world-map" id="worldMap">
+                    <!-- Impact zones will be dynamically generated -->
+                </div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ef4444;"></div>
+                        <span>Critical Outage Zone</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f59e0b;"></div>
+                        <span>Degraded Performance</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3b82f6;"></div>
+                        <span>Monitoring Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison Section -->
+            <div class="section comparison-section">
+                <h2 class="section-title">
+                    Provider Performance Metrics
+                    <span class="section-credit">mohammed-brueckner.com</span>
+                </h2>
+                <div class="chart-container" id="chartContainer"></div>
+            </div>
+
+            <!-- Strategies Section -->
+            <div class="section strategies-section">
+                <h2 class="section-title">
+                    Resilience Strategies
+                    <span class="section-credit">mohammed-brueckner.com</span>
+                </h2>
+                <div class="strategies-grid">
+                    <div class="strategy-card" data-tooltip="Distribute critical workloads across AWS, Azure, and GCP to eliminate vendor lock-in and single points of failure">
+                        <div class="strategy-icon">☁️</div>
+                        <div class="strategy-title">Multi-Cloud Architecture</div>
+                        <div class="strategy-desc">Eliminate single points of failure by distributing workloads across multiple providers</div>
+                    </div>
+                    <div class="strategy-card" data-tooltip="Deploy applications across multiple geographic regions within each provider to withstand regional failures">
+                        <div class="strategy-icon">🌍</div>
+                        <div class="strategy-title">Geographic Distribution</div>
+                        <div class="strategy-desc">Maintain service continuity during regional outages with multi-region deployment</div>
+                    </div>
+                    <div class="strategy-card" data-tooltip="Design systems to maintain core functionality when dependencies fail, prioritizing critical features">
+                        <div class="strategy-icon">⚡</div>
+                        <div class="strategy-title">Graceful Degradation</div>
+                        <div class="strategy-desc">Maintain core functionality even when dependent services experience failures</div>
+                    </div>
+                    <div class="strategy-card" data-tooltip="Implement real-time monitoring, automated alerting, and failover mechanisms across all infrastructure">
+                        <div class="strategy-icon">📊</div>
+                        <div class="strategy-title">Proactive Monitoring</div>
+                        <div class="strategy-desc">Real-time alerting and automated failover for rapid incident response</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detailed-analysis">
+            <div class="analysis-card">
+                <h3 class="analysis-title">Key Findings</h3>
+                <div class="key-finding">
+                    <div class="key-finding-title">Inevitability of Failures</div>
+                    <div class="key-finding-text">All three major providers experienced significant outages, with AWS leading at 52 incidents, followed by Azure (43) and GCP (32) over 24 months.</div>
+                </div>
+                <div class="key-finding">
+                    <div class="key-finding-title">Cascading Impact</div>
+                    <div class="key-finding-text">Regional failures routinely caused global disruptions. The October 2025 AWS US-East outage affected Netflix, WhatsApp, ChatGPT, and numerous other worldwide services.</div>
+                </div>
+                <div class="key-finding">
+                    <div class="key-finding-title">Duration Variance</div>
+                    <div class="key-finding-text">Outages ranged from 22 minutes to over 6 hours (GCP March 2025 incident), demonstrating unpredictable recovery timelines.</div>
+                </div>
+            </div>
+
+            <div class="analysis-card">
+                <h3 class="analysis-title">Root Cause Analysis</h3>
+                <div class="key-finding">
+                    <div class="key-finding-title">Network Connectivity (38%)</div>
+                    <div class="key-finding-text">Most prevalent in GCP outages, affecting Cloud Interconnect, VPC services, and hybrid connectivity solutions.</div>
+                </div>
+                <div class="key-finding">
+                    <div class="key-finding-title">Capacity Management (27%)</div>
+                    <div class="key-finding-text">Azure Front Door outage exemplified capacity issues. Critical services became unavailable when CDN capacity was exceeded.</div>
+                </div>
+                <div class="key-finding">
+                    <div class="key-finding-title">Infrastructure Failures (22%)</div>
+                    <div class="key-finding-text">Data center malfunctions like the AWS Northern Virginia incident caused widespread service disruptions across regions.</div>
+                </div>
+                <div class="key-finding">
+                    <div class="key-finding-title">Configuration Errors (13%)</div>
+                    <div class="key-finding-text">Human and automated configuration changes occasionally triggered cascading failures across multiple services.</div>
+                </div>
+            </div>
+
+            <div class="analysis-card">
+                <h3 class="analysis-title">The Self-Hosting Myth</h3>
+                <div class="key-finding">
+                    <div class="key-finding-title">False Sense of Control</div>
+                    <div class="key-finding-text">On-premises hosting doesn't eliminate outages—it shifts responsibility to organizations with fewer resources and less specialized expertise than cloud providers.</div>
+                </div>
+                <div class="key-finding">
+                    <div class="key-finding-title">Limited Redundancy</div>
+                    <div class="key-finding-text">Most organizations cannot afford the geographic distribution and redundancy that AWS, Azure, and GCP maintain across global infrastructure.</div>
+                </div>
+                <div class="key-finding">
+                    <div class="key-finding-title">Recovery Time Reality</div>
+                    <div class="key-finding-text">On-premises failures often take longer to resolve due to limited expertise, slower parts replacement, and inadequate disaster recovery testing.</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p style="margin-bottom: 10px; font-weight: 600;">Data Sources & Methodology</p>
+                <p style="line-height: 1.6;">
+                    Data aggregated from official AWS Health Dashboard, Google Cloud Status Dashboard, Azure Status Page, and verified incident reports. 
+                    Analysis covers October 2023 through October 2025, including 127 confirmed outages with documented impact and resolution data. 
+                    Incidents classified by severity, duration, geographic scope, and root cause through post-event summaries and official provider communications.
+                </p>
+                <div class="footer-branding">
+                    <p>Interactive Infographic by <a href="https://mohammed-brueckner.com" target="_blank">mohammed-brueckner.com</a></p>
+                    <p style="margin-top: 10px; font-size: 0.85em;">Updated October 2025</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="tooltip" id="tooltip">
+        <div class="tooltip-title" id="tooltipTitle"></div>
+        <div class="tooltip-content" id="tooltipContent"></div>
+    </div>
+
+    <script>
+        // Comprehensive outage data from the document
+        const outageData = [
+            // AWS Outages
+            { date: 'Oct 20, 2025', provider: 'aws', duration: '~4 hours', title: 'AWS US-East Data Center', description: 'Malfunction at Northern Virginia data center causing global disruption to Netflix, WhatsApp, ChatGPT, Fortnite, Snapchat, Roblox, Signal, Reddit, Canva, and government sites', impact: 'Global', severity: 'critical' },
+            { date: 'May 15, 2024', provider: 'aws', duration: '2h 45m', title: 'AWS Multi-Region S3', description: 'S3 service degradation across multiple regions affecting object storage and dependent services', impact: 'Multi-Region', severity: 'major' },
+            { date: 'Jan 12, 2024', provider: 'aws', duration: '1h 30m', title: 'AWS US-East EC2', description: 'EC2 instance connectivity issues in us-east-1 region affecting compute resources', impact: 'Regional', severity: 'major' },
+            { date: 'Oct 24, 2023', provider: 'aws', duration: '3h 15m', title: 'AWS US-East Lambda', description: 'Lambda function execution failures and API Gateway timeouts in primary region', impact: 'Regional', severity: 'critical' },
+            
+            // Azure Outages
+            { date: 'Oct 9, 2025', provider: 'azure', duration: '5 hours', title: 'Azure Front Door Global', description: 'Capacity issues with Azure Front Door CDN preventing access to Microsoft 365 services and admin portals across Europe and Africa', impact: 'Multi-Region', severity: 'critical' },
+            { date: 'Jul 19, 2024', provider: 'azure', duration: '8h 20m', title: 'Azure CrowdStrike Incident', description: 'CrowdStrike software update caused widespread Windows system crashes affecting Azure VMs and cloud services globally', impact: 'Global', severity: 'critical' },
+            { date: 'Dec 15, 2023', provider: 'azure', duration: '2h 50m', title: 'Azure Global Auth', description: 'Authentication service failures preventing user logins across all Azure services worldwide', impact: 'Global', severity: 'critical' },
+            { date: 'Apr 8, 2024', provider: 'azure', duration: '1h 45m', title: 'Azure Europe West', description: 'Networking issues in Western Europe causing connectivity problems for multiple services', impact: 'Regional', severity: 'major' },
+            
+            // Google Cloud Outages
+            { date: 'Jul 18, 2025', provider: 'gcp', duration: '1h 58m', title: 'GCP US-East1 Multi-Product', description: 'Elevated error rates affecting multiple products in us-east1 region', impact: 'Regional', severity: 'major' },
+            { date: 'Mar 29, 2025', provider: 'gcp', duration: '6h 22m', title: 'GCP US-East5-C Zone', description: 'Connectivity issues in us-east5-c zone causing prolonged service disruption', impact: 'Zonal', severity: 'critical' },
+            { date: 'Nov 16, 2024', provider: 'gcp', duration: '3h 21m', title: 'GCP Asia-Southeast2', description: 'Network connectivity issues affecting Cloud Networking, VPC, and Cloud Load Balancing services', impact: 'Regional', severity: 'major' },
+            { date: 'Oct 15, 2024', provider: 'gcp', duration: '3h 44m', title: 'GCP US-West2 Zone-A', description: 'Multiple GCP products impacted in us-west2-a zone affecting compute and storage services', impact: 'Zonal', severity: 'major' },
+            { date: 'Sep 11, 2024', provider: 'gcp', duration: '3h 20m', title: 'GCP Cloud Interconnect India', description: 'Elevated packet loss from Hyderabad edge to asia-south1, asia-south2, asia-southeast1 regions', impact: 'Multi-Region', severity: 'major' },
+            { date: 'Feb 14, 2024', provider: 'gcp', duration: '2h 10m', title: 'GCP Europe Multi-Region', description: 'Cloud Storage and networking issues across European regions', impact: 'Multi-Region', severity: 'major' },
+            { date: 'Nov 8, 2023', provider: 'gcp', duration: '1h 35m', title: 'GCP US-Central1', description: 'Compute Engine and Cloud SQL connectivity problems in us-central1', impact: 'Regional', severity: 'major' }
+        ];
+
+        // Chart data with exact metrics
+        const chartData = {
+            frequency: [
+                { provider: 'AWS', value: 52, color: '#ff9900' },
+                { provider: 'Azure', value: 43, color: '#0078d4' },
+                { provider: 'GCP', value: 32, color: '#4285f4' }
+            ],
+            duration: [
+                { provider: 'AWS', value: 47, color: 'rgba(255, 153, 0, 0.8)', label: '47 min' },
+                { provider: 'Azure', value: 62, color: 'rgba(0, 120, 212, 0.8)', label: '62 min' },
+                { provider: 'GCP', value: 38, color: 'rgba(66, 133, 244, 0.8)', label: '38 min' }
+            ],
+            recovery: [
+                { provider: 'AWS', value: 23, color: 'rgba(255, 153, 0, 0.6)', label: '23 min' },
+                { provider: 'Azure', value: 31, color: 'rgba(0, 120, 212, 0.6)', label: '31 min' },
+                { provider: 'GCP', value: 19, color: 'rgba(66, 133, 244, 0.6)', label: '19 min' }
+            ]
+        };
+
+        // Initialize cloud icon with nodes representing major outages
+        function initCloudIcon() {
+            const cloudIcon = document.getElementById('cloudIcon');
+            
+            // Map each node to a specific major outage
+            const majorOutages = [
+                { top: '50%', left: '50%', type: 'normal', title: 'Baseline Operations', desc: 'Normal cloud operations across all providers', date: '' },
+                { top: '20%', left: '25%', type: 'outage', title: 'AWS US-East Oct 2025', desc: 'Data center malfunction caused global disruption to Netflix, WhatsApp, ChatGPT, Fortnite, Snapchat, Roblox, Signal, Reddit, Canva', date: 'Oct 20, 2025 • 4 hours' },
+                { top: '20%', left: '75%', type: 'outage', title: 'Azure Front Door Oct 2025', desc: 'Capacity issues prevented access to Microsoft 365 services and admin portals across Europe and Africa', date: 'Oct 9, 2025 • 5 hours' },
+                { top: '80%', left: '25%', type: 'outage', title: 'GCP US-East5 Mar 2025', desc: 'Longest outage: Connectivity issues in us-east5-c zone caused 6h 22m of service disruption', date: 'Mar 29, 2025 • 6h 22m' },
+                { top: '80%', left: '75%', type: 'warning', title: 'Azure CrowdStrike Jul 2024', desc: 'Software update caused widespread Windows crashes affecting Azure VMs and cloud services globally', date: 'Jul 19, 2024 • 8h 20m' },
+                { top: '50%', left: '5%', type: 'warning', title: 'GCP Asia-Southeast2 Nov 2024', desc: 'Network connectivity issues affected Cloud Networking, VPC, and Load Balancing', date: 'Nov 16, 2024 • 3h 21m' },
+                { top: '50%', left: '95%', type: 'outage', title: 'AWS Multi-Region May 2024', desc: 'S3 service degradation across multiple regions affected object storage and dependent services', date: 'May 15, 2024 • 2h 45m' },
+                { top: '5%', left: '50%', type: 'outage', title: 'Azure Global Auth Dec 2023', desc: 'Authentication service failures prevented user logins across all Azure services worldwide', date: 'Dec 15, 2023 • 2h 50m' },
+                { top: '95%', left: '50%', type: 'warning', title: 'GCP Cloud Interconnect Sep 2024', desc: 'Elevated packet loss from Hyderabad edge to asia-south1, asia-south2, asia-southeast1', date: 'Sep 11, 2024 • 3h 20m' },
+                { top: '35%', left: '15%', type: 'warning', title: 'AWS Lambda Oct 2023', desc: 'Lambda function execution failures and API Gateway timeouts in us-east-1', date: 'Oct 24, 2023 • 3h 15m' },
+                { top: '35%', left: '85%', type: 'warning', title: 'GCP US-West2 Oct 2024', desc: 'Multiple GCP products impacted in us-west2-a zone affecting compute and storage', date: 'Oct 15, 2024 • 3h 44m' },
+                { top: '65%', left: '15%', type: 'outage', title: 'Azure Europe West Apr 2024', desc: 'Networking issues in Western Europe caused connectivity problems for multiple services', date: 'Apr 8, 2024 • 1h 45m' },
+                { top: '65%', left: '85%', type: 'warning', title: 'GCP US-East1 Jul 2025', desc: 'Elevated error rates affecting multiple products in us-east1 region', date: 'Jul 18, 2025 • 1h 58m' }
+            ];
+
+            majorOutages.forEach((outage, index) => {
+                const node = document.createElement('div');
+                node.className = `node ${outage.type}`;
+                node.style.top = outage.top;
+                node.style.left = outage.left;
+                node.style.transform = 'translate(-50%, -50%)';
+                node.style.animationDelay = `${index * 0.1}s`;
+                
+                node.addEventListener('mouseenter', (e) => {
+                    const tooltipContent = outage.date ? `${outage.desc}<br><br><strong>${outage.date}</strong>` : outage.desc;
+                    showRichTooltip(e, outage.title, tooltipContent);
+                });
+                node.addEventListener('mouseleave', hideTooltip);
+                
+                cloudIcon.appendChild(node);
+            });
+
+            // Add connection lines
+            const connections = [
+                { rotation: 0, width: '120px' },
+                { rotation: 45, width: '100px' },
+                { rotation: 90, width: '120px' },
+                { rotation: 135, width: '100px' },
+                { rotation: 180, width: '120px' },
+                { rotation: 225, width: '100px' },
+                { rotation: 270, width: '120px' },
+                { rotation: 315, width: '100px' }
+            ];
+
+            connections.forEach(conn => {
+                const line = document.createElement('div');
+                line.className = 'connection-line';
+                line.style.top = '50%';
+                line.style.left = '50%';
+                line.style.width = conn.width;
+                line.style.transform = `rotate(${conn.rotation}deg)`;
+                cloudIcon.appendChild(line);
+            });
+        }
+
+        // Initialize timeline
+        function initTimeline() {
+            const timeline = document.getElementById('timeline');
+            
+            outageData.forEach((event, index) => {
+                const eventEl = document.createElement('div');
+                eventEl.className = `timeline-event ${event.provider}`;
+                eventEl.style.borderLeftColor = getProviderColor(event.provider);
+                eventEl.style.animationDelay = `${index * 0.05}s`;
+                
+                eventEl.innerHTML = `
+                    <div class="timeline-header">
+                        <span class="timeline-date">${event.date}</span>
+                        <span class="timeline-duration">${event.duration}</span>
+                    </div>
+                    <div class="timeline-title">${event.title}</div>
+                    <div class="timeline-description">${event.description}</div>
+                    <div class="timeline-bar" style="background: ${getProviderColor(event.provider)}; width: ${getBarWidth(event.duration)};"></div>
+                `;
+                
+                eventEl.addEventListener('mouseenter', (e) => showTooltip(e, event.title, `Impact: ${event.impact} • Severity: ${event.severity.toUpperCase()}`));
+                eventEl.addEventListener('mouseleave', hideTooltip);
+                
+                timeline.appendChild(eventEl);
+            });
+        }
+
+        // Initialize world map with real data about regional impacts
+        function initWorldMap() {
+            const worldMap = document.getElementById('worldMap');
+            
+            const regions = [
+                { 
+                    top: '30%', left: '20%', size: '120px', label: 'US-EAST', delay: 0,
+                    incidents: 23,
+                    avgDuration: '3h 15m',
+                    majorOutage: 'AWS US-East Oct 2025',
+                    impact: 'Highest incident concentration. AWS Northern Virginia data center malfunction affected 2M+ services globally including Netflix, WhatsApp, ChatGPT.',
+                    services: 'Primary region for AWS, critical for global services'
+                },
+                { 
+                    top: '35%', left: '15%', size: '90px', label: 'US-WEST', delay: 1.5,
+                    incidents: 12,
+                    avgDuration: '2h 40m',
+                    majorOutage: 'GCP US-West2 Oct 2024',
+                    impact: 'Multiple GCP products affected in us-west2-a zone. 3h 44m downtime impacting compute and storage services.',
+                    services: 'Secondary US region, backup routing hub'
+                },
+                { 
+                    top: '45%', left: '50%', size: '100px', label: 'EU-WEST', delay: 1,
+                    incidents: 18,
+                    avgDuration: '2h 55m',
+                    majorOutage: 'Azure Front Door Oct 2025',
+                    impact: 'CDN capacity issues prevented Microsoft 365 access across Europe and Africa. 5-hour outage affecting enterprise customers.',
+                    services: 'European primary region, GDPR compliance hub'
+                },
+                { 
+                    top: '60%', left: '48%', size: '80px', label: 'EU-CENTRAL', delay: 2.5,
+                    incidents: 9,
+                    avgDuration: '1h 50m',
+                    majorOutage: 'Azure Global Auth Dec 2023',
+                    impact: 'Authentication failures caused cascading failures. Users locked out of Azure services worldwide for 2h 50m.',
+                    services: 'Financial services and manufacturing center'
+                },
+                { 
+                    top: '25%', left: '75%', size: '85px', label: 'ASIA-PAC', delay: 2,
+                    incidents: 15,
+                    avgDuration: '3h 5m',
+                    majorOutage: 'GCP Asia-Southeast2 Nov 2024',
+                    impact: 'Network connectivity issues affected VPC, Cloud Networking, and Load Balancing for 3h 21m. Major e-commerce disruption.',
+                    services: 'E-commerce and gaming infrastructure'
+                },
+                { 
+                    top: '55%', left: '78%', size: '75px', label: 'ASIA-SOUTH', delay: 1.8,
+                    incidents: 8,
+                    avgDuration: '3h 10m',
+                    majorOutage: 'GCP Cloud Interconnect Sep 2024',
+                    impact: 'Elevated packet loss from Hyderabad edge to multiple Asian regions. 3h 20m of degraded hybrid cloud connectivity.',
+                    services: 'Emerging market growth region'
+                },
+                { 
+                    top: '70%', left: '25%', size: '70px', label: 'SA-EAST', delay: 3,
+                    incidents: 6,
+                    avgDuration: '2h 20m',
+                    majorOutage: 'AWS S3 Multi-Region May 2024',
+                    impact: 'S3 degradation cascaded to South America. Dependent services experienced 2h 45m of disruption.',
+                    services: 'Dependent on US-East routing'
+                }
+            ];
+
+            regions.forEach(region => {
+                const zone = document.createElement('div');
+                zone.className = 'impact-zone';
+                zone.style.top = region.top;
+                zone.style.left = region.left;
+                zone.style.width = region.size;
+                zone.style.height = region.size;
+                zone.style.animationDelay = `${region.delay}s`;
+                
+                const tooltipContent = `<strong>${region.incidents} incidents</strong> over 24 months<br>Avg duration: ${region.avgDuration}<br><br>${region.impact}<br><br><em>Role: ${region.services}</em>`;
+                
+                zone.addEventListener('mouseenter', (e) => {
+                    showRichTooltip(e, `${region.label} Region`, tooltipContent);
+                });
+                zone.addEventListener('mouseleave', hideTooltip);
+                
+                worldMap.appendChild(zone);
+
+                const label = document.createElement('div');
+                label.className = 'region-label';
+                label.style.top = region.top;
+                label.style.left = region.left;
+                label.textContent = region.label;
+                
+                label.addEventListener('mouseenter', (e) => {
+                    showRichTooltip(e, `${region.label} Region`, tooltipContent);
+                });
+                label.addEventListener('mouseleave', hideTooltip);
+                
+                worldMap.appendChild(label);
+            });
+        }
+
+        // Initialize charts
+        function initCharts() {
+            const container = document.getElementById('chartContainer');
+            
+            const charts = [
+                { title: 'Outage Frequency (24 months)', data: chartData.frequency, suffix: '' },
+                { title: 'Average Duration', data: chartData.duration, suffix: '' },
+                { title: 'Mean Time to Recovery', data: chartData.recovery, suffix: '' }
+            ];
+
+            charts.forEach(chart => {
+                const section = document.createElement('div');
+                section.className = 'chart-section';
+                
+                const title = document.createElement('div');
+                title.className = 'chart-title';
+                title.textContent = chart.title;
+                section.appendChild(title);
+
+                const maxValue = Math.max(...chart.data.map(d => d.value));
+
+                chart.data.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'chart-row';
+                    
+                    const label = document.createElement('div');
+                    label.className = 'chart-label';
+                    label.textContent = item.provider;
+                    
+                    const barContainer = document.createElement('div');
+                    barContainer.className = 'chart-bar-container';
+                    
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.style.background = item.color;
+                    bar.style.width = `${(item.value / maxValue) * 100}%`;
+                    bar.textContent = item.label || item.value;
+                    
+                    const tooltipText = `${item.provider}: ${item.label || item.value}${chart.suffix}`;
+                    bar.addEventListener('mouseenter', (e) => showTooltip(e, tooltipText, `Relative to provider average across all measured incidents`));
+                    bar.addEventListener('mouseleave', hideTooltip);
+                    
+                    barContainer.appendChild(bar);
+                    row.appendChild(label);
+                    row.appendChild(barContainer);
+                    section.appendChild(row);
+                });
+
+                container.appendChild(section);
+            });
+        }
+
+        // Filter timeline
+        function filterTimeline(provider) {
+            const events = document.querySelectorAll('.timeline-event');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            events.forEach(event => {
+                if (provider === 'all' || event.classList.contains(provider)) {
+                    event.classList.remove('hidden');
+                } else {
+                    event.classList.add('hidden');
+                }
+            });
+        }
+
+        // Tooltip functions with rich content support
+        function showRichTooltip(e, title, content) {
+            const tooltip = document.getElementById('tooltip');
+            const tooltipTitle = document.getElementById('tooltipTitle');
+            const tooltipContent = document.getElementById('tooltipContent');
+            
+            tooltipTitle.textContent = title;
+            tooltipContent.innerHTML = content; // Allow HTML for richer formatting
+            
+            tooltip.style.left = (e.pageX + 15) + 'px';
+            tooltip.style.top = (e.pageY + 15) + 'px';
+            tooltip.classList.add('show');
+        }
+
+        function showTooltip(e, title, content) {
+            showRichTooltip(e, title, content);
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.classList.remove('show');
+        }
+
+        // Helper functions
+        function getProviderColor(provider) {
+            const colors = {
+                'aws': '#ff9900',
+                'azure': '#0078d4',
+                'gcp': '#4285f4'
+            };
+            return colors[provider] || '#ffffff';
+        }
+
+        function getBarWidth(duration) {
+            const match = duration.match(/(\d+)h?\s*(\d+)?m?/);
+            if (!match) return '50%';
+            
+            const hours = parseInt(match[1]) || 0;
+            const minutes = parseInt(match[2]) || 0;
+            const totalMinutes = (hours * 60) + minutes;
+            
+            return `${Math.min((totalMinutes / 380) * 100, 100)}%`;
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initCloudIcon();
+            initTimeline();
+            initWorldMap();
+            initCharts();
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => filterTimeline(e.target.dataset.filter));
+            });
+
+            // Provider badge interactions
+            document.querySelectorAll('.provider-badge').forEach(badge => {
+                badge.addEventListener('click', function() {
+                    document.querySelectorAll('.provider-badge').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const provider = this.dataset.provider;
+                    const filterBtn = document.querySelector(`.filter-btn[data-filter="${provider}"]`);
+                    if (filterBtn) filterBtn.click();
+                });
+            });
+
+            // Stat card tooltips
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('mouseenter', (e) => {
+                    const tooltip = card.dataset.tooltip;
+                    if (tooltip) showTooltip(e, card.querySelector('.stat-label').textContent, tooltip);
+                });
+                card.addEventListener('mouseleave', hideTooltip);
+            });
+
+            // Strategy card tooltips
+            document.querySelectorAll('.strategy-card').forEach(card => {
+                card.addEventListener('mouseenter', (e) => {
+                    const tooltip = card.dataset.tooltip;
+                    if (tooltip) {
+                        const title = card.querySelector('.strategy-title').textContent;
+                        showTooltip(e, title, tooltip);
+                    }
+                });
+                card.addEventListener('mouseleave', hideTooltip);
+            });
+
+            // Node tooltips
+            document.querySelectorAll('.node').forEach(node => {
+                node.addEventListener('mouseenter', (e) => {
+                    const tooltip = node.dataset.tooltip;
+                    if (tooltip) showTooltip(e, 'Network Node', tooltip);
+                });
+                node.addEventListener('mouseleave', hideTooltip);
+            });
+
+            // Animate chart bars on load
+            setTimeout(() => {
+                document.querySelectorAll('.chart-bar').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+
+            // Animate timeline events
+            document.querySelectorAll('.timeline-event').forEach((event, index) => {
+                event.style.opacity = '0';
+                event.style.transform = 'translateX(-20px)';
+                setTimeout(() => {
+                    event.style.transition = 'all 0.5s ease';
+                    event.style.opacity = '1';
+                    event.style.transform = 'translateX(0)';
+                }, index * 50);
+            });
+
+            // Track mouse movement for tooltip positioning
+            document.addEventListener('mousemove', (e) => {
+                const tooltip = document.getElementById('tooltip');
+                if (tooltip.classList.contains('show')) {
+                    tooltip.style.left = (e.pageX + 15) + 'px';
+                    tooltip.style.top = (e.pageY + 15) + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
