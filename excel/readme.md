@@ -137,6 +137,6 @@ Dynamic Arrays allow formulas to return multiple results (an "array") that "spil
 ```
 
 ---
-For an even more interactive version, check out the [Excel Magic Demo](excel-magic.html).
+For an even more interactive version, check out the sweet, animated [extended version of this page](excel-magic.html).
 
 © 2025 Mohammed Brueckner. All insights and code examples are for illustrative purposes.
