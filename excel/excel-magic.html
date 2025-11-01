@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Unleashed: The AI Revolution - Advanced Features & Capabilities</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover how Excel's latest AI features - Agent Mode, =COPILOT() function, and Formula AI - are transforming data analysis. Learn about Python integration, Office Scripts, and advanced automation techniques.">
+    <meta name="keywords" content="Excel AI, Microsoft Excel, Agent Mode, COPILOT function, Formula AI, Python in Excel, Office Scripts, XLOOKUP, Dynamic Arrays, Data Analysis, Spreadsheet Automation">
+    <meta name="author" content="Mohammed Brueckner">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Excel Unleashed: The AI Revolution">
+    <meta property="og:description" content="Discover how Excel's latest AI features are transforming data analysis and productivity.">
+    <meta property="og:image" content="https://mohammed-brueckner.com/images/excel-unleashed-og.jpg">
+    <meta property="og:url" content="https://mohammed-brueckner.com/excel-unleashed">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohammed Brueckner">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Excel Unleashed: The AI Revolution">
+    <meta name="twitter:description" content="Discover how Excel's latest AI features are transforming data analysis and productivity.">
+    <meta name="twitter:image" content="https://mohammed-brueckner.com/images/excel-unleashed-twitter.jpg">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Excel Unleashed: The AI Revolution",
+      "author": {
+        "@type": "Person",
+        "name": "Mohammed Brueckner",
+        "url": "https://mohammed-brueckner.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mohammed Brueckner",
+        "url": "https://mohammed-brueckner.com"
+      },
+      "datePublished": "2025-11-01",
+      "dateModified": "2025-11-01",
+      "image": "https://mohammed-brueckner.com/images/excel-unleashed-og.jpg",
+      "description": "Discover how Excel's latest AI features - Agent Mode, =COPILOT() function, and Formula AI - are transforming data analysis. Learn about Python integration, Office Scripts, and advanced automation techniques."
+    }
+    </script>
+    
+    <style>
+        /* --- 1. Global Styles & Variables --- */
+        :root {
+            --primary-dark: #0A2463;
+            --primary-blue: #3E92CC;
+            --accent-red: #D8315B;
+            --light-bg: #F0F4F8;
+            --dark-text: #2D3436;
+            --light-text: #636E72;
+            --white: #FFFFFF;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --crt-green: #2EFA6E;
+            --crt-green-dim: rgba(46, 250, 110, 0.3);
+            --code-bg: #F5F7FA;
+            --code-text: #333333;
+            --code-keyword: #0066CC;
+            --code-string: #D33F49;
+            --code-comment: #6A8759;
+            --code-function: #6600CC;
+            --link-blue: #5DADE2; /* Lighter blue for default link color */
+            --link-green: #90EE90; /* Light green for hover */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        /* --- 2. Typography --- */
+        h1, h2, h3 {
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .attribution {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-red);
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+        }
+
+        /* --- 3. Layout Components --- */
+        .header {
+            text-align: center;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Excel-themed abstract grid pattern with CRT green */
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(var(--crt-green-dim) 1px, transparent 1px),
+                linear-gradient(90deg, var(--crt-green-dim) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 1;
+            box-shadow: inset 0 0 100px rgba(46, 250, 110, 0.1);
+        }
+
+        /* Diagonal accent lines with CRT green */
+        .header::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 48%, var(--crt-green-dim) 49%, var(--crt-green-dim) 51%, transparent 52%);
+            background-size: 20px 20px;
+            transform: rotate(35deg);
+            z-index: 1;
+            filter: drop-shadow(0 0 3px var(--crt-green));
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1, .header .subtitle, .header .attribution {
+            color: var(--white);
+        }
+
+        .grid {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--primary-blue);
+        }
+
+        .card-accent .card-icon svg {
+            fill: var(--accent-red);
+        }
+
+        .card h3 {
+            color: var(--primary-dark);
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .card li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent-red);
+            font-size: 0.8rem;
+        }
+
+        /* --- 4. Specific Visual Elements --- */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+        
+        .flowchart {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .flowchart-step {
+            text-align: center;
+            width: 22%;
+        }
+
+        .flowchart-step-number {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 700;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .flowchart-arrow {
+            color: var(--accent-red);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .bar-chart {
+            margin-top: 20px;
+        }
+
+        .bar-item {
+            margin-bottom: 15px;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .bar-container {
+            background-color: #e0e0e0;
+            height: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-red));
+            border-radius: 12px;
+            transition: width 1.5s ease-out;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            color: var(--light-text);
+            font-size: 1rem;
+        }
+
+        /* Code block styling */
+        .code-block {
+            background-color: var(--code-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+            overflow-x: auto;
+            position: relative;
+            border: 1px solid #E1E4E8;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            color: var(--code-text);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .code-title {
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .code-language {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .code-comment {
+            color: var(--code-comment);
+            font-style: italic;
+        }
+
+        .code-keyword {
+            color: var(--code-keyword);
+            font-weight: bold;
+        }
+
+        .code-string {
+            color: var(--code-string);
+        }
+
+        .code-function {
+            color: var(--code-function);
+            font-weight: bold;
+        }
+
+        .code-result {
+            background-color: rgba(46, 250, 110, 0.15);
+            border-left: 3px solid var(--crt-green);
+            padding: 12px 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            color: var(--dark-text);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .code-result-label {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-right: 10px;
+        }
+
+        /* Link styling */
+        .brand-link {
+            color: var(--link-blue); /* Lighter blue for default link color */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .brand-link:hover {
+            color: var(--link-green); /* Light green for hover */
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 15px 25px;
+            }
+            
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.6rem;
+            }
+            
+            .attribution {
+                font-size: 1.6rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+            
+            p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px 15px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .attribution {
+                font-size: 1.4rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .code-block {
+                padding: 15px;
+                overflow-x: scroll;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 8px 10px;
+            }
+            
+            .flowchart {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .flowchart-step {
+                width: 100%;
+            }
+            
+            .flowchart-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .attribution {
+                font-size: 1.2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .card-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .code-block {
+                padding: 10px;
+            }
+            
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .code-title {
+                font-size: 1rem;
+            }
+            
+            .code-language {
+                font-size: 0.8rem;
+            }
+            
+            .code-block pre {
+                font-size: 0.9rem;
+            }
+            
+            .code-result {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header fade-in">
+            <div class="header-content">
+                <h1>Excel Unleashed</h1>
+                <p class="subtitle">AI supercharges your favorite tool. The future of spreadsheets is here.</p>
+                <p class="attribution">Presented by <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <!-- SECTION 1: THE AI TRINITY -->
+            <section class="fade-in">
+                <h2>The AI Trinity: Agentic, Generative & Semantic</h2>
+                <div class="grid grid-3">
+                    <div class="card card-accent scale-in">
+                        <div class="card-icon float-animation">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h3>Agent Mode</h3>
+                        <p>Transforms Copilot from a passive assistant into an active AI agent capable of orchestrating complex, multi-step workflows.</p>
+                        <ul>
+                            <li>Multi-step Task Orchestration</li>
+                            <li>Native Excel Object Creation</li>
+                            <li>Iterative Refinement Loop</li>
+                            <li>Cross-Application Synergy</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic;">Learn more at <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+                    </div>
+                    <div class="card slide-in-left">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        </div>
+                        <h3>=COPILOT() Function</h3>
+                        <p>Embeds generative AI directly into Excel's formula ecosystem, enabling dynamic AI-powered calculations within cells.</p>
+                        
+                        <div class="code-block">
+                            <div class="code-header">
+                                <div class="code-title">AI-Powered Text Analysis</div>
+                                <div class="code-language">Excel Formula</div>
+                            </div>
+                            <pre>=<span class="code-function">COPILOT</span>(<span class="code-string">"Summarize this feedback"</span>, A2:A20)</pre>
+                            <div class="code-result">
+                                <span class="code-result-label">Result:</span> "Customers love the new interface but request additional customization options."
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; font-style: italic;">Visit <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a> for more examples</p>
+                    </div>
+                    <div class="card slide-in-right">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                        </div>
+                        <h3>Formula AI</h3>
+                        <p>Converts plain English descriptions into accurate, complex Excel formulas, democratizing advanced spreadsheet capabilities.</p>
+                        
+                        <div class="code-block">
+                            <div class="code-header">
+                                <div class="code-title">Natural Language to Formula</div>
+                                <div class="code-language">Excel Formula</div>
+                            </div>
+                            <pre><span class="code-comment">// Plain English request:</span>
+"Calculate the average sales for Q2, excluding outliers above $50,000"
+
+<span class="code-comment">// AI-generated formula:</span>
+=<span class="code-function">AVERAGEIFS</span>(SalesData, QuarterRange, <span class="code-string">"Q2"</span>, SalesRange, <span class="code-string">"&lt;50000"</span>)</pre>
+                        </div>
+                        <p style="margin-top: 15px; font-style: italic;">Discover more at <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ADVANCED AUTOMATION -->
+            <section class="fade-in">
+                <h2>Advanced Automation & Scripting Ecosystem</h2>
+                <div class="grid grid-2">
+                    <div class="card slide-in-left">
+                        <h3>Python Integration</h3>
+                        <p>Excel's Python integration brings professional data science capabilities directly into spreadsheets.</p>
+                        
+                        <div class="code-block">
+                            <div class="code-header">
+                                <div class="code-title">Advanced Data Analysis</div>
+                                <div class="code-language">Python in Excel</div>
+                            </div>
+                            <pre><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd
+<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+<span class="code-keyword">from</span> sklearn.linear_model <span class="code-keyword">import</span> LinearRegression
+
+<span class="code-comment"># Load Excel data into pandas DataFrame</span>
+df = xl(<span class="code-string">"SalesData!A1:D100"</span>)
+
+<span class="code-comment"># Perform regression analysis</span>
+X = df[[<span class="code-string">'MarketingSpend'</span>, <span class="code-string">'ProductPrice'</span>]]
+y = df[<span class="code-string">'SalesRevenue'</span>]
+
+model = LinearRegression()
+model.fit(X, y)
+
+<span class="code-comment"># Predict future sales</span>
+future_predictions = model.predict([[5000, 29.99], [7500, 27.99]])</pre>
+                            <div class="code-result">
+                                <span class="code-result-label">Result:</span> Predicted sales values: [$125,430, $142,780]
+                            </div>
+                        </div>
+                        
+                        <div class="bar-chart">
+                            <div class="bar-item">
+                                <div class="bar-label"><span>Statistical Analysis</span><span>95%</span></div>
+                                <div class="bar-container"><div class="bar-fill" style="width: 95%;"></div></div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label"><span>Machine Learning</span><span>80%</span></div>
+                                <div class="bar-container"><div class="bar-fill" style="width: 80%;"></div></div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label"><span>Data Visualization</span><span>90%</span></div>
+                                <div class="bar-container"><div class="bar-fill" style="width: 90%;"></div></div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; font-style: italic;">Explore more at <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+                    </div>
+                    <div class="card slide-in-right">
+                        <h3>Office Scripts vs. VBA</h3>
+                        <p>Office Scripts represent Microsoft's modern approach to Excel automation, designed as a cross-platform alternative to VBA.</p>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Office Scripts</th>
+                                    <th>VBA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Platform</td>
+                                    <td>Cross-Platform</td>
+                                    <td>Windows-only primarily</td>
+                                </tr>
+                                <tr>
+                                    <td>Security</td>
+                                    <td>Sandboxed</td>
+                                    <td>Full system access</td>
+                                </tr>
+                                <tr>
+                                    <td>Language</td>
+                                    <td>TypeScript/JavaScript</td>
+                                    <td>Visual Basic</td>
+                                </tr>
+                                <tr>
+                                    <td>Cloud Integration</td>
+                                    <td>Native</td>
+                                    <td>Limited</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="code-block">
+                            <div class="code-header">
+                                <div class="code-title">Automated Report Generation</div>
+                                <div class="code-language">Office Scripts</div>
+                            </div>
+                            <pre><span class="code-keyword">function</span> main(workbook: ExcelScript.Workbook) {
+  <span class="code-comment">// Get the current worksheet</span>
+  <span class="code-keyword">let</span> sheet = workbook.getActiveWorksheet();
+  
+  <span class="code-comment">// Format sales data as a table</span>
+  <span class="code-keyword">let</span> salesTable = sheet.getRange(<span class="code-string">"A1:D100"</span>);
+  <span class="code-keyword">let</span> table = workbook.addTable(salesTable.getAddress(), <span class="code-keyword">true</span>);
+  
+  <span class="code-comment">// Add conditional formatting</span>
+  <span class="code-keyword">let</span> salesColumn = table.getColumnByName(<span class="code-string">"Sales"</span>);
+  salesColumn.getRange().setFormat({
+    fill: { color: <span class="code-string">"#4CAF50"</span> },
+    font: { color: <span class="code-string">"white"</span> }
+  });
+  
+  <span class="code-comment">// Create a chart</span>
+  <span class="code-keyword">let</span> chart = sheet.addChart(
+    ExcelScript.ChartType.columnClustered,
+    salesTable.getRange()
+  );
+  
+  <span class="code-comment">// Position and format the chart</span>
+  chart.setPosition(<span class="code-string">"F2"</span>, <span class="code-string">"L15"</span>);
+  chart.setTitle(<span class="code-string">"Quarterly Sales Performance"</span>);
+}</pre>
+                        </div>
+                        <p style="margin-top: 15px; font-style: italic;">More insights at <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: FUNCTION EVOLUTION -->
+            <section class="fade-in">
+                <h2>Function Evolution</h2>
+                <div class="grid grid-2">
+                    <div class="card slide-in-left">
+                        <h3>XLOOKUP Dominance</h3>
+                        <p>XLOOKUP is the modern replacement for VLOOKUP/HLOOKUP that offers superior flexibility and power.</p>
+                        
+                        <div class="code-block">
+                            <div class="code-header">
+                                <div class="code-title">Advanced Lookup Techniques</div>
+                                <div class="code-language">Excel Formula</div>
+                            </div>
+                            <pre><span class="code-comment">// Traditional VLOOKUP limitations</span>
+=<span class="code-function">VLOOKUP</span>(A2, SalesData, 3, FALSE)  <span class="code-comment">// Can't look left, breaks with column insertions</span>
+
+<span class="code-comment">// XLOOKUP advantages</span>
+=<span class="code-function">XLOOKUP</span>(A2, ProductIDs, ProductNames)  <span class="code-comment">// Simple, intuitive</span>
+
+<span class="code-comment">// Advanced XLOOKUP with multiple criteria</span>
+=<span class="code-function">XLOOKUP</span>(1, (Region=North)*(Product="Widget"), SalesAmount)</pre>
+                            <div class="code-result">
+                                <span class="code-result-label">Result:</span> $42,350 (Total sales of Widgets in North region)
+                            </div>
+                        </div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Capability</th>
+                                    <th>XLOOKUP</th>
+                                    <th>VLOOKUP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Search Direction</td>
+                                    <td>Both Ways</td>
+                                    <td>Right-Only</td>
+                                </tr>
+                                <tr>
+                                    <td>Column Insertion</td>
+                                    <td>Safe</td>
+                                    <td>Breaks</td>
+                                </tr>
+                                <tr>
+                                    <td>Error Handling</td>
+                                    <td>Built-in</td>
+                                    <td>Requires IFERROR</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 15px; font-style: italic;">Visit <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a> for advanced tutorials</p>
+                    </div>
+                    <div class="card slide-in-right">
+                        <h3>Dynamic Arrays Revolution</h3>
+                        <p>Dynamic arrays have fundamentally changed how Excel handles formulas, allowing a single formula to return multiple results.</p>
+                        
+                        <div class="code-block">
+                            <div class="code-header">
+                                <div class="code-title">Powerful Array Formulas</div>
+                                <div class="code-language">Excel Formula</div>
+                            </div>
+                            <pre><span class="code-comment">// Generate a unique, sorted list of products</span>
+=<span class="code-function">SORT</span>(<span class="code-function">UNIQUE</span>(SalesData[Product]))
+
+<span class="code-comment">// Create a dynamic cross-tabulation</span>
+=<span class="code-function">TRANSPOSE</span>(<span class="code-function">SUMIFS</span>(SalesData[Amount], 
+  SalesData[Region], G2#, 
+  SalesData[Product], H1#))
+
+<span class="code-comment">// Filter and sort in one step</span>
+=<span class="code-function">SORT</span>(<span class="code-function">FILTER</span>(SalesData, 
+  (SalesData[Sales]&gt;50000)*(SalesData[Region]="North")), 
+  3, -1)</pre>
+                            <div class="code-result">
+                                <span class="code-result-label">Result:</span> Dynamic array of North region sales over $50,000, sorted by amount descending
+                            </div>
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Calculation Control:</strong> Switch to Manual Calculation</li>
+                            <li><strong>Formula Efficiency:</strong> Replace volatile functions</li>
+                            <li><strong>Array Management:</strong> Leverage Dynamic Arrays</li>
+                            <li><strong>File Size:</strong> Break workbooks >50MB into modules</li>
+                            <li><strong>Data Cleanup:</strong> Use "Optimize All" feature</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic;">Learn more at <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: PERFORMANCE OPTIMIZATION -->
+            <section class="fade-in">
+                <h2>Performance Optimization Strategies</h2>
+                <div class="grid grid-2">
+                    <div class="card slide-in-left">
+                        <h3>Workbook Optimization Techniques</h3>
+                        <p>For professionals working with large datasets, performance optimization is crucial.</p>
+                        <ul>
+                            <li><strong>Calculation Control:</strong> Turn off Automatic Calculations for large workbooks</li>
+                            <li><strong>Formula Optimization:</strong> Replace volatile functions (INDIRECT, OFFSET, TODAY) with alternatives</li>
+                            <li><strong>Array Efficiency:</strong> Use dynamic arrays instead of array formulas where possible</li>
+                            <li><strong>File Size Management:</strong> Break large workbooks (>50MB) into smaller, logically grouped files</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic;">More optimization tips at <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+                    </div>
+                    <div class="card slide-in-right">
+                        <h3>Advanced Data Validation</h3>
+                        <p>Properly implemented data validation prevents errors and ensures consistent data entry.</p>
+                        <ul>
+                            <li><strong>Cascading Dropdowns:</strong> Create dependent validation lists using INDIRECT or dynamic arrays</li>
+                            <li><strong>Custom Formulas:</strong> Use formulas for complex validation rules (e.g., preventing duplicate entries)</li>
+                            <li><strong>Input Messages:</strong> Provide clear instructions for data entry</li>
+                            <li><strong>Error Alerts:</strong> Design user-friendly error messages that guide correction</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic;">Advanced techniques at <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer fade-in">
+            <p>Presented by <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a><br>The future of Excel is intelligent, automated, and integrated.</p>
+            <p>#Excel #AI #Microsoft365 #DataAnalytics #FutureOfWork</p>
+            <p style="margin-top: 15px;">Visit <a href="https://mohammed-brueckner.com" target="_blank" class="brand-link">mohammed-brueckner.com</a> for even more insights and tutorials!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple fade-in animation on scroll for a premium feel
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.slide-in-left').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animate bar charts when they come into view
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const barFills = entry.target.querySelectorAll('.bar-fill');
+                    barFills.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                    barObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.bar-chart').forEach(el => {
+            barObserver.observe(el);
+        });
+
+        // Add click tracking for mohammed-brueckner.com links
+        document.querySelectorAll('.brand-link').forEach(link => {
+            link.addEventListener('click', function() {
+                // In a real implementation, you would send this data to your analytics service
+                console.log('Link clicked:', this.href);
+            });
+        });
+    </script>
+
+</body>
+</html>
