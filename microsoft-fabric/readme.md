@@ -35,7 +35,6 @@ This comprehensive guide addresses 100 common misconceptions about Microsoft Fab
 **Reality:** Fabric reached general availability in November 2023 and is fully production-ready.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#FFD700','primaryTextColor':'#000','primaryBorderColor':'#FF6B6B','lineColor':'#4ECDC4','secondaryColor':'#95E1D3','tertiaryColor':'#F38181','background':'#FFFFFF','mainBkg':'#FFE66D','secondaryBkg':'#A8E6CF','tertiaryBkg':'#FFD3B6'}}}%%
 graph LR
     A[Microsoft Fabric Platform] --> B[Power BI]
     A --> C[Data Factory]
@@ -44,14 +43,6 @@ graph LR
     A --> F[Real-Time Analytics]
     A --> G[Synapse Data Warehouse]
     A --> H[OneLake/Lakehouse]
-    style A fill:#FFD700,stroke:#FF6B6B,stroke-width:3px,color:#000
-    style B fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style C fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style D fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style E fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style F fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style G fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style H fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
 ```
 
 ## 2. Licensing & Pricing Myths
@@ -87,7 +78,6 @@ graph LR
 **Reality:** F2 SKU starts at affordable rates, making Fabric accessible for small-scale projects.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#FFE66D','primaryTextColor':'#000','primaryBorderColor':'#4ECDC4','secondaryColor':'#95E1D3','tertiaryColor':'#F38181'}}}%%
 pie showData
     title Fabric Licensing Model Components
     "Capacity-based F SKUs" : 40
@@ -128,7 +118,6 @@ pie showData
 **Reality:** Fabric adoption is an ongoing journey with continuous optimization opportunities.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#A8E6CF','primaryTextColor':'#000','primaryBorderColor':'#FF6B6B','lineColor':'#4ECDC4','secondaryColor':'#FFD3B6','tertiaryColor':'#95E1D3'}}}%%
 flowchart TD
     Start[Current Data Architecture] --> Decision{Migration Path}
     Decision -->|Simple| PathA[Quick Adoption - New Projects]
@@ -137,13 +126,6 @@ flowchart TD
     Training --> Governance[Governance & Workspace Design]
     Governance --> Success[Successful Fabric Adoption]
     PathA --> Success
-    style Start fill:#FFD700,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style Decision fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style PathA fill:#95E1D3,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style PathB fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style Training fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style Governance fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style Success fill:#A8E6CF,stroke:#4ECDC4,stroke-width:3px,color:#000
 ```
 
 ## 4. Team & Skills Myths
@@ -179,7 +161,6 @@ flowchart TD
 **Reality:** Continuous learning is essential as Fabric evolves with new features monthly.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#FFE66D','primaryTextColor':'#000','primaryBorderColor':'#4ECDC4'}}}%%
 mindmap
   root((Team Readiness for Fabric))
     Training Programs
@@ -238,7 +219,6 @@ mindmap
 **Reality:** Copilot features are included in Fabric capacity licensing (availability may vary by SKU).
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#A8E6CF','primaryTextColor':'#000','primaryBorderColor':'#FF6B6B','lineColor':'#4ECDC4','secondaryColor':'#FFD3B6','tertiaryColor':'#95E1D3'}}}%%
 sequenceDiagram
     participant User
     participant Copilot
@@ -287,7 +267,6 @@ sequenceDiagram
 **Reality:** Data Factory pipelines support sophisticated scheduling, dependencies, and error handling.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#FFD700','primaryTextColor':'#000','primaryBorderColor':'#FF6B6B','lineColor':'#4ECDC4','secondaryColor':'#A8E6CF','tertiaryColor':'#FFD3B6'}}}%%
 graph TD
     DataSources[Data Sources] -->|Batch Load| Lakehouse
     DataSources -->|Streaming Ingestion| RealTime[Real-Time Analytics KQL]
@@ -297,14 +276,6 @@ graph TD
     ML --> Predictions[Predictive Insights]
     Lakehouse --> DWH[Data Warehouse]
     DWH --> BI
-    style DataSources fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style Lakehouse fill:#FFD700,stroke:#FF6B6B,stroke-width:3px,color:#000
-    style RealTime fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style BI fill:#95E1D3,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style Dashboards fill:#95E1D3,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style ML fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style Predictions fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style DWH fill:#FFE66D,stroke:#FF6B6B,stroke-width:2px,color:#000
 ```
 
 ## 7. Security & Governance Myths
@@ -340,7 +311,6 @@ graph TD
 **Reality:** Version history and audit trails track all changes to items and data.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#A8E6CF','primaryTextColor':'#000','primaryBorderColor':'#4ECDC4','lineColor':'#FF6B6B'}}}%%
 graph LR
     A[Fabric Security Layers] --> B[Identity & Access]
     A --> C[Data Protection]
@@ -354,11 +324,6 @@ graph LR
     D --> D2[Firewall Rules]
     E --> E1[Purview Integration]
     E --> E2[Audit Logging]
-    style A fill:#FFD700,stroke:#FF6B6B,stroke-width:3px,color:#000
-    style B fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style C fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style D fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style E fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
 ```
 
 ## 8. Performance & Optimization Myths
@@ -394,7 +359,6 @@ graph LR
 **Reality:** Capacity can be scaled up/down manually or programmatically based on demand.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#FFE66D','primaryTextColor':'#000','primaryBorderColor':'#FF6B6B','lineColor':'#4ECDC4'}}}%%
 graph TD
     Query[User Query] --> Cache{Cache Hit?}
     Cache -->|Yes| Fast[Return Cached Result]
@@ -404,11 +368,6 @@ graph TD
     Partition --> Execute[Execute Query]
     Execute --> Store[Store in Cache]
     Store --> Return[Return Result]
-    style Query fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style Cache fill:#FFD700,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style Fast fill:#95E1D3,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style Optimize fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style Return fill:#95E1D3,stroke:#4ECDC4,stroke-width:2px,color:#000
 ```
 
 ## 9. Integration & Connectivity Myths
@@ -444,7 +403,6 @@ graph TD
 **Reality:** PowerShell modules enable comprehensive Fabric automation.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#A8E6CF','primaryTextColor':'#000','primaryBorderColor':'#FF6B6B','lineColor':'#4ECDC4'}}}%%
 graph TD
     Fabric[Microsoft Fabric] <--> Cloud[Cloud Data Sources]
     Fabric <--> Gateway[On-Premises Gateway]
@@ -453,14 +411,6 @@ graph TD
     API <--> External[External Applications]
     Fabric <--> M365[Microsoft 365]
     Fabric <--> ThirdParty[Third-Party BI Tools]
-    style Fabric fill:#FFD700,stroke:#FF6B6B,stroke-width:3px,color:#000
-    style Cloud fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style Gateway fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style OnPrem fill:#FFE66D,stroke:#FF6B6B,stroke-width:2px,color:#000
-    style API fill:#95E1D3,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style External fill:#A8E6CF,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style M365 fill:#95E1D3,stroke:#4ECDC4,stroke-width:2px,color:#000
-    style ThirdParty fill:#FFD3B6,stroke:#FF6B6B,stroke-width:2px,color:#000
 ```
 
 ## 10. Future & Roadmap Myths
