@@ -168,31 +168,62 @@
       </div>
     </div>
 
-    <!-- Mermaid Initialization Script -->
+    <!-- Mermaid Initialization Script - MOVED TO END OF BODY -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      // Wait for page to fully load
+      window.addEventListener('load', function() {
+        // Initialize Mermaid with bright colors
         mermaid.initialize({
           startOnLoad: true,
-          theme: 'default',
+          theme: 'base',
+          themeVariables: {
+            primaryColor: '#FFE66D',
+            primaryTextColor: '#000000',
+            primaryBorderColor: '#FF6B6B',
+            lineColor: '#4ECDC4',
+            secondaryColor: '#A8E6CF',
+            tertiaryColor: '#95E1D3',
+            background: '#FFFFFF',
+            mainBkg: '#FFD700',
+            secondaryBkg: '#A8E6CF',
+            tertiaryBkg: '#FFD3B6',
+            fontSize: '16px',
+            nodeBorder: '#FF6B6B',
+            clusterBkg: '#FFD3B6',
+            clusterBorder: '#FF6B6B',
+            edgeLabelBackground: '#FFFFFF'
+          },
           flowchart: {
             useMaxWidth: true,
             htmlLabels: true,
             curve: 'basis'
           },
-          themeVariables: {
-            primaryColor: '#0a2a43',
-            primaryTextColor: '#333333',
-            primaryBorderColor: '#0077b5',
-            lineColor: '#666666',
-            secondaryColor: '#f7f7f7',
-            tertiaryColor: '#ffffff'
+          sequence: {
+            useMaxWidth: true
+          },
+          gantt: {
+            useMaxWidth: true
           }
         });
+        
+        // Force render all mermaid diagrams
+        try {
+          mermaid.run({
+            querySelector: '.language-mermaid, .mermaid, pre code.language-mermaid'
+          });
+        } catch (e) {
+          console.error('Mermaid rendering error:', e);
+        }
       });
 
-      document.querySelectorAll('a[href^="http"]').forEach(function(anchor) {
-        anchor.setAttribute('target', '_blank');
-        anchor.setAttribute('rel', 'noopener noreferrer');
+      // External links handler
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[href^="http"]').forEach(function(anchor) {
+          if (!anchor.href.includes(window.location.hostname)) {
+            anchor.setAttribute('target', '_blank');
+            anchor.setAttribute('rel', 'noopener noreferrer');
+          }
+        });
       });
     </script>
 </body>
