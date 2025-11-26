@@ -4,8 +4,14 @@ description: "Results-oriented tech leader driving innovation and transformative
 # Use your custom domain here
 url: "https://mohammed-brueckner.com"
 baseurl: ""  # leave empty for root of the domain
-
 theme: jekyll-theme-architect
+
+# Markdown processing - ADDED FOR MERMAID SUPPORT
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  parse_block_html: true
 
 # Social Links
 social_links:
