@@ -12,7 +12,7 @@
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Double Trinity Pyramid: Interactive Change Management Model">
-    <meta property="og:description" content="Explore this innovative change management model that demonstrates how balancing organizational and individual trinities creates the sweet spot for successful transformation.">
+    <meta property="og:description" content="Explore this innovative change management model that demonstrates how balancing organizational and individual trinities creates a sweet spot for successful transformation.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mohammed-brueckner.com">
     <meta property="og:image" content="https://mohammed-brueckner.com/images/double-trinity-pyramid-og.jpg">
@@ -21,7 +21,7 @@
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Double Trinity Pyramid: Interactive Change Management Model">
-    <meta name="twitter:description" content="Explore this innovative change management model by Mohammed Brueckner that demonstrates how balancing trinities creates the sweet spot for successful transformation.">
+    <meta name="twitter:description" content="Explore this innovative change management model by Mohammed Brueckner that demonstrates how balancing trinities creates a sweet spot for successful transformation.">
     <meta name="twitter:image" content="https://mohammed-brueckner.com/images/double-trinity-pyramid-twitter.jpg">
     <meta name="twitter:creator" content="@mohammedbrueckner">
     
@@ -41,7 +41,7 @@
             "name": "Mohammed Brueckner",
             "url": "https://mohammed-brueckner.com"
         },
-        "description": "Explore the Double Trinity Pyramid, an innovative change management model that demonstrates how balancing organizational and individual trinities creates the sweet spot for successful transformation.",
+        "description": "Explore the Double Trinity Pyramid, an innovative change management model that demonstrates how balancing organizational and individual trinities creates a sweet spot for successful transformation.",
         "image": "https://mohammed-brueckner.com/images/double-trinity-pyramid.jpg",
         "datePublished": "2023-01-01",
         "dateModified": "2023-12-01",
@@ -143,6 +143,8 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            height: calc(100vh - 160px); /* Header + Navigation + Padding */
+            overflow-y: auto;
         }
         
         .slide {
@@ -441,11 +443,17 @@
             transform: scale(1.2);
         }
         
-        .navigation-buttons {
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: center;
-            margin: 15px 0;
-            gap: 10px;
+            padding: 15px 0;
+            background-color: white;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            z-index: 50;
         }
         
         .nav-btn {
@@ -538,7 +546,6 @@
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin: 20px 0;
-            flex-grow: 1;
         }
         
         .imbalance-card:hover {
@@ -1207,7 +1214,7 @@
                 </div>
             </div>
             
-            <!-- Slide 9: Case Studies -->
+            <!-- Slide 9: Case Study -->
             <div class="slide" id="slide9">
                 <div class="case-study-card">
                     <h3>
@@ -1231,9 +1238,9 @@
                     </h3>
                     <p>Explore these resources to deepen your understanding of the Double Trinity Pyramid model:</p>
                     <ul>
-                        <li><a href="https://mohammed-brueckner.com/blog/double-trinity-pyramid" class="resource-link" target="_blank">Detailed blog post on the model</a></li>
-                        <li><a href="https://mohammed-brueckner.com/change-management-tools" class="resource-link" target="_blank">Change management assessment tools</a></li>
-                        <li><a href="https://mohammed-brueckner.com/contact" class="resource-link" target="_blank">Consulting services</a></li>
+                        <li><a href="https://mohammed-brueckner.com/publications" class="resource-link" target="_blank">Publications on Change Management</a></li>
+                        <li><a href="https://mohammed-brueckner.com/outsourcing" class="resource-link" target="_blank">Learn about the New Reality for Outsourcing</a></li>
+                        <li><a href="https://mohammed-brueckner.com/how-to-ai" class="resource-link" target="_blank">How to Get Started with AI</a></li>
                     </ul>
                 </div>
             </div>
@@ -1250,17 +1257,18 @@
                 <div class="page-dot" data-slide="9"></div>
                 <div class="page-dot" data-slide="10"></div>
             </div>
-            
-            <div class="navigation-buttons">
-                <button class="nav-btn" id="prevBtn" disabled>
-                    <span class="material-icons">arrow_back</span>
-                    <span>Previous</span>
-                </button>
-                <button class="nav-btn" id="nextBtn">
-                    <span>Next</span>
-                    <span class="material-icons">arrow_forward</span>
-                </button>
-            </div>
+        </div>
+        
+        <!-- Fixed Navigation at Bottom -->
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" disabled>
+                <span class="material-icons">arrow_back</span>
+                <span>Previous</span>
+            </button>
+            <button class="nav-btn" id="nextBtn">
+                <span>Next</span>
+                <span class="material-icons">arrow_forward</span>
+            </button>
         </div>
     </div>
     
@@ -1492,7 +1500,7 @@
             });
         });
         
-        // Initialize first slide
+        // Initialize the first slide
         showSlide(1);
     </script>
 </body>
