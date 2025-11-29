@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Double Trinity Pyramid: Interactive Change Management Model | Mohammed Brueckner</title>
-    <meta name="description" content="Explore the Double Trinity Pyramid, an innovative change management model by Mohammed Brueckner. This interactive tool demonstrates how balancing organizational (People, Processes, Technology) and individual (Incentivized, Intrinsically Motivated, Empowered) trinities creates the sweet spot for successful transformation.">
+    <meta name="description" content="Explore the Double Trinity Pyramid, an innovative change management model by Mohammed Brueckner. This interactive tool demonstrates how balancing organizational (People, Processes, Technology) and individual (Incentivized, Intrinsically Motivated, Empowered) trinities creates a sweet spot for successful transformation.">
     <meta name="keywords" content="change management, organizational transformation, double trinity pyramid, Mohammed Brueckner, change resistance, sweet spot, people processes technology, incentivized motivated empowered, change model, interactive tool, organizational development">
     <meta name="author" content="Mohammed Brueckner">
     <meta name="robots" content="index, follow">
@@ -830,66 +830,6 @@
             font-size: 1.1rem;
         }
         
-        /* Case Studies Styles */
-        .case-study-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 20px 0;
-        }
-        
-        .case-study-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
-        
-        .case-study-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background-color: #16a085;
-        }
-        
-        .case-study-card h3 {
-            color: #16a085;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .case-study-card p {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-        
-        .case-study-card .outcome {
-            background-color: rgba(22, 160, 133, 0.1);
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-        
-        .case-study-card .outcome h4 {
-            color: #16a085;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-        }
-        
-        .case-study-card .outcome p {
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        
         /* Resources Styles */
         .resources-card {
             background-color: #f8f9fa;
@@ -1214,23 +1154,8 @@
                 </div>
             </div>
             
-            <!-- Slide 9: Case Study -->
+            <!-- Slide 9: Resources -->
             <div class="slide" id="slide9">
-                <div class="case-study-card">
-                    <h3>
-                        <span class="material-icons">cases</span>
-                        Case Study: Digital Transformation
-                    </h3>
-                    <p>A financial services company struggled with a major digital transformation initiative despite investing heavily in new technology. The issue was that they focused primarily on technology and processes, neglecting the individual trinity. Employees weren't properly incentivized to adopt new systems and felt disempowered by the rigid implementation approach.</p>
-                    <div class="outcome">
-                        <h4>Outcome:</h4>
-                        <p>After rebalancing to address all six elements, adoption rates increased by 75% and the transformation timeline accelerated by 40%.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slide 10: Resources -->
-            <div class="slide" id="slide10">
                 <div class="resources-card">
                     <h3>
                         <span class="material-icons">menu_book</span>
@@ -1255,20 +1180,18 @@
                 <div class="page-dot" data-slide="7"></div>
                 <div class="page-dot" data-slide="8"></div>
                 <div class="page-dot" data-slide="9"></div>
-                <div class="page-dot" data-slide="10"></div>
             </div>
-        </div>
-        
-        <!-- Fixed Navigation at Bottom -->
-        <div class="navigation">
-            <button class="nav-btn" id="prevBtn" disabled>
-                <span class="material-icons">arrow_back</span>
-                <span>Previous</span>
-            </button>
-            <button class="nav-btn" id="nextBtn">
-                <span>Next</span>
-                <span class="material-icons">arrow_forward</span>
-            </button>
+            
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" disabled>
+                    <span class="material-icons">arrow_back</span>
+                    <span>Previous</span>
+                </button>
+                <button class="nav-btn" id="nextBtn">
+                    <span>Next</span>
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
         </div>
     </div>
     
@@ -1352,7 +1275,7 @@
             
             // Update navigation buttons
             prevBtn.disabled = slideIndex === 1;
-            nextBtn.disabled = slideIndex === 10;
+            nextBtn.disabled = slideIndex === 9;
             
             // Update current slide index
             currentSlide = slideIndex;
@@ -1386,9 +1309,6 @@
                 headerTitle.textContent = "Implementation Strategy";
                 headerSubtitle.textContent = "How to apply the Double Trinity Pyramid model";
             } else if (slideIndex === 9) {
-                headerTitle.textContent = "Case Study";
-                headerSubtitle.textContent = "Real-world application of the model";
-            } else if (slideIndex === 10) {
                 headerTitle.textContent = "Additional Resources";
                 headerSubtitle.textContent = "Continue your learning journey";
             }
@@ -1487,7 +1407,7 @@
         });
         
         nextBtn.addEventListener('click', function() {
-            if (currentSlide < 10) {
+            if (currentSlide < 9) {
                 showSlide(currentSlide + 1);
             }
         });
