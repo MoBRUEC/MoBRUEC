@@ -3,7 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Double Trinity Pyramid: Interactive Change Management Model</title>
+    <title>Double Trinity Pyramid: Interactive Change Management Model | Mohammed Brueckner</title>
+    <meta name="description" content="Explore the Double Trinity Pyramid, an innovative change management model by Mohammed Brueckner. This interactive tool demonstrates how balancing organizational (People, Processes, Technology) and individual (Incentivized, Intrinsically Motivated, Empowered) trinities creates the sweet spot for successful transformation.">
+    <meta name="keywords" content="change management, organizational transformation, double trinity pyramid, Mohammed Brueckner, change resistance, sweet spot, people processes technology, incentivized motivated empowered, change model, interactive tool, organizational development">
+    <meta name="author" content="Mohammed Brueckner">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mohammed-brueckner.com">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Double Trinity Pyramid: Interactive Change Management Model">
+    <meta property="og:description" content="Explore this innovative change management model that demonstrates how balancing organizational and individual trinities creates the sweet spot for successful transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohammed-brueckner.com">
+    <meta property="og:image" content="https://mohammed-brueckner.com/images/double-trinity-pyramid-og.jpg">
+    <meta property="og:site_name" content="Mohammed Brueckner - Change Management Expert">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Double Trinity Pyramid: Interactive Change Management Model">
+    <meta name="twitter:description" content="Explore this innovative change management model by Mohammed Brueckner that demonstrates how balancing trinities creates the sweet spot for successful transformation.">
+    <meta name="twitter:image" content="https://mohammed-brueckner.com/images/double-trinity-pyramid-twitter.jpg">
+    <meta name="twitter:creator" content="@mohammedbrueckner">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Double Trinity Pyramid: Interactive Change Management Model",
+        "author": {
+            "@type": "Person",
+            "name": "Mohammed Brueckner",
+            "url": "https://mohammed-brueckner.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Mohammed Brueckner",
+            "url": "https://mohammed-brueckner.com"
+        },
+        "description": "Explore the Double Trinity Pyramid, an innovative change management model that demonstrates how balancing organizational and individual trinities creates the sweet spot for successful transformation.",
+        "image": "https://mohammed-brueckner.com/images/double-trinity-pyramid.jpg",
+        "datePublished": "2023-01-01",
+        "dateModified": "2023-12-01",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://mohammed-brueckner.com/double-trinity-pyramid"
+        }
+    }
+    </script>
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -55,9 +103,27 @@
         .header p {
             font-size: 1rem;
             max-width: 80%;
-            margin: 0 auto;
+            margin: 0 auto 10px;
             position: relative;
             z-index: 2;
+        }
+        
+        .attribution {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .attribution a {
+            color: #fff;
+            text-decoration: underline;
+            font-weight: 500;
         }
         
         .header::before {
@@ -77,6 +143,17 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+        }
+        
+        .slide {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            flex-grow: 1;
+        }
+        
+        .slide.active {
+            display: flex;
         }
         
         .pyramid-container {
@@ -343,6 +420,59 @@
             font-size: 0.9rem;
         }
         
+        .page-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 5px;
+        }
+        
+        .page-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .page-dot.active {
+            background-color: #3498db;
+            transform: scale(1.2);
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
         .modal {
             position: fixed;
             top: 0;
@@ -398,49 +528,424 @@
             line-height: 1.4;
         }
         
-        .page-indicator {
+        /* Imbalance Styles */
+        .imbalance-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px 0;
+            flex-grow: 1;
+        }
+        
+        .imbalance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .imbalance-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #e74c3c;
+        }
+        
+        .imbalance-card h3 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .imbalance-card p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .imbalance-visual {
             display: flex;
             justify-content: center;
-            margin: 15px 0;
-            gap: 5px;
+            align-items: center;
+            margin: 20px 0;
+            position: relative;
+            height: 150px;
         }
         
-        .page-dot {
-            width: 10px;
-            height: 10px;
+        .triangle-visual {
+            width: 150px;
+            height: 150px;
+            position: relative;
+        }
+        
+        .triangle-visual::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(52, 152, 219, 0.2);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        .vertex-visual {
+            position: absolute;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background-color: #ddd;
-            transition: all 0.3s ease;
+            background-color: #3498db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
-        .page-dot.active {
-            background-color: #3498db;
+        .vertex-visual.highlight {
+            background-color: #e74c3c;
             transform: scale(1.2);
         }
         
-        .next-page-btn {
-            display: flex;
-            justify-content: center;
-            margin: 15px 0;
+        .vertex-visual.dim {
+            background-color: #bdc3c7;
+            opacity: 0.5;
         }
         
-        .next-page-btn button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
+        .vertex-visual.people {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .vertex-visual.processes {
+            bottom: 0;
+            left: 0;
+        }
+        
+        .vertex-visual.technology {
+            bottom: 0;
+            right: 0;
+        }
+        
+        .key-insight {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .key-insight h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
         }
         
-        .next-page-btn button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+        .key-insight p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Understanding Model Styles */
+        .intro-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .intro-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .intro-section p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            background-color: rgba(52, 152, 219, 0.2);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .trinity-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .trinity-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .trinity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .trinity-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .trinity-card ul {
+            padding-left: 20px;
+        }
+        
+        .trinity-card li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .org-color {
+            color: #3498db;
+        }
+        
+        .ind-color {
+            color: #2ecc71;
+        }
+        
+        .sweet-color {
+            color: #f39c12;
+        }
+        
+        .benefits-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .benefits-section h2 {
+            color: #f39c12;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .benefit-item .material-icons {
+            color: #f39c12;
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        
+        .benefit-item span {
+            font-size: 1.1rem;
+        }
+        
+        /* Implementation Styles */
+        .implementation-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px 0;
+        }
+        
+        .implementation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .implementation-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #9b59b6;
+        }
+        
+        .implementation-card h3 {
+            color: #9b59b6;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .implementation-card p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .implementation-card ul {
+            padding-left: 20px;
+        }
+        
+        .implementation-card li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Case Studies Styles */
+        .case-study-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px 0;
+        }
+        
+        .case-study-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .case-study-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #16a085;
+        }
+        
+        .case-study-card h3 {
+            color: #16a085;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .case-study-card p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .case-study-card .outcome {
+            background-color: rgba(22, 160, 133, 0.1);
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .case-study-card .outcome h4 {
+            color: #16a085;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .case-study-card .outcome p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Resources Styles */
+        .resources-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px 0;
+        }
+        
+        .resources-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .resources-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #f39c12;
+        }
+        
+        .resources-card h3 {
+            color: #f39c12;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resources-card p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .resources-card ul {
+            padding-left: 20px;
+        }
+        
+        .resources-card li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .resource-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
         }
         
         @media (max-width: 480px) {
@@ -483,6 +988,16 @@
                 max-width: 140px;
                 font-size: 0.7rem;
             }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .trinity-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
@@ -491,63 +1006,258 @@
         <div class="header">
             <h1>Double Trinity Pyramid</h1>
             <p>Interactive Change Management Model</p>
+            <div class="attribution">
+                <span>A mental change management model by</span>
+                <a href="https://mohammed-brueckner.com" target="_blank">Mohammed Brueckner</a>
+                <span>• Developed through years of experience</span>
+            </div>
         </div>
         
         <div class="main-content">
-            <div class="pyramid-container">
-                <div class="triangle org-triangle"></div>
-                <div class="triangle ind-triangle"></div>
+            <!-- Slide 1: Interactive Pyramid -->
+            <div class="slide active" id="slide1">
+                <div class="pyramid-container">
+                    <div class="triangle org-triangle"></div>
+                    <div class="triangle ind-triangle"></div>
+                    
+                    <!-- Organizational Trinity Vertices -->
+                    <div class="vertex org-vertex vertex-people" data-info="people">PEOPLE</div>
+                    <div class="vertex org-vertex vertex-processes" data-info="processes">PROCESSES</div>
+                    <div class="vertex org-vertex vertex-technology" data-info="technology">TECHNOLOGY</div>
+                    
+                    <!-- Individual Trinity Vertices -->
+                    <div class="vertex ind-vertex vertex-incentivized" data-info="incentivized">INCENTIVIZED</div>
+                    <div class="vertex ind-vertex vertex-motivated" data-info="motivated">INTRINSICALLY<br>MOTIVATED</div>
+                    <div class="vertex ind-vertex vertex-empowered" data-info="empowered">EMPOWERED</div>
+                    
+                    <!-- Sweet Spot -->
+                    <div class="sweet-spot" data-info="sweet-spot">SWEET<br>SPOT</div>
+                    
+                    <!-- Warning Signs -->
+                    <div class="warning warning1" data-warning="Great intentions but not supported by tech maturity" data-position="right">!</div>
+                    <div class="warning warning2" data-warning="Poor processes (inconsistent or unfit) hindering Change" data-position="left">!</div>
+                    <div class="warning warning3" data-warning="Leaving people out of equation" data-position="top">!</div>
+                    <div class="warning warning4" data-warning="Everybody would love to, but hands are tied and transparency only for few" data-position="right">!</div>
+                    <div class="warning warning5" data-warning="Way too few are convinced of the value of the Change" data-position="left">!</div>
+                    <div class="warning warning6" data-warning="Asking for one thing, demanding something different" data-position="top">!</div>
+                    <div class="warning warning7" data-warning="Misaligned incentives causing resistance to change" data-position="top">!</div>
+                    
+                    <!-- Tooltip -->
+                    <div class="tooltip" id="tooltip"></div>
+                </div>
                 
-                <!-- Organizational Trinity Vertices -->
-                <div class="vertex org-vertex vertex-people" data-info="people">PEOPLE</div>
-                <div class="vertex org-vertex vertex-processes" data-info="processes">PROCESSES</div>
-                <div class="vertex org-vertex vertex-technology" data-info="technology">TECHNOLOGY</div>
-                
-                <!-- Individual Trinity Vertices -->
-                <div class="vertex ind-vertex vertex-incentivized" data-info="incentivized">INCENTIVIZED</div>
-                <div class="vertex ind-vertex vertex-motivated" data-info="motivated">INTRINSICALLY<br>MOTIVATED</div>
-                <div class="vertex ind-vertex vertex-empowered" data-info="empowered">EMPOWERED</div>
-                
-                <!-- Sweet Spot -->
-                <div class="sweet-spot" data-info="sweet-spot">SWEET<br>SPOT</div>
-                
-                <!-- Warning Signs -->
-                <div class="warning warning1" data-warning="Great intentions but not supported by tech maturity" data-position="right">!</div>
-                <div class="warning warning2" data-warning="Poor processes (inconsistent or unfit) hindering Change" data-position="left">!</div>
-                <div class="warning warning3" data-warning="Leaving people out of the equation" data-position="top">!</div>
-                <div class="warning warning4" data-warning="Everybody would love to, but hands are tied and transparency only for few" data-position="right">!</div>
-                <div class="warning warning5" data-warning="Way too few are convinced of the value of the Change" data-position="left">!</div>
-                <div class="warning warning6" data-warning="Asking for one thing, demanding something different" data-position="top">!</div>
-                <div class="warning warning7" data-warning="Misaligned incentives causing resistance to change" data-position="top">!</div>
-                
-                <!-- Tooltip -->
-                <div class="tooltip" id="tooltip"></div>
+                <div class="controls">
+                    <button class="control-btn" id="toggleWarnings">
+                        <span class="material-icons">warning</span>
+                        Toggle Warnings
+                    </button>
+                    <button class="control-btn" id="resetView">
+                        <span class="material-icons">refresh</span>
+                        Reset View
+                    </button>
+                </div>
             </div>
             
-            <div class="controls">
-                <button class="control-btn" id="toggleWarnings">
-                    <span class="material-icons">warning</span>
-                    Toggle Warnings
-                </button>
-                <button class="control-btn" id="showImbalances">
-                    <span class="material-icons">error_outline</span>
-                    Show Imbalances
-                </button>
-                <button class="control-btn" id="resetView">
-                    <span class="material-icons">refresh</span>
-                    Reset View
-                </button>
+            <!-- Slide 2: People & Processes vs Technology -->
+            <div class="slide" id="slide2">
+                <div class="imbalance-card">
+                    <h3>
+                        <span class="material-icons">warning</span>
+                        Too much focus on People & Processes, neglecting Technology
+                    </h3>
+                    <p>Great intentions and motivation exist, but lack tech capabilities to execute effectively. Organizations in this state often have enthusiastic teams and well-designed workflows, but struggle with outdated systems, inefficient tools, or inadequate digital infrastructure.</p>
+                    
+                    <div class="imbalance-visual">
+                        <div class="triangle-visual">
+                            <div class="vertex-visual people highlight">P</div>
+                            <div class="vertex-visual processes highlight">P</div>
+                            <div class="vertex-visual technology dim">T</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: People & Technology vs Processes -->
+            <div class="slide" id="slide3">
+                <div class="imbalance-card">
+                    <h3>
+                        <span class="material-icons">warning</span>
+                        Too much focus on People & Technology, neglecting Processes
+                    </h3>
+                    <p>Even with motivated people and good technology, poor processes create friction and inefficiency. This imbalance leads to confusion, duplicated efforts, and inconsistent outcomes as team members struggle with unclear procedures and lack of standardization.</p>
+                    
+                    <div class="imbalance-visual">
+                        <div class="triangle-visual">
+                            <div class="vertex-visual people highlight">P</div>
+                            <div class="vertex-visual processes dim">P</div>
+                            <div class="vertex-visual technology highlight">T</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Processes & Technology vs People -->
+            <div class="slide" id="slide4">
+                <div class="imbalance-card">
+                    <h3>
+                        <span class="material-icons">warning</span>
+                        Too much focus on Processes & Technology, neglecting People
+                    </h3>
+                    <p>Well-designed systems and processes fail without proper buy-in and engagement from people. Organizations with this imbalance often have excellent technical infrastructure and documented procedures, but struggle with low adoption, resistance to change, and disengaged employees.</p>
+                    
+                    <div class="imbalance-visual">
+                        <div class="triangle-visual">
+                            <div class="vertex-visual people dim">P</div>
+                            <div class="vertex-visual processes highlight">P</div>
+                            <div class="vertex-visual technology highlight">T</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Individual Trinity Imbalance -->
+            <div class="slide" id="slide5">
+                <div class="imbalance-card">
+                    <h3>
+                        <span class="material-icons">warning</span>
+                        Individual Trinity Imbalance
+                    </h3>
+                    <p>When incentives, motivation, and empowerment are misaligned, resistance to change increases significantly. Even if organizational trinity is balanced, individual factors can undermine success. For example, employees might be motivated but lack authority to implement changes, or they might have incentives that conflict with desired behaviors.</p>
+                    
+                    <div class="imbalance-visual">
+                        <div class="triangle-visual" style="transform: rotate(180deg);">
+                            <div class="vertex-visual people dim">I</div>
+                            <div class="vertex-visual processes highlight">M</div>
+                            <div class="vertex-visual technology highlight">E</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Understanding the Model -->
+            <div class="slide" id="slide6">
+                <div class="intro-section">
+                    <h2>The Double Trinity Pyramid Model</h2>
+                    <p>The Double Trinity Pyramid model illustrates how successful organizational change requires balancing two critical trinities: <span class="highlight">Organizational Trinity</span> (People, Processes, Technology) and <span class="highlight">Individual Trinity</span> (Incentivized, Intrinsically Motivated, Empowered).</p>
+                </div>
+                
+                <div class="trinity-grid">
+                    <div class="trinity-card">
+                        <h3><span class="material-icons org-color">business</span> Organizational Trinity</h3>
+                        <p>The three pillars that must work in harmony for effective organizational change:</p>
+                        <ul>
+                            <li><strong>People:</strong> The human element driving and affected by change</li>
+                            <li><strong>Processes:</strong> The workflows and procedures that guide operations</li>
+                            <li><strong>Technology:</strong> The tools and systems that enable change</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="trinity-card">
+                        <h3><span class="material-icons ind-color">person</span> Individual Trinity</h3>
+                        <p>The three personal factors that determine individual adoption of change:</p>
+                        <ul>
+                            <li><strong>Incentivized:</strong> Clear rewards and recognition for embracing change</li>
+                            <li><strong>Intrinsically Motivated:</strong> Personal belief in value of change</li>
+                            <li><strong>Empowered:</strong> Having authority and resources to implement change</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 7: Benefits of Finding the Sweet Spot -->
+            <div class="slide" id="slide7">
+                <div class="benefits-section">
+                    <h2><span class="material-icons sweet-color">stars</span> Benefits of Finding the Sweet Spot</h2>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <span class="material-icons">check_circle</span>
+                            <span>Smoother transition periods</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="material-icons">check_circle</span>
+                            <span>Higher adoption rates</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="material-icons">check_circle</span>
+                            <span>Sustainable change implementation</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="material-icons">check_circle</span>
+                            <span>Improved organizational performance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 8: Implementation Strategy -->
+            <div class="slide" id="slide8">
+                <div class="implementation-card">
+                    <h3>
+                        <span class="material-icons">build</span>
+                        Implementation Strategy
+                    </h3>
+                    <p>Successfully implementing the Double Trinity Pyramid model requires a systematic approach:</p>
+                    <ul>
+                        <li><strong>Assessment:</strong> Evaluate current state of both trinities</li>
+                        <li><strong>Prioritization:</strong> Identify most critical imbalances</li>
+                        <li><strong>Alignment:</strong> Create initiatives that address both trinities simultaneously</li>
+                        <li><strong>Measurement:</strong> Track progress toward balance with specific metrics</li>
+                        <li><strong>Iteration:</strong> Continuously refine approach based on feedback</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 9: Case Studies -->
+            <div class="slide" id="slide9">
+                <div class="case-study-card">
+                    <h3>
+                        <span class="material-icons">cases</span>
+                        Case Study: Digital Transformation
+                    </h3>
+                    <p>A financial services company struggled with a major digital transformation initiative despite investing heavily in new technology. The issue was that they focused primarily on technology and processes, neglecting the individual trinity. Employees weren't properly incentivized to adopt new systems and felt disempowered by the rigid implementation approach.</p>
+                    <div class="outcome">
+                        <h4>Outcome:</h4>
+                        <p>After rebalancing to address all six elements, adoption rates increased by 75% and the transformation timeline accelerated by 40%.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 10: Resources -->
+            <div class="slide" id="slide10">
+                <div class="resources-card">
+                    <h3>
+                        <span class="material-icons">menu_book</span>
+                        Additional Resources
+                    </h3>
+                    <p>Explore these resources to deepen your understanding of the Double Trinity Pyramid model:</p>
+                    <ul>
+                        <li><a href="https://mohammed-brueckner.com/blog/double-trinity-pyramid" class="resource-link" target="_blank">Detailed blog post on the model</a></li>
+                        <li><a href="https://mohammed-brueckner.com/change-management-tools" class="resource-link" target="_blank">Change management assessment tools</a></li>
+                        <li><a href="https://mohammed-brueckner.com/contact" class="resource-link" target="_blank">Consulting services</a></li>
+                    </ul>
+                </div>
             </div>
             
             <div class="page-indicator">
-                <div class="page-dot active"></div>
-                <div class="page-dot"></div>
-                <div class="page-dot"></div>
+                <div class="page-dot active" data-slide="1"></div>
+                <div class="page-dot" data-slide="2"></div>
+                <div class="page-dot" data-slide="3"></div>
+                <div class="page-dot" data-slide="4"></div>
+                <div class="page-dot" data-slide="5"></div>
+                <div class="page-dot" data-slide="6"></div>
+                <div class="page-dot" data-slide="7"></div>
+                <div class="page-dot" data-slide="8"></div>
+                <div class="page-dot" data-slide="9"></div>
+                <div class="page-dot" data-slide="10"></div>
             </div>
             
-            <div class="next-page-btn">
-                <button id="nextPageBtn">
-                    <span>Explore Imbalances</span>
+            <div class="navigation-buttons">
+                <button class="nav-btn" id="prevBtn" disabled>
+                    <span class="material-icons">arrow_back</span>
+                    <span>Previous</span>
+                </button>
+                <button class="nav-btn" id="nextBtn">
+                    <span>Next</span>
                     <span class="material-icons">arrow_forward</span>
                 </button>
             </div>
@@ -571,10 +1281,15 @@
         const modalBody = document.getElementById('modalBody');
         const modalClose = document.getElementById('modalClose');
         const toggleWarningsBtn = document.getElementById('toggleWarnings');
-        const showImbalancesBtn = document.getElementById('showImbalances');
         const resetViewBtn = document.getElementById('resetView');
         const warnings = document.querySelectorAll('.warning');
-        const nextPageBtn = document.getElementById('nextPageBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageDots = document.querySelectorAll('.page-dot');
+        const slides = document.querySelectorAll('.slide');
+        
+        // Current slide index
+        let currentSlide = 1;
         
         // Information for each vertex
         const vertexInfo = {
@@ -607,6 +1322,69 @@
                 content: "The sweet spot occurs when both trinities are balanced. Here, organizational elements (people, processes, technology) align with individual factors (incentives, motivation, empowerment), creating an environment where change can flourish with minimal resistance."
             }
         };
+        
+        // Function to show a specific slide
+        function showSlide(slideIndex) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show the selected slide
+            document.getElementById(`slide${slideIndex}`).classList.add('active');
+            
+            // Update page indicators
+            pageDots.forEach((dot, index) => {
+                if (index + 1 === slideIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = slideIndex === 1;
+            nextBtn.disabled = slideIndex === 10;
+            
+            // Update current slide index
+            currentSlide = slideIndex;
+            
+            // Update header text based on current slide
+            const headerTitle = document.querySelector('.header h1');
+            const headerSubtitle = document.querySelector('.header p');
+            
+            if (slideIndex === 1) {
+                headerTitle.textContent = "Double Trinity Pyramid";
+                headerSubtitle.textContent = "Interactive Change Management Model";
+            } else if (slideIndex === 2) {
+                headerTitle.textContent = "Imbalance: People & Processes vs. Technology";
+                headerSubtitle.textContent = "Understanding what happens when technology is neglected";
+            } else if (slideIndex === 3) {
+                headerTitle.textContent = "Imbalance: People & Technology vs. Processes";
+                headerSubtitle.textContent = "Understanding what happens when processes are neglected";
+            } else if (slideIndex === 4) {
+                headerTitle.textContent = "Imbalance: Processes & Technology vs. People";
+                headerSubtitle.textContent = "Understanding what happens when people are neglected";
+            } else if (slideIndex === 5) {
+                headerTitle.textContent = "Individual Trinity Imbalance";
+                headerSubtitle.textContent = "How personal factors impact change adoption";
+            } else if (slideIndex === 6) {
+                headerTitle.textContent = "Understanding the Model";
+                headerSubtitle.textContent = "Key insights for successful organizational change";
+            } else if (slideIndex === 7) {
+                headerTitle.textContent = "Benefits of Finding the Sweet Spot";
+                headerSubtitle.textContent = "Why balance matters in change management";
+            } else if (slideIndex === 8) {
+                headerTitle.textContent = "Implementation Strategy";
+                headerSubtitle.textContent = "How to apply the Double Trinity Pyramid model";
+            } else if (slideIndex === 9) {
+                headerTitle.textContent = "Case Study";
+                headerSubtitle.textContent = "Real-world application of the model";
+            } else if (slideIndex === 10) {
+                headerTitle.textContent = "Additional Resources";
+                headerSubtitle.textContent = "Continue your learning journey";
+            }
+        }
         
         // Add click event to vertices
         document.querySelectorAll('.vertex, .sweet-spot').forEach(vertex => {
@@ -684,11 +1462,6 @@
             this.classList.toggle('active');
         });
         
-        // Show imbalances (navigate to page 2)
-        showImbalancesBtn.addEventListener('click', function() {
-            window.location.href = 'double_trinity_pyramid_page2.html';
-        });
-        
         // Reset view
         resetViewBtn.addEventListener('click', function() {
             warnings.forEach(warning => {
@@ -698,10 +1471,29 @@
             modal.classList.remove('show');
         });
         
-        // Navigate to next page
-        nextPageBtn.addEventListener('click', function() {
-            window.location.href = 'double_trinity_pyramid_page2.html';
+        // Navigation button event listeners
+        prevBtn.addEventListener('click', function() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
         });
+        
+        nextBtn.addEventListener('click', function() {
+            if (currentSlide < 10) {
+                showSlide(currentSlide + 1);
+            }
+        });
+        
+        // Page dot click event listeners
+        pageDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const slideIndex = parseInt(this.dataset.slide);
+                showSlide(slideIndex);
+            });
+        });
+        
+        // Initialize first slide
+        showSlide(1);
     </script>
 </body>
 </html>
