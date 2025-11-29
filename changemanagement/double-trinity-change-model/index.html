@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Trinity Pyramid: Interactive Change Management Model</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+        
+        .poster-container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            max-width: 80%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 1;
+        }
+        
+        .main-content {
+            padding: 20px;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pyramid-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            margin: 20px 0;
+            flex-grow: 1;
+        }
+        
+        .triangle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .org-triangle {
+            background-color: rgba(52, 152, 219, 0.3);
+            border: 3px solid #3498db;
+            z-index: 1;
+        }
+        
+        .ind-triangle {
+            background-color: rgba(46, 204, 113, 0.3);
+            border: 3px solid #2ecc71;
+            z-index: 2;
+            transform: translate(-50%, -50%) rotate(180deg);
+        }
+        
+        .vertex {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 3;
+            text-align: center;
+            font-size: 0.7rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .vertex:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .org-vertex {
+            background-color: #3498db;
+        }
+        
+        .ind-vertex {
+            background-color: #2ecc71;
+        }
+        
+        .vertex-people {
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .vertex-processes {
+            bottom: 10%;
+            left: 20%;
+        }
+        
+        .vertex-technology {
+            bottom: 10%;
+            right: 20%;
+        }
+        
+        .vertex-incentivized {
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .vertex-motivated {
+            top: 10%;
+            right: 20%;
+        }
+        
+        .vertex-empowered {
+            top: 10%;
+            left: 20%;
+        }
+        
+        .sweet-spot {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #f39c12 0%, #e67e22 100%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sweet-spot:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 30px rgba(243, 156, 18, 0.8);
+        }
+        
+        .warning {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 5;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .warning:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        
+        .warning1 {
+            top: 30%;
+            left: 35%;
+        }
+        
+        .warning2 {
+            top: 30%;
+            right: 35%;
+        }
+        
+        .warning3 {
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .warning4 {
+            top: 50%;
+            left: 25%;
+            transform: translateY(-50%);
+        }
+        
+        .warning5 {
+            top: 50%;
+            right: 25%;
+            transform: translateY(-50%);
+        }
+        
+        .warning6 {
+            bottom: 15%;
+            left: 40%;
+        }
+        
+        .warning7 {
+            bottom: 15%;
+            right: 40%;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            max-width: 180px;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        
+        .tooltip.show {
+            opacity: 1;
+        }
+        
+        .tooltip.left {
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .tooltip.right {
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .tooltip.top {
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .tooltip.bottom {
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .control-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .control-btn.active {
+            background-color: #2ecc71;
+        }
+        
+        .control-btn .material-icons {
+            font-size: 0.9rem;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .modal-close:hover {
+            color: #2c3e50;
+        }
+        
+        .modal h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .modal p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .page-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 5px;
+        }
+        
+        .page-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            transition: all 0.3s ease;
+        }
+        
+        .page-dot.active {
+            background-color: #3498db;
+            transform: scale(1.2);
+        }
+        
+        .next-page-btn {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .next-page-btn button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .next-page-btn button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 480px) {
+            .pyramid-container {
+                height: 300px;
+            }
+            
+            .triangle {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .vertex {
+                width: 70px;
+                height: 70px;
+                font-size: 0.6rem;
+            }
+            
+            .sweet-spot {
+                width: 50px;
+                height: 50px;
+                font-size: 0.6rem;
+            }
+            
+            .warning {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .tooltip {
+                max-width: 140px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="header">
+            <h1>Double Trinity Pyramid</h1>
+            <p>Interactive Change Management Model</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="pyramid-container">
+                <div class="triangle org-triangle"></div>
+                <div class="triangle ind-triangle"></div>
+                
+                <!-- Organizational Trinity Vertices -->
+                <div class="vertex org-vertex vertex-people" data-info="people">PEOPLE</div>
+                <div class="vertex org-vertex vertex-processes" data-info="processes">PROCESSES</div>
+                <div class="vertex org-vertex vertex-technology" data-info="technology">TECHNOLOGY</div>
+                
+                <!-- Individual Trinity Vertices -->
+                <div class="vertex ind-vertex vertex-incentivized" data-info="incentivized">INCENTIVIZED</div>
+                <div class="vertex ind-vertex vertex-motivated" data-info="motivated">INTRINSICALLY<br>MOTIVATED</div>
+                <div class="vertex ind-vertex vertex-empowered" data-info="empowered">EMPOWERED</div>
+                
+                <!-- Sweet Spot -->
+                <div class="sweet-spot" data-info="sweet-spot">SWEET<br>SPOT</div>
+                
+                <!-- Warning Signs -->
+                <div class="warning warning1" data-warning="Great intentions but not supported by tech maturity" data-position="right">!</div>
+                <div class="warning warning2" data-warning="Poor processes (inconsistent or unfit) hindering Change" data-position="left">!</div>
+                <div class="warning warning3" data-warning="Leaving people out of the equation" data-position="top">!</div>
+                <div class="warning warning4" data-warning="Everybody would love to, but hands are tied and transparency only for few" data-position="right">!</div>
+                <div class="warning warning5" data-warning="Way too few are convinced of the value of the Change" data-position="left">!</div>
+                <div class="warning warning6" data-warning="Asking for one thing, demanding something different" data-position="top">!</div>
+                <div class="warning warning7" data-warning="Misaligned incentives causing resistance to change" data-position="top">!</div>
+                
+                <!-- Tooltip -->
+                <div class="tooltip" id="tooltip"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn" id="toggleWarnings">
+                    <span class="material-icons">warning</span>
+                    Toggle Warnings
+                </button>
+                <button class="control-btn" id="showImbalances">
+                    <span class="material-icons">error_outline</span>
+                    Show Imbalances
+                </button>
+                <button class="control-btn" id="resetView">
+                    <span class="material-icons">refresh</span>
+                    Reset View
+                </button>
+            </div>
+            
+            <div class="page-indicator">
+                <div class="page-dot active"></div>
+                <div class="page-dot"></div>
+                <div class="page-dot"></div>
+            </div>
+            
+            <div class="next-page-btn">
+                <button id="nextPageBtn">
+                    <span>Explore Imbalances</span>
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for detailed information -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">×</span>
+            <h2 id="modalTitle">Title</h2>
+            <div id="modalBody">Content</div>
+        </div>
+    </div>
+    
+    <script>
+        // Get DOM elements
+        const tooltip = document.getElementById('tooltip');
+        const modal = document.getElementById('infoModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+        const toggleWarningsBtn = document.getElementById('toggleWarnings');
+        const showImbalancesBtn = document.getElementById('showImbalances');
+        const resetViewBtn = document.getElementById('resetView');
+        const warnings = document.querySelectorAll('.warning');
+        const nextPageBtn = document.getElementById('nextPageBtn');
+        
+        // Information for each vertex
+        const vertexInfo = {
+            people: {
+                title: "People",
+                content: "The human element is critical to any organizational change. This includes leadership support, employee engagement, and the right skill sets. When people are neglected, even the best processes and technology will fail to deliver results."
+            },
+            processes: {
+                title: "Processes",
+                content: "Well-defined processes provide the structure for implementing change. They ensure consistency, efficiency, and quality. Poor processes create friction and waste, undermining even the most motivated people and advanced technology."
+            },
+            technology: {
+                title: "Technology",
+                content: "Technology enables change at scale and provides the tools needed for new ways of working. Without the right technology, even motivated people and well-designed processes will struggle to achieve desired outcomes."
+            },
+            incentivized: {
+                title: "Incentivized",
+                content: "Clear incentives motivate individuals to embrace change. This includes both tangible rewards (compensation, recognition) and intangible benefits (career growth, skill development). Without proper incentives, resistance to change increases."
+            },
+            motivated: {
+                title: "Intrinsically Motivated",
+                content: "Intrinsic motivation comes from personal belief in the value of change. When individuals understand why change is needed and how it benefits them and the organization, they become champions rather than obstacles."
+            },
+            empowered: {
+                title: "Empowered",
+                content: "Empowerment gives individuals the authority and resources to implement change. This includes decision-making power, time, tools, and support. Without empowerment, even motivated individuals cannot drive meaningful change."
+            },
+            "sweet-spot": {
+                title: "Sweet Spot for Change",
+                content: "The sweet spot occurs when both trinities are balanced. Here, organizational elements (people, processes, technology) align with individual factors (incentives, motivation, empowerment), creating an environment where change can flourish with minimal resistance."
+            }
+        };
+        
+        // Add click event to vertices
+        document.querySelectorAll('.vertex, .sweet-spot').forEach(vertex => {
+            vertex.addEventListener('click', function() {
+                const info = vertexInfo[this.dataset.info];
+                if (info) {
+                    modalTitle.textContent = info.title;
+                    modalBody.textContent = info.content;
+                    modal.classList.add('show');
+                }
+            });
+        });
+        
+        // Add hover event to warnings
+        document.querySelectorAll('.warning').forEach(warning => {
+            warning.addEventListener('mouseenter', function(e) {
+                const warningText = this.dataset.warning;
+                const position = this.dataset.position;
+                tooltip.textContent = warningText;
+                
+                // Remove all position classes
+                tooltip.classList.remove('left', 'right', 'top', 'bottom');
+                
+                // Add the appropriate position class
+                tooltip.classList.add(position);
+                
+                // Position tooltip next to the warning icon
+                const rect = this.getBoundingClientRect();
+                const containerRect = this.parentElement.getBoundingClientRect();
+                
+                // Calculate position relative to container
+                const relativeLeft = rect.left - containerRect.left;
+                const relativeTop = rect.top - containerRect.top;
+                
+                // Position tooltip based on the position attribute
+                if (position === 'left') {
+                    tooltip.style.left = (relativeLeft - 190) + 'px';
+                    tooltip.style.top = (relativeTop - 10) + 'px';
+                } else if (position === 'right') {
+                    tooltip.style.left = (relativeLeft + 30) + 'px';
+                    tooltip.style.top = (relativeTop - 10) + 'px';
+                } else if (position === 'top') {
+                    tooltip.style.left = (relativeLeft - 75) + 'px';
+                    tooltip.style.top = (relativeTop - 40) + 'px';
+                } else if (position === 'bottom') {
+                    tooltip.style.left = (relativeLeft - 75) + 'px';
+                    tooltip.style.top = (relativeTop + 30) + 'px';
+                }
+                
+                tooltip.classList.add('show');
+            });
+            
+            warning.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('show');
+            });
+        });
+        
+        // Close modal
+        modalClose.addEventListener('click', function() {
+            modal.classList.remove('show');
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+        
+        // Toggle warnings visibility
+        toggleWarningsBtn.addEventListener('click', function() {
+            warnings.forEach(warning => {
+                warning.style.display = warning.style.display === 'none' ? 'flex' : 'none';
+            });
+            this.classList.toggle('active');
+        });
+        
+        // Show imbalances (navigate to page 2)
+        showImbalancesBtn.addEventListener('click', function() {
+            window.location.href = 'double_trinity_pyramid_page2.html';
+        });
+        
+        // Reset view
+        resetViewBtn.addEventListener('click', function() {
+            warnings.forEach(warning => {
+                warning.style.display = 'flex';
+            });
+            toggleWarningsBtn.classList.remove('active');
+            modal.classList.remove('show');
+        });
+        
+        // Navigate to next page
+        nextPageBtn.addEventListener('click', function() {
+            window.location.href = 'double_trinity_pyramid_page2.html';
+        });
+    </script>
+</body>
+</html>
