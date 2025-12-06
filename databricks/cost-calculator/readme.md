@@ -1,4 +1,4 @@
-# The Azure Cost Calculator: Your Ballpark Buddy!
+# 💰 The Azure Cost Calculator: Your Ballpark Buddy!
 
 Tired of Azure cost estimates that feel like they were pulled from a magic hat? We get it. The official calculators are powerful, but sometimes you just need a quick, no-fuss number to get the conversation started.
 
@@ -18,6 +18,16 @@ It gives you a great starting point by focusing on the complex, high-cost compon
 *   **Networking** (Application Gateway, Data Transfer)
 
 It even lets you factor in multiple environments (Dev, QA, Prod) with different cost multipliers, so you can see the true TCO of your multi-stage deployment.
+
+### What's Missing? (The Fine Print)
+
+To keep this a true "ballpark buddy," we had to focus on the core, high-cost drivers. This means we've intentionally omitted some other high-cost components that you'll need to budget for in a real-world deployment. For example, if you plan to expose your Databricks functionality as a secure API to external consumers, you'll need to budget for:
+
+*   **Azure API Management (APIM):** The dedicated tool for API governance, security, and publishing. A production-ready instance can add a significant fixed cost (hundreds to thousands of dollars per month) to your bill.
+*   **Azure DevOps/GitHub Actions:** The cost of your CI/CD pipelines for automated deployment.
+*   **Monitoring and Logging:** Advanced tools like Azure Monitor Log Analytics beyond the free tier.
+
+This calculator is your starting line, not the finish line! Use the estimate here, then be sure to add these other critical services to your final budget.
 
 ### From Ballpark to Blueprint
 
