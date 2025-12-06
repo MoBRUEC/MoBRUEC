@@ -1,4 +1,4 @@
-# 💰 The Azure Cost Calculator: Your Ballpark Buddy!
+# The Azure Cost Calculator: Your Ballpark Buddy!
 
 Tired of Azure cost estimates that feel like they were pulled from a magic hat? We get it. The official calculators are powerful, but sometimes you just need a quick, no-fuss number to get the conversation started.
 
