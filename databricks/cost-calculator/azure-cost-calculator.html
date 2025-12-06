@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Data & ML Platform Cost Calculator, presented by mohammed-brueckner.com</title>
+    
+    <meta name="description" content="Free Azure Data & ML Platform cost calculator. Get accurate ballpark estimates for multi-environment Azure deployments including AKS, Databricks, Storage, Security, and Networking.">
+    <meta name="keywords" content="Azure cost calculator, cloud cost estimation, data platform cost, ML platform cost, Azure pricing, AKS cost, Databricks cost, Azure storage cost, cloud budgeting, multi-environment cost calculator, Mohammed Brueckner">
+    <meta name="author" content="Mohammed Brueckner">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #1a75ff;
+            --light-blue: #e6f0ff;
+            --medium-blue: #4d94ff;
+            --dark-blue: #004799;
+            --darker-blue: #003366;
+            --accent-blue: #0099ff;
+            --background-blue: #f5f9ff;
+            --card-blue: #ffffff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --border-blue: #cce0ff;
+            --success-green: #28a745;
+            --warning-orange: #fd7e14;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-blue);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background-color: var(--primary-blue);
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.1);
+        }
+        
+        .card {
+            border: 1px solid var(--border-blue);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            background-color: var(--card-blue);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 102, 204, 0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            font-weight: 600;
+            border-radius: 8px 8px 0 0 !important;
+        }
+        
+        .service-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--primary-blue);
+        }
+        
+        .dev { border-left-color: var(--secondary-blue); }
+        .qa { border-left-color: var(--medium-blue); }
+        .staging { border-left-color: var(--accent-blue); }
+        .preprod { border-left-color: var(--dark-blue); }
+        .prod { border-left-color: var(--darker-blue); }
+        
+        .cost-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+        
+        .cost-breakdown {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .total-cost {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.1);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid var(--border-blue);
+            color: var(--text-dark);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+        }
+        
+        .form-control.is-invalid {
+            border-color: var(--warning-orange);
+        }
+        
+        .invalid-feedback {
+            display: none;
+            color: var(--warning-orange);
+            font-size: 0.875em;
+            margin-top: 0.25rem;
+        }
+        
+        .form-control.is-invalid ~ .invalid-feedback {
+            display: block;
+        }
+        
+        .btn-calculate {
+            background-color: var(--secondary-blue);
+            border: none;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-calculate:hover {
+            background-color: var(--primary-blue);
+            transform: scale(1.05);
+            color: var(--text-light);
+        }
+        
+        .btn-export {
+            background-color: var(--accent-blue);
+            border: none;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-export:hover {
+            background-color: var(--medium-blue);
+            transform: scale(1.05);
+            color: var(--text-light);
+        }
+        
+        .btn-preset {
+            background-color: var(--medium-blue);
+            border: none;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-preset:hover {
+            background-color: var(--primary-blue);
+            transform: scale(1.05);
+            color: var(--text-light);
+        }
+        
+        .btn-preset.active {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+        }
+        
+        .tab-content {
+            padding-top: 20px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            border-color: var(--primary-blue);
+        }
+        
+        .pricing-note {
+            font-size: 0.8rem;
+            color: var(--dark-blue);
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .environment-multiplier {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .environment-multiplier input {
+            width: 80px;
+            margin-right: 10px;
+        }
+        
+        .cost-per-service {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-blue);
+        }
+        
+        .cost-per-service:last-child {
+            border-bottom: none;
+        }
+        
+        .footer {
+            background-color: var(--light-blue);
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 2px solid var(--border-blue);
+            font-size: 0.9rem;
+            color: var(--dark-blue);
+        }
+        
+        .book-link {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 5px 10px;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .book-link:hover {
+            background-color: var(--dark-blue);
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="https://mohammed-brueckner.com" target="_blank">
+                <i class="bi bi-calculator-fill me-2 text-light"></i>
+                <span class="text-light">Azure Data & ML Platform Cost Calculator, presented by mohammed-brueckner.com</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-gear-fill me-2"></i> Configuration
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="mb-4">
+                            <h5><i class="bi bi-globe me-2"></i> General Settings</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="environment-count" class="form-label">Number of Environments</label>
+                                    <select class="form-select" id="environment-count">
+                                        <option value="1">1 (e.g., PROD only)</option>
+                                        <option value="2">2 (e.g., DEV, PROD)</option>
+                                        <option value="3" selected>3 (e.g., DEV, QA, PROD)</option>
+                                        <option value="4">4 (e.g., DEV, QA, STAGING, PROD)</option>
+                                        <option value="5">5 (e.g., DEV, QA, STAGING, PRE-PROD, PROD)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Azure Region</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="location" id="location-us" value="us">
+                                        <label class="form-check-label" for="location-us">US (Baseline)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="location" id="location-europe" value="europe" checked>
+                                        <label class="form-check-label" for="location-europe">Europe (-5% cost)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="location" id="location-asia" value="asia">
+                                        <label class="form-check-label" for="location-asia">Asia (+10% cost)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="location" id="location-australia" value="australia">
+                                        <label class="form-check-label" for="location-australia">Australia (+20% cost)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="bi bi-layers-fill me-2"></i> Environment Multipliers</h5>
+                            <div id="environments-container"></div>
+                            <p class="pricing-note">Adjust the resource multiplier for each environment (e.g., DEV uses 20% of PROD resources).</p>
+                        </div>
+
+                        <ul class="nav nav-tabs" id="serviceTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="aks-tab" data-bs-toggle="tab" data-bs-target="#aks" type="button" role="tab">AKS</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="databricks-tab" data-bs-toggle="tab" data-bs-target="#databricks" type="button" role="tab">Databricks</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="storage-tab" data-bs-toggle="tab" data-bs-target="#storage" type="button" role="tab">Storage</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">Security</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="networking-tab" data-bs-toggle="tab" data-bs-target="#networking" type="button" role="tab">Networking</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content" id="serviceTabsContent">
+                            
+                            <div class="tab-pane fade show active" id="aks" role="tabpanel">
+                                <h5>Azure Kubernetes Service (AKS)</h5>
+                                <div class="mb-3">
+                                    <button type="button" class="btn-preset" data-service="aks" data-preset="basic">Basic</button>
+                                    <button type="button" class="btn-preset active" data-service="aks" data-preset="standard">Standard</button>
+                                    <button type="button" class="btn-preset" data-service="aks" data-preset="enterprise">Enterprise</button>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="aks-cluster-count" class="form-label">Number of AKS Clusters (per environment)</label>
+                                        <input type="number" class="form-control" id="aks-cluster-count" value="1" min="1" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="aks-node-count" class="form-label">Default Node Count (per cluster)</label>
+                                        <input type="number" class="form-control" id="aks-node-count" value="3" min="1" max="100">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="aks-node-size" class="form-label">Node VM Size</label>
+                                        <select class="form-select" id="aks-node-size">
+                                            <option value="Standard_B2s" data-price="0.042">Standard_B2s (2 vCPU, 4GB)</option>
+                                            <option value="Standard_D2s_v3" data-price="0.108">Standard_D2s_v3 (2 vCPU, 8GB)</option>
+                                            <option value="Standard_D4s_v3" data-price="0.208" selected>Standard_D4s_v3 (4 vCPU, 16GB)</option>
+                                            <option value="Standard_D8s_v3" data-price="0.416">Standard_D8s_v3 (8 vCPU, 32GB)</option>
+                                            <option value="Standard_F8s_v2" data-price="0.304">Standard_F8s_v2 (8 vCPU, 16GB)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="aks-load-balancer" class="form-label">Load Balancer Tier</label>
+                                        <select class="form-select" id="aks-load-balancer">
+                                            <option value="basic" data-price="0">Basic (Free)</option>
+                                            <option value="standard" data-price="18.60" selected>Standard</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="aks-uptime" class="form-label">Uptime (Hours/Day)</label>
+                                        <input type="number" class="form-control" id="aks-uptime" value="24" min="1" max="24">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="aks-spot-instances" class="form-label">Spot Instances (%)</label>
+                                        <input type="number" class="form-control" id="aks-spot-instances" value="25" min="0" max="100">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="aks-node-pools" class="form-label">Additional Node Pools</label>
+                                        <input type="number" class="form-control" id="aks-node-pools" value="1" min="0" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mt-4">
+                                            <input class="form-check-input" type="checkbox" id="aks-monitoring" checked>
+                                            <label class="form-check-label" for="aks-monitoring">Enable Monitoring</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="aks-autoscaling" checked>
+                                            <label class="form-check-label" for="aks-autoscaling">Enable Autoscaler</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="databricks" role="tabpanel">
+                                <h5>Azure Databricks</h5>
+                                <div class="mb-3">
+                                    <button type="button" class="btn-preset" data-service="databricks" data-preset="light">Light</button>
+                                    <button type="button" class="btn-preset active" data-service="databricks" data-preset="standard">Standard</button>
+                                    <button type="button" class="btn-preset" data-service="databricks" data-preset="heavy">Heavy</button>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="databricks-workspace-count" class="form-label">Workspaces (per environment)</label>
+                                        <input type="number" class="form-control" id="databricks-workspace-count" value="1" min="1" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="databricks-cluster-count" class="form-label">Concurrent Clusters</label>
+                                        <input type="number" class="form-control" id="databricks-cluster-count" value="2" min="1" max="100">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="databricks-node-count" class="form-label">Nodes per Cluster</label>
+                                        <input type="number" class="form-control" id="databricks-node-count" value="3" min="1" max="100">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="databricks-node-type" class="form-label">Node VM Type</label>
+                                        <select class="form-select" id="databricks-node-type">
+                                            <option value="Standard_DS3_v2" data-price="0.189">Standard_DS3_v2 (4 vCPU, 14GB)</option>
+                                            <option value="Standard_DS4_v2" data-price="0.378" selected>Standard_DS4_v2 (8 vCPU, 28GB)</option>
+                                            <option value="Standard_F8s_v2" data-price="0.304">Standard_F8s_v2 (8 vCPU, 16GB)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="databricks-dbu-tier" class="form-label">DBU Tier</label>
+                                        <select class="form-select" id="databricks-dbu-tier">
+                                            <option value="jobs-light" data-price="0.10">Jobs Light ($0.10/DBU)</option>
+                                            <option value="jobs" data-price="0.40" selected>Jobs ($0.40/DBU)</option>
+                                            <option value="all-purpose" data-price="0.55">All-Purpose ($0.55/DBU)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="databricks-runtime-hours" class="form-label">Daily Runtime (Hours)</label>
+                                        <input type="number" class="form-control" id="databricks-runtime-hours" value="8" min="1" max="24">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="databricks-storage" class="form-label">Managed Storage (GB)</label>
+                                        <input type="number" class="form-control" id="databricks-storage" value="500" min="100" max="10000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="databricks-auto-termination" class="form-label">Auto-Termination (Minutes)</label>
+                                        <input type="number" class="form-control" id="databricks-auto-termination" value="10" min="10" max="10000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mt-4">
+                                            <input class="form-check-input" type="checkbox" id="databricks-photon" checked>
+                                            <label class="form-check-label" for="databricks-photon">Photon Engine</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="databricks-ml" checked>
+                                            <label class="form-check-label" for="databricks-ml">ML Runtime</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="storage" role="tabpanel">
+                                <h5>Azure Storage (ADLS Gen2 & ACR)</h5>
+                                <div class="mb-3">
+                                    <button type="button" class="btn-preset" data-service="storage" data-preset="basic">Basic</button>
+                                    <button type="button" class="btn-preset active" data-service="storage" data-preset="standard">Standard</button>
+                                    <button type="button" class="btn-preset" data-service="storage" data-preset="enterprise">Enterprise</button>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="adls-account-count" class="form-label">ADLS Accounts (per environment)</label>
+                                        <input type="number" class="form-control" id="adls-account-count" value="1" min="1" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="adls-hot-storage" class="form-label">Hot Storage (TB)</label>
+                                        <input type="number" class="form-control" id="adls-hot-storage" value="2" min="0.001" max="1000" step="0.1">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="adls-cool-storage" class="form-label">Cool Storage (TB)</label>
+                                        <input type="number" class="form-control" id="adls-cool-storage" value="1" min="0" max="1000" step="0.1">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="adls-archive-storage" class="form-label">Archive Storage (TB)</label>
+                                        <input type="number" class="form-control" id="adls-archive-storage" value="0.5" min="0" max="1000" step="0.1">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="adls-operations" class="form-label">Operations (Millions)</label>
+                                        <input type="number" class="form-control" id="adls-operations" value="2" min="0.001" max="1000" step="0.1">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="adls-redundancy" class="form-label">Redundancy</label>
+                                        <select class="form-select" id="adls-redundancy">
+                                            <option value="lrs">LRS (Locally Redundant)</option>
+                                            <option value="zrs" selected>ZRS (Zone Redundant)</option>
+                                            <option value="grs">GRS (Geo Redundant)</option>
+                                            <option value="ggrs">GGRS (Geo-Zone Redundant)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="container-registry-count" class="form-label">Container Registries</label>
+                                        <input type="number" class="form-control" id="container-registry-count" value="1" min="1" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="container-registry-tier" class="form-label">ACR Tier</label>
+                                        <select class="form-select" id="container-registry-tier">
+                                            <option value="basic">Basic</option>
+                                            <option value="standard" selected>Standard</option>
+                                            <option value="premium">Premium</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="container-registry-storage" class="form-label">ACR Storage (GB)</label>
+                                        <input type="number" class="form-control" id="container-registry-storage" value="100" min="1" max="10000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mt-4">
+                                            <input class="form-check-input" type="checkbox" id="adls-lifecycle" checked>
+                                            <label class="form-check-label" for="adls-lifecycle">Lifecycle Management</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="security" role="tabpanel">
+                                <h5>Security (Entra ID & Key Vault)</h5>
+                                <div class="mb-3">
+                                    <button type="button" class="btn-preset" data-service="security" data-preset="basic">Basic</button>
+                                    <button type="button" class="btn-preset active" data-service="security" data-preset="standard">Standard</button>
+                                    <button type="button" class="btn-preset" data-service="security" data-preset="enterprise">Enterprise</button>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="entra-id-users" class="form-label">Total Users</label>
+                                        <input type="number" class="form-control" id="entra-id-users" value="100" min="1" max="500000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="entra-id-premium" class="form-label">Premium P1 Users</label>
+                                        <input type="number" class="form-control" id="entra-id-premium" value="30" min="0" max="500000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="entra-id-p2" class="form-label">Premium P2 Users</label>
+                                        <input type="number" class="form-control" id="entra-id-p2" value="10" min="0" max="500000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="key-vault-count" class="form-label">Key Vaults (per environment)</label>
+                                        <input type="number" class="form-control" id="key-vault-count" value="1" min="1" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="key-vault-tier" class="form-label">Key Vault Tier</label>
+                                        <select class="form-select" id="key-vault-tier">
+                                            <option value="standard">Standard</option>
+                                            <option value="premium" selected>Premium</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="key-vault-transactions" class="form-label">Transactions (k/month)</label>
+                                        <input type="number" class="form-control" id="key-vault-transactions" value="50" min="1" max="300000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="microsoft-defender" class="form-label">Microsoft Defender</label>
+                                        <select class="form-select" id="microsoft-defender">
+                                            <option value="off">Off</option>
+                                            <option value="on" selected>On (Standard)</option>
+                                            <option value="basic">Basic Plan</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mt-4">
+                                            <input class="form-check-input" type="checkbox" id="key-vault-hsm">
+                                            <label class="form-check-label" for="key-vault-hsm">HSM</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="azure-sentinel" checked>
+                                            <label class="form-check-label" for="azure-sentinel">Azure Sentinel</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="networking" role="tabpanel">
+                                <h5>Networking</h5>
+                                <div class="mb-3">
+                                    <button type="button" class="btn-preset" data-service="networking" data-preset="basic">Basic</button>
+                                    <button type="button" class="btn-preset active" data-service="networking" data-preset="standard">Standard</button>
+                                    <button type="button" class="btn-preset" data-service="networking" data-preset="enterprise">Enterprise</button>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="vnet-count" class="form-label">Virtual Networks</label>
+                                        <input type="number" class="form-control" id="vnet-count" value="1" min="1" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="application-gateway-count" class="form-label">App Gateways</label>
+                                        <input type="number" class="form-control" id="application-gateway-count" value="1" min="0" max="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="application-gateway-tier" class="form-label">App Gateway Tier</label>
+                                        <select class="form-select" id="application-gateway-tier">
+                                            <option value="standard_v2">Standard V2</option>
+                                            <option value="waf_v2" selected>WAF V2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="application-gateway-capacity" class="form-label">Capacity Units</label>
+                                        <input type="number" class="form-control" id="application-gateway-capacity" value="2" min="1" max="125">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="data-transfer" class="form-label">Data Transfer (GB/month)</label>
+                                        <input type="number" class="form-control" id="data-transfer" value="500" min="1" max="10000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="private-endpoints" class="form-label">Private Endpoints</label>
+                                        <input type="number" class="form-control" id="private-endpoints" value="5" min="0" max="1000">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mt-4">
+                                            <input class="form-check-input" type="checkbox" id="networking-env-multiplier" checked>
+                                            <label class="form-check-label" for="networking-env-multiplier">Apply Env Multiplier</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mt-4">
+                                            <input class="form-check-input" type="checkbox" id="cdn-enabled" checked>
+                                            <label class="form-check-label" for="cdn-enabled">Azure CDN</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="traffic-manager" checked>
+                                            <label class="form-check-label" for="traffic-manager">Traffic Manager</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="front-door">
+                                            <label class="form-check-label" for="front-door">Front Door</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button class="btn btn-calculate" id="calculate-btn" type="button">
+                                <i class="bi bi-currency-dollar me-2"></i> Calculate Ballpark Cost
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="total-cost">
+                    <h5 class="mb-0">Estimated Monthly Cost</h5>
+                    <div class="cost-display mt-2" id="total-monthly-cost">$0.00</div>
+                    <div class="cost-breakdown mt-3" id="cost-breakdown-summary"></div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <i class="bi bi-clipboard-data-fill me-2"></i> Results & Export
+                    </div>
+                    <div class="card-body">
+                        <div id="cost-results">
+                            <div class="alert alert-info" role="alert">
+                                Enter your configuration and click "Calculate" to see the estimated cost.
+                            </div>
+                        </div>
+                        <button class="btn btn-export w-100 mt-3" id="export-btn" type="button">
+                            <i class="bi bi-box-arrow-up-right me-2"></i> Export to Markdown
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Export Cost Estimate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Copy the Markdown below to share your cost estimate.</p>
+                    <textarea class="form-control" id="markdown-output" rows="20" readonly></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="copy-markdown-btn">Copy to Clipboard</button>
+                    <span class="ms-3 text-success" id="copy-notification" style="display: none;">Copied!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mb-3">
+                    <p class="mb-2"><strong>Learn more about Azure architecture and MLOps:</strong></p>
+                    <a href="https://www.amazon.com/-/de/dp/B0CVZ1BWPN" target="_blank" class="book-link">
+                        <i class="bi bi-book me-1"></i> IT's not magic, it's architecture
+                    </a>
+                    <a href="https://www.amazon.com/dp/B0FTSY78DR" target="_blank" class="book-link">
+                        <i class="bi bi-robot me-1"></i> MLOps with Databricks on Azure
+                    </a>
+                </div>
+                <div class="col-md-12 text-center">
+                    <p class="mb-1"><small>Disclaimer: This is a ballpark cost calculator. Actual Azure costs may vary.</small></p>
+                    <p class="mb-0"><small>&copy; 2024 Mohammed Brueckner. All rights reserved.</small></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const costResults = document.getElementById('cost-results');
+            const exportBtn = document.getElementById('export-btn');
+            const exportModal = new bootstrap.Modal(document.getElementById('exportModal'));
+            const markdownOutput = document.getElementById('markdown-output');
+            const copyMarkdownBtn = document.getElementById('copy-markdown-btn');
+            const copyNotification = document.getElementById('copy-notification');
+            const environmentCount = document.getElementById('environment-count');
+            const environmentsContainer = document.getElementById('environments-container');
+            
+            let currentResults = null;
+            let selectedLocation = 'europe';
+            let environments = [
+                { name: 'DEV', multiplier: 0.2, color: 'dev' },
+                { name: 'QA', multiplier: 0.3, color: 'qa' },
+                { name: 'STAGING', multiplier: 0.5, color: 'staging' },
+                { name: 'PRE-PROD', multiplier: 0.8, color: 'preprod' },
+                { name: 'PROD', multiplier: 1.0, color: 'prod' }
+            ];
+            
+            const locationMultipliers = {
+                'us': 1.0,
+                'europe': 0.95,
+                'asia': 1.1,
+                'australia': 1.2
+            };
+            
+            const dataTransferPricing = {
+                'us': 0.087,
+                'europe': 0.087,
+                'asia': 0.14,
+                'australia': 0.19
+            };
+            
+            const aksPresets = {
+                basic: { nodeCount: 1, nodeSize: 'Standard_B2s', loadBalancer: 'basic', monitoring: false, spotInstances: '0', uptime: 8, autoscaling: false, nodePools: 0 },
+                standard: { nodeCount: 3, nodeSize: 'Standard_D4s_v3', loadBalancer: 'standard', monitoring: true, spotInstances: '25', uptime: 24, autoscaling: true, nodePools: 1 },
+                enterprise: { nodeCount: 5, nodeSize: 'Standard_D8s_v3', loadBalancer: 'standard', monitoring: true, spotInstances: '50', uptime: 24, autoscaling: true, nodePools: 2 }
+            };
+            
+            const databricksPresets = {
+                light: { clusterCount: 1, nodeCount: 2, nodeType: 'Standard_DS3_v2', dbuTier: 'jobs-light', storage: 100, runtimeHours: 4, autoTermination: '10', photon: true, ml: false },
+                standard: { clusterCount: 2, nodeCount: 3, nodeType: 'Standard_DS4_v2', dbuTier: 'jobs', storage: 500, runtimeHours: 8, autoTermination: '10', photon: true, ml: true },
+                heavy: { clusterCount: 3, nodeCount: 5, nodeType: 'Standard_F8s_v2', dbuTier: 'all-purpose', storage: 1000, runtimeHours: 16, autoTermination: '30', photon: true, ml: true }
+            };
+            
+            const storagePresets = {
+                basic: { hotStorage: 0.5, coolStorage: 0.2, operations: 0.5, registryTier: 'basic', registryStorage: 20, redundancy: 'lrs', lifecycle: true, archiveStorage: 0 },
+                standard: { hotStorage: 2, coolStorage: 1, operations: 2, registryTier: 'standard', registryStorage: 100, redundancy: 'zrs', lifecycle: true, archiveStorage: 0.5 },
+                enterprise: { hotStorage: 10, coolStorage: 5, operations: 10, registryTier: 'premium', registryStorage: 500, redundancy: 'grs', lifecycle: true, archiveStorage: 2 }
+            };
+            
+            const securityPresets = {
+                basic: { users: 20, premiumUsers: 5, keyVaultTier: 'standard', transactions: 10, p2Users: 0, hsm: false, defender: 'off', sentinel: false },
+                standard: { users: 100, premiumUsers: 30, keyVaultTier: 'premium', transactions: 50, p2Users: 10, hsm: false, defender: 'on', sentinel: true },
+                enterprise: { users: 500, premiumUsers: 200, keyVaultTier: 'premium', transactions: 200, p2Users: 50, hsm: true, defender: 'on', sentinel: true }
+            };
+            
+            const networkingPresets = {
+                basic: { gatewayTier: 'standard_v2', capacity: 1, dataTransfer: 100, privateEndpoints: 0, cdn: false, trafficManager: false, frontDoor: false },
+                standard: { gatewayTier: 'waf_v2', capacity: 2, dataTransfer: 500, privateEndpoints: 5, cdn: true, trafficManager: true, frontDoor: false },
+                enterprise: { gatewayTier: 'waf_v2', capacity: 5, dataTransfer: 2000, privateEndpoints: 20, cdn: true, trafficManager: true, frontDoor: true }
+            };
+            
+            function updateEnvironments() {
+                const count = parseInt(environmentCount.value);
+                environmentsContainer.innerHTML = '';
+                
+                for (let i = 0; i < count; i++) {
+                    const env = environments[i];
+                    const envDiv = document.createElement('div');
+                    envDiv.className = `environment-config ${env.color}`;
+                    envDiv.innerHTML = `
+                        <div class="environment-multiplier">
+                            <label for="env-${i}" class="form-label me-2">${env.name}:</label>
+                            <input type="number" class="form-control env-multiplier-input" id="env-${i}" value="${env.multiplier}" min="0" max="1" step="0.1">
+                            <div class="invalid-feedback">Enter 0-1</div>
+                            <span class="ms-2 env-percentage-text">(${Math.round(env.multiplier * 100)}%)</span>
+                        </div>
+                    `;
+                    environmentsContainer.appendChild(envDiv);
+                }
+                
+                document.querySelectorAll('.env-multiplier-input').forEach(input => {
+                    input.addEventListener('input', function() {
+                        const envIndex = parseInt(this.id.split('-')[1]);
+                        const percentage = Math.round(this.value * 100);
+                        this.nextElementSibling.nextElementSibling.textContent = `(${percentage}%)`;
+                        environments[envIndex].multiplier = parseFloat(this.value);
+                    });
+                });
+            }
+            
+            document.querySelectorAll('input[name="location"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    selectedLocation = this.value;
+                });
+            });
+            
+            function applyAksPreset(presetName) {
+                const p = aksPresets[presetName];
+                document.getElementById('aks-node-count').value = p.nodeCount;
+                document.getElementById('aks-node-size').value = p.nodeSize;
+                document.getElementById('aks-load-balancer').value = p.loadBalancer;
+                document.getElementById('aks-monitoring').checked = p.monitoring;
+                document.getElementById('aks-spot-instances').value = p.spotInstances;
+                document.getElementById('aks-uptime').value = p.uptime;
+                document.getElementById('aks-autoscaling').checked = p.autoscaling;
+                document.getElementById('aks-node-pools').value = p.nodePools;
+            }
+            
+            function applyDatabricksPreset(presetName) {
+                const p = databricksPresets[presetName];
+                document.getElementById('databricks-cluster-count').value = p.clusterCount;
+                document.getElementById('databricks-node-count').value = p.nodeCount;
+                document.getElementById('databricks-node-type').value = p.nodeType;
+                document.getElementById('databricks-dbu-tier').value = p.dbuTier;
+                document.getElementById('databricks-storage').value = p.storage;
+                document.getElementById('databricks-runtime-hours').value = p.runtimeHours;
+                document.getElementById('databricks-auto-termination').value = p.autoTermination;
+                document.getElementById('databricks-photon').checked = p.photon;
+                document.getElementById('databricks-ml').checked = p.ml;
+            }
+            
+            function applyStoragePreset(presetName) {
+                const p = storagePresets[presetName];
+                document.getElementById('adls-hot-storage').value = p.hotStorage;
+                document.getElementById('adls-cool-storage').value = p.coolStorage;
+                document.getElementById('adls-operations').value = p.operations;
+                document.getElementById('container-registry-tier').value = p.registryTier;
+                document.getElementById('container-registry-storage').value = p.registryStorage;
+                document.getElementById('adls-redundancy').value = p.redundancy;
+                document.getElementById('adls-lifecycle').checked = p.lifecycle;
+                document.getElementById('adls-archive-storage').value = p.archiveStorage;
+            }
+            
+            function applySecurityPreset(presetName) {
+                const p = securityPresets[presetName];
+                document.getElementById('entra-id-users').value = p.users;
+                document.getElementById('entra-id-premium').value = p.premiumUsers;
+                document.getElementById('key-vault-tier').value = p.keyVaultTier;
+                document.getElementById('key-vault-transactions').value = p.transactions;
+                document.getElementById('entra-id-p2').value = p.p2Users;
+                document.getElementById('key-vault-hsm').checked = p.hsm;
+                document.getElementById('microsoft-defender').value = p.defender;
+                document.getElementById('azure-sentinel').checked = p.sentinel;
+            }
+            
+            function applyNetworkingPreset(presetName) {
+                const p = networkingPresets[presetName];
+                document.getElementById('application-gateway-tier').value = p.gatewayTier;
+                document.getElementById('application-gateway-capacity').value = p.capacity;
+                document.getElementById('data-transfer').value = p.dataTransfer;
+                document.getElementById('private-endpoints').value = p.privateEndpoints;
+                document.getElementById('cdn-enabled').checked = p.cdn;
+                document.getElementById('traffic-manager').checked = p.trafficManager;
+                document.getElementById('front-door').checked = p.frontDoor;
+            }
+            
+            function validateInputs() {
+                let isValid = true;
+                document.querySelectorAll('input[type="number"]').forEach(input => {
+                    if (input.disabled) {
+                        input.classList.remove('is-invalid');
+                        return;
+                    }
+                    const min = parseFloat(input.getAttribute('min'));
+                    const max = parseFloat(input.getAttribute('max'));
+                    const value = parseFloat(input.value);
+                    if (isNaN(value) || value < min || value > max) {
+                        input.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                });
+                return isValid;
+            }
+            
+            function safeParseFloat(value, defaultValue = 0) {
+                const parsed = parseFloat(value);
+                return isNaN(parsed) ? defaultValue : parsed;
+            }
+            
+            function safeParseInt(value, defaultValue = 0) {
+                const parsed = parseInt(value, 10);
+                return isNaN(parsed) ? defaultValue : parsed;
+            }
+            
+            function roundToTwoDecimals(value) {
+                return Math.round((value + Number.EPSILON) * 100) / 100;
+            }
+            
+            updateEnvironments();
+            
+            document.querySelectorAll('.btn-preset').forEach(button => {
+                button.addEventListener('click', function() {
+                    const presetName = this.getAttribute('data-preset');
+                    const serviceName = this.getAttribute('data-service');
+                    
+                    this.parentElement.querySelectorAll('.btn-preset').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    switch(serviceName) {
+                        case 'aks': applyAksPreset(presetName); break;
+                        case 'databricks': applyDatabricksPreset(presetName); break;
+                        case 'storage': applyStoragePreset(presetName); break;
+                        case 'security': applySecurityPreset(presetName); break;
+                        case 'networking': applyNetworkingPreset(presetName); break;
+                    }
+                });
+            });
+            
+            environmentCount.addEventListener('change', updateEnvironments);
+            
+            exportBtn.addEventListener('click', function() {
+                if (!currentResults) {
+                    alert('Please calculate costs first.');
+                    return;
+                }
+                exportModal.show();
+            });
+            
+            calculateBtn.addEventListener('click', function() {
+                if (!validateInputs()) {
+                    costResults.innerHTML = '<div class="alert alert-danger"><i class="bi bi-exclamation-triangle"></i> Please correct input errors.</div>';
+                    return;
+                }
+                
+                costResults.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary"></div><p class="mt-3">Calculating...</p></div>';
+                
+                setTimeout(calculateCosts, 800);
+            });
+            
+            copyMarkdownBtn.addEventListener('click', function() {
+                const text = markdownOutput.value;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyNotification.style.display = 'inline';
+                    setTimeout(() => copyNotification.style.display = 'none', 2000);
+                }).catch(() => {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    copyNotification.style.display = 'inline';
+                    setTimeout(() => copyNotification.style.display = 'none', 2000);
+                });
+            });
+            
+            function calculateCosts() {
+                const count = safeParseInt(environmentCount.value, 3);
+                const envMultipliers = [];
+                
+                for (let i = 0; i < count; i++) {
+                    const multiplier = safeParseFloat(document.getElementById(`env-${i}`).value, 0.2);
+                    envMultipliers.push(multiplier);
+                    environments[i].multiplier = multiplier;
+                }
+                
+                const locationMultiplier = locationMultipliers[selectedLocation];
+                
+                // AKS Calculation
+                const aksClusterCount = safeParseInt(document.getElementById('aks-cluster-count').value, 1);
+                const aksNodeCount = safeParseInt(document.getElementById('aks-node-count').value, 3);
+                const aksNodePools = safeParseInt(document.getElementById('aks-node-pools').value, 0);
+                const aksNodeSize = document.getElementById('aks-node-size');
+                const aksNodePrice = safeParseFloat(aksNodeSize.options[aksNodeSize.selectedIndex].getAttribute('data-price'), 0.208) * locationMultiplier;
+                const aksLoadBalancer = document.getElementById('aks-load-balancer');
+                const aksLoadBalancerPrice = safeParseFloat(aksLoadBalancer.options[aksLoadBalancer.selectedIndex].getAttribute('data-price'), 18.60);
+                const aksMonitoring = document.getElementById('aks-monitoring').checked;
+                const aksSpotInstances = safeParseInt(document.getElementById('aks-spot-instances').value, 0);
+                const aksUptime = safeParseInt(document.getElementById('aks-uptime').value, 24);
+                
+                const spotSavings = 1 - ((aksSpotInstances / 100) * 0.7);
+                const adjustedNodePrice = aksNodePrice * spotSavings;
+                const totalNodes = aksNodeCount + aksNodePools;
+                
+                let aksTotalCost = 0;
+                for (let i = 0; i < count; i++) {
+                    const m = envMultipliers[i];
+                    aksTotalCost += aksClusterCount * totalNodes * adjustedNodePrice * aksUptime * 30 * m;
+                    aksTotalCost += aksClusterCount * aksLoadBalancerPrice * m;
+                    if (aksMonitoring) aksTotalCost += aksClusterCount * 10 * m;
+                }
+                aksTotalCost = roundToTwoDecimals(aksTotalCost);
+
+                // Databricks Calculation
+                const databricksWorkspaceCount = safeParseInt(document.getElementById('databricks-workspace-count').value, 1);
+                const databricksClusterCount = safeParseInt(document.getElementById('databricks-cluster-count').value, 2);
+                const databricksNodeCount = safeParseInt(document.getElementById('databricks-node-count').value, 3);
+                const databricksNodeType = document.getElementById('databricks-node-type');
+                const databricksNodePrice = safeParseFloat(databricksNodeType.options[databricksNodeType.selectedIndex].getAttribute('data-price'), 0.378) * locationMultiplier;
+                const databricksDbuTier = document.getElementById('databricks-dbu-tier');
+                const databricksDbuPrice = safeParseFloat(databricksDbuTier.options[databricksDbuTier.selectedIndex].getAttribute('data-price'), 0.40);
+                const databricksRuntimeHours = safeParseInt(document.getElementById('databricks-runtime-hours').value, 8);
+                const databricksStorage = safeParseInt(document.getElementById('databricks-storage').value, 500);
+                const databricksPhoton = document.getElementById('databricks-photon').checked;
+                const databricksMl = document.getElementById('databricks-ml').checked;
+
+                let databricksTotalCost = 0;
+                for (let i = 0; i < count; i++) {
+                    const m = envMultipliers[i];
+                    let dbuCost = databricksWorkspaceCount * databricksClusterCount * databricksNodeCount * databricksRuntimeHours * 30 * databricksDbuPrice * m;
+                    if (databricksPhoton) dbuCost *= 1.1;
+                    if (databricksMl) dbuCost *= 1.1;
+                    databricksTotalCost += dbuCost;
+                    databricksTotalCost += databricksWorkspaceCount * databricksClusterCount * databricksNodeCount * databricksNodePrice * databricksRuntimeHours * 30 * m;
+                    databricksTotalCost += databricksWorkspaceCount * databricksStorage * 0.02 * m;
+                }
+                databricksTotalCost = roundToTwoDecimals(databricksTotalCost);
+
+                // Storage Calculation
+                const adlsAccountCount = safeParseInt(document.getElementById('adls-account-count').value, 1);
+                const adlsHotStorage = safeParseFloat(document.getElementById('adls-hot-storage').value, 2);
+                const adlsCoolStorage = safeParseFloat(document.getElementById('adls-cool-storage').value, 1);
+                const adlsArchiveStorage = safeParseFloat(document.getElementById('adls-archive-storage').value, 0.5);
+                const adlsOperations = safeParseFloat(document.getElementById('adls-operations').value, 2);
+                const adlsRedundancy = document.getElementById('adls-redundancy').value;
+                const containerRegistryCount = safeParseInt(document.getElementById('container-registry-count').value, 1);
+                const containerRegistryTier = document.getElementById('container-registry-tier').value;
+                const containerRegistryStorage = safeParseInt(document.getElementById('container-registry-storage').value, 100);
+
+                let redundancyMult = 1.0;
+                if (adlsRedundancy === 'zrs') redundancyMult = 1.2;
+                if (adlsRedundancy === 'grs') redundancyMult = 1.5;
+                if (adlsRedundancy === 'ggrs') redundancyMult = 1.8;
+
+                const adlsHotPrice = 0.02 * 1024 * locationMultiplier * redundancyMult;
+                const adlsCoolPrice = 0.01 * 1024 * locationMultiplier * redundancyMult;
+                const adlsArchivePrice = 0.002 * 1024 * locationMultiplier * redundancyMult;
+                const adlsOpsPrice = 0.0004 * 1000 * locationMultiplier;
+                
+                let acrPrice = 0;
+                if (containerRegistryTier === 'basic') acrPrice = 5;
+                if (containerRegistryTier === 'standard') acrPrice = 15;
+                if (containerRegistryTier === 'premium') acrPrice = 50;
+                
+                let storageTotalCost = 0;
+                for (let i = 0; i < count; i++) {
+                    const m = envMultipliers[i];
+                    storageTotalCost += adlsAccountCount * (adlsHotStorage * adlsHotPrice + adlsCoolStorage * adlsCoolPrice + adlsArchiveStorage * adlsArchivePrice) * m;
+                    storageTotalCost += adlsAccountCount * adlsOperations * adlsOpsPrice * m;
+                    storageTotalCost += containerRegistryCount * (acrPrice + containerRegistryStorage * 0.003) * m;
+                }
+                storageTotalCost = roundToTwoDecimals(storageTotalCost);
+
+                // Security Calculation
+                const entraIdUsers = safeParseInt(document.getElementById('entra-id-users').value, 100);
+                const entraIdPremium = safeParseInt(document.getElementById('entra-id-premium').value, 30);
+                const entraIdP2 = safeParseInt(document.getElementById('entra-id-p2').value, 10);
+                const keyVaultCount = safeParseInt(document.getElementById('key-vault-count').value, 1);
+                const keyVaultTier = document.getElementById('key-vault-tier').value;
+                const keyVaultTransactions = safeParseFloat(document.getElementById('key-vault-transactions').value, 50);
+                const defenderValue = document.getElementById('microsoft-defender').value;
+                const sentinelOn = document.getElementById('azure-sentinel').checked;
+
+                const entraIdP1Price = 6 * locationMultiplier;
+                const entraIdP2Price = 9 * locationMultiplier;
+                const kvPrice = keyVaultTier === 'premium' ? 0.005 * 1000 * locationMultiplier : 0.003 * 1000 * locationMultiplier;
+                const defenderPrice = defenderValue === 'basic' ? 5 * locationMultiplier : (defenderValue === 'on' ? 15 * locationMultiplier : 0);
+                const sentinelPrice = 2.46 * 30 * locationMultiplier;
+
+                let securityTotalCost = 0;
+                for (let i = 0; i < count; i++) {
+                    const m = envMultipliers[i];
+                    securityTotalCost += (entraIdPremium * entraIdP1Price + entraIdP2 * entraIdP2Price) * m;
+                    securityTotalCost += keyVaultCount * keyVaultTransactions * kvPrice * m;
+                    if (defenderValue !== 'off') securityTotalCost += aksClusterCount * totalNodes * defenderPrice * m;
+                    if (sentinelOn) securityTotalCost += sentinelPrice * m;
+                }
+                securityTotalCost = roundToTwoDecimals(securityTotalCost);
+
+                // Networking Calculation
+                const vnetCount = safeParseInt(document.getElementById('vnet-count').value, 1);
+                const appGatewayCount = safeParseInt(document.getElementById('application-gateway-count').value, 1);
+                const appGatewayTier = document.getElementById('application-gateway-tier').value;
+                const appGatewayCapacity = safeParseInt(document.getElementById('application-gateway-capacity').value, 2);
+                const dataTransfer = safeParseFloat(document.getElementById('data-transfer').value, 500);
+                const privateEndpoints = safeParseInt(document.getElementById('private-endpoints').value, 5);
+                const networkingEnvMult = document.getElementById('networking-env-multiplier').checked;
+                const cdnEnabled = document.getElementById('cdn-enabled').checked;
+                const trafficManagerEnabled = document.getElementById('traffic-manager').checked;
+                const frontDoorEnabled = document.getElementById('front-door').checked;
+
+                let appGwBase = 0, appGwCapPrice = 0;
+                if (appGatewayTier === 'standard_v2') { appGwBase = 24.50 * locationMultiplier; appGwCapPrice = 0.008 * locationMultiplier; }
+                else if (appGatewayTier === 'waf_v2') { appGwBase = 35.00 * locationMultiplier; appGwCapPrice = 0.012 * locationMultiplier; }
+                
+                const appGwCapCost = appGwCapPrice * appGatewayCapacity * 730;
+                const dataTransferPrice = dataTransferPricing[selectedLocation];
+                const pePrice = 7.30 * locationMultiplier;
+
+                let networkingTotalCost = 0;
+                for (let i = 0; i < count; i++) {
+                    const m = networkingEnvMult ? envMultipliers[i] : 1.0;
+                    networkingTotalCost += appGatewayCount * (appGwBase + appGwCapCost) * m;
+                    networkingTotalCost += privateEndpoints * pePrice * m;
+                }
+                networkingTotalCost += dataTransfer * dataTransferPrice;
+                if (cdnEnabled) networkingTotalCost += 50 * locationMultiplier;
+                if (trafficManagerEnabled) networkingTotalCost += 5 * locationMultiplier;
+                if (frontDoorEnabled) networkingTotalCost += 35 * locationMultiplier;
+                networkingTotalCost = roundToTwoDecimals(networkingTotalCost);
+
+                const totalMonthlyCost = roundToTwoDecimals(aksTotalCost + databricksTotalCost + storageTotalCost + securityTotalCost + networkingTotalCost);
+
+                currentResults = {
+                    totalMonthlyCost,
+                    aksTotalCost,
+                    databricksTotalCost,
+                    storageTotalCost,
+                    securityTotalCost,
+                    networkingTotalCost,
+                    environments: environments.slice(0, count),
+                    location: selectedLocation
+                };
+
+                renderResults(currentResults);
+                generateMarkdown(currentResults);
+            }
+
+            function renderResults(results) {
+                document.getElementById('total-monthly-cost').textContent = `${results.totalMonthlyCost.toLocaleString('en-US')}`;
+
+                let breakdownHtml = `
+                    <p class="mb-1"><strong>Breakdown:</strong></p>
+                    <div class="cost-per-service"><span>AKS</span><span>${results.aksTotalCost.toLocaleString('en-US')}</span></div>
+                    <div class="cost-per-service"><span>Databricks</span><span>${results.databricksTotalCost.toLocaleString('en-US')}</span></div>
+                    <div class="cost-per-service"><span>Storage</span><span>${results.storageTotalCost.toLocaleString('en-US')}</span></div>
+                    <div class="cost-per-service"><span>Security</span><span>${results.securityTotalCost.toLocaleString('en-US')}</span></div>
+                    <div class="cost-per-service"><span>Networking</span><span>${results.networkingTotalCost.toLocaleString('en-US')}</span></div>
+                `;
+                document.getElementById('cost-breakdown-summary').innerHTML = breakdownHtml;
+
+                let envHtml = '<h5 class="mt-4">Per Environment</h5><ul class="list-group">';
+                const totalPerService = results.aksTotalCost + results.databricksTotalCost + results.storageTotalCost + results.securityTotalCost + results.networkingTotalCost;
+                
+                results.environments.forEach(env => {
+                    const envCost = roundToTwoDecimals(totalPerService * env.multiplier);
+                    envHtml += `<li class="list-group-item d-flex justify-content-between align-items-center ${env.color}">
+                        <strong>${env.name} (${Math.round(env.multiplier * 100)}%)</strong>
+                        <span class="badge bg-primary rounded-pill">${envCost.toLocaleString('en-US')}</span>
+                    </li>`;
+                });
+                envHtml += '</ul>';
+
+                costResults.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle-fill"></i> Complete!</div>' + envHtml;
+            }
+
+            function generateMarkdown(results) {
+                let md = `# Azure Data & ML Platform Cost Estimate\n\n`;
+                md += `**Generated:** ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}\n\n`;
+                md += `## 💰 Total Monthly Cost: ${results.totalMonthlyCost.toLocaleString('en-US')}\n\n`;
+                md += `---\n\n`;
+                
+                md += `## 📊 Service Breakdown\n\n`;
+                md += `| Service | Monthly Cost |\n| :--- | ---: |\n`;
+                md += `| AKS | ${results.aksTotalCost.toLocaleString('en-US')} |\n`;
+                md += `| Databricks | ${results.databricksTotalCost.toLocaleString('en-US')} |\n`;
+                md += `| Storage | ${results.storageTotalCost.toLocaleString('en-US')} |\n`;
+                md += `| Security | ${results.securityTotalCost.toLocaleString('en-US')} |\n`;
+                md += `| Networking | ${results.networkingTotalCost.toLocaleString('en-US')} |\n\n`;
+
+                md += `## 🌍 Environment Config\n\n`;
+                md += `**Environments:** ${results.environments.length} | **Region:** ${results.location.toUpperCase()}\n\n`;
+                md += `| Environment | Multiplier | Cost |\n| :--- | :---: | ---: |\n`;
+                
+                const totalPerService = results.aksTotalCost + results.databricksTotalCost + results.storageTotalCost + results.securityTotalCost + results.networkingTotalCost;
+                results.environments.forEach(env => {
+                    const envCost = roundToTwoDecimals(totalPerService * env.multiplier);
+                    md += `| ${env.name} | ${Math.round(env.multiplier * 100)}% | ${envCost.toLocaleString('en-US')} |\n`;
+                });
+
+                md += `\n---\n\n## ⚙️ Configuration Details\n\n`;
+                
+                md += `### AKS\n`;
+                const aksNodeSize = document.getElementById('aks-node-size');
+                md += `- Clusters: ${document.getElementById('aks-cluster-count').value}\n`;
+                md += `- Nodes: ${document.getElementById('aks-node-count').value}\n`;
+                md += `- VM: ${aksNodeSize.options[aksNodeSize.selectedIndex].text}\n`;
+                md += `- Load Balancer: ${document.getElementById('aks-load-balancer').options[document.getElementById('aks-load-balancer').selectedIndex].text}\n`;
+                md += `- Uptime: ${document.getElementById('aks-uptime').value}h/day\n`;
+                md += `- Spot: ${document.getElementById('aks-spot-instances').value}%\n`;
+                md += `- Monitoring: ${document.getElementById('aks-monitoring').checked ? 'Yes' : 'No'}\n\n`;
+                
+                md += `### Databricks\n`;
+                md += `- Workspaces: ${document.getElementById('databricks-workspace-count').value}\n`;
+                md += `- Clusters: ${document.getElementById('databricks-cluster-count').value}\n`;
+                md += `- Nodes: ${document.getElementById('databricks-node-count').value}\n`;
+                md += `- VM: ${document.getElementById('databricks-node-type').options[document.getElementById('databricks-node-type').selectedIndex].text}\n`;
+                md += `- DBU: ${document.getElementById('databricks-dbu-tier').options[document.getElementById('databricks-dbu-tier').selectedIndex].text}\n`;
+                md += `- Runtime: ${document.getElementById('databricks-runtime-hours').value}h/day\n`;
+                md += `- Storage: ${document.getElementById('databricks-storage').value} GB\n`;
+                md += `- Auto-term: ${document.getElementById('databricks-auto-termination').value} min\n`;
+                md += `- Photon: ${document.getElementById('databricks-photon').checked ? 'Yes' : 'No'}\n`;
+                md += `- ML: ${document.getElementById('databricks-ml').checked ? 'Yes' : 'No'}\n\n`;
+                
+                md += `### Storage\n`;
+                md += `- ADLS Accounts: ${document.getElementById('adls-account-count').value}\n`;
+                md += `- Hot: ${document.getElementById('adls-hot-storage').value} TB\n`;
+                md += `- Cool: ${document.getElementById('adls-cool-storage').value} TB\n`;
+                md += `- Archive: ${document.getElementById('adls-archive-storage').value} TB\n`;
+                md += `- Operations: ${document.getElementById('adls-operations').value}M\n`;
+                md += `- Redundancy: ${document.getElementById('adls-redundancy').options[document.getElementById('adls-redundancy').selectedIndex].text}\n`;
+                md += `- ACR: ${document.getElementById('container-registry-tier').options[document.getElementById('container-registry-tier').selectedIndex].text} (${document.getElementById('container-registry-storage').value} GB)\n\n`;
+                
+                md += `### Security\n`;
+                md += `- Users: ${document.getElementById('entra-id-users').value}\n`;
+                md += `- P1: ${document.getElementById('entra-id-premium').value}\n`;
+                md += `- P2: ${document.getElementById('entra-id-p2').value}\n`;
+                md += `- Key Vaults: ${document.getElementById('key-vault-count').value}\n`;
+                md += `- KV Tier: ${document.getElementById('key-vault-tier').options[document.getElementById('key-vault-tier').selectedIndex].text}\n`;
+                md += `- Transactions: ${document.getElementById('key-vault-transactions').value}k\n`;
+                md += `- Defender: ${document.getElementById('microsoft-defender').options[document.getElementById('microsoft-defender').selectedIndex].text}\n`;
+                md += `- Sentinel: ${document.getElementById('azure-sentinel').checked ? 'Yes' : 'No'}\n\n`;
+                
+                md += `### Networking\n`;
+                md += `- VNets: ${document.getElementById('vnet-count').value}\n`;
+                md += `- App Gateways: ${document.getElementById('application-gateway-count').value}\n`;
+                md += `- AG Tier: ${document.getElementById('application-gateway-tier').options[document.getElementById('application-gateway-tier').selectedIndex].text}\n`;
+                md += `- Capacity: ${document.getElementById('application-gateway-capacity').value}\n`;
+                md += `- Data Transfer: ${document.getElementById('data-transfer').value} GB\n`;
+                md += `- Private Endpoints: ${document.getElementById('private-endpoints').value}\n`;
+                md += `- CDN: ${document.getElementById('cdn-enabled').checked ? 'Yes' : 'No'}\n`;
+                md += `- Traffic Manager: ${document.getElementById('traffic-manager').checked ? 'Yes' : 'No'}\n`;
+                md += `- Front Door: ${document.getElementById('front-door').checked ? 'Yes' : 'No'}\n\n`;
+
+                md += `---\n\n`;
+                md += `## 📚 Learn More\n\n`;
+                md += `Building cloud platforms requires solid architecture principles. Check out:\n\n`;
+                md += `- **[IT's not magic, it's architecture](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** - Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI\n`;
+                md += `- **[MLOps with Databricks on Azure End-to-End](https://www.amazon.com/dp/B0FTSY78DR)** - Building production-grade MLOps systems\n\n`;
+                md += `*Disclaimer: Ballpark estimate for ${results.location.toUpperCase()} region. Actual costs may vary.*\n`;
+
+                markdownOutput.value = md;
+            }
+        });
+    </script>
+</body>
+</html>
