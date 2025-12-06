@@ -1,4 +1,6 @@
-# 📘 [Check out my book on Amazon for everything MLOps with Databricks →](https://www.amazon.com/dp/B0FTSY78DR)
+## [Check out my book on Amazon for everything MLOps with Databricks →](https://www.amazon.com/dp/B0FTSY78DR)
+
+### [Need a Ballpark Cost Estimate? Try the Azure Data & ML Platform Cost Calculator →](./cost-calculator/azure-cost-calculator.html)
 
 ---
 
