@@ -1242,6 +1242,13 @@
                 md += `- Front Door: ${document.getElementById('front-door').checked ? 'Yes' : 'No'}\n\n`;
 
                 md += `---\n\n`;
+                md += `## ⚠️ Important Limitations\n\n`;
+                md += `This calculator focuses on the core, high-cost drivers (Compute, Storage, and essential Networking/Security). To keep the estimate a true "ballpark," it intentionally omits other high-cost components that are critical for a production-ready platform. Please budget separately for services such as:\n\n`;
+                md += `*   **Azure API Management (APIM):** Essential for API governance, security, and publishing of Databricks APIs. A production-ready instance can add a significant fixed cost (hundreds to thousands of dollars per month).\n`;
+                md += `*   **Azure DevOps/GitHub Actions:** The cost of your CI/CD pipelines for automated deployment.\n`;
+                md += `*   **Monitoring and Logging:** Advanced tools like Azure Monitor Log Analytics beyond the free tier.\n\n`;
+                md += `This estimate is a starting point, not the finish line! Always consult the official Azure Pricing Calculator for final figures.\n\n`;
+                md += `---\n\n`;
                 md += `## 📚 Learn More\n\n`;
                 md += `Building cloud platforms requires solid architecture principles. Check out:\n\n`;
                 md += `- **[IT's not magic, it's architecture](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** - Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI\n`;
