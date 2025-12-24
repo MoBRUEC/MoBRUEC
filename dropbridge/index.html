@@ -801,21 +801,48 @@
                 this.localPeer = new RTCPeerConnection({
                     iceServers: [
                         { urls: "stun:stun.l.google.com:19302" },
-                        { urls: "stun:freestun.net:3479" },
+                        { urls: "stun:stun1.l.google.com:19302" },
+                        { urls: "stun:stun2.l.google.com:19302" },
+                        { urls: "stun:stun3.l.google.com:19302" },
+                        { urls: "stun:stun4.l.google.com:19302" },
                         {
-                            urls: "turn:freestun.net:3479",
-                            username: "free",
-                            credential: "free",
+                            urls: "turn:openrelay.metered.ca:80",
+                            username: "openrelayproject",
+                            credential: "openrelayproject",
+                        },
+                        {
+                            urls: "turn:openrelay.metered.ca:443",
+                            username: "openrelayproject",
+                            credential: "openrelayproject",
+                        },
+                        {
+                            urls: "turn:openrelay.metered.ca:443?transport=tcp",
+                            username: "openrelayproject",
+                            credential: "openrelayproject",
                         },
                     ],
                 });
 
                 this.localPeer.onicecandidate = (event) => {
                     if (event.candidate && this.remotePeerId) {
+                        console.log('Sending ICE candidate:', event.candidate.type);
                         this.socket.emit('ice-candidate', {
                             to: this.remotePeerId,
                             candidate: event.candidate
                         });
+                    } else if (!event.candidate) {
+                        console.log('ICE gathering complete');
+                    }
+                };
+
+                this.localPeer.onicegatheringstatechange = () => {
+                    console.log('ICE gathering state:', this.localPeer.iceGatheringState);
+                };
+
+                this.localPeer.oniceconnectionstatechange = () => {
+                    console.log('ICE connection state:', this.localPeer.iceConnectionState);
+                    if (this.localPeer.iceConnectionState === 'failed') {
+                        this.showToast('ICE connection failed. Please try again.', 'error');
                     }
                 };
 
