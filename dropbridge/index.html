@@ -715,6 +715,10 @@
                 this.maxFileSize = 50 * 1024 * 1024;
                 this.peerId = null;
                 this.remotePeerId = null;
+                this.iceCandidateBuffer = []; // Buffer for early ICE candidates
+                this.connectionAttempts = 0;
+                this.maxRetries = 1;
+                this.candidateTypes = new Set(); // Track candidate types for diagnostics
             }
 
             initializeElements() {
@@ -758,6 +762,20 @@
                     console.log('Received offer from peer:', data.from);
                     try {
                         await this.localPeer.setRemoteDescription(new RTCSessionDescription(data.offer));
+                        
+                        // Process buffered ICE candidates
+                        if (this.iceCandidateBuffer.length > 0) {
+                            console.log(`Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`);
+                            for (const candidate of this.iceCandidateBuffer) {
+                                try {
+                                    await this.localPeer.addIceCandidate(new RTCIceCandidate(candidate));
+                                } catch (e) {
+                                    console.warn('Error adding buffered candidate:', e);
+                                }
+                            }
+                            this.iceCandidateBuffer = [];
+                        }
+                        
                         const answer = await this.localPeer.createAnswer();
                         await this.localPeer.setLocalDescription(answer);
                         
@@ -792,13 +810,17 @@
                 });
 
                 this.socket.on('ice-candidate', async (data) => {
-                    console.log('Received ICE candidate from peer:', data.candidate);
+                    console.log('Received ICE candidate from peer');
                     try {
-                        if (data.candidate && this.localPeer.remoteDescription) {
-                            await this.localPeer.addIceCandidate(new RTCIceCandidate(data.candidate));
-                            console.log('ICE candidate added successfully');
-                        } else if (!this.localPeer.remoteDescription) {
-                            console.warn('Cannot add ICE candidate - no remote description set yet');
+                        if (data.candidate) {
+                            // Buffer candidates if remote description not set yet
+                            if (!this.localPeer.remoteDescription) {
+                                console.log('Buffering ICE candidate (no remote description yet)');
+                                this.iceCandidateBuffer.push(data.candidate);
+                            } else {
+                                await this.localPeer.addIceCandidate(new RTCIceCandidate(data.candidate));
+                                console.log('ICE candidate added successfully');
+                            }
                         }
                     } catch (error) {
                         console.error('Error adding ICE candidate:', error);
@@ -834,13 +856,23 @@
 
                 this.localPeer.onicecandidate = (event) => {
                     if (event.candidate && this.remotePeerId) {
-                        console.log('Sending ICE candidate:', event.candidate.type);
+                        // Track candidate types for diagnostics
+                        if (event.candidate.candidate) {
+                            const candidateStr = event.candidate.candidate;
+                            if (candidateStr.includes('typ host')) this.candidateTypes.add('host');
+                            if (candidateStr.includes('typ srflx')) this.candidateTypes.add('srflx');
+                            if (candidateStr.includes('typ relay')) this.candidateTypes.add('relay');
+                        }
+                        
+                        console.log('Sending ICE candidate:', event.candidate.type, 
+                                    'Types so far:', Array.from(this.candidateTypes));
                         this.socket.emit('ice-candidate', {
                             to: this.remotePeerId,
                             candidate: event.candidate
                         });
                     } else if (!event.candidate) {
-                        console.log('ICE gathering complete');
+                        console.log('ICE gathering complete. Candidate types:', Array.from(this.candidateTypes));
+                        this.diagnoseNetworkConditions();
                     }
                 };
 
@@ -851,7 +883,9 @@
                 this.localPeer.oniceconnectionstatechange = () => {
                     console.log('ICE connection state:', this.localPeer.iceConnectionState);
                     if (this.localPeer.iceConnectionState === 'failed') {
-                        this.showToast('ICE connection failed. Please try again.', 'error');
+                        this.handleConnectionFailure();
+                    } else if (this.localPeer.iceConnectionState === 'connected') {
+                        this.connectionAttempts = 0; // Reset on success
                     }
                 };
 
