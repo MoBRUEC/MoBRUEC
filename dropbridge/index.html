@@ -582,6 +582,9 @@
                 <i class="fas fa-circle"></i>
                 <span>Not connected to peer</span>
             </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; font-size: 0.9rem; color: var(--error-color);">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Two tabs on the same device <strong>cannot</strong> connect. Use two different devices (phones, laptops, tablets).
+            </div>
         </div>
 
         <div class="connection-grid">
@@ -693,6 +696,19 @@
                 <div class="step-number">5</div>
                 <div class="step-text">Once connected, you can securely transfer files between devices!</div>
             </div>
+            
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px;">
+                <h4 style="color: var(--warning-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-exclamation-triangle"></i> Connection Tips
+                </h4>
+                <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                    <li><strong>Best Setup:</strong> Use two different devices on different networks (e.g., one on WiFi, one on mobile data)</li>
+                    <li><strong>Same Device Warning:</strong> Two tabs on the same laptop/phone cannot connect directly (WebRTC limitation)</li>
+                    <li><strong>Same WiFi Issues:</strong> Some routers block device-to-device connections (try different networks if connection fails)</li>
+                    <li><strong>Public WiFi:</strong> Guest networks often isolate devices - use mobile data instead</li>
+                    <li><strong>VPN Users:</strong> Disable VPN temporarily if connection fails</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -802,6 +818,20 @@
                     console.log('Received answer from peer:', data.from);
                     try {
                         await this.localPeer.setRemoteDescription(new RTCSessionDescription(data.answer));
+                        
+                        // Process buffered ICE candidates
+                        if (this.iceCandidateBuffer.length > 0) {
+                            console.log(`Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`);
+                            for (const candidate of this.iceCandidateBuffer) {
+                                try {
+                                    await this.localPeer.addIceCandidate(new RTCIceCandidate(candidate));
+                                } catch (e) {
+                                    console.warn('Error adding buffered candidate:', e);
+                                }
+                            }
+                            this.iceCandidateBuffer = [];
+                        }
+                        
                         this.showToast('Connection established!', 'success');
                     } catch (error) {
                         console.error('Error handling answer:', error);
@@ -1227,6 +1257,88 @@
                     toast.classList.remove('show');
                     toast.addEventListener('transitionend', () => toast.remove());
                 }, 5000);
+            }
+
+            diagnoseNetworkConditions() {
+                const types = Array.from(this.candidateTypes);
+                console.log('Network diagnostics:', {
+                    hasHost: types.includes('host'),
+                    hasSrflx: types.includes('srflx'),
+                    hasRelay: types.includes('relay')
+                });
+
+                // Check if this looks like a same-device scenario
+                if (types.includes('host') && !types.includes('relay')) {
+                    // Count how many host candidates we have
+                    const hostCount = Array.from(this.candidateTypes).filter(t => t === 'host').length;
+                    if (hostCount > 0 && types.length <= 2) {
+                        console.warn('⚠️ Possible same-device connection attempt detected');
+                    }
+                }
+
+                if (!types.includes('srflx') && !types.includes('relay')) {
+                    console.warn('⚠️ No STUN/TURN candidates found - NAT traversal may fail');
+                    this.showToast('Network conditions may prevent direct connection', 'error');
+                }
+            }
+
+            async handleConnectionFailure() {
+                console.error('Connection failed. Attempt:', this.connectionAttempts + 1);
+                
+                // Check for same-device scenario
+                const types = Array.from(this.candidateTypes);
+                const likelySameDevice = types.includes('host') && types.length <= 2;
+                
+                if (likelySameDevice && this.connectionAttempts === 0) {
+                    this.showToast('⚠️ Same-device connection detected! Two tabs on the same computer/phone cannot connect directly. Please use two different devices.', 'error');
+                    this.resetUI();
+                    return;
+                }
+                
+                if (this.connectionAttempts < this.maxRetries) {
+                    this.connectionAttempts++;
+                    this.showToast(`Connection failed. Retrying (attempt ${this.connectionAttempts + 1})...`, 'error');
+                    
+                    // Wait a bit before retry
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Reset and try again
+                    this.resetConnection();
+                    this.showToast('Please click "Connect to Peer" again', 'error');
+                } else {
+                    // Show detailed failure message
+                    this.showDetailedFailureMessage();
+                }
+            }
+
+            showDetailedFailureMessage() {
+                const types = Array.from(this.candidateTypes);
+                let message = 'Connection failed. ';
+                
+                if (!types.includes('srflx')) {
+                    message += 'Your network may be blocking NAT traversal. ';
+                }
+                
+                message += 'Try: (1) Use different networks (mobile data + WiFi), (2) Check if both devices are on same restrictive WiFi, (3) Disable VPN if active.';
+                
+                this.showToast(message, 'error');
+                this.resetUI();
+            }
+
+            resetConnection() {
+                // Close existing connection
+                if (this.localPeer) {
+                    this.localPeer.close();
+                }
+                
+                // Reset state
+                this.iceCandidateBuffer = [];
+                this.candidateTypes.clear();
+                this.dataChannel = null;
+                
+                // Reinitialize
+                this.initializePeerConnection();
+                this.resetUI();
             }
 
             formatBytes(bytes, decimals = 2) {
