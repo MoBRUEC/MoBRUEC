@@ -761,12 +761,18 @@
                         const answer = await this.localPeer.createAnswer();
                         await this.localPeer.setLocalDescription(answer);
                         
+                        console.log('Created answer, waiting for ICE gathering...');
+                        
+                        // Wait a bit for ICE candidates to be gathered
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        
                         this.socket.emit('answer', {
                             to: data.from,
                             answer: this.localPeer.localDescription
                         });
                         
                         this.remotePeerId = data.from;
+                        console.log('Answer sent to peer:', data.from);
                         this.showToast('Connection offer received, sending response...', 'success');
                     } catch (error) {
                         console.error('Error handling offer:', error);
@@ -786,10 +792,13 @@
                 });
 
                 this.socket.on('ice-candidate', async (data) => {
-                    console.log('Received ICE candidate from peer');
+                    console.log('Received ICE candidate from peer:', data.candidate);
                     try {
-                        if (data.candidate) {
+                        if (data.candidate && this.localPeer.remoteDescription) {
                             await this.localPeer.addIceCandidate(new RTCIceCandidate(data.candidate));
+                            console.log('ICE candidate added successfully');
+                        } else if (!this.localPeer.remoteDescription) {
+                            console.warn('Cannot add ICE candidate - no remote description set yet');
                         }
                     } catch (error) {
                         console.error('Error adding ICE candidate:', error);
@@ -938,14 +947,23 @@
                         this.setupDataChannel(this.dataChannel);
                     }
 
-                    const offer = await this.localPeer.createOffer();
+                    const offer = await this.localPeer.createOffer({
+                        offerToReceiveAudio: false,
+                        offerToReceiveVideo: false
+                    });
                     await this.localPeer.setLocalDescription(offer);
+                    
+                    console.log('Created offer, waiting for ICE gathering...');
+                    
+                    // Wait a bit for ICE candidates to be gathered
+                    await new Promise(resolve => setTimeout(resolve, 1000));
                     
                     this.socket.emit('offer', {
                         to: this.remotePeerId,
                         offer: this.localPeer.localDescription
                     });
 
+                    console.log('Offer sent to peer:', this.remotePeerId);
                     this.showToast('Connecting to peer...', 'success');
                     this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
                     this.elements.connectRemoteBtn.disabled = true;
