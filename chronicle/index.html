@@ -84,28 +84,38 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Main Layout */
+        /* Main Layout - Using Grid Areas */
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
             padding: 20px;
             display: grid;
-            grid-template-columns: 1fr 40px 1fr; /* Left col, Gutter, Right col */
+            /* Desktop Grid Areas */
+            grid-template-areas:
+                "local gutter remote"
+                "editor gutter receiver"
+                "files gutter downloads";
+            grid-template-columns: 1fr 40px 1fr;
+            grid-template-rows: auto auto auto;
             gap: 20px;
             flex: 1;
         }
 
-        /* Sections */
-        .column {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .gutter {
+        /* Grid Area Assignments */
+        .area-local { grid-area: local; }
+        .area-remote { grid-area: remote; }
+        .area-editor { grid-area: editor; }
+        .area-receiver { grid-area: receiver; }
+        .area-files { grid-area: files; }
+        .area-downloads { grid-area: downloads; }
+        .area-gutter { 
+            grid-area: gutter; 
             border-right: 1px solid #ddd;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .section-title {
@@ -129,6 +139,8 @@
             padding: 1.5rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             transition: box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .paper-card:hover {
@@ -254,6 +266,11 @@
             padding: 2rem;
             cursor: pointer;
             transition: background 0.2s;
+            flex-grow: 1; /* Fill remaining space in card */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .drop-zone:hover {
@@ -309,16 +326,30 @@
             margin-top: auto;
         }
 
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .main-container {
                 grid-template-columns: 1fr;
+                /* Mobile Order: Local -> Remote -> Editor -> Receiver -> Files -> Downloads */
+                grid-template-areas:
+                    "local"
+                    "remote"
+                    "editor"
+                    "receiver"
+                    "files"
+                    "downloads";
             }
-            .gutter {
-                display: none;
+
+            .area-gutter {
+                display: none; /* Hide gutter on mobile */
             }
+
             .masthead {
                 font-size: 2.2rem;
+            }
+            
+            .paper-card {
+                min-height: auto;
             }
         }
     </style>
@@ -335,109 +366,101 @@
     </header>
 
     <div class="main-container">
-        <!-- Left Column: Local -->
-        <div class="column">
+        <!-- Local Credentials (Left Top) -->
+        <div class="paper-card area-local">
+            <div class="section-title">
+                <span>Local Bureau Credentials</span>
+                <i class="fas fa-id-badge"></i>
+            </div>
+            <textarea id="localConfigText" rows="3" readonly placeholder="Click 'Obtain Credentials' to receive your bureau code..."></textarea>
+            <button id="createLocalOffer" class="btn btn-outline" style="margin-top: 10px;">
+                <i class="fas fa-stamp"></i> Obtain Credentials
+            </button>
+        </div>
+
+        <!-- Gutter -->
+        <div class="area-gutter">
+            <div style="font-size: 0.7rem; color: #ccc; writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 2px;">
+                THE MORNING CHRONICLE
+            </div>
+        </div>
+
+        <!-- Remote Credentials (Right Top) -->
+        <div class="paper-card area-remote">
+            <div class="section-title">
+                <span>Foreign Bureau Link</span>
+                <i class="fas fa-globe-americas"></i>
+            </div>
+            <textarea id="remoteConfigText" rows="3" placeholder="Enter Foreign Bureau Access Code..."></textarea>
+            <button id="connectRemoteConfig" class="btn btn-outline" style="margin-top: 10px;">
+                <i class="fas fa-broadcast-tower"></i> Establish Uplink
+            </button>
+        </div>
+
+        <!-- Text Editor (Left Middle) -->
+        <div class="paper-card area-editor">
+            <div class="section-title">
+                <span>Editorial Desk</span>
+                <span id="textStatus" class="status-badge offline">Wire Down</span>
+            </div>
+            <div id="textEditor" contenteditable="true"></div>
+            <button id="sendTextBtn" class="btn" disabled>
+                <i class="fas fa-print"></i> Send to Press
+            </button>
+            <div style="font-size: 0.75rem; color: #888; margin-top: 8px; font-style: italic;">
+                Note: Paste formatted articles directly from the wire into this desk.
+            </div>
+        </div>
+
+        <!-- Text Receiver (Right Middle) -->
+        <div class="paper-card area-receiver" style="border-top: 4px double #000;">
+            <div class="section-title">
+                <span>Teleprinter Feed</span>
+                <i class="fas fa-tty"></i>
+            </div>
+            <div id="textReceiver">
+                <div style="color: #aaa; text-align: center; margin-top: 80px; font-style: italic;">
+                    Awaiting incoming wire...
+                </div>
+            </div>
+        </div>
+
+        <!-- File Upload (Left Bottom) -->
+        <div class="paper-card area-files">
+            <div class="section-title">
+                <span>Material Dispatch</span>
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <input type="file" id="fileInput" hidden>
+            <div class="drop-zone" id="fileUploadArea">
+                <i class="fas fa-box-open" style="font-size: 2rem; color: #ccc; margin-bottom: 10px;"></i>
+                <p style="font-family: 'Arial'; font-size: 0.9rem;">Drop dispatch materials here</p>
+            </div>
             
-            <!-- Connection: Local -->
-            <div class="paper-card">
-                <div class="section-title">
-                    <span>Local Bureau Credentials</span>
-                    <i class="fas fa-id-badge"></i>
+            <div id="progressContainer" class="hidden" style="margin-top: 15px;">
+                <div style="display: flex; justify-content: space-between; font-family: 'Arial'; font-size: 0.8rem; margin-bottom: 5px;">
+                    <span id="progressLabel">Typesetting...</span>
+                    <span id="progressPercent">0%</span>
                 </div>
-                <textarea id="localConfigText" rows="3" readonly placeholder="Click 'Obtain Credentials' to receive your bureau code..."></textarea>
-                <button id="createLocalOffer" class="btn btn-outline" style="margin-top: 10px;">
-                    <i class="fas fa-stamp"></i> Obtain Credentials
-                </button>
-            </div>
-
-            <!-- Text Editor -->
-            <div class="paper-card">
-                <div class="section-title">
-                    <span>Editorial Desk</span>
-                    <span id="textStatus" class="status-badge offline">Wire Down</span>
-                </div>
-                <div id="textEditor" contenteditable="true"></div>
-                <button id="sendTextBtn" class="btn" disabled>
-                    <i class="fas fa-print"></i> Send to Press
-                </button>
-                <div style="font-size: 0.75rem; color: #888; margin-top: 8px; font-style: italic;">
-                    Note: Paste formatted articles directly from the wire into this desk.
-                </div>
-            </div>
-
-            <!-- File Upload -->
-            <div class="paper-card">
-                <div class="section-title">
-                    <span>Material Dispatch</span>
-                    <i class="fas fa-envelope-open-text"></i>
-                </div>
-                <input type="file" id="fileInput" hidden>
-                <div class="drop-zone" id="fileUploadArea">
-                    <i class="fas fa-box-open" style="font-size: 2rem; color: #ccc; margin-bottom: 10px;"></i>
-                    <p style="font-family: 'Arial'; font-size: 0.9rem;">Drop dispatch materials here</p>
-                </div>
-                
-                <div id="progressContainer" class="hidden" style="margin-top: 15px;">
-                    <div style="display: flex; justify-content: space-between; font-family: 'Arial'; font-size: 0.8rem; margin-bottom: 5px;">
-                        <span id="progressLabel">Typesetting...</span>
-                        <span id="progressPercent">0%</span>
-                    </div>
-                    <div class="progress-wrapper">
-                        <div id="progressFill" class="progress-fill"></div>
-                    </div>
+                <div class="progress-wrapper">
+                    <div id="progressFill" class="progress-fill"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Gutter (Visual) -->
-        <div class="gutter">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.7rem; color: #ccc; writing-mode: vertical-rl; text-orientation: mixed;">
-                EDITION
+        <!-- Received Files (Right Bottom) -->
+        <div class="paper-card area-downloads">
+            <div class="section-title">
+                <span>Inbound Dispatches</span>
+                <i class="fas fa-archive"></i>
+            </div>
+            <div id="downloadArea" style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="color: #aaa; text-align: center; padding: 20px; font-style: italic;">
+                    No dispatches received.
+                </div>
             </div>
         </div>
 
-        <!-- Right Column: Remote -->
-        <div class="column">
-            
-            <!-- Connection: Remote -->
-            <div class="paper-card">
-                <div class="section-title">
-                    <span>Foreign Bureau Link</span>
-                    <i class="fas fa-globe-americas"></i>
-                </div>
-                <textarea id="remoteConfigText" rows="3" placeholder="Enter Foreign Bureau Access Code..."></textarea>
-                <button id="connectRemoteConfig" class="btn btn-outline" style="margin-top: 10px;">
-                    <i class="fas fa-broadcast-tower"></i> Establish Uplink
-                </button>
-            </div>
-
-            <!-- Received Text -->
-            <div class="paper-card" style="border-top: 4px double #000;">
-                <div class="section-title">
-                    <span>Teleprinter Feed</span>
-                    <i class="fas fa-tty"></i>
-                </div>
-                <div id="textReceiver">
-                    <div style="color: #aaa; text-align: center; margin-top: 80px; font-style: italic;">
-                        Awaiting incoming wire...
-                    </div>
-                </div>
-            </div>
-
-            <!-- Received Files -->
-            <div class="paper-card">
-                <div class="section-title">
-                    <span>Inbound Dispatches</span>
-                    <i class="fas fa-archive"></i>
-                </div>
-                <div id="downloadArea" style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="color: #aaa; text-align: center; padding: 20px; font-style: italic;">
-                        No dispatches received.
-                    </div>
-                </div>
-            </div>
-
-        </div>
     </div>
 
     <footer>
@@ -650,28 +673,32 @@
             }
 
             updateConnectionStatus(connected) {
-                const btn = this.elements.sendTextBtn;
+                const btn = this.elements.connectRemoteBtn;
                 const status = this.elements.textStatus;
                 
                 if (connected) {
-                    this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-check"></i> Uplink Active';
-                    this.elements.connectRemoteBtn.classList.replace('btn-outline', 'btn'); 
-                    this.elements.connectRemoteBtn.style.background = "#1a7f37";
-                    this.elements.connectRemoteBtn.style.color = "#fff";
-                    this.elements.connectRemoteBtn.style.borderColor = "#1a7f37";
+                    btn.innerHTML = '<i class="fas fa-check"></i> Uplink Active';
+                    btn.classList.remove('btn-outline');
+                    btn.classList.add('btn');
+                    btn.style.background = "#1a7f37";
+                    btn.style.color = "#fff";
+                    btn.style.borderColor = "#1a7f37";
                     
-                    btn.disabled = false;
+                    this.elements.sendTextBtn.disabled = false;
                     status.className = 'status-badge online';
                     status.innerText = 'Wire Live';
                     this.elements.fileUploadArea.style.borderColor = '#1a7f37';
                 } else {
-                    this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-broadcast-tower"></i> Establish Uplink';
-                    this.elements.connectRemoteBtn.classList.replace('btn', 'btn-outline');
-                    this.elements.connectRemoteBtn.style.background = "transparent";
-                    this.elements.connectRemoteBtn.style.color = "var(--ink-color)";
-                    this.elements.connectRemoteBtn.style.borderColor = "var(--ink-color)";
+                    // Explicitly reset styles to ensure button isn't "lost"
+                    btn.innerHTML = '<i class="fas fa-broadcast-tower"></i> Establish Uplink';
+                    btn.classList.remove('btn');
+                    btn.classList.add('btn-outline');
+                    btn.style.background = "transparent";
+                    btn.style.color = "var(--ink-color)";
+                    btn.style.borderColor = "var(--ink-color)";
+                    btn.disabled = false;
 
-                    btn.disabled = true;
+                    this.elements.sendTextBtn.disabled = true;
                     status.className = 'status-badge offline';
                     status.innerText = 'Wire Down';
                     this.elements.fileUploadArea.style.borderColor = '#ccc';
@@ -932,8 +959,6 @@
             resetUI() {
                 this.elements.createLocalOfferBtn.innerHTML = '<i class="fas fa-stamp"></i> Obtain Credentials';
                 this.elements.createLocalOfferBtn.disabled = false;
-                this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-broadcast-tower"></i> Establish Uplink';
-                this.elements.connectRemoteBtn.disabled = false;
                 this.updateConnectionStatus(false);
             }
 
@@ -946,14 +971,21 @@
 
             async handleConnectionFailure() {
                 this.showToast('Uplink Interrupted. Logistical note: Two reporters in the same room cannot link directly. Use separate devices.');
-                this.resetUI();
+                // FIX: Call resetConnection instead of resetUI to recreate the WebRTC object
+                this.resetConnection();
             }
 
             resetConnection() {
-                if (this.localPeer) this.localPeer.close();
+                // Close and recreate the peer connection object
+                if (this.localPeer) {
+                    this.localPeer.close();
+                }
+                
                 this.iceCandidateBuffer = [];
                 this.candidateTypes.clear();
                 this.dataChannel = null;
+                
+                // Reinitialize
                 this.initializePeerConnection();
                 this.resetUI();
             }
