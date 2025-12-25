@@ -1,1338 +1,1648 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Morning Chronicle | The Unfiltered Press</title>
-    <link rel="icon" href="https://static-00.iconduck.com/assets.00/newspaper-icon-2048x2048-g0w8y3f8.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <style>
-        :root {
-            --paper-bg: #fdfdfd;
-            --ink-color: #121212;
-            --accent-grey: #666;
-            --light-grey: #e2e2e2;
-            --chronicle-blue: #2c3e50;
-            --chronicle-red: #8b0000;
-            --border-style: 1px solid #000;
-            --double-border: 4px double #000;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Morning Chronicle | The Unfiltered Press</title>
+  <link rel="icon" href="https://static-00.iconduck.com/assets.00/newspaper-icon-2048x2048-g0w8y3f8.png" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    :root {
+      --paper-bg: #fdfdfd;
+      --ink-color: #121212;
+      --accent-grey: #666;
+      --light-grey: #e2e2e2;
+      --chronicle-blue: #2c3e50;
+      --chronicle-red: #8b0000;
+      --border-style: 1px solid #000;
+      --double-border: 4px double #000;
+    }
 
-        body {
-            font-family: 'Georgia', 'Times New Roman', Times, serif;
-            background-color: var(--paper-bg);
-            color: var(--ink-color);
-            line-height: 1.5;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Utility */
-        .hidden { display: none !important; }
-        .fade-in { animation: fadeIn 0.5s ease-in; }
+    body {
+      font-family: "Georgia", "Times New Roman", Times, serif;
+      background-color: var(--paper-bg);
+      color: var(--ink-color);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .hidden {
+      display: none !important;
+    }
 
-        /* Header / Masthead */
-        header {
-            border-bottom: 1px solid #000;
-            padding-bottom: 1rem;
-            text-align: center;
-            background: #fff;
-            position: relative;
-        }
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
 
-        .date-bar {
-            font-family: 'Arial', sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-grey);
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            border-bottom: 1px double #ccc;
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .masthead {
-            font-family: 'Times New Roman', serif;
-            font-weight: 900;
-            font-size: 3.2rem;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            margin: 0.5rem 0;
-            line-height: 1;
-        }
+    header {
+      border-bottom: 1px solid #000;
+      padding-bottom: 1rem;
+      text-align: center;
+      background: #fff;
+      position: relative;
+    }
 
-        .tagline {
-            font-family: 'Arial', sans-serif;
-            font-style: italic;
-            font-size: 0.9rem;
-            color: var(--accent-grey);
-            margin-bottom: 0.5rem;
-        }
+    .date-bar {
+      font-family: "Arial", sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-grey);
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px double #ccc;
+    }
 
-        /* =========================================
-           ADVANCED C64 ARCADE ANIMATION
-           ========================================= */
-        #pixel-stage {
-            height: 80px; /* Increased height for layers */
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            background: #6E8FBE; /* C64 Blue 1 (Sky) */
-            border-top: 1px solid #000;
-            border-bottom: 1px solid #000;
-            image-rendering: pixelated;
-            display: block;
-        }
+    .masthead {
+      font-family: "Times New Roman", serif;
+      font-weight: 900;
+      font-size: 3.2rem;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      margin: 0.5rem 0;
+      line-height: 1;
+    }
 
-        /* Layer 1: Clouds (Parallax Slow) */
-        .sky-layer {
-            position: absolute;
-            top: 5px;
-            left: 0;
-            width: 200%;
-            height: 20px;
-            z-index: 1;
-            animation: scroll-slow 15s linear infinite;
-        }
-        .cloud {
-            position: absolute;
-            background: #fff;
-            opacity: 0.6;
-        }
-        .cloud::after { /* Pixel cloud shape */
-            content: '';
-            position: absolute;
-            top: 4px; left: 6px;
-            width: 6px; height: 6px;
-            background: #fff;
-            box-shadow: 8px 2px 0 #fff, 4px 6px 0 #fff;
-        }
+    .tagline {
+      font-family: "Arial", sans-serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--accent-grey);
+      margin-bottom: 0.5rem;
+    }
 
-        /* Layer 2: Mountains (Parallax Medium) */
-        .mountain-layer {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 200%;
-            height: 25px;
-            z-index: 2;
-            animation: scroll-medium 8s linear infinite;
-        }
-        .mountain {
-            position: absolute;
-            bottom: 0;
-            width: 0; height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 20px solid #3B4A56; /* Darker Blue/Grey */
-        }
+    #pixel-stage {
+      height: 80px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      background: #6e8fbe;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      image-rendering: pixelated;
+      display: block;
+    }
 
-        /* Layer 3: Houses (Parallax Normal) */
-        .house-layer {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 200%;
-            height: 35px;
-            z-index: 3;
-            animation: scroll-normal 4s linear infinite;
-        }
-        .house {
-            position: absolute;
-            bottom: 0;
-            width: 35px;
-            height: 20px;
-            background: #A33232; /* C64 Red Body */
-            border: 1px solid #000;
-        }
-        .house::before { /* Roof */
-            content: ''; position: absolute; top: -12px; left: -4px;
-            border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 12px solid #000;
-        }
-        .house::after { /* Door */
-            content: ''; position: absolute; top: 6px; left: 12px;
-            width: 10px; height: 14px; background: #6E8FBE;
-        }
+    .sky-layer,
+    .mountain-layer,
+    .house-layer,
+    .sidewalk-layer {
+      position: absolute;
+      left: 0;
+      width: 200%;
+      animation: scroll-normal 4s linear infinite;
+    }
 
-        /* Layer 4: Sidewalk (Parallax Normal) */
-        .sidewalk-layer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 20px;
-            z-index: 4;
-            background: 
-                linear-gradient(to bottom, #707070 0%, #707070 2px, #8f8f8f 2px, #8f8f8f 100%);
-            border-top: 2px solid #000;
-            animation: scroll-normal 4s linear infinite;
-        }
-        
-        /* Sidewalk Obstacle: The Crack */
-        .crack {
-            position: absolute;
-            bottom: 5px;
-            width: 0; height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 10px solid #000; /* Inverted triangle */
-            transform: scaleX(0.5);
-        }
+    .sky-layer {
+      top: 5px;
+      height: 20px;
+      z-index: 1;
+      animation-duration: 15s;
+    }
 
-        /* The Paperboy Wrapper (Foreground - Moves Fast) */
-        .boy-wrapper {
-            position: absolute;
-            bottom: 8px; /* On sidewalk */
-            left: -60px;
-            z-index: 10;
-            animation: ride-across 6s linear infinite;
-        }
+    .mountain-layer {
+      top: 20px;
+      height: 25px;
+      z-index: 2;
+      animation-duration: 8s;
+    }
 
-        /* C64 Sprite Construction */
-        .paperboy {
-            position: relative;
-            width: 32px;
-            height: 40px;
-            animation: pedaling-bob 0.15s infinite alternate;
-        }
+    .house-layer {
+      top: 20px;
+      height: 35px;
+      z-index: 3;
+      animation-duration: 4s;
+    }
 
-        .cap { /* Cap */
-            position: absolute; top: 0; left: 4px; width: 22px; height: 10px;
-            background: #fff; border: 1px solid #000; border-bottom: none;
-        }
-        .cap::after { /* Visor */
-            content: ''; position: absolute; bottom: -2px; left: 2px;
-            width: 20px; height: 4px; background: #fff; border: 1px solid #000;
-        }
-        .head { /* Head */
-            position: absolute; top: 8px; left: 10px; width: 10px; height: 10px;
-            background: #F8F8B8; border: 1px solid #000; z-index: 2;
-        }
-        .body { /* Body & Shirt */
-            position: absolute; top: 18px; left: 2px; width: 26px; height: 14px;
-            background: #F8F8B8; border: 1px solid #000;
-            background-image: linear-gradient(to bottom, transparent 40%, #6E8FBE 40%, #6E8FBE 45%, transparent 45%);
-        }
-        .bag { /* News Satchel */
-            position: absolute; top: 16px; left: -6px; width: 10px; height: 14px;
-            background: #8B4513; border: 1px solid #000; z-index: 1;
-            animation: bag-wobble 0.3s infinite alternate;
-        }
+    .sidewalk-layer {
+      bottom: 0;
+      height: 20px;
+      z-index: 4;
+      background: linear-gradient(to bottom, #707070 0%, #707070 2px, #8f8f8f 100%);
+      border-top: 2px solid #000;
+    }
 
-        /* The Bike */
-        .bike {
-            position: absolute; top: 30px; left: 0; width: 32px; height: 10px;
-        }
-        .wheel {
-            position: absolute; bottom: 0; width: 12px; height: 12px;
-            border: 2px solid #000; border-radius: 50%; background: #707070;
-            animation: spin 0.2s linear infinite;
-        }
-        .wheel.back { left: 0; } .wheel.front { left: 20px; }
-        
-        /* Pedal Arms */
-        .pedal-arm {
-            position: absolute; top: 4px; left: 4px; width: 24px; height: 2px;
-            background: #000; animation: pedaling 0.2s linear infinite;
-        }
+    .cloud {
+      position: absolute;
+      background: #fff;
+      opacity: 0.6;
+      width: 30px;
+      height: 10px;
+      border-radius: 10px;
+    }
 
-        /* The Arm & Throw */
-        .arm {
-            position: absolute; top: 20px; right: -4px; width: 14px; height: 3px;
-            background: #000; transform-origin: left center;
-            animation: arcade-throw 1.2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-        }
+    .mountain {
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 15px solid #3b4a56;
+    }
 
-        /* Flying Newspaper Physics */
-        .projectile {
-            position: absolute; top: 20px; left: 30px;
-            width: 10px; height: 14px; background: #fff; border: 1px solid #000;
-            z-index: 5; opacity: 0;
-            animation: physics-throw 1.2s ease-out infinite;
-            animation-delay: 2.5s;
-        }
-        .projectile:nth-child(2) { animation-delay: 5.5s; }
+    .house {
+      position: absolute;
+      bottom: 0;
+      width: 35px;
+      height: 20px;
+      background: #a33232;
+      border: 1px solid #000;
+    }
 
-        /* HUD: Score Counter */
-        .hud {
-            position: absolute; bottom: 25px; left: 10px;
-            font-family: 'Courier New', monospace; font-weight: bold; font-size: 10px;
-            color: #fff; text-shadow: 1px 1px 0 #000; z-index: 20;
-        }
-        .subscribers-count { color: #FFD700; } /* Gold */
+    .crack {
+      position: absolute;
+      bottom: 5px;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 10px solid #000;
+      transform: scaleX(0.5);
+    }
 
-        /* Keyframes */
-        @keyframes scroll-slow { 0% { transform: translateX(0); } 100% { transform: translateX(-200px); } }
-        @keyframes scroll-medium { 0% { transform: translateX(0); } 100% { transform: translateX(-200px); } }
-        @keyframes scroll-normal { 0% { transform: translateX(0); } 100% { transform: translateX(-200px); } }
+    .boy-wrapper {
+      position: absolute;
+      bottom: 8px;
+      left: -60px;
+      z-index: 10;
+      animation: ride-across 6s linear infinite;
+    }
 
-        @keyframes ride-across {
-            0% { left: -60px; }
-            100% { left: 100%; }
-        }
+    .paperboy {
+      position: relative;
+      width: 32px;
+      height: 40px;
+      animation: pedaling-bob 0.15s infinite alternate;
+    }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    .cap {
+      position: absolute;
+      top: 0;
+      left: 4px;
+      width: 22px;
+      height: 10px;
+      background: #fff;
+      border: 1px solid #000;
+      border-bottom: none;
+    }
 
-        @keyframes pedaling {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    .head {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      width: 10px;
+      height: 10px;
+      background: #f8f8b8;
+      border: 1px solid #000;
+    }
 
-        @keyframes pedaling-bob {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-3px); } /* Bumpier */
-        }
+    .body {
+      position: absolute;
+      top: 18px;
+      left: 2px;
+      width: 26px;
+      height: 14px;
+      background: #f8f8b8;
+      border: 1px solid #000;
+    }
 
-        @keyframes bag-wobble {
-            from { transform: rotate(-5deg); }
-            to { transform: rotate(5deg); }
-        }
+    .bag {
+      position: absolute;
+      top: 16px;
+      left: -6px;
+      width: 10px;
+      height: 14px;
+      background: #8b4513;
+      border: 1px solid #000;
+      animation: bag-wobble 0.3s infinite alternate;
+    }
 
-        @keyframes arcade-throw {
-            0% { transform: rotate(0deg); }
-            20% { transform: rotate(-70deg); } /* Wind back */
-            30% { transform: rotate(60deg); } /* Whip forward */
-            40% { transform: rotate(0deg); }
-            100% { transform: rotate(0deg); }
-        }
+    .bike {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 32px;
+      height: 10px;
+    }
 
-        @keyframes physics-throw {
-            0% { left: 40px; top: 20px; transform: scale(1) rotate(0); opacity: 1; }
-            25% { left: 55%; top: 25px; transform: scale(0.9) rotate(180deg); opacity: 1; } /* Apex */
-            50% { left: 75%; top: 20px; transform: scale(0.8) rotate(360deg); opacity: 1; } /* Impact */
-            100% { left: 85%; top: 15px; transform: scale(0.6) rotate(540deg); opacity: 0; } /* Landed */
-        }
+    .wheel {
+      position: absolute;
+      bottom: 0;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #000;
+      border-radius: 50%;
+      background: #707070;
+      animation: spin 0.3s linear infinite;
+    }
 
-        /* Main Layout - Using Grid Areas */
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 20px;
-            display: grid;
-            /* Desktop Grid Areas */
-            grid-template-areas:
-                "local gutter remote"
-                "editor gutter receiver"
-                "files gutter downloads";
-            grid-template-columns: 1fr 40px 1fr;
-            grid-template-rows: auto auto auto;
-            gap: 20px;
-            flex: 1;
-        }
+    .wheel.back {
+      left: 0;
+    }
+    .wheel.front {
+      left: 20px;
+    }
 
-        /* Grid Area Assignments */
-        .area-local { grid-area: local; }
-        .area-remote { grid-area: remote; }
-        .area-editor { grid-area: editor; }
-        .area-receiver { grid-area: receiver; }
-        .area-files { grid-area: files; }
-        .area-downloads { grid-area: downloads; }
-        .area-gutter { 
-            grid-area: gutter; 
-            border-right: 1px solid #ddd;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .pedal-arm {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 24px;
+      height: 2px;
+      background: #000;
+      animation: pedaling 0.2s linear infinite;
+    }
 
-        .section-title {
-            font-family: 'Arial', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-bottom: 1px solid #000;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            letter-spacing: 0.5px;
-        }
+    .arm {
+      position: absolute;
+      top: 20px;
+      right: -4px;
+      width: 14px;
+      height: 3px;
+      background: #000;
+      transform-origin: left center;
+      animation: arcade-throw 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
 
-        /* Card Styles */
-        .paper-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 1.5rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
+    .paper-in-hand {
+      position: absolute;
+      top: 0;
+      right: -4px;
+      width: 4px;
+      height: 5px;
+      background: #fff;
+      border: 1px solid #000;
+    }
 
-        .paper-card:hover {
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+    .projectile {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      width: 10px;
+      height: 14px;
+      background: #fff;
+      border: 1px solid #000;
+      z-index: 5;
+      opacity: 0;
+      animation: physics-throw 1.2s ease-out infinite;
+      animation-delay: 2.5s;
+    }
 
-        /* Inputs & Text Areas */
-        textarea, input[type="text"] {
-            width: 100%;
-            background: #f9f9f9;
-            border: 1px solid #ccc;
-            padding: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            resize: vertical;
-            color: #333;
-        }
+    .projectile:nth-child(2) {
+      animation-delay: 5.5s;
+    }
 
-        textarea:focus, input:focus {
-            outline: none;
-            border-color: var(--ink-color);
-            background: #fff;
-        }
+    .hud {
+      position: absolute;
+      bottom: 25px;
+      left: 10px;
+      font-family: "Courier New", monospace;
+      font-weight: bold;
+      font-size: 10px;
+      color: #fff;
+      text-shadow: 1px 1px 0 #000;
+      z-index: 20;
+    }
 
-        /* Rich Text Editor */
-        #textEditor {
-            min-height: 200px;
-            border: 1px dashed #ccc;
-            background: #fff;
-            padding: 15px;
-            font-family: 'Georgia', serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            overflow-y: auto;
-            margin-bottom: 10px;
-        }
-        
-        #textEditor:empty:before {
-            content: "Begin drafting the breaking story here...";
-            color: #aaa;
-            font-style: italic;
-        }
+    .subscribers-count {
+      color: #ffd700;
+    }
 
-        #textReceiver {
-            min-height: 200px;
-            border: 1px solid #eee;
-            background: #fafafa;
-            padding: 15px;
-            font-family: 'Georgia', serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            overflow-y: auto;
-        }
+    @keyframes scroll-normal {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-200px);
+      }
+    }
 
-        /* Buttons */
-        .btn {
-            background: var(--ink-color);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-family: 'Arial', sans-serif;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
-            justify-content: center;
-        }
+    @keyframes ride-across {
+      0% {
+        left: -60px;
+      }
+      100% {
+        left: 100%;
+      }
+    }
 
-        .btn:hover {
-            background: #333;
-        }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
+    @keyframes pedaling-bob {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-3px);
+      }
+    }
 
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--ink-color);
-            color: var(--ink-color);
-        }
+    @keyframes bag-wobble {
+      from {
+        transform: rotate(-5deg);
+      }
+      to {
+        transform: rotate(5deg);
+      }
+    }
 
-        .btn-outline:hover {
-            background: var(--ink-color);
-            color: #fff;
-        }
+    @keyframes arcade-throw {
+      0% {
+        transform: rotate(0deg);
+      }
+      20% {
+        transform: rotate(-70deg);
+      }
+      30% {
+        transform: rotate(60deg);
+      }
+      40% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(360deg);
+      }
+      100% {
+        transform: rotate(540deg);
+        opacity: 0;
+      }
+    }
 
-        /* Status Indicators */
-        .status-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            font-family: 'Arial', sans-serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            font-weight: bold;
-            border-radius: 2px;
-        }
+    @keyframes physics-throw {
+      0% {
+        left: 40px;
+        top: 20px;
+        transform: scale(1) rotate(0);
+        opacity: 1;
+      }
+      25% {
+        left: 55%;
+        top: 25px;
+        transform: scale(0.9) rotate(180deg);
+        opacity: 1;
+      }
+      50% {
+        left: 85%;
+        top: 15px;
+        transform: scale(0.8) rotate(360deg);
+        opacity: 1;
+      }
+      100% {
+        left: 85%;
+        top: 20px;
+        transform: scale(0.6) rotate(540deg);
+        opacity: 0;
+      }
+    }
 
-        .status-badge.offline {
-            background: #eee;
-            color: #777;
-            border: 1px solid #ddd;
-        }
+    @keyframes pedaling {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-        .status-badge.online {
-            background: #e6f7ed;
-            color: #1a7f37;
-            border: 1px solid #badbcc;
-        }
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 20px;
+      display: grid;
+      grid-template-areas:
+        "local gutter remote"
+        "editor gutter receiver"
+        "files gutter downloads";
+      grid-template-columns: 1fr 40px 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 20px;
+      flex: 1;
+    }
 
-        /* File Upload Area */
-        .drop-zone {
-            border: 1px solid #ccc;
-            background: #fdfdfd;
-            text-align: center;
-            padding: 2rem;
-            cursor: pointer;
-            transition: background 0.2s;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+    .area-local {
+      grid-area: local;
+    }
+    .area-remote {
+      grid-area: remote;
+    }
+    .area-editor {
+      grid-area: editor;
+    }
+    .area-receiver {
+      grid-area: receiver;
+    }
+    .area-files {
+      grid-area: files;
+    }
+    .area-downloads {
+      grid-area: downloads;
+    }
 
-        .drop-zone:hover {
-            background: #f0f0f0;
-        }
+    .area-gutter {
+      grid-area: gutter;
+      border-right: 1px solid #ddd;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        /* Progress Bar */
-        .progress-wrapper {
-            margin-top: 10px;
-            background: #eee;
-            height: 4px;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
+    .section-title {
+      font-family: "Arial", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-bottom: 1px solid #000;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: 0.5px;
+    }
 
-        .progress-fill {
-            height: 100%;
-            background: var(--ink-color);
-            width: 0%;
-            transition: width 0.3s linear;
-        }
+    .paper-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease;
+    }
 
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #222;
-            color: #fff;
-            padding: 12px 24px;
-            font-family: 'Arial', sans-serif;
-            font-size: 0.9rem;
-            border-radius: 2px;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            max-width: 80%;
-            text-align: center;
-        }
-        .toast.show { opacity: 1; }
+    .paper-card:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Footer */
-        footer {
-            border-top: 4px double #000;
-            padding: 20px;
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-            font-size: 0.8rem;
-            color: #777;
-            margin-top: auto;
-        }
+    textarea,
+    input[type="text"] {
+      width: 100%;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+      resize: vertical;
+      color: #333;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                /* Mobile Order: Local -> Remote -> Editor -> Receiver -> Files -> Downloads */
-                grid-template-areas:
-                    "local"
-                    "remote"
-                    "editor"
-                    "receiver"
-                    "files"
-                    "downloads";
-            }
+    textarea:focus,
+    input:focus {
+      outline: none;
+      border-color: var(--ink-color);
+      background: #fff;
+    }
 
-            .area-gutter {
-                display: none;
-            }
+    #textEditor {
+      min-height: 200px;
+      border: 1px dashed #ccc;
+      background: #fff;
+      padding: 15px;
+      font-family: "Georgia", serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
 
-            .masthead {
-                font-size: 2.2rem;
-            }
-            
-            .paper-card {
-                min-height: auto;
-            }
-            
-            #pixel-stage {
-                height: 60px;
-            }
-        }
-    </style>
+    #textEditor:empty::before {
+      content: "Begin drafting your breaking story here ...";
+      color: #aaa;
+      font-style: italic;
+    }
+
+    #textReceiver {
+      min-height: 200px;
+      border: 1px solid #eee;
+      background: #fafafa;
+      padding: 15px;
+      font-family: "Georgia", serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      overflow-y: auto;
+    }
+
+    .btn {
+      background: var(--ink-color);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-family: "Arial", sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      background: #333;
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--ink-color);
+      color: var(--ink-color);
+    }
+
+    .btn-outline:hover {
+      background: var(--ink-color);
+      color: #fff;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      font-family: "Arial", sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      border-radius: 2px;
+    }
+
+    .status-badge.offline {
+      background: #eee;
+      color: #777;
+      border: 1px solid #ddd;
+    }
+
+    .status-badge.online {
+      background: #e6f7ed;
+      color: #1a7f37;
+      border: 1px solid #badbcc;
+    }
+
+    .drop-zone {
+      border: 1px solid #ccc;
+      background: #fdfdfd;
+      text-align: center;
+      padding: 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .drop-zone:hover {
+      background: #f0f0f0;
+    }
+
+    .progress-wrapper {
+      margin-top: 10px;
+      background: #eee;
+      height: 4px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--ink-color);
+      width: 0%;
+      transition: width 0.3s linear;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      color: #fff;
+      padding: 12px 24px;
+      font-family: "Arial", sans-serif;
+      font-size: 0.9rem;
+      border-radius: 2px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      max-width: 80%;
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    footer {
+      border-top: 4px double #000;
+      padding: 20px;
+      text-align: center;
+      font-family: "Arial", sans-serif;
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "local"
+          "remote"
+          "editor"
+          "receiver"
+          "files"
+          "downloads";
+      }
+      .area-gutter {
+        display: none;
+      }
+      .masthead {
+        font-size: 2.2rem;
+      }
+      #pixel-stage {
+        height: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div class="date-bar">
+      <span id="currentDate">Morning Edition</span>
+      <span>Vol. CCXXV, No. 1</span>
+    </div>
+    <div class="masthead">The Morning Chronicle</div>
+    <div class="tagline">"Truth Without Intermediaries"</div>
 
-    <header>
-        <div class="date-bar">
-            <span id="currentDate">Morning Edition</span>
-            <span>Vol. CCXXV, No. 1</span>
+    <div id="pixel-stage">
+      <div class="sky-layer">
+        <div class="cloud" style="left: 10%"></div>
+        <div class="cloud" style="left: 50%"></div>
+        <div class="cloud" style="left: 120%"></div>
+        <div class="cloud" style="left: 190%"></div>
+      </div>
+
+      <div class="mountain-layer">
+        <div class="mountain" style="left: 0"></div>
+        <div class="mountain" style="left: 80px"></div>
+        <div class="mountain" style="left: 160px"></div>
+        <div class="mountain" style="left: 240px"></div>
+      </div>
+
+      <div class="house-layer">
+        <div class="house" style="left: 0"></div>
+        <div class="house" style="left: 160px"></div>
+        <div class="house" style="left: 320px"></div>
+        <div class="house" style="left: 480px"></div>
+      </div>
+
+      <div class="sidewalk-layer">
+        <div class="crack" style="left: 100px"></div>
+        <div class="crack" style="left: 350px"></div>
+        <div class="crack" style="left: 600px"></div>
+      </div>
+
+      <div class="boy-wrapper">
+        <div class="hud">
+          SUBSCRIBERS: <span class="subscribers-count">0</span>
         </div>
-        <div class="masthead">The Morning Chronicle</div>
-        <div class="tagline">"Truth Without Intermediaries"</div>
-
-        <!-- NEW: Advanced Arcade Animation -->
-        <div id="pixel-stage">
-            <!-- Layer 1: Sky (Clouds) -->
-            <div class="sky-layer">
-                <div class="cloud" style="left: 10%;"></div>
-                <div class="cloud" style="left: 50%;"></div>
-                <div class="cloud" style="left: 120%;"></div>
-                <div class="cloud" style="left: 170%;"></div>
-            </div>
-
-            <!-- Layer 2: Mountains -->
-            <div class="mountain-layer">
-                <div class="mountain" style="left: 0%;"></div>
-                <div class="mountain" style="left: 80%;"></div>
-                <div class="mountain" style="left: 160%;"></div>
-                <div class="mountain" style="left: 240%;"></div>
-            </div>
-
-            <!-- Layer 3: Houses -->
-            <div class="house-layer">
-                <div class="house" style="left: 10px;"></div>
-                <div class="house" style="left: 160px;"></div>
-                <div class="house" style="left: 320px;"></div>
-                <div class="house" style="left: 480px;"></div>
-                <div class="house" style="left: 640px;"></div>
-            </div>
-
-            <!-- Layer 4: Sidewalk -->
-            <div class="sidewalk-layer">
-                <div class="crack" style="left: 100px;"></div>
-                <div class="crack" style="left: 350px;"></div>
-                <div class="crack" style="left: 600px;"></div>
-            </div>
-            
-            <!-- The Paperboy (Foreground) -->
-            <div class="boy-wrapper">
-                <!-- Score HUD -->
-                <div class="hud">
-                    SUBSCRIBERS: <span class="subscribers-count">0</span>
-                </div>
-
-                <div class="paperboy">
-                    <div class="cap"></div>
-                    <div class="head"></div>
-                    <div class="bag"></div> <!-- The Satchel -->
-                    <div class="body"></div>
-                    <div class="arm"></div> <!-- Throwing Arm -->
-                    <div class="bike">
-                        <div class="wheel back"></div>
-                        <div class="wheel front"></div>
-                        <div class="pedal-arm"></div>
-                    </div>
-                </div>
-                <div class="projectile"></div>
-                <div class="projectile"></div>
-            </div>
+        <div class="paperboy">
+          <div class="cap"></div>
+          <div class="head"></div>
+          <div class="bag"></div>
+          <div class="body"></div>
+          <div class="arm"></div>
+          <div class="paper-in-hand"></div>
         </div>
-    </header>
-
-    <div class="main-container">
-        <!-- Local Credentials (Left Top) -->
-        <div class="paper-card area-local">
-            <div class="section-title">
-                <span>Local Bureau Credentials</span>
-                <i class="fas fa-id-badge"></i>
-            </div>
-            <textarea id="localConfigText" rows="3" readonly placeholder="Click 'Obtain Credentials' to receive your bureau code..."></textarea>
-            <button id="createLocalOffer" class="btn btn-outline" style="margin-top: 10px;">
-                <i class="fas fa-stamp"></i> Obtain Credentials
-            </button>
+        <div class="bike">
+          <div class="wheel back"></div>
+          <div class="wheel front"></div>
         </div>
+        <div class="pedal-arm"></div>
+        <div class="projectile"></div>
+        <div class="projectile"></div>
+      </div>
+    </div>
+  </header>
 
-        <!-- Gutter -->
-        <div class="area-gutter">
-            <div style="font-size: 0.7rem; color: #ccc; writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 2px;">
-                THE MORNING CHRONICLE
-            </div>
-        </div>
-
-        <!-- Remote Credentials (Right Top) -->
-        <div class="paper-card area-remote">
-            <div class="section-title">
-                <span>Foreign Bureau Link</span>
-                <i class="fas fa-globe-americas"></i>
-            </div>
-            <textarea id="remoteConfigText" rows="3" placeholder="Enter Foreign Bureau Access Code..."></textarea>
-            <button id="connectRemoteConfig" class="btn btn-outline" style="margin-top: 10px;">
-                <i class="fas fa-broadcast-tower"></i> Establish Uplink
-            </button>
-        </div>
-
-        <!-- Text Editor (Left Middle) -->
-        <div class="paper-card area-editor">
-            <div class="section-title">
-                <span>Editorial Desk</span>
-                <span id="textStatus" class="status-badge offline">Wire Down</span>
-            </div>
-            <div id="textEditor" contenteditable="true"></div>
-            <button id="sendTextBtn" class="btn" disabled>
-                <i class="fas fa-print"></i> Send to Press
-            </button>
-            <div style="font-size: 0.75rem; color: #888; margin-top: 8px; font-style: italic;">
-                Note: Paste formatted articles directly from the wire into this desk.
-            </div>
-        </div>
-
-        <!-- Text Receiver (Right Middle) -->
-        <div class="paper-card area-receiver" style="border-top: 4px double #000;">
-            <div class="section-title">
-                <span>Teleprinter Feed</span>
-                <i class="fas fa-tty"></i>
-            </div>
-            <div id="textReceiver">
-                <div style="color: #aaa; text-align: center; margin-top: 80px; font-style: italic;">
-                    Awaiting incoming wire...
-                </div>
-            </div>
-        </div>
-
-        <!-- File Upload (Left Bottom) -->
-        <div class="paper-card area-files">
-            <div class="section-title">
-                <span>Material Dispatch</span>
-                <i class="fas fa-envelope-open-text"></i>
-            </div>
-            <input type="file" id="fileInput" hidden>
-            <div class="drop-zone" id="fileUploadArea">
-                <i class="fas fa-box-open" style="font-size: 2rem; color: #ccc; margin-bottom: 10px;"></i>
-                <p style="font-family: 'Arial'; font-size: 0.9rem;">Drop dispatch materials here</p>
-            </div>
-            
-            <div id="progressContainer" class="hidden" style="margin-top: 15px;">
-                <div style="display: flex; justify-content: space-between; font-family: 'Arial'; font-size: 0.8rem; margin-bottom: 5px;">
-                    <span id="progressLabel">Typesetting...</span>
-                    <span id="progressPercent">0%</span>
-                </div>
-                <div class="progress-wrapper">
-                    <div id="progressFill" class="progress-fill"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Received Files (Right Bottom) -->
-        <div class="paper-card area-downloads">
-            <div class="section-title">
-                <span>Inbound Dispatches</span>
-                <i class="fas fa-archive"></i>
-            </div>
-            <div id="downloadArea" style="display: flex; flex-direction: column; gap: 10px;">
-                <div style="color: #aaa; text-align: center; padding: 20px; font-style: italic;">
-                    No dispatches received.
-                </div>
-            </div>
-        </div>
-
+  <div class="main-container">
+    <div class="paper-card area-local">
+      <div class="section-title">
+        <span>Local Bureau Credentials</span>
+        <i class="fas fa-id-badge"></i>
+      </div>
+      <textarea
+        id="localConfigText"
+        rows="3"
+        readonly
+        placeholder="Click 'Obtain Credentials' to receive your bureau code ..."
+      ></textarea>
+      <button id="createLocalOffer" class="btn btn-outline" style="margin-top: 10px">
+        <i class="fas fa-stamp"></i> Obtain Credentials
+      </button>
     </div>
 
-    <footer>
-        <p>Distributed via The Morning Chronicle • Direct Bureau-to-Bureau Distribution</p>
-        <p style="margin-top: 5px; font-size: 0.7rem;">&copy; 2025 The Morning Chronicle. No Archives Kept.</p>
-    </footer>
+    <div class="area-gutter">
+      <div
+        style="
+          font-size: 0.7rem;
+          color: #ccc;
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          letter-spacing: 2px;
+        "
+      >
+        THE MORNING CHRONICLE
+      </div>
+    </div>
 
-    <div id="toast" class="toast">Notification</div>
+    <div class="paper-card area-remote">
+      <div class="section-title">
+        <span>Foreign Bureau Link</span>
+        <i class="fas fa-globe-americas"></i>
+      </div>
+      <textarea
+        id="remoteConfigText"
+        rows="3"
+        placeholder="Enter Foreign Bureau Access Code..."
+      ></textarea>
+      <button id="connectRemoteConfig" class="btn btn-outline" style="margin-top: 10px">
+        <i class="fas fa-broadcast-tower"></i> Establish Uplink
+      </button>
+    </div>
 
-    <script>
-        class SecureShareApp {
-            constructor() {
-                this.initializeElements();
-                this.initializeSignalingServer();
-                this.initializePeerConnection();
-                this.setupEventListeners();
-                this.setupDragAndDrop();
-                this.setupPageSafety(); // NEW: Unload protection
-                this.updateDate();
-                
-                // State
-                this.dataChannel = null;
-                this.receiveBuffer = [];
-                this.receivedSize = 0;
-                this.receivedFile = {};
-                this.fileToSend = null;
-                this.maxFileSize = 50 * 1024 * 1024;
-                this.peerId = null;
-                this.remotePeerId = null;
-                this.iceCandidateBuffer = []; 
-                this.connectionAttempts = 0;
-                this.maxRetries = 1;
-                this.candidateTypes = new Set(); 
-            }
+    <div class="paper-card area-editor">
+      <div class="section-title">
+        <span>Editorial Desk</span>
+        <span id="textStatus" class="status-badge offline">Wire Down</span>
+      </div>
+      <div id="textEditor" contenteditable="true"></div>
+      <button id="sendTextBtn" class="btn" disabled>
+        <i class="fas fa-print"></i> Send to Press
+      </button>
+      <div
+        style="
+          font-size: 0.75rem;
+          color: #888;
+          margin-top: 8px;
+          font-style: italic;
+        "
+      >
+        Note: Paste formatted articles directly from wire into this desk.
+      </div>
+    </div>
 
-            initializeElements() {
-                this.elements = {
-                    localConfigText: document.getElementById('localConfigText'),
-                    remoteConfigText: document.getElementById('remoteConfigText'),
-                    createLocalOfferBtn: document.getElementById('createLocalOffer'),
-                    connectRemoteBtn: document.getElementById('connectRemoteConfig'),
-                    textEditor: document.getElementById('textEditor'),
-                    textReceiver: document.getElementById('textReceiver'),
-                    sendTextBtn: document.getElementById('sendTextBtn'),
-                    textStatus: document.getElementById('textStatus'),
-                    fileUploadArea: document.getElementById('fileUploadArea'),
-                    fileInput: document.getElementById('fileInput'),
-                    progressContainer: document.getElementById('progressContainer'),
-                    progressFill: document.getElementById('progressFill'),
-                    progressLabel: document.getElementById('progressLabel'),
-                    progressPercent: document.getElementById('progressPercent'),
-                    downloadArea: document.getElementById('downloadArea'),
-                    toast: document.getElementById('toast')
-                };
-            }
+    <div class="paper-card area-receiver" style="border-top: 4px double #000">
+      <div class="section-title">
+        <span>Teleprinter Feed</span>
+        <i class="fas fa-tty"></i>
+      </div>
+      <div id="textReceiver">
+        <div
+          style="
+            color: #aaa;
+            text-align: center;
+            margin-top: 80px;
+            font-style: italic;
+          "
+        >
+          Awaiting incoming wire...
+        </div>
+      </div>
+    </div>
 
-            updateDate() {
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-US', options);
-            }
+    <div class="paper-card area-files">
+      <div class="section-title">
+        <span>Material Dispatch</span>
+        <i class="fas fa-envelope-open-text"></i>
+      </div>
+      <input type="file" id="fileInput" hidden />
+      <div class="drop-zone" id="fileUploadArea">
+        <i
+          class="fas fa-box-open"
+          style="font-size: 2rem; color: #ccc; margin-bottom: 10px"
+        ></i>
+        <p style="font-family: 'Arial'; font-size: 0.9rem">
+          Drop dispatch materials here
+        </p>
+      </div>
+      <div id="progressContainer" class="hidden" style="margin-top: 15px">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Arial';
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+          "
+        >
+          <span id="progressLabel">Typesetting...</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-wrapper">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
 
-            initializeSignalingServer() {
-                this.socket = io("https://vswbappapp-dbb2f3f4h9bnh7ed.westeurope-01.azurewebsites.net", {
-                    transports: ["websocket", "polling"]
-                });
+    <div class="paper-card area-downloads">
+      <div class="section-title">
+        <span>Inbound Dispatches</span>
+        <i class="fas fa-archive"></i>
+      </div>
+      <div
+        id="downloadArea"
+        style="display: flex; flex-direction: column; gap: 10px"
+      >
+        <div
+          style="
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+          "
+        >
+          No dispatches received.
+        </div>
+      </div>
+    </div>
+  </div>
 
-                // NEW: Connect error handling
-                this.socket.on('connect_error', (error) => {
-                    console.error('Connection error:', error);
-                    this.showToast('Signal Bureau unreachable. Check connection.');
-                });
+  <footer>
+    <p>Distributed via The Morning Chronicle. Direct Bureau-to-Bureau Distribution</p>
+    <p style="margin-top: 5px; font-size: 0.7rem">
+      &copy; 2025 The Morning Chronicle. No Archives Kept.
+    </p>
+  </footer>
 
-                this.socket.on('connect', () => {
-                    console.log('Connected to signaling server');
-                    this.showToast('Wire Service Online');
-                });
+  <div id="toast" class="toast">Notification</div>
 
-                this.socket.on('disconnect', () => {
-                    console.log('Disconnected from signaling server');
-                    this.showToast('Wire Service Interrupted');
-                });
+  <script>
+    class SecureShareApp {
+      constructor() {
+        this.elements = {};
+        this.socket = null;
+        this.localPeer = null;
+        this.iceServers = null; // will be filled from backend
 
-                this.socket.on('offer', async (data) => {
-                    console.log('Received offer');
-                    try {
-                        await this.localPeer.setRemoteDescription(new RTCSessionDescription(data.offer));
-                        
-                        if (this.iceCandidateBuffer.length > 0) {
-                            console.log(`Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`);
-                            for (const candidate of this.iceCandidateBuffer) {
-                                try {
-                                    await this.localPeer.addIceCandidate(new RTCIceCandidate(candidate));
-                                } catch (e) { console.warn(e); }
-                            }
-                            this.iceCandidateBuffer = [];
-                        }
-                        
-                        const answer = await this.localPeer.createAnswer();
-                        await this.localPeer.setLocalDescription(answer);
-                        
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        
-                        this.socket.emit('answer', {
-                            to: data.from,
-                            answer: this.localPeer.localDescription
-                        });
-                        
-                        this.remotePeerId = data.from;
-                        this.showToast('Incoming Uplink Request. Responding...');
-                    } catch (error) {
-                        console.error('Error handling offer:', error);
-                        this.showToast('Error Processing Handshake');
-                    }
-                });
+        this.dataChannel = null;
+        this.receiveBuffer = [];
+        this.receivedSize = 0;
+        this.receivedFile = {};
+        this.fileToSend = null;
+        this.maxFileSize = 50 * 1024 * 1024;
+        this.peerId = null;
+        this.remotePeerId = null;
+        this.iceCandidateBuffer = [];
+        this.connectionAttempts = 0;
+        this.maxRetries = 1;
+        this.candidateTypes = new Set();
 
-                this.socket.on('answer', async (data) => {
-                    console.log('Received answer');
-                    try {
-                        await this.localPeer.setRemoteDescription(new RTCSessionDescription(data.answer));
-                        
-                        if (this.iceCandidateBuffer.length > 0) {
-                            console.log(`Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`);
-                            for (const candidate of this.iceCandidateBuffer) {
-                                try {
-                                    await this.localPeer.addIceCandidate(new RTCIceCandidate(candidate));
-                                } catch (e) { console.warn(e); }
-                            }
-                            this.iceCandidateBuffer = [];
-                        }
-                        this.showToast('Bureau Uplink Established Successfully');
-                    } catch (error) {
-                        console.error('Error handling answer:', error);
-                        this.showToast('Error Processing Handshake Response');
-                    }
-                });
+        this.initializeElements();
+        this.updateDate();
+        this.initializeSignalingServer();
+        this.fetchTurnConfig();
+        this.setupEventListeners();
+        this.setupDragAndDrop();
+        this.setupPageSafety();
+      }
 
-                this.socket.on('ice-candidate', async (data) => {
-                    try {
-                        if (data.candidate) {
-                            if (!this.localPeer.remoteDescription) {
-                                this.iceCandidateBuffer.push(data.candidate);
-                            } else {
-                                await this.localPeer.addIceCandidate(new RTCIceCandidate(data.candidate));
-                            }
-                        }
-                    } catch (error) {
-                        console.error('Error adding ICE candidate:', error);
-                    }
-                });
-            }
+      initializeElements() {
+        this.elements = {
+          localConfigText: document.getElementById("localConfigText"),
+          remoteConfigText: document.getElementById("remoteConfigText"),
+          createLocalOfferBtn: document.getElementById("createLocalOffer"),
+          connectRemoteBtn: document.getElementById("connectRemoteConfig"),
+          textEditor: document.getElementById("textEditor"),
+          textReceiver: document.getElementById("textReceiver"),
+          sendTextBtn: document.getElementById("sendTextBtn"),
+          textStatus: document.getElementById("textStatus"),
+          fileUploadArea: document.getElementById("fileUploadArea"),
+          fileInput: document.getElementById("fileInput"),
+          progressContainer: document.getElementById("progressContainer"),
+          progressFill: document.getElementById("progressFill"),
+          progressLabel: document.getElementById("progressLabel"),
+          progressPercent: document.getElementById("progressPercent"),
+          downloadArea: document.getElementById("downloadArea"),
+          toast: document.getElementById("toast"),
+        };
+      }
 
-            initializePeerConnection() {
-                this.localPeer = new RTCPeerConnection({
-                    iceServers: [
-                        { urls: "stun:stun.l.google.com:19302" },
-                        { urls: "stun:stun1.l.google.com:19302" },
-                        {
-                            urls: "turn:openrelay.metered.ca:80",
-                            username: "openrelayproject",
-                            credential: "openrelayproject",
-                        },
-                        {
-                            urls: "turn:openrelay.metered.ca:443",
-                            username: "openrelayproject",
-                            credential: "openrelayproject",
-                        }
-                    ],
-                });
+      updateDate() {
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        document.getElementById("currentDate").innerText =
+          new Date().toLocaleDateString("en-US", options);
+      }
 
-                this.localPeer.onicecandidate = (event) => {
-                    if (event.candidate && this.remotePeerId) {
-                        this.socket.emit('ice-candidate', {
-                            to: this.remotePeerId,
-                            candidate: event.candidate
-                        });
-                    }
-                };
+      initializeSignalingServer() {
+        this.socket = io(
+          "https://vswbappapp-dbb2f3f4h9bnh7ed.westeurope-01.azurewebsites.net",
+          {
+            transports: ["websocket", "polling"],
+          }
+        );
 
-                this.localPeer.oniceconnectionstatechange = () => {
-                    if (this.localPeer.iceConnectionState === 'failed') {
-                        this.handleConnectionFailure();
-                    }
-                };
+        this.socket.on("connect_error", (error) => {
+          console.error("Connection error:", error);
+          this.showToast("Signal Bureau unreachable. Check connection.");
+        });
 
-                this.localPeer.onconnectionstatechange = () => {
-                    if (this.localPeer.connectionState === 'connected') {
-                        this.updateConnectionStatus(true);
-                    } else if (['disconnected', 'failed', 'closed'].includes(this.localPeer.connectionState)) {
-                        this.updateConnectionStatus(false);
-                    }
-                };
+        this.socket.on("connect", () => {
+          console.log("Connected to signaling server");
+          this.showToast("Wire Service Online");
+        });
 
-                this.localPeer.ondatachannel = (event) => {
-                    this.setupDataChannel(event.channel);
-                };
-            }
+        this.socket.on("disconnect", () => {
+          console.log("Disconnected from signaling server");
+          this.showToast("Wire Service Interrupted");
+        });
 
-            setupDataChannel(channel) {
-                this.dataChannel = channel;
-                this.dataChannel.binaryType = "arraybuffer";
+        this.socket.on("offer", async (data) => {
+          console.log("Received offer");
+          if (!this.localPeer) {
+            this.showToast("TURN config not ready yet.");
+            return;
+          }
+          try {
+            await this.localPeer.setRemoteDescription(
+              new RTCSessionDescription(data.offer)
+            );
 
-                this.dataChannel.onopen = () => {
-                    console.log('Data channel opened');
-                    this.updateConnectionStatus(true);
-                    this.showToast('The Uplink is Live. Ready to dispatch.');
-                };
-
-                this.dataChannel.onclose = () => {
-                    console.log('Data channel closed');
-                    this.updateConnectionStatus(false);
-                    this.showToast('Uplink Terminated.');
-                };
-
-                this.dataChannel.onmessage = (event) => {
-                    this.handleReceiveMessage(event);
-                };
-            }
-
-            updateConnectionStatus(connected) {
-                const btn = this.elements.connectRemoteBtn;
-                const status = this.elements.textStatus;
-                
-                if (connected) {
-                    btn.innerHTML = '<i class="fas fa-check"></i> Uplink Active';
-                    btn.classList.remove('btn-outline');
-                    btn.classList.add('btn');
-                    btn.style.background = "#1a7f37";
-                    btn.style.color = "#fff";
-                    btn.style.borderColor = "#1a7f37";
-                    
-                    this.elements.sendTextBtn.disabled = false;
-                    status.className = 'status-badge online';
-                    status.innerText = 'Wire Live';
-                    this.elements.fileUploadArea.style.borderColor = '#1a7f37';
-                } else {
-                    // Explicitly reset styles to ensure button isn't "lost"
-                    btn.innerHTML = '<i class="fas fa-broadcast-tower"></i> Establish Uplink';
-                    btn.classList.remove('btn');
-                    btn.classList.add('btn-outline');
-                    btn.style.background = "transparent";
-                    btn.style.color = "var(--ink-color)";
-                    btn.style.borderColor = "var(--ink-color)";
-                    btn.disabled = false;
-
-                    this.elements.sendTextBtn.disabled = true;
-                    status.className = 'status-badge offline';
-                    status.innerText = 'Wire Down';
-                    this.elements.fileUploadArea.style.borderColor = '#ccc';
-                }
-            }
-
-            setupEventListeners() {
-                this.elements.createLocalOfferBtn.addEventListener('click', () => this.generatePeerId());
-                this.elements.connectRemoteBtn.addEventListener('click', () => this.connectToPeer());
-                this.elements.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
-                
-                // Text sending
-                this.elements.sendTextBtn.addEventListener('click', () => {
-                    const content = this.elements.textEditor.innerHTML;
-                    
-                    // NEW: Check for empty content before sending
-                    if(!content || content.trim() === '' || content === '<br>') {
-                        this.showToast('Editor is empty. Nothing to publish.');
-                        return;
-                    }
-
-                    if(this.dataChannel && this.dataChannel.readyState === 'open') {
-                        this.dataChannel.send(content); 
-                        this.showToast('Story Dispatched to Press');
-                        this.elements.textEditor.innerHTML = ""; // Clear after send
-                    } else {
-                        this.showToast('Wire is cut. Cannot dispatch.');
-                    }
-                });
-            }
-
-            setupDragAndDrop() {
-                const uploadArea = this.elements.fileUploadArea;
-                
-                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                    uploadArea.addEventListener(eventName, this.preventDefaults, false);
-                });
-
-                uploadArea.addEventListener('drop', (e) => this.handleDrop(e), false);
-                uploadArea.addEventListener('click', () => {
-                    if (this.dataChannel && this.dataChannel.readyState === 'open') {
-                        this.elements.fileInput.click();
-                    } else {
-                        this.showToast('Establish Bureau Uplink before dispatching materials.');
-                    }
-                });
-            }
-
-            // NEW: Prevent accidental tab closure during transfer
-            setupPageSafety() {
-                window.addEventListener('beforeunload', (e) => {
-                    // Check if sending
-                    if (this.fileToSend) {
-                        e.preventDefault();
-                        e.returnValue = '';
-                        return;
-                    }
-                    
-                    // Check if receiving
-                    if (this.receivedFile.size !== undefined && this.receivedSize < this.receivedFile.size) {
-                        e.preventDefault();
-                        e.returnValue = '';
-                        return;
-                    }
-                });
-            }
-
-            preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-
-            handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                if (files.length > 0) {
-                    this.elements.fileInput.files = files;
-                    this.handleFileSelect({ target: { files: files } });
-                }
-            }
-
-            generatePeerId() {
-                // NEW: Ensure socket is actually connected
-                if (this.socket.connected) {
-                    this.peerId = this.socket.id;
-                    this.elements.localConfigText.value = this.peerId;
-                    this.showToast('Credentials Obtained. Share with Foreign Bureau.');
-                    this.elements.createLocalOfferBtn.innerHTML = '<i class="fas fa-check"></i> ID Active';
-                    this.elements.createLocalOfferBtn.disabled = true;
-                } else {
-                    this.showToast('Signal Service Offline. Cannot obtain credentials.');
-                }
-            }
-
-            async connectToPeer() {
+            if (this.iceCandidateBuffer.length > 0) {
+              console.log(
+                `Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`
+              );
+              for (const candidate of this.iceCandidateBuffer) {
                 try {
-                    const remotePeerIdInput = this.elements.remoteConfigText.value.trim();
-                    if (!remotePeerIdInput) {
-                        this.showToast('Enter a Foreign Bureau Access Code');
-                        return;
-                    }
-
-                    if (!this.peerId) {
-                        this.showToast('Obtain Local Credentials first');
-                        return;
-                    }
-
-                    this.remotePeerId = remotePeerIdInput;
-
-                    if (!this.dataChannel) {
-                        this.dataChannel = this.localPeer.createDataChannel("fileTransfer", { ordered: true });
-                        this.setupDataChannel(this.dataChannel);
-                    }
-
-                    const offer = await this.localPeer.createOffer();
-                    await this.localPeer.setLocalDescription(offer);
-                    
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                    
-                    this.socket.emit('offer', {
-                        to: this.remotePeerId,
-                        offer: this.localPeer.localDescription
-                    });
-
-                    this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Establishing...';
-                    this.elements.connectRemoteBtn.disabled = true;
-
-                } catch (error) {
-                    console.error('Error connecting:', error);
-                    this.showToast('Uplink Failed');
-                    this.resetUI();
+                  await this.localPeer.addIceCandidate(
+                    new RTCIceCandidate(candidate)
+                  );
+                } catch (e) {
+                  console.warn(e);
                 }
+              }
+              this.iceCandidateBuffer = [];
             }
 
-            handleFileSelect(event) {
-                this.fileToSend = event.target.files[0];
-                if (!this.fileToSend) return;
+            const answer = await this.localPeer.createAnswer();
+            await this.localPeer.setLocalDescription(answer);
 
-                if (this.fileToSend.size > this.maxFileSize) {
-                    this.showToast(`Dispatch too large (Max 50MB)`);
-                    this.fileToSend = null;
-                    this.elements.fileInput.value = '';
-                    return;
-                }
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
-                if (!this.dataChannel || this.dataChannel.readyState !== 'open') {
-                    this.showToast('Establish Bureau Uplink first');
-                    this.fileToSend = null;
-                    this.elements.fileInput.value = '';
-                    return;
-                }
+            this.socket.emit("answer", {
+              to: data.from,
+              answer: this.localPeer.localDescription,
+            });
 
-                this.sendFile(this.fileToSend);
-            }
+            this.remotePeerId = data.from;
+            this.showToast("Incoming Uplink Request. Responding...");
+          } catch (error) {
+            console.error("Error handling offer:", error);
+            this.showToast("Error Processing Handshake");
+          }
+        });
 
-            async sendFile(file) {
-                this.elements.progressContainer.classList.remove('hidden');
-                this.updateProgress(0, `Telexing: ${file.name}`);
+        this.socket.on("answer", async (data) => {
+          console.log("Received answer");
+          if (!this.localPeer) {
+            this.showToast("TURN config not ready yet.");
+            return;
+          }
+          try {
+            await this.localPeer.setRemoteDescription(
+              new RTCSessionDescription(data.answer)
+            );
 
+            if (this.iceCandidateBuffer.length > 0) {
+              console.log(
+                `Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`
+              );
+              for (const candidate of this.iceCandidateBuffer) {
                 try {
-                    const metadata = {
-                        name: file.name,
-                        size: file.size,
-                        type: file.type,
-                    };
-                    
-                    this.dataChannel.send(JSON.stringify(metadata));
-
-                    let offset = 0;
-                    const maxChunkSize = 16384; 
-                    const fileReader = new FileReader();
-
-                    fileReader.onload = (e) => {
-                        this.dataChannel.send(e.target.result);
-                        offset += e.target.result.byteLength;
-
-                        const percentage = ((offset / file.size) * 100).toFixed(1);
-                        this.updateProgress(offset, `Telexing: ${file.name}`, percentage);
-
-                        if (offset < file.size) {
-                            readNextChunk();
-                        } else {
-                            this.showToast(`Dispatch Sent: ${file.name}`);
-                            this.updateProgress(file.size, `Sent: ${file.name}`, '100');
-                            this.elements.fileInput.value = '';
-                            this.fileToSend = null;
-                            setTimeout(() => this.elements.progressContainer.classList.add('hidden'), 3000);
-                        }
-                    };
-
-                    const readNextChunk = () => {
-                        const slice = file.slice(offset, offset + maxChunkSize);
-                        fileReader.readAsArrayBuffer(slice);
-                    };
-
-                    readNextChunk();
-
-                } catch (error) {
-                    this.showToast(`Transmission Error: ${error.message}`);
-                    console.error(error);
-                    this.elements.progressContainer.classList.add('hidden');
+                  await this.localPeer.addIceCandidate(
+                    new RTCIceCandidate(candidate)
+                  );
+                } catch (e) {
+                  console.warn(e);
                 }
+              }
+              this.iceCandidateBuffer = [];
             }
 
-            handleReceiveMessage(event) {
-                if (typeof event.data === 'string') {
-                    try {
-                        const fileMetadata = JSON.parse(event.data);
-                        if (fileMetadata.name && fileMetadata.size) {
-                            this.receivedFile = fileMetadata;
-                            this.receiveBuffer = [];
-                            this.receivedSize = 0;
-                            this.elements.progressContainer.classList.remove('hidden');
-                            this.updateProgress(0, `Receiving: ${this.receivedFile.name}`);
-                            this.showToast(`Incoming Dispatch: ${this.receivedFile.name}`);
-                            return;
-                        }
-                    } catch (e) {
-                        console.log("Received text content");
-                        this.elements.textReceiver.innerHTML = event.data; 
-                        this.showToast('Breaking Story Received');
-                        return;
-                    }
-                }
+            this.showToast("Bureau Uplink Established Successfully");
+          } catch (error) {
+            console.error("Error handling answer:", error);
+            this.showToast("Error Processing Handshake Response");
+          }
+        });
 
-                if (this.receivedFile.size !== undefined) {
-                    this.receiveBuffer.push(event.data);
-                    this.receivedSize += event.data.byteLength;
-                    
-                    const percentage = ((this.receivedSize / this.receivedFile.size) * 100).toFixed(1);
-                    this.updateProgress(this.receivedSize, `Receiving: ${this.receivedFile.name}`, percentage);
-
-                    if (this.receivedSize >= this.receivedFile.size) {
-                        this.assembleAndDownloadFile();
-                    }
-                }
+        this.socket.on("ice-candidate", async (data) => {
+          if (!this.localPeer) {
+            this.iceCandidateBuffer.push(data.candidate);
+            return;
+          }
+          try {
+            if (data.candidate) {
+              if (!this.localPeer.remoteDescription) {
+                this.iceCandidateBuffer.push(data.candidate);
+              } else {
+                await this.localPeer.addIceCandidate(
+                  new RTCIceCandidate(data.candidate)
+                );
+              }
             }
+          } catch (error) {
+            console.error("Error adding ICE candidate:", error);
+          }
+        });
 
-            assembleAndDownloadFile() {
-                try {
-                    const blob = new Blob(this.receiveBuffer, { type: this.receivedFile.type });
-                    const url = URL.createObjectURL(blob);
-
-                    const dlItem = document.createElement('div');
-                    dlItem.className = 'paper-card fade-in';
-                    dlItem.style.padding = '10px';
-                    dlItem.style.borderLeft = '4px solid #000';
-                    dlItem.innerHTML = `
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <div style="font-weight:bold; font-family:'Arial'; font-size:0.9rem;">${this.receivedFile.name}</div>
-                                <div style="font-size:0.8rem; color:#666;">${this.formatBytes(this.receivedFile.size)}</div>
-                            </div>
-                            <a href="${url}" download="${this.receivedFile.name}" class="btn btn-outline" style="width:auto; padding:5px 15px; font-size:0.75rem;">
-                                <i class="fas fa-download"></i> Collect
-                            </a>
-                        </div>
-                    `;
-
-                    if(this.elements.downloadArea.children[0] && this.elements.downloadArea.children[0].innerText.includes("No dispatches")) {
-                        this.elements.downloadArea.innerHTML = '';
-                    }
-
-                    this.elements.downloadArea.prepend(dlItem);
-                    
-                    this.showToast('Dispatch Archived');
-                    this.updateProgress(this.receivedSize, `Received: ${this.receivedFile.name}`, '100');
-                    
-                    setTimeout(() => {
-                        this.receiveBuffer = [];
-                        this.receivedSize = 0;
-                        this.receivedFile = {};
-                        this.elements.progressContainer.classList.add('hidden');
-                    }, 3000);
-                    
-                } catch (error) {
-                    this.showToast(`Error Archiving: ${error.message}`);
-                    console.error(error);
-                    this.elements.progressContainer.classList.add('hidden');
-                }
+        // Optional: also accept TURN config via socket
+        this.socket.on("turn-config", (cfg) => {
+          if (cfg && Array.isArray(cfg.iceServers)) {
+            this.iceServers = cfg.iceServers;
+            if (!this.localPeer) {
+              this.initializePeerConnection();
             }
+          }
+        });
+      }
 
-            updateProgress(current, label, percent = '0') {
-                this.elements.progressFill.style.width = `${percent}%`;
-                this.elements.progressLabel.textContent = label;
-                this.elements.progressPercent.textContent = `${percent}%`;
-            }
+      async fetchTurnConfig() {
+        try {
+          const res = await fetch(
+            "https://vswbappapp-dbb2f3f4h9bnh7ed.westeurope-01.azurewebsites.net/api/turn-config",
+            { method: "GET" }
+          );
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+          }
+          const data = await res.json();
+          if (!data || !Array.isArray(data.iceServers)) {
+            throw new Error("Invalid TURN config format");
+          }
+          this.iceServers = data.iceServers;
+          this.showToast("TURN configuration loaded.");
+          this.initializePeerConnection();
+        } catch (err) {
+          console.error("Failed to fetch TURN config:", err);
+          this.showToast("Failed to load TURN config from bureau backend.");
+        }
+      }
 
-            resetUI() {
-                this.elements.createLocalOfferBtn.innerHTML = '<i class="fas fa-stamp"></i> Obtain Credentials';
-                this.elements.createLocalOfferBtn.disabled = false;
-                this.updateConnectionStatus(false);
-            }
-
-            showToast(message) {
-                const toast = this.elements.toast;
-                toast.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 3000);
-            }
-
-            async handleConnectionFailure() {
-                this.showToast('Uplink Interrupted. Logistical note: Two reporters in same room cannot link directly. Use separate devices.');
-                this.resetConnection();
-            }
-
-            resetConnection() {
-                if (this.localPeer) this.localPeer.close();
-                this.iceCandidateBuffer = [];
-                this.candidateTypes.clear();
-                this.dataChannel = null;
-                this.initializePeerConnection();
-                this.resetUI();
-            }
-
-            formatBytes(bytes, decimals = 2) {
-                if (bytes === 0) return '0 Bytes';
-                const k = 1024;
-                const dm = decimals < 0 ? 0 : decimals;
-                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-            }
+      initializePeerConnection() {
+        if (!this.iceServers) {
+          console.warn("initializePeerConnection called before iceServers are available");
+          return;
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            new SecureShareApp();
+        this.localPeer = new RTCPeerConnection({
+          iceServers: this.iceServers,
         });
-    </script>
+
+        this.localPeer.onicecandidate = (event) => {
+          if (event.candidate && this.remotePeerId) {
+            this.socket.emit("ice-candidate", {
+              to: this.remotePeerId,
+              candidate: event.candidate,
+            });
+          }
+        };
+
+        this.localPeer.oniceconnectionstatechange = () => {
+          if (this.localPeer.iceConnectionState === "failed") {
+            this.handleConnectionFailure();
+          }
+        };
+
+        this.localPeer.onconnectionstatechange = () => {
+          if (this.localPeer.connectionState === "connected") {
+            this.updateConnectionStatus(true);
+          } else if (
+            ["disconnected", "failed", "closed"].includes(
+              this.localPeer.connectionState
+            )
+          ) {
+            this.updateConnectionStatus(false);
+          }
+        };
+
+        this.localPeer.ondatachannel = (event) => {
+          this.setupDataChannel(event.channel);
+        };
+      }
+
+      setupDataChannel(channel) {
+        this.dataChannel = channel;
+        this.dataChannel.binaryType = "arraybuffer";
+
+        this.dataChannel.onopen = () => {
+          console.log("Data channel opened");
+          this.updateConnectionStatus(true);
+          this.showToast("The Uplink is Live. Ready to dispatch.");
+        };
+
+        this.dataChannel.onclose = () => {
+          console.log("Data channel closed");
+          this.updateConnectionStatus(false);
+          this.showToast("Uplink Terminated.");
+        };
+
+        this.dataChannel.onmessage = (event) => {
+          this.handleReceiveMessage(event);
+        };
+      }
+
+      updateConnectionStatus(connected) {
+        const btn = this.elements.connectRemoteBtn;
+        const status = this.elements.textStatus;
+
+        if (connected) {
+          btn.innerHTML = '<i class="fas fa-check"></i> Uplink Active';
+          btn.classList.remove("btn-outline");
+          btn.classList.add("btn");
+          btn.style.background = "#1a7f37";
+          btn.style.color = "#fff";
+          btn.style.borderColor = "#1a7f37";
+
+          this.elements.sendTextBtn.disabled = false;
+          status.className = "status-badge online";
+          status.innerText = "Wire Live";
+          this.elements.fileUploadArea.style.borderColor = "#1a7f37";
+        } else {
+          btn.innerHTML =
+            '<i class="fas fa-broadcast-tower"></i> Establish Uplink';
+          btn.classList.remove("btn");
+          btn.classList.add("btn-outline");
+          btn.style.background = "transparent";
+          btn.style.color = "var(--ink-color)";
+          btn.style.borderColor = "var(--ink-color)";
+          btn.disabled = false;
+
+          this.elements.sendTextBtn.disabled = true;
+          status.className = "status-badge offline";
+          status.innerText = "Wire Down";
+          this.elements.fileUploadArea.style.borderColor = "#ccc";
+        }
+      }
+
+      setupEventListeners() {
+        this.elements.createLocalOfferBtn.addEventListener("click", () =>
+          this.generatePeerId()
+        );
+
+        this.elements.connectRemoteBtn.addEventListener("click", () =>
+          this.connectToPeer()
+        );
+
+        this.elements.fileInput.addEventListener("change", (e) =>
+          this.handleFileSelect(e)
+        );
+
+        this.elements.sendTextBtn.addEventListener("click", () => {
+          const content = this.elements.textEditor.innerHTML;
+
+          if (!content || content.trim() === "" || content === "<br>") {
+            this.showToast("Editor is empty. Nothing to publish.");
+            return;
+          }
+
+          if (
+            this.dataChannel &&
+            this.dataChannel.readyState === "open"
+          ) {
+            this.dataChannel.send(content);
+            this.showToast("Story Dispatched to Press");
+            this.elements.textEditor.innerHTML = "";
+          } else {
+            this.showToast("Wire is cut. Cannot dispatch.");
+          }
+        });
+      }
+
+      setupDragAndDrop() {
+        const uploadArea = this.elements.fileUploadArea;
+
+        ["dragenter", "dragover", "dragleave", "drop"].forEach(
+          (eventName) => {
+            uploadArea.addEventListener(
+              eventName,
+              this.preventDefaults,
+              false
+            );
+          }
+        );
+
+        uploadArea.addEventListener("drop", (e) => this.handleDrop(e), false);
+
+        uploadArea.addEventListener("click", () => {
+          if (
+            this.dataChannel &&
+            this.dataChannel.readyState === "open"
+          ) {
+            this.elements.fileInput.click();
+          } else {
+            this.showToast(
+              "Establish Bureau Uplink before dispatching materials."
+            );
+          }
+        });
+      }
+
+      setupPageSafety() {
+        window.addEventListener("beforeunload", (e) => {
+          if (this.fileToSend) {
+            e.preventDefault();
+            e.returnValue = "";
+            return;
+          }
+          if (
+            this.receivedFile.size !== undefined &&
+            this.receivedSize < this.receivedFile.size
+          ) {
+            e.preventDefault();
+            e.returnValue = "";
+          }
+        });
+      }
+
+      preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files.length > 0) {
+          this.elements.fileInput.files = files;
+          this.handleFileSelect({ target: { files } });
+        }
+      }
+
+      generatePeerId() {
+        if (this.socket && this.socket.connected) {
+          this.peerId = this.socket.id;
+          this.elements.localConfigText.value = this.peerId;
+          this.showToast(
+            "Credentials Obtained. Share with Foreign Bureau."
+          );
+          this.elements.createLocalOfferBtn.innerHTML =
+            '<i class="fas fa-check"></i> ID Active';
+          this.elements.createLocalOfferBtn.disabled = true;
+        } else {
+          this.showToast(
+            "Signal Service Offline. Cannot obtain credentials."
+          );
+        }
+      }
+
+      async connectToPeer() {
+        try {
+          if (!this.iceServers) {
+            this.showToast("TURN config not loaded yet. Please wait.");
+            return;
+          }
+          if (!this.localPeer) {
+            this.initializePeerConnection();
+          }
+
+          const remotePeerIdInput =
+            this.elements.remoteConfigText.value.trim();
+          if (!remotePeerIdInput) {
+            this.showToast("Enter a Foreign Bureau Access Code");
+            return;
+          }
+          if (!this.peerId) {
+            this.showToast("Obtain Local Credentials first");
+            return;
+          }
+
+          this.remotePeerId = remotePeerIdInput;
+
+          if (!this.dataChannel) {
+            this.dataChannel = this.localPeer.createDataChannel(
+              "fileTransfer",
+              { ordered: true }
+            );
+            this.setupDataChannel(this.dataChannel);
+          }
+
+          const offer = await this.localPeer.createOffer();
+          await this.localPeer.setLocalDescription(offer);
+
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          this.socket.emit("offer", {
+            to: this.remotePeerId,
+            offer: this.localPeer.localDescription,
+          });
+
+          this.elements.connectRemoteBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Establishing...';
+          this.elements.connectRemoteBtn.disabled = true;
+        } catch (error) {
+          console.error("Error connecting:", error);
+          this.showToast("Uplink Failed");
+          this.resetUI();
+        }
+      }
+
+      handleFileSelect(event) {
+        this.fileToSend = event.target.files[0];
+        if (!this.fileToSend) return;
+
+        if (this.fileToSend.size > this.maxFileSize) {
+          this.showToast("Dispatch too large (Max 50MB)");
+          this.fileToSend = null;
+          this.elements.fileInput.value = "";
+          return;
+        }
+
+        if (
+          !this.dataChannel ||
+          this.dataChannel.readyState !== "open"
+        ) {
+          this.showToast("Establish Bureau Uplink first");
+          this.fileToSend = null;
+          this.elements.fileInput.value = "";
+          return;
+        }
+
+        this.sendFile(this.fileToSend);
+      }
+
+      async sendFile(file) {
+        this.elements.progressContainer.classList.remove("hidden");
+        this.updateProgress(0, `Telexing: ${file.name}`, "0");
+        try {
+          const metadata = {
+            name: file.name,
+            size: file.size,
+            type: file.type,
+          };
+          this.dataChannel.send(JSON.stringify(metadata));
+
+          let offset = 0;
+          const maxChunkSize = 16384;
+          const fileReader = new FileReader();
+
+          fileReader.onload = (e) => {
+            this.dataChannel.send(e.target.result);
+            offset += e.target.result.byteLength;
+
+            const percentage = ((offset / file.size) * 100).toFixed(1);
+            this.updateProgress(
+              offset,
+              `Telexing: ${file.name}`,
+              percentage
+            );
+
+            if (offset < file.size) {
+              readNextChunk();
+            } else {
+              this.showToast(`Dispatch Sent: ${file.name}`);
+              this.updateProgress(
+                file.size,
+                `Sent: ${file.name}`,
+                "100"
+              );
+              this.elements.fileInput.value = "";
+              this.fileToSend = null;
+              setTimeout(
+                () =>
+                  this.elements.progressContainer.classList.add(
+                    "hidden"
+                  ),
+                3000
+              );
+            }
+          };
+
+          const readNextChunk = () => {
+            const slice = file.slice(offset, offset + maxChunkSize);
+            fileReader.readAsArrayBuffer(slice);
+          };
+
+          readNextChunk();
+        } catch (error) {
+          this.showToast(`Transmission Error: ${error.message}`);
+          console.error(error);
+          this.elements.progressContainer.classList.add("hidden");
+        }
+      }
+
+      handleReceiveMessage(event) {
+        if (typeof event.data === "string") {
+          try {
+            const fileMetadata = JSON.parse(event.data);
+            if (fileMetadata.name && fileMetadata.size) {
+              this.receivedFile = fileMetadata;
+              this.receiveBuffer = [];
+              this.receivedSize = 0;
+              this.elements.progressContainer.classList.remove(
+                "hidden"
+              );
+              this.updateProgress(
+                0,
+                `Receiving: ${this.receivedFile.name}`,
+                "0"
+              );
+              this.showToast(
+                `Incoming Dispatch: ${this.receivedFile.name}`
+              );
+              return;
+            }
+          } catch (e) {
+            // treat as text content
+          }
+
+          this.elements.textReceiver.innerHTML = event.data;
+          this.showToast("Breaking Story Received");
+          return;
+        }
+
+        if (this.receivedFile.size !== undefined) {
+          this.receiveBuffer.push(event.data);
+          this.receivedSize += event.data.byteLength;
+
+          const percentage = (
+            (this.receivedSize / this.receivedFile.size) *
+            100
+          ).toFixed(1);
+          this.updateProgress(
+            this.receivedSize,
+            `Receiving: ${this.receivedFile.name}`,
+            percentage
+          );
+
+          if (this.receivedSize >= this.receivedFile.size) {
+            this.assembleAndDownloadFile();
+          }
+        }
+      }
+
+      assembleAndDownloadFile() {
+        try {
+          const blob = new Blob(this.receiveBuffer, {
+            type: this.receivedFile.type,
+          });
+          const url = URL.createObjectURL(blob);
+
+          const dlItem = document.createElement("div");
+          dlItem.className = "paper-card fade-in";
+          dlItem.style.padding = "10px";
+          dlItem.style.borderLeft = "4px solid #000";
+          dlItem.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: bold; font-family: 'Arial'; font-size: 0.9rem;">
+                  ${this.receivedFile.name}
+                </div>
+                <div style="font-size: 0.8rem; color:#666;">
+                  ${this.formatBytes(this.receivedFile.size)}
+                </div>
+              </div>
+              <a href="${url}" download="${this.receivedFile.name}" class="btn btn-outline" style="width: auto; padding: 6px 12px;">
+                <i class="fas fa-download"></i> Collect
+              </a>
+            </div>
+          `;
+
+          if (
+            this.elements.downloadArea.children[0] &&
+            this.elements.downloadArea.children[0].innerText.includes(
+              "No dispatches received"
+            )
+          ) {
+            this.elements.downloadArea.innerHTML = "";
+          }
+
+          this.elements.downloadArea.prepend(dlItem);
+
+          this.showToast("Dispatch Archived");
+          this.updateProgress(
+            this.receivedSize,
+            `Received: ${this.receivedFile.name}`,
+            "100"
+          );
+          setTimeout(() => {
+            this.receiveBuffer = [];
+            this.receivedSize = 0;
+            this.receivedFile = {};
+            this.elements.progressContainer.classList.add("hidden");
+          }, 3000);
+        } catch (error) {
+          this.showToast(`Error Archiving: ${error.message}`);
+          console.error(error);
+          this.elements.progressContainer.classList.add("hidden");
+        }
+      }
+
+      updateProgress(current, label, percent = "0") {
+        this.elements.progressFill.style.width = `${percent}%`;
+        this.elements.progressLabel.textContent = label;
+        this.elements.progressPercent.textContent = `${percent}%`;
+      }
+
+      resetUI() {
+        this.elements.createLocalOfferBtn.innerHTML =
+          '<i class="fas fa-stamp"></i> Obtain Credentials';
+        this.elements.createLocalOfferBtn.disabled = false;
+        this.updateConnectionStatus(false);
+      }
+
+      showToast(message) {
+        const toast = this.elements.toast;
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+
+      async handleConnectionFailure() {
+        this.showToast(
+          "Uplink Interrupted. Logistical note: Two reporters in same room cannot link directly. Use separate devices/networks."
+        );
+        this.resetConnection();
+      }
+
+      resetConnection() {
+        if (this.localPeer) this.localPeer.close();
+        this.iceCandidateBuffer = [];
+        this.candidateTypes.clear();
+        this.dataChannel = null;
+        this.localPeer = null;
+        this.resetUI();
+        if (this.iceServers) {
+          this.initializePeerConnection();
+        }
+      }
+
+      formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return (
+          parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) +
+          " " +
+          sizes[i]
+        );
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      new SecureShareApp();
+    });
+  </script>
 </body>
 </html>
