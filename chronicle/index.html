@@ -47,7 +47,7 @@
         /* Header / Masthead */
         header {
             border-bottom: 1px solid #000;
-            padding: 1rem 0;
+            padding-bottom: 1rem;
             text-align: center;
             background: #fff;
             position: relative;
@@ -82,6 +82,243 @@
             font-size: 0.9rem;
             color: var(--accent-grey);
             margin-bottom: 0.5rem;
+        }
+
+        /* =========================================
+           ADVANCED C64 ARCADE ANIMATION
+           ========================================= */
+        #pixel-stage {
+            height: 80px; /* Increased height for layers */
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: #6E8FBE; /* C64 Blue 1 (Sky) */
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            image-rendering: pixelated;
+            display: block;
+        }
+
+        /* Layer 1: Clouds (Parallax Slow) */
+        .sky-layer {
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 200%;
+            height: 20px;
+            z-index: 1;
+            animation: scroll-slow 15s linear infinite;
+        }
+        .cloud {
+            position: absolute;
+            background: #fff;
+            opacity: 0.6;
+        }
+        .cloud::after { /* Pixel cloud shape */
+            content: '';
+            position: absolute;
+            top: 4px; left: 6px;
+            width: 6px; height: 6px;
+            background: #fff;
+            box-shadow: 8px 2px 0 #fff, 4px 6px 0 #fff;
+        }
+
+        /* Layer 2: Mountains (Parallax Medium) */
+        .mountain-layer {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 200%;
+            height: 25px;
+            z-index: 2;
+            animation: scroll-medium 8s linear infinite;
+        }
+        .mountain {
+            position: absolute;
+            bottom: 0;
+            width: 0; height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 20px solid #3B4A56; /* Darker Blue/Grey */
+        }
+
+        /* Layer 3: Houses (Parallax Normal) */
+        .house-layer {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 200%;
+            height: 35px;
+            z-index: 3;
+            animation: scroll-normal 4s linear infinite;
+        }
+        .house {
+            position: absolute;
+            bottom: 0;
+            width: 35px;
+            height: 20px;
+            background: #A33232; /* C64 Red Body */
+            border: 1px solid #000;
+        }
+        .house::before { /* Roof */
+            content: ''; position: absolute; top: -12px; left: -4px;
+            border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 12px solid #000;
+        }
+        .house::after { /* Door */
+            content: ''; position: absolute; top: 6px; left: 12px;
+            width: 10px; height: 14px; background: #6E8FBE;
+        }
+
+        /* Layer 4: Sidewalk (Parallax Normal) */
+        .sidewalk-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 20px;
+            z-index: 4;
+            background: 
+                linear-gradient(to bottom, #707070 0%, #707070 2px, #8f8f8f 2px, #8f8f8f 100%);
+            border-top: 2px solid #000;
+            animation: scroll-normal 4s linear infinite;
+        }
+        
+        /* Sidewalk Obstacle: The Crack */
+        .crack {
+            position: absolute;
+            bottom: 5px;
+            width: 0; height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid #000; /* Inverted triangle */
+            transform: scaleX(0.5);
+        }
+
+        /* The Paperboy Wrapper (Foreground - Moves Fast) */
+        .boy-wrapper {
+            position: absolute;
+            bottom: 8px; /* On sidewalk */
+            left: -60px;
+            z-index: 10;
+            animation: ride-across 6s linear infinite;
+        }
+
+        /* C64 Sprite Construction */
+        .paperboy {
+            position: relative;
+            width: 32px;
+            height: 40px;
+            animation: pedaling-bob 0.15s infinite alternate;
+        }
+
+        .cap { /* Cap */
+            position: absolute; top: 0; left: 4px; width: 22px; height: 10px;
+            background: #fff; border: 1px solid #000; border-bottom: none;
+        }
+        .cap::after { /* Visor */
+            content: ''; position: absolute; bottom: -2px; left: 2px;
+            width: 20px; height: 4px; background: #fff; border: 1px solid #000;
+        }
+        .head { /* Head */
+            position: absolute; top: 8px; left: 10px; width: 10px; height: 10px;
+            background: #F8F8B8; border: 1px solid #000; z-index: 2;
+        }
+        .body { /* Body & Shirt */
+            position: absolute; top: 18px; left: 2px; width: 26px; height: 14px;
+            background: #F8F8B8; border: 1px solid #000;
+            background-image: linear-gradient(to bottom, transparent 40%, #6E8FBE 40%, #6E8FBE 45%, transparent 45%);
+        }
+        .bag { /* News Satchel */
+            position: absolute; top: 16px; left: -6px; width: 10px; height: 14px;
+            background: #8B4513; border: 1px solid #000; z-index: 1;
+            animation: bag-wobble 0.3s infinite alternate;
+        }
+
+        /* The Bike */
+        .bike {
+            position: absolute; top: 30px; left: 0; width: 32px; height: 10px;
+        }
+        .wheel {
+            position: absolute; bottom: 0; width: 12px; height: 12px;
+            border: 2px solid #000; border-radius: 50%; background: #707070;
+            animation: spin 0.2s linear infinite;
+        }
+        .wheel.back { left: 0; } .wheel.front { left: 20px; }
+        
+        /* Pedal Arms */
+        .pedal-arm {
+            position: absolute; top: 4px; left: 4px; width: 24px; height: 2px;
+            background: #000; animation: pedaling 0.2s linear infinite;
+        }
+
+        /* The Arm & Throw */
+        .arm {
+            position: absolute; top: 20px; right: -4px; width: 14px; height: 3px;
+            background: #000; transform-origin: left center;
+            animation: arcade-throw 1.2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+        }
+
+        /* Flying Newspaper Physics */
+        .projectile {
+            position: absolute; top: 20px; left: 30px;
+            width: 10px; height: 14px; background: #fff; border: 1px solid #000;
+            z-index: 5; opacity: 0;
+            animation: physics-throw 1.2s ease-out infinite;
+            animation-delay: 2.5s;
+        }
+        .projectile:nth-child(2) { animation-delay: 5.5s; }
+
+        /* HUD: Score Counter */
+        .hud {
+            position: absolute; bottom: 25px; left: 10px;
+            font-family: 'Courier New', monospace; font-weight: bold; font-size: 10px;
+            color: #fff; text-shadow: 1px 1px 0 #000; z-index: 20;
+        }
+        .subscribers-count { color: #FFD700; } /* Gold */
+
+        /* Keyframes */
+        @keyframes scroll-slow { 0% { transform: translateX(0); } 100% { transform: translateX(-200px); } }
+        @keyframes scroll-medium { 0% { transform: translateX(0); } 100% { transform: translateX(-200px); } }
+        @keyframes scroll-normal { 0% { transform: translateX(0); } 100% { transform: translateX(-200px); } }
+
+        @keyframes ride-across {
+            0% { left: -60px; }
+            100% { left: 100%; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pedaling {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pedaling-bob {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-3px); } /* Bumpier */
+        }
+
+        @keyframes bag-wobble {
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
+        }
+
+        @keyframes arcade-throw {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(-70deg); } /* Wind back */
+            30% { transform: rotate(60deg); } /* Whip forward */
+            40% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes physics-throw {
+            0% { left: 40px; top: 20px; transform: scale(1) rotate(0); opacity: 1; }
+            25% { left: 55%; top: 25px; transform: scale(0.9) rotate(180deg); opacity: 1; } /* Apex */
+            50% { left: 75%; top: 20px; transform: scale(0.8) rotate(360deg); opacity: 1; } /* Impact */
+            100% { left: 85%; top: 15px; transform: scale(0.6) rotate(540deg); opacity: 0; } /* Landed */
         }
 
         /* Main Layout - Using Grid Areas */
@@ -351,6 +588,10 @@
             .paper-card {
                 min-height: auto;
             }
+            
+            #pixel-stage {
+                height: 60px;
+            }
         }
     </style>
 </head>
@@ -363,6 +604,64 @@
         </div>
         <div class="masthead">The Morning Chronicle</div>
         <div class="tagline">"Truth Without Intermediaries"</div>
+
+        <!-- NEW: Advanced Arcade Animation -->
+        <div id="pixel-stage">
+            <!-- Layer 1: Sky (Clouds) -->
+            <div class="sky-layer">
+                <div class="cloud" style="left: 10%;"></div>
+                <div class="cloud" style="left: 50%;"></div>
+                <div class="cloud" style="left: 120%;"></div>
+                <div class="cloud" style="left: 170%;"></div>
+            </div>
+
+            <!-- Layer 2: Mountains -->
+            <div class="mountain-layer">
+                <div class="mountain" style="left: 0%;"></div>
+                <div class="mountain" style="left: 80%;"></div>
+                <div class="mountain" style="left: 160%;"></div>
+                <div class="mountain" style="left: 240%;"></div>
+            </div>
+
+            <!-- Layer 3: Houses -->
+            <div class="house-layer">
+                <div class="house" style="left: 10px;"></div>
+                <div class="house" style="left: 160px;"></div>
+                <div class="house" style="left: 320px;"></div>
+                <div class="house" style="left: 480px;"></div>
+                <div class="house" style="left: 640px;"></div>
+            </div>
+
+            <!-- Layer 4: Sidewalk -->
+            <div class="sidewalk-layer">
+                <div class="crack" style="left: 100px;"></div>
+                <div class="crack" style="left: 350px;"></div>
+                <div class="crack" style="left: 600px;"></div>
+            </div>
+            
+            <!-- The Paperboy (Foreground) -->
+            <div class="boy-wrapper">
+                <!-- Score HUD -->
+                <div class="hud">
+                    SUBSCRIBERS: <span class="subscribers-count">0</span>
+                </div>
+
+                <div class="paperboy">
+                    <div class="cap"></div>
+                    <div class="head"></div>
+                    <div class="bag"></div> <!-- The Satchel -->
+                    <div class="body"></div>
+                    <div class="arm"></div> <!-- Throwing Arm -->
+                    <div class="bike">
+                        <div class="wheel back"></div>
+                        <div class="wheel front"></div>
+                        <div class="pedal-arm"></div>
+                    </div>
+                </div>
+                <div class="projectile"></div>
+                <div class="projectile"></div>
+            </div>
+        </div>
     </header>
 
     <div class="main-container">
@@ -1008,7 +1307,7 @@
             }
 
             async handleConnectionFailure() {
-                this.showToast('Uplink Interrupted. Logistical note: Two reporters in the same room cannot link directly. Use separate devices.');
+                this.showToast('Uplink Interrupted. Logistical note: Two reporters in same room cannot link directly. Use separate devices.');
                 this.resetConnection();
             }
 
