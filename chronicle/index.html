@@ -266,7 +266,7 @@
             padding: 2rem;
             cursor: pointer;
             transition: background 0.2s;
-            flex-grow: 1; /* Fill remaining space in card */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -341,7 +341,7 @@
             }
 
             .area-gutter {
-                display: none; /* Hide gutter on mobile */
+                display: none;
             }
 
             .masthead {
@@ -478,6 +478,7 @@
                 this.initializePeerConnection();
                 this.setupEventListeners();
                 this.setupDragAndDrop();
+                this.setupPageSafety(); // NEW: Unload protection
                 this.updateDate();
                 
                 // State
@@ -524,6 +525,12 @@
             initializeSignalingServer() {
                 this.socket = io("https://vswbappapp-dbb2f3f4h9bnh7ed.westeurope-01.azurewebsites.net", {
                     transports: ["websocket", "polling"]
+                });
+
+                // NEW: Connect error handling
+                this.socket.on('connect_error', (error) => {
+                    console.error('Connection error:', error);
+                    this.showToast('Signal Bureau unreachable. Check connection.');
                 });
 
                 this.socket.on('connect', () => {
@@ -713,6 +720,13 @@
                 // Text sending
                 this.elements.sendTextBtn.addEventListener('click', () => {
                     const content = this.elements.textEditor.innerHTML;
+                    
+                    // NEW: Check for empty content before sending
+                    if(!content || content.trim() === '' || content === '<br>') {
+                        this.showToast('Editor is empty. Nothing to publish.');
+                        return;
+                    }
+
                     if(this.dataChannel && this.dataChannel.readyState === 'open') {
                         this.dataChannel.send(content); 
                         this.showToast('Story Dispatched to Press');
@@ -740,6 +754,25 @@
                 });
             }
 
+            // NEW: Prevent accidental tab closure during transfer
+            setupPageSafety() {
+                window.addEventListener('beforeunload', (e) => {
+                    // Check if sending
+                    if (this.fileToSend) {
+                        e.preventDefault();
+                        e.returnValue = '';
+                        return;
+                    }
+                    
+                    // Check if receiving
+                    if (this.receivedFile.size !== undefined && this.receivedSize < this.receivedFile.size) {
+                        e.preventDefault();
+                        e.returnValue = '';
+                        return;
+                    }
+                });
+            }
+
             preventDefaults(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -755,11 +788,16 @@
             }
 
             generatePeerId() {
-                this.peerId = this.socket.id;
-                this.elements.localConfigText.value = this.peerId;
-                this.showToast('Credentials Obtained. Share with Foreign Bureau.');
-                this.elements.createLocalOfferBtn.innerHTML = '<i class="fas fa-check"></i> ID Active';
-                this.elements.createLocalOfferBtn.disabled = true;
+                // NEW: Ensure socket is actually connected
+                if (this.socket.connected) {
+                    this.peerId = this.socket.id;
+                    this.elements.localConfigText.value = this.peerId;
+                    this.showToast('Credentials Obtained. Share with Foreign Bureau.');
+                    this.elements.createLocalOfferBtn.innerHTML = '<i class="fas fa-check"></i> ID Active';
+                    this.elements.createLocalOfferBtn.disabled = true;
+                } else {
+                    this.showToast('Signal Service Offline. Cannot obtain credentials.');
+                }
             }
 
             async connectToPeer() {
@@ -971,21 +1009,14 @@
 
             async handleConnectionFailure() {
                 this.showToast('Uplink Interrupted. Logistical note: Two reporters in the same room cannot link directly. Use separate devices.');
-                // FIX: Call resetConnection instead of resetUI to recreate the WebRTC object
                 this.resetConnection();
             }
 
             resetConnection() {
-                // Close and recreate the peer connection object
-                if (this.localPeer) {
-                    this.localPeer.close();
-                }
-                
+                if (this.localPeer) this.localPeer.close();
                 this.iceCandidateBuffer = [];
                 this.candidateTypes.clear();
                 this.dataChannel = null;
-                
-                // Reinitialize
                 this.initializePeerConnection();
                 this.resetUI();
             }
