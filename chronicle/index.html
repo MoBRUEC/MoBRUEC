@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Morning Chronicle | The Unfiltered Press</title>
+    <link rel="icon" href="https://static-00.iconduck.com/assets.00/newspaper-icon-2048x2048-g0w8y3f8.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <style>
+        :root {
+            --paper-bg: #fdfdfd;
+            --ink-color: #121212;
+            --accent-grey: #666;
+            --light-grey: #e2e2e2;
+            --chronicle-blue: #2c3e50;
+            --chronicle-red: #8b0000;
+            --border-style: 1px solid #000;
+            --double-border: 4px double #000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            background-color: var(--paper-bg);
+            color: var(--ink-color);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Utility */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header / Masthead */
+        header {
+            border-bottom: 1px solid #000;
+            padding: 1rem 0;
+            text-align: center;
+            background: #fff;
+            position: relative;
+        }
+
+        .date-bar {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-grey);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px double #ccc;
+        }
+
+        .masthead {
+            font-family: 'Times New Roman', serif;
+            font-weight: 900;
+            font-size: 3.2rem;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            margin: 0.5rem 0;
+            line-height: 1;
+        }
+
+        .tagline {
+            font-family: 'Arial', sans-serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--accent-grey);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 40px 1fr; /* Left col, Gutter, Right col */
+            gap: 20px;
+            flex: 1;
+        }
+
+        /* Sections */
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .gutter {
+            border-right: 1px solid #ddd;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            letter-spacing: 0.5px;
+        }
+
+        /* Card Styles */
+        .paper-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .paper-card:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Inputs & Text Areas */
+        textarea, input[type="text"] {
+            width: 100%;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            resize: vertical;
+            color: #333;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: var(--ink-color);
+            background: #fff;
+        }
+
+        /* Rich Text Editor */
+        #textEditor {
+            min-height: 200px;
+            border: 1px dashed #ccc;
+            background: #fff;
+            padding: 15px;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        
+        #textEditor:empty:before {
+            content: "Begin drafting the breaking story here...";
+            color: #aaa;
+            font-style: italic;
+        }
+
+        #textReceiver {
+            min-height: 200px;
+            border: 1px solid #eee;
+            background: #fafafa;
+            padding: 15px;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-y: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--ink-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: #333;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--ink-color);
+            color: var(--ink-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--ink-color);
+            color: #fff;
+        }
+
+        /* Status Indicators */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 2px;
+        }
+
+        .status-badge.offline {
+            background: #eee;
+            color: #777;
+            border: 1px solid #ddd;
+        }
+
+        .status-badge.online {
+            background: #e6f7ed;
+            color: #1a7f37;
+            border: 1px solid #badbcc;
+        }
+
+        /* File Upload Area */
+        .drop-zone {
+            border: 1px solid #ccc;
+            background: #fdfdfd;
+            text-align: center;
+            padding: 2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .drop-zone:hover {
+            background: #f0f0f0;
+        }
+
+        /* Progress Bar */
+        .progress-wrapper {
+            margin-top: 10px;
+            background: #eee;
+            height: 4px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--ink-color);
+            width: 0%;
+            transition: width 0.3s linear;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #222;
+            color: #fff;
+            padding: 12px 24px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 2px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            max-width: 80%;
+            text-align: center;
+        }
+        .toast.show { opacity: 1; }
+
+        /* Footer */
+        footer {
+            border-top: 4px double #000;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .gutter {
+                display: none;
+            }
+            .masthead {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="date-bar">
+            <span id="currentDate">Morning Edition</span>
+            <span>Vol. CCXXV, No. 1</span>
+        </div>
+        <div class="masthead">The Morning Chronicle</div>
+        <div class="tagline">"Truth Without Intermediaries"</div>
+    </header>
+
+    <div class="main-container">
+        <!-- Left Column: Local -->
+        <div class="column">
+            
+            <!-- Connection: Local -->
+            <div class="paper-card">
+                <div class="section-title">
+                    <span>Local Bureau Credentials</span>
+                    <i class="fas fa-id-badge"></i>
+                </div>
+                <textarea id="localConfigText" rows="3" readonly placeholder="Click 'Obtain Credentials' to receive your bureau code..."></textarea>
+                <button id="createLocalOffer" class="btn btn-outline" style="margin-top: 10px;">
+                    <i class="fas fa-stamp"></i> Obtain Credentials
+                </button>
+            </div>
+
+            <!-- Text Editor -->
+            <div class="paper-card">
+                <div class="section-title">
+                    <span>Editorial Desk</span>
+                    <span id="textStatus" class="status-badge offline">Wire Down</span>
+                </div>
+                <div id="textEditor" contenteditable="true"></div>
+                <button id="sendTextBtn" class="btn" disabled>
+                    <i class="fas fa-print"></i> Send to Press
+                </button>
+                <div style="font-size: 0.75rem; color: #888; margin-top: 8px; font-style: italic;">
+                    Note: Paste formatted articles directly from the wire into this desk.
+                </div>
+            </div>
+
+            <!-- File Upload -->
+            <div class="paper-card">
+                <div class="section-title">
+                    <span>Material Dispatch</span>
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <input type="file" id="fileInput" hidden>
+                <div class="drop-zone" id="fileUploadArea">
+                    <i class="fas fa-box-open" style="font-size: 2rem; color: #ccc; margin-bottom: 10px;"></i>
+                    <p style="font-family: 'Arial'; font-size: 0.9rem;">Drop dispatch materials here</p>
+                </div>
+                
+                <div id="progressContainer" class="hidden" style="margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; font-family: 'Arial'; font-size: 0.8rem; margin-bottom: 5px;">
+                        <span id="progressLabel">Typesetting...</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-wrapper">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gutter (Visual) -->
+        <div class="gutter">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.7rem; color: #ccc; writing-mode: vertical-rl; text-orientation: mixed;">
+                EDITION
+            </div>
+        </div>
+
+        <!-- Right Column: Remote -->
+        <div class="column">
+            
+            <!-- Connection: Remote -->
+            <div class="paper-card">
+                <div class="section-title">
+                    <span>Foreign Bureau Link</span>
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <textarea id="remoteConfigText" rows="3" placeholder="Enter Foreign Bureau Access Code..."></textarea>
+                <button id="connectRemoteConfig" class="btn btn-outline" style="margin-top: 10px;">
+                    <i class="fas fa-broadcast-tower"></i> Establish Uplink
+                </button>
+            </div>
+
+            <!-- Received Text -->
+            <div class="paper-card" style="border-top: 4px double #000;">
+                <div class="section-title">
+                    <span>Teleprinter Feed</span>
+                    <i class="fas fa-tty"></i>
+                </div>
+                <div id="textReceiver">
+                    <div style="color: #aaa; text-align: center; margin-top: 80px; font-style: italic;">
+                        Awaiting incoming wire...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Received Files -->
+            <div class="paper-card">
+                <div class="section-title">
+                    <span>Inbound Dispatches</span>
+                    <i class="fas fa-archive"></i>
+                </div>
+                <div id="downloadArea" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="color: #aaa; text-align: center; padding: 20px; font-style: italic;">
+                        No dispatches received.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Distributed via The Morning Chronicle • Direct Bureau-to-Bureau Distribution</p>
+        <p style="margin-top: 5px; font-size: 0.7rem;">&copy; 2025 The Morning Chronicle. No Archives Kept.</p>
+    </footer>
+
+    <div id="toast" class="toast">Notification</div>
+
+    <script>
+        class SecureShareApp {
+            constructor() {
+                this.initializeElements();
+                this.initializeSignalingServer();
+                this.initializePeerConnection();
+                this.setupEventListeners();
+                this.setupDragAndDrop();
+                this.updateDate();
+                
+                // State
+                this.dataChannel = null;
+                this.receiveBuffer = [];
+                this.receivedSize = 0;
+                this.receivedFile = {};
+                this.fileToSend = null;
+                this.maxFileSize = 50 * 1024 * 1024;
+                this.peerId = null;
+                this.remotePeerId = null;
+                this.iceCandidateBuffer = []; 
+                this.connectionAttempts = 0;
+                this.maxRetries = 1;
+                this.candidateTypes = new Set(); 
+            }
+
+            initializeElements() {
+                this.elements = {
+                    localConfigText: document.getElementById('localConfigText'),
+                    remoteConfigText: document.getElementById('remoteConfigText'),
+                    createLocalOfferBtn: document.getElementById('createLocalOffer'),
+                    connectRemoteBtn: document.getElementById('connectRemoteConfig'),
+                    textEditor: document.getElementById('textEditor'),
+                    textReceiver: document.getElementById('textReceiver'),
+                    sendTextBtn: document.getElementById('sendTextBtn'),
+                    textStatus: document.getElementById('textStatus'),
+                    fileUploadArea: document.getElementById('fileUploadArea'),
+                    fileInput: document.getElementById('fileInput'),
+                    progressContainer: document.getElementById('progressContainer'),
+                    progressFill: document.getElementById('progressFill'),
+                    progressLabel: document.getElementById('progressLabel'),
+                    progressPercent: document.getElementById('progressPercent'),
+                    downloadArea: document.getElementById('downloadArea'),
+                    toast: document.getElementById('toast')
+                };
+            }
+
+            updateDate() {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-US', options);
+            }
+
+            initializeSignalingServer() {
+                this.socket = io("https://vswbappapp-dbb2f3f4h9bnh7ed.westeurope-01.azurewebsites.net", {
+                    transports: ["websocket", "polling"]
+                });
+
+                this.socket.on('connect', () => {
+                    console.log('Connected to signaling server');
+                    this.showToast('Wire Service Online');
+                });
+
+                this.socket.on('disconnect', () => {
+                    console.log('Disconnected from signaling server');
+                    this.showToast('Wire Service Interrupted');
+                });
+
+                this.socket.on('offer', async (data) => {
+                    console.log('Received offer');
+                    try {
+                        await this.localPeer.setRemoteDescription(new RTCSessionDescription(data.offer));
+                        
+                        if (this.iceCandidateBuffer.length > 0) {
+                            console.log(`Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`);
+                            for (const candidate of this.iceCandidateBuffer) {
+                                try {
+                                    await this.localPeer.addIceCandidate(new RTCIceCandidate(candidate));
+                                } catch (e) { console.warn(e); }
+                            }
+                            this.iceCandidateBuffer = [];
+                        }
+                        
+                        const answer = await this.localPeer.createAnswer();
+                        await this.localPeer.setLocalDescription(answer);
+                        
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        
+                        this.socket.emit('answer', {
+                            to: data.from,
+                            answer: this.localPeer.localDescription
+                        });
+                        
+                        this.remotePeerId = data.from;
+                        this.showToast('Incoming Uplink Request. Responding...');
+                    } catch (error) {
+                        console.error('Error handling offer:', error);
+                        this.showToast('Error Processing Handshake');
+                    }
+                });
+
+                this.socket.on('answer', async (data) => {
+                    console.log('Received answer');
+                    try {
+                        await this.localPeer.setRemoteDescription(new RTCSessionDescription(data.answer));
+                        
+                        if (this.iceCandidateBuffer.length > 0) {
+                            console.log(`Processing ${this.iceCandidateBuffer.length} buffered ICE candidates`);
+                            for (const candidate of this.iceCandidateBuffer) {
+                                try {
+                                    await this.localPeer.addIceCandidate(new RTCIceCandidate(candidate));
+                                } catch (e) { console.warn(e); }
+                            }
+                            this.iceCandidateBuffer = [];
+                        }
+                        this.showToast('Bureau Uplink Established Successfully');
+                    } catch (error) {
+                        console.error('Error handling answer:', error);
+                        this.showToast('Error Processing Handshake Response');
+                    }
+                });
+
+                this.socket.on('ice-candidate', async (data) => {
+                    try {
+                        if (data.candidate) {
+                            if (!this.localPeer.remoteDescription) {
+                                this.iceCandidateBuffer.push(data.candidate);
+                            } else {
+                                await this.localPeer.addIceCandidate(new RTCIceCandidate(data.candidate));
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error adding ICE candidate:', error);
+                    }
+                });
+            }
+
+            initializePeerConnection() {
+                this.localPeer = new RTCPeerConnection({
+                    iceServers: [
+                        { urls: "stun:stun.l.google.com:19302" },
+                        { urls: "stun:stun1.l.google.com:19302" },
+                        {
+                            urls: "turn:openrelay.metered.ca:80",
+                            username: "openrelayproject",
+                            credential: "openrelayproject",
+                        },
+                        {
+                            urls: "turn:openrelay.metered.ca:443",
+                            username: "openrelayproject",
+                            credential: "openrelayproject",
+                        }
+                    ],
+                });
+
+                this.localPeer.onicecandidate = (event) => {
+                    if (event.candidate && this.remotePeerId) {
+                        this.socket.emit('ice-candidate', {
+                            to: this.remotePeerId,
+                            candidate: event.candidate
+                        });
+                    }
+                };
+
+                this.localPeer.oniceconnectionstatechange = () => {
+                    if (this.localPeer.iceConnectionState === 'failed') {
+                        this.handleConnectionFailure();
+                    }
+                };
+
+                this.localPeer.onconnectionstatechange = () => {
+                    if (this.localPeer.connectionState === 'connected') {
+                        this.updateConnectionStatus(true);
+                    } else if (['disconnected', 'failed', 'closed'].includes(this.localPeer.connectionState)) {
+                        this.updateConnectionStatus(false);
+                    }
+                };
+
+                this.localPeer.ondatachannel = (event) => {
+                    this.setupDataChannel(event.channel);
+                };
+            }
+
+            setupDataChannel(channel) {
+                this.dataChannel = channel;
+                this.dataChannel.binaryType = "arraybuffer";
+
+                this.dataChannel.onopen = () => {
+                    console.log('Data channel opened');
+                    this.updateConnectionStatus(true);
+                    this.showToast('The Uplink is Live. Ready to dispatch.');
+                };
+
+                this.dataChannel.onclose = () => {
+                    console.log('Data channel closed');
+                    this.updateConnectionStatus(false);
+                    this.showToast('Uplink Terminated.');
+                };
+
+                this.dataChannel.onmessage = (event) => {
+                    this.handleReceiveMessage(event);
+                };
+            }
+
+            updateConnectionStatus(connected) {
+                const btn = this.elements.sendTextBtn;
+                const status = this.elements.textStatus;
+                
+                if (connected) {
+                    this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-check"></i> Uplink Active';
+                    this.elements.connectRemoteBtn.classList.replace('btn-outline', 'btn'); 
+                    this.elements.connectRemoteBtn.style.background = "#1a7f37";
+                    this.elements.connectRemoteBtn.style.color = "#fff";
+                    this.elements.connectRemoteBtn.style.borderColor = "#1a7f37";
+                    
+                    btn.disabled = false;
+                    status.className = 'status-badge online';
+                    status.innerText = 'Wire Live';
+                    this.elements.fileUploadArea.style.borderColor = '#1a7f37';
+                } else {
+                    this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-broadcast-tower"></i> Establish Uplink';
+                    this.elements.connectRemoteBtn.classList.replace('btn', 'btn-outline');
+                    this.elements.connectRemoteBtn.style.background = "transparent";
+                    this.elements.connectRemoteBtn.style.color = "var(--ink-color)";
+                    this.elements.connectRemoteBtn.style.borderColor = "var(--ink-color)";
+
+                    btn.disabled = true;
+                    status.className = 'status-badge offline';
+                    status.innerText = 'Wire Down';
+                    this.elements.fileUploadArea.style.borderColor = '#ccc';
+                }
+            }
+
+            setupEventListeners() {
+                this.elements.createLocalOfferBtn.addEventListener('click', () => this.generatePeerId());
+                this.elements.connectRemoteBtn.addEventListener('click', () => this.connectToPeer());
+                this.elements.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+                
+                // Text sending
+                this.elements.sendTextBtn.addEventListener('click', () => {
+                    const content = this.elements.textEditor.innerHTML;
+                    if(this.dataChannel && this.dataChannel.readyState === 'open') {
+                        this.dataChannel.send(content); 
+                        this.showToast('Story Dispatched to Press');
+                        this.elements.textEditor.innerHTML = ""; // Clear after send
+                    } else {
+                        this.showToast('Wire is cut. Cannot dispatch.');
+                    }
+                });
+            }
+
+            setupDragAndDrop() {
+                const uploadArea = this.elements.fileUploadArea;
+                
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    uploadArea.addEventListener(eventName, this.preventDefaults, false);
+                });
+
+                uploadArea.addEventListener('drop', (e) => this.handleDrop(e), false);
+                uploadArea.addEventListener('click', () => {
+                    if (this.dataChannel && this.dataChannel.readyState === 'open') {
+                        this.elements.fileInput.click();
+                    } else {
+                        this.showToast('Establish Bureau Uplink before dispatching materials.');
+                    }
+                });
+            }
+
+            preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                if (files.length > 0) {
+                    this.elements.fileInput.files = files;
+                    this.handleFileSelect({ target: { files: files } });
+                }
+            }
+
+            generatePeerId() {
+                this.peerId = this.socket.id;
+                this.elements.localConfigText.value = this.peerId;
+                this.showToast('Credentials Obtained. Share with Foreign Bureau.');
+                this.elements.createLocalOfferBtn.innerHTML = '<i class="fas fa-check"></i> ID Active';
+                this.elements.createLocalOfferBtn.disabled = true;
+            }
+
+            async connectToPeer() {
+                try {
+                    const remotePeerIdInput = this.elements.remoteConfigText.value.trim();
+                    if (!remotePeerIdInput) {
+                        this.showToast('Enter a Foreign Bureau Access Code');
+                        return;
+                    }
+
+                    if (!this.peerId) {
+                        this.showToast('Obtain Local Credentials first');
+                        return;
+                    }
+
+                    this.remotePeerId = remotePeerIdInput;
+
+                    if (!this.dataChannel) {
+                        this.dataChannel = this.localPeer.createDataChannel("fileTransfer", { ordered: true });
+                        this.setupDataChannel(this.dataChannel);
+                    }
+
+                    const offer = await this.localPeer.createOffer();
+                    await this.localPeer.setLocalDescription(offer);
+                    
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    this.socket.emit('offer', {
+                        to: this.remotePeerId,
+                        offer: this.localPeer.localDescription
+                    });
+
+                    this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Establishing...';
+                    this.elements.connectRemoteBtn.disabled = true;
+
+                } catch (error) {
+                    console.error('Error connecting:', error);
+                    this.showToast('Uplink Failed');
+                    this.resetUI();
+                }
+            }
+
+            handleFileSelect(event) {
+                this.fileToSend = event.target.files[0];
+                if (!this.fileToSend) return;
+
+                if (this.fileToSend.size > this.maxFileSize) {
+                    this.showToast(`Dispatch too large (Max 50MB)`);
+                    this.fileToSend = null;
+                    this.elements.fileInput.value = '';
+                    return;
+                }
+
+                if (!this.dataChannel || this.dataChannel.readyState !== 'open') {
+                    this.showToast('Establish Bureau Uplink first');
+                    this.fileToSend = null;
+                    this.elements.fileInput.value = '';
+                    return;
+                }
+
+                this.sendFile(this.fileToSend);
+            }
+
+            async sendFile(file) {
+                this.elements.progressContainer.classList.remove('hidden');
+                this.updateProgress(0, `Telexing: ${file.name}`);
+
+                try {
+                    const metadata = {
+                        name: file.name,
+                        size: file.size,
+                        type: file.type,
+                    };
+                    
+                    this.dataChannel.send(JSON.stringify(metadata));
+
+                    let offset = 0;
+                    const maxChunkSize = 16384; 
+                    const fileReader = new FileReader();
+
+                    fileReader.onload = (e) => {
+                        this.dataChannel.send(e.target.result);
+                        offset += e.target.result.byteLength;
+
+                        const percentage = ((offset / file.size) * 100).toFixed(1);
+                        this.updateProgress(offset, `Telexing: ${file.name}`, percentage);
+
+                        if (offset < file.size) {
+                            readNextChunk();
+                        } else {
+                            this.showToast(`Dispatch Sent: ${file.name}`);
+                            this.updateProgress(file.size, `Sent: ${file.name}`, '100');
+                            this.elements.fileInput.value = '';
+                            this.fileToSend = null;
+                            setTimeout(() => this.elements.progressContainer.classList.add('hidden'), 3000);
+                        }
+                    };
+
+                    const readNextChunk = () => {
+                        const slice = file.slice(offset, offset + maxChunkSize);
+                        fileReader.readAsArrayBuffer(slice);
+                    };
+
+                    readNextChunk();
+
+                } catch (error) {
+                    this.showToast(`Transmission Error: ${error.message}`);
+                    console.error(error);
+                    this.elements.progressContainer.classList.add('hidden');
+                }
+            }
+
+            handleReceiveMessage(event) {
+                if (typeof event.data === 'string') {
+                    try {
+                        const fileMetadata = JSON.parse(event.data);
+                        if (fileMetadata.name && fileMetadata.size) {
+                            this.receivedFile = fileMetadata;
+                            this.receiveBuffer = [];
+                            this.receivedSize = 0;
+                            this.elements.progressContainer.classList.remove('hidden');
+                            this.updateProgress(0, `Receiving: ${this.receivedFile.name}`);
+                            this.showToast(`Incoming Dispatch: ${this.receivedFile.name}`);
+                            return;
+                        }
+                    } catch (e) {
+                        console.log("Received text content");
+                        this.elements.textReceiver.innerHTML = event.data; 
+                        this.showToast('Breaking Story Received');
+                        return;
+                    }
+                }
+
+                if (this.receivedFile.size !== undefined) {
+                    this.receiveBuffer.push(event.data);
+                    this.receivedSize += event.data.byteLength;
+                    
+                    const percentage = ((this.receivedSize / this.receivedFile.size) * 100).toFixed(1);
+                    this.updateProgress(this.receivedSize, `Receiving: ${this.receivedFile.name}`, percentage);
+
+                    if (this.receivedSize >= this.receivedFile.size) {
+                        this.assembleAndDownloadFile();
+                    }
+                }
+            }
+
+            assembleAndDownloadFile() {
+                try {
+                    const blob = new Blob(this.receiveBuffer, { type: this.receivedFile.type });
+                    const url = URL.createObjectURL(blob);
+
+                    const dlItem = document.createElement('div');
+                    dlItem.className = 'paper-card fade-in';
+                    dlItem.style.padding = '10px';
+                    dlItem.style.borderLeft = '4px solid #000';
+                    dlItem.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <div style="font-weight:bold; font-family:'Arial'; font-size:0.9rem;">${this.receivedFile.name}</div>
+                                <div style="font-size:0.8rem; color:#666;">${this.formatBytes(this.receivedFile.size)}</div>
+                            </div>
+                            <a href="${url}" download="${this.receivedFile.name}" class="btn btn-outline" style="width:auto; padding:5px 15px; font-size:0.75rem;">
+                                <i class="fas fa-download"></i> Collect
+                            </a>
+                        </div>
+                    `;
+
+                    if(this.elements.downloadArea.children[0] && this.elements.downloadArea.children[0].innerText.includes("No dispatches")) {
+                        this.elements.downloadArea.innerHTML = '';
+                    }
+
+                    this.elements.downloadArea.prepend(dlItem);
+                    
+                    this.showToast('Dispatch Archived');
+                    this.updateProgress(this.receivedSize, `Received: ${this.receivedFile.name}`, '100');
+                    
+                    setTimeout(() => {
+                        this.receiveBuffer = [];
+                        this.receivedSize = 0;
+                        this.receivedFile = {};
+                        this.elements.progressContainer.classList.add('hidden');
+                    }, 3000);
+                    
+                } catch (error) {
+                    this.showToast(`Error Archiving: ${error.message}`);
+                    console.error(error);
+                    this.elements.progressContainer.classList.add('hidden');
+                }
+            }
+
+            updateProgress(current, label, percent = '0') {
+                this.elements.progressFill.style.width = `${percent}%`;
+                this.elements.progressLabel.textContent = label;
+                this.elements.progressPercent.textContent = `${percent}%`;
+            }
+
+            resetUI() {
+                this.elements.createLocalOfferBtn.innerHTML = '<i class="fas fa-stamp"></i> Obtain Credentials';
+                this.elements.createLocalOfferBtn.disabled = false;
+                this.elements.connectRemoteBtn.innerHTML = '<i class="fas fa-broadcast-tower"></i> Establish Uplink';
+                this.elements.connectRemoteBtn.disabled = false;
+                this.updateConnectionStatus(false);
+            }
+
+            showToast(message) {
+                const toast = this.elements.toast;
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            }
+
+            async handleConnectionFailure() {
+                this.showToast('Uplink Interrupted. Logistical note: Two reporters in the same room cannot link directly. Use separate devices.');
+                this.resetUI();
+            }
+
+            resetConnection() {
+                if (this.localPeer) this.localPeer.close();
+                this.iceCandidateBuffer = [];
+                this.candidateTypes.clear();
+                this.dataChannel = null;
+                this.initializePeerConnection();
+                this.resetUI();
+            }
+
+            formatBytes(bytes, decimals = 2) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            new SecureShareApp();
+        });
+    </script>
+</body>
+</html>
