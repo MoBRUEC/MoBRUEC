@@ -1,5 +1,4 @@
 # From Discovery to Deployment with AI, a reality check as of 2026
-Some resources discussing the basics of finding and realizing AI Opportunities
 
 The enterprise AI conversation in early 2026 has reached a peculiar inflection. Microsoft's Satya Nadella and Amazon's Werner Vogels both published their respective visions for 2026 at the end of 2025, and the collision between their frameworks exposes a fault line running through the entire industry. With ChatGPT on the scene since late 2022 and the sustained hype through 2023, there can be only little doubt about the importance of AI on all kinds of aspects of value creation. [It can certainly help you code against the Microsoft Graph API and Azure, as I found out.](https://mohammedbrueckner.medium.com/integrating-m365-graph-api-using-chatgpt-b22a15dc6ff)
 
