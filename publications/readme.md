@@ -1,6 +1,6 @@
 # Integration in a serverless world
 
-I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** and **["Machine Learning Operations (MLOps) with Databricks on Azure End-to-End"](https://www.amazon.com/dp/B0FTSY78DR)**, both available via Amazon.
+I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/dp/B0CVZ1BWPN)** and **["Machine Learning Operations (MLOps) with Databricks on Azure End-to-End"](https://www.amazon.com/dp/B0FTSY78DR)**, both available via Amazon.
 
 [![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
 [![Machine Learning Operations (MLOps) with Databricks on Azure End-to-End](https://m.media-amazon.com/images/I/81+EfK4Yv2L._SY522_.jpg)](https://www.amazon.com/dp/B0FTSY78DR)
