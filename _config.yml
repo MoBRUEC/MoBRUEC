@@ -25,6 +25,10 @@ social_links:
     url: "https://medium.com/@mohammedbrueckner"
     icon: "fab fa-medium"
 
-# Ensure Jekyll includes your PDF in the build
+# Ensure Jekyll includes what is needed
 include:
   - changemanagement/presentations/Change Management a pragmatic take M Brueckner.pdf
+  - "cdmp-exam-simulator/**/*"
+  - "**/*.jpg"
+  - "**/*.png"
+  - "**/*.pdf"
