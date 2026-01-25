@@ -22,6 +22,9 @@ A comprehensive guide for using PlantUML with ArchiMate extensions for enterpris
 
 PlantUML is a powerful tool for creating diagrams from plain text descriptions. When combined with ArchiMate extensions, it becomes an effective solution for enterprise architecture modeling. This guide covers both local and online usage scenarios.
 
+If you want to master not only your diagrams but IT Architecture overall, check out:
+[“IT’s not magic, it’s architecture”](https://www.amazon.com/-/en/dp/B0CVZ1BWPN) *today*!
+
 ---
 
 ## Quick Start Examples
