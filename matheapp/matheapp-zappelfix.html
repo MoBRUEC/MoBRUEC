@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Zahlenzauberer Zappelfix Lite: Die lustige Mathe-Lern-App für Kinder zum Üben von Multiplikation, Division und Runden">
-    <meta name="keywords" content="Mathe lernen, Kinderspiel, Mathematik, Multiplikation, Division, Runden, Lernspiel">
+    <meta name="description" content="Zahlenzauberer Zappelfix: Die lustige Mathe-Lern-App für Kinder zum Üben von Multiplikation, Division, Runden, Schreibweisen, Einheiten und Kopfrechenstrategien">
+    <meta name="keywords" content="Mathe lernen, Kinderspiel, Mathematik, Multiplikation, Division, Runden, Maßeinheiten, Lernspiel, Kopfrechnen">
     <title>Zahlenzauberer Zappelfix: Mathe-Mampf und Rechenspaß</title>
     <style>
         * {
@@ -121,7 +121,6 @@
             margin-bottom: 8px;
             font-weight: 900;
             letter-spacing: -1px;
-            animation: bounce 2s infinite;
         }
 
         .header p {
@@ -131,13 +130,8 @@
             font-weight: 600;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
@@ -165,7 +159,7 @@
             padding: 14px 22px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: clamp(0.95em, 2.5vw, 1.1em);
+            font-size: clamp(0.9em, 2.5vw, 1.1em);
             font-weight: 700;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
@@ -182,7 +176,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255, 0.3), transparent);
             transition: left 0.5s;
         }
 
@@ -272,17 +266,17 @@
             font-family: 'Nunito', sans-serif;
             position: relative;
             overflow: hidden;
-            display: none;
+            display: none; /* Hidden by default */
         }
         
         .submit-button {
             background: linear-gradient(135deg, #95E1D3, #4ECDC4);
             box-shadow: 0 4px 20px rgba(149, 225, 211, 0.4);
-            display: block;
+            display: block; /* Visible initially */
         }
         
         .next-button {
-            background: linear-gradient(135deg, #9B59B6, #8E44AD);
+            background: linear-gradient(135deg, #9B59B6, #8E44AD); /* Purple for Next */
             box-shadow: 0 4px 20px rgba(155, 89, 182, 0.4);
             margin-top: 10px;
         }
@@ -294,7 +288,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255, 0.3), transparent);
             transition: left 0.5s;
         }
 
@@ -520,6 +514,15 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 1em;
+        }
+
         .progress-bar {
             height: 20px;
             background: rgba(255, 255, 255, 0.3);
@@ -717,18 +720,18 @@
                 width: 100%;
                 max-width: 250px;
             }
+            
+            .submit-button, .next-button {
+                width: 100%;
+                max-width: 250px;
+                padding: 12px 20px;
+            }
 
             .settings-button {
                 top: 10px;
                 right: 10px;
                 padding: 8px 12px;
                 font-size: 1em;
-            }
-            
-            .submit-button, .next-button {
-                width: 100%;
-                max-width: 250px;
-                padding: 12px 20px;
             }
 
             .settings-modal {
@@ -769,27 +772,31 @@
     <div class="settings-modal" id="settingsModal">
         <h2>⚙️ Zahlenraum</h2>
         <p>Maximale Ergebniszahl:</p>
-        <input type="range" class="range-slider" id="maxNumber" min="20" max="2000" step="10" value="200" oninput="updateMaxNumber(this.value)">
-        <div class="range-value" id="maxNumberValue">200</div>
+        <input type="range" class="range-slider" id="maxNumber" min="20" max="1000000" step="100" value="100000" oninput="updateMaxNumber(this.value)">
+        <div class="range-value" id="maxNumberValue">100.000</div>
         <button class="submit-button" onclick="toggleSettings()">Schließen</button>
     </div>
 
     <div class="container">
         <header class="header">
-            <h1>Zahlenzauberer Zappelfix</h1>
+            <h1>✨ Zahlenzauberer Zappelfix ✨</h1>
             <p>Mathe-Mampf und Rechenspaß</p>
         </header>
 
         <nav class="nav">
-            <button class="nav-button" onclick="setMode('multiplication')" data-mode="multiplication">🌟 Multy's Multiplikation</button>
-            <button class="nav-button" onclick="setMode('division')" data-mode="division">⚡ Divi's Division</button>
-            <button class="nav-button" onclick="setMode('rounding')" data-mode="rounding">🎯 Rundy's Runderei</button>
+            <button class="nav-button" onclick="setMode('multiplication')" data-mode="multiplication">🌟 Multiplikation</button>
+            <button class="nav-button" onclick="setMode('division')" data-mode="division">⚡ Division</button>
+            <button class="nav-button" onclick="setMode('rounding')" data-mode="rounding">🎯 Runden</button>
+            <button class="nav-button" onclick="setMode('notation')" data-mode="notation">📝 Schreibweisen</button>
+            <button class="nav-button" onclick="setMode('units')" data-mode="units">📏 Einheiten-Umrechner</button>
+            <button class="nav-button" onclick="setMode('mental')" data-mode="mental">🧠 Im Kopf? Oder schriftlich?</button>
         </nav>
 
         <div class="game-area">
             <div class="task" id="task">Wähle eine Rechenart! 🎮</div>
             <div class="input-area">
-                <input type="number" class="answer-input" id="answer" placeholder="?" inputmode="decimal" onkeydown="handleKeyPress(event)">
+                <!-- Kein onkeydown Attribut mehr -->
+                <input type="number" class="answer-input" id="answer" placeholder="?" inputmode="decimal">
                 <button class="submit-button" id="submitBtn" onclick="checkAnswer()">Prüfen! 🚀</button>
                 <button class="next-button" id="nextBtn" onclick="nextTask()">Weiter ➡️</button>
             </div>
@@ -798,6 +805,10 @@
         </div>
 
         <div class="progress-container">
+            <div class="progress-label">
+                <span>🏆 Punkte</span>
+                <span id="scoreDisplay">0</span>
+            </div>
             <div class="progress-bar">
                 <div class="progress" id="progress"></div>
             </div>
@@ -811,13 +822,103 @@
             correctAnswer: null,
             score: 0,
             level: 'easy',
-            maxResult: 200,
+            maxResult: 100000,
             streak: 0,
             explanation: null,
+            taskData: null,
             isAnswered: false
         };
 
-        // Utility: Format numbers with dots (e.g. 100.000)
+        // Realistic everyday units (Expanded with dm)
+        const unitDefinitions = {
+            length: {
+                units: ['mm', 'cm', 'dm', 'm', 'km'],
+                names: ['Millimeter', 'Zentimeter', 'Dezimeter', 'Meter', 'Kilometer'],
+                factors: [0.001, 0.01, 0.1, 1, 1000],
+                examples: ['Münze', 'Lineal', 'Schreibheft', 'Schritt', 'Autofahrt'],
+                conversions: {
+                    'mm-cm': 0.1,
+                    'mm-dm': 0.01,
+                    'mm-m': 0.001,
+                    'mm-km': 0.000001,
+                    'cm-mm': 10,
+                    'cm-dm': 0.1,
+                    'cm-m': 0.01,
+                    'cm-km': 0.00001,
+                    'dm-mm': 100,
+                    'dm-cm': 10,
+                    'dm-m': 0.1,
+                    'dm-km': 0.0001,
+                    'm-mm': 1000,
+                    'm-cm': 100,
+                    'm-dm': 10,
+                    'm-km': 0.001,
+                    'km-mm': 1000000,
+                    'km-cm': 100000,
+                    'km-dm': 10000,
+                    'km-m': 1000
+                }
+            },
+            weight: {
+                units: ['g', 'kg', 't'],
+                names: ['Gramm', 'Kilogramm', 'Tonne'],
+                factors: [0.001, 1, 1000],
+                examples: ['Briefmarke', 'Tasche', 'Auto'],
+                conversions: {
+                    'g-kg': 0.001,
+                    'g-t': 0.000001,
+                    'kg-g': 1000,
+                    'kg-t': 0.001,
+                    't-g': 1000000,
+                    't-kg': 1000
+                }
+            },
+            volume: {
+                units: ['ml', 'l'],
+                names: ['Milliliter', 'Liter'],
+                factors: [0.001, 1],
+                examples: ['Teelöffel', 'Milchpackung'],
+                conversions: {
+                    'ml-l': 0.001,
+                    'l-ml': 1000
+                }
+            },
+            time: {
+                units: ['s', 'min', 'h', 'd'],
+                names: ['Sekunden', 'Minuten', 'Stunden', 'Tage'],
+                factors: [1/60, 1, 60, 1440],
+                examples: ['Augenzwinkern', 'Lied', 'Unterrichtsstunde', 'Wochenende'],
+                conversions: {
+                    's-min': 1/60,
+                    's-h': 1/3600,
+                    's-d': 1/86400,
+                    'min-s': 60,
+                    'min-h': 1/60,
+                    'min-d': 1/1440,
+                    'h-s': 3600,
+                    'h-min': 60,
+                    'h-d': 1/24,
+                    'd-s': 86400,
+                    'd-min': 1440,
+                    'd-h': 24
+                }
+            }
+        };
+
+        // Common fractions used in everyday life
+        const fractions = [
+            { decimal: 0.25, word: 'ein Viertel', short: '¼', of: 4 },
+            { decimal: 0.5, word: 'ein halb', short: '½', of: 2 },
+            { decimal: 0.75, word: 'drei Viertel', short: '¾', of: 4 },
+            { decimal: 0.33, word: 'ein Drittel', short: '⅓', of: 3 },
+            { decimal: 0.67, word: 'zwei Drittel', short: '⅔', of: 3 },
+            { decimal: 0.2, word: 'ein Fünftel', short: '⅕', of: 5 },
+            { decimal: 0.4, word: 'zwei Fünftel', short: '⅖', of: 5 },
+            { decimal: 0.6, word: 'drei Fünftel', short: '⅗', of: 5 },
+            { decimal: 0.8, word: 'vier Fünftel', short: '⅘', of: 5 }
+        ];
+
+        // Utility: Format numbers with dots (e.g. 100.000) for standard modes
         function formatNumber(num) {
             if (num === undefined || num === null) return '';
             let parts = num.toString().split('.');
@@ -865,6 +966,7 @@
             const explanationEl = document.getElementById('explanation');
             explanationEl.innerHTML = '';
             gameState.explanation = null;
+            gameState.taskData = null;
             
             document.getElementById('answer').value = '';
             document.getElementById('answer').disabled = false;
@@ -874,83 +976,449 @@
             document.getElementById('nextBtn').style.display = 'none';
             document.getElementById('answer').focus();
 
-            let num1, num2;
-            do {
-                switch(gameState.mode) {
-                    case 'multiplication':
-                        num1 = Math.floor(Math.random() * Math.ceil(Math.sqrt(gameState.maxResult))) + 1;
-                        num2 = Math.floor(Math.random() * Math.ceil(Math.sqrt(gameState.maxResult))) + 1;
-                        gameState.correctAnswer = num1 * num2;
-                        gameState.currentTask = `${num1} × ${num2}`;
-                        buildMultiplicationExplanation(num1, num2);
-                        break;
-                    case 'division':
-                        num2 = Math.floor(Math.random() * 12) + 1;
-                        do {
-                            num1 = num2 * (Math.floor(Math.random() * Math.floor(gameState.maxResult / num2)) + 1);
-                        } while (num1 > gameState.maxResult);
-                        gameState.correctAnswer = num1 / num2;
-                        gameState.currentTask = `${formatNumber(num1)} ÷ ${num2}`;
-                        buildDivisionExplanation(num1, num2, gameState.correctAnswer);
-                        break;
-                    case 'rounding':
-                        num1 = Math.floor(Math.random() * gameState.maxResult) + 1;
-                        gameState.correctAnswer = Math.round(num1 / 10) * 10;
-                        gameState.currentTask = `Runde ${formatNumber(num1)} auf Zehner`;
-                        buildRoundingExplanation(num1, gameState.correctAnswer);
-                        break;
-                }
-            } while (gameState.correctAnswer > gameState.maxResult);
-
-            document.getElementById('task').textContent = gameState.currentTask;
-        }
-
-        function buildMultiplicationExplanation(a, b) {
-            // For simple numbers, show repeated addition
-            const addition = Array(b).fill(a).join(' + ');
-            gameState.explanation = {
-                title: 'So geht das Rechnen:',
-                steps: [
-                    `${a} × ${b} bedeutet: ${addition}`,
-                    `Das ergibt ${formatNumber(a * b)}`
-                ]
-            };
-        }
-
-        function buildDivisionExplanation(a, b, result) {
-            gameState.explanation = {
-                title: 'So geht das Rechnen:',
-                steps: [
-                    `${formatNumber(a)} ÷ ${b} bedeutet: Wie oft passt ${b} in ${formatNumber(a)}?`,
-                    `Ich überlege: ${result} × ${b} = ${formatNumber(a)}`,
-                    `Also ist die Antwort ${result}`
-                ]
-            };
-        }
-
-        function buildRoundingExplanation(num, result) {
-            const ones = num % 10;
-            const lowerTen = Math.floor(num / 10) * 10;
-            const upperTen = lowerTen + 10;
-            
-            let stepText = '';
-            if (ones < 5) {
-                stepText = `Da die Einerstelle ${ones} ist (< 5), runde ich auf ${formatNumber(lowerTen)} ab.`;
-            } else {
-                stepText = `Da die Einerstelle ${ones} ist (>= 5), runde ich auf ${formatNumber(upperTen)} auf.`;
+            switch(gameState.mode) {
+                case 'multiplication':
+                    generateMultiplicationTask();
+                    break;
+                case 'division':
+                    generateDivisionTask();
+                    break;
+                case 'rounding':
+                    generateRoundingTask();
+                    break;
+                case 'notation':
+                    generateNotationTask();
+                    break;
+                case 'units':
+                    generateUnitsTask();
+                    break;
+                case 'mental':
+                    generateMentalVsWrittenTask();
+                    break;
             }
-
-            gameState.explanation = {
-                title: 'So geht das Runden:',
-                steps: [
-                    `Ich schaue auf die Einerstelle: ${ones}`,
-                    stepText
-                ]
-            };
         }
 
         function nextTask() {
             generateTask();
+        }
+
+        function generateMultiplicationTask() {
+            let num1, num2, result;
+            do {
+                num1 = Math.floor(Math.random() * 12) + 2;
+                num2 = Math.floor(Math.random() * 10) + 2;
+                result = num1 * num2;
+            } while (result > gameState.maxResult);
+
+            gameState.correctAnswer = result;
+            gameState.currentTask = `${num1} × ${num2}`;
+            
+            gameState.explanation = {
+                title: 'So geht das Rechnen:',
+                steps: buildMultiplicationSteps(num1, num2)
+            };
+            
+            gameState.taskData = { num1, num2, operation: 'multiplication' };
+            document.getElementById('task').innerHTML = gameState.currentTask;
+        }
+
+        function buildMultiplicationSteps(a, b) {
+            const steps = [];
+            const addition = Array(b).fill(a).join(' + ');
+            steps.push(`${a} × ${b} bedeutet: ${addition}`);
+            
+            if (a > 10 || b > 10) {
+                const larger = a > b ? a : b;
+                const smaller = a > b ? b : a;
+                
+                if (larger > 10) {
+                    const tens = Math.floor(larger / 10) * 10;
+                    const ones = larger % 10;
+                    steps.push(`Ich zerlege ${larger} in ${tens} + ${ones}`);
+                    steps.push(`Dann rechne ich: (${tens} × ${smaller}) + (${ones} × ${smaller})`);
+                    steps.push(`= ${formatNumber(tens * smaller)} + ${formatNumber(ones * smaller)}`);
+                }
+            }
+            
+            steps.push(`= ${formatNumber(a * b)}`);
+            return steps;
+        }
+
+        function generateDivisionTask() {
+            let divisor, dividend;
+            
+            divisor = Math.floor(Math.random() * 10) + 2;
+            const quotient = Math.floor(Math.random() * 12) + 2;
+            dividend = divisor * quotient;
+
+            gameState.correctAnswer = quotient;
+            gameState.currentTask = `${formatNumber(dividend)} ÷ ${divisor}`;
+            
+            gameState.explanation = {
+                title: 'So geht das Rechnen:',
+                steps: buildDivisionSteps(dividend, divisor, quotient)
+            };
+            
+            gameState.taskData = { dividend, divisor, quotient, operation: 'division' };
+            document.getElementById('task').innerHTML = gameState.currentTask;
+        }
+
+        function buildDivisionSteps(dividend, divisor, quotient) {
+            const steps = [];
+            steps.push(`${formatNumber(dividend)} ÷ ${divisor} bedeutet: Welche Zahl mal ${divisor} ergibt ${formatNumber(dividend)}?`);
+            steps.push(`Ich suche: ? × ${divisor} = ${formatNumber(dividend)}`);
+            steps.push(`Das ist das kleine Einmaleins: ${quotient} × ${divisor} = ${formatNumber(dividend)}`);
+            steps.push(`Also ist ${formatNumber(dividend)} ÷ ${divisor} = ${quotient}`);
+            return steps;
+        }
+
+        function generateRoundingTask() {
+            const num = Math.floor(Math.random() * gameState.maxResult) + 1;
+            const roundTo = Math.random() > 0.5 ? 10 : 100;
+            
+            gameState.correctAnswer = Math.round(num / roundTo) * roundTo;
+            gameState.currentTask = `Runde ${formatNumber(num)} auf ${roundTo === 10 ? 'Zehner' : 'Hunderter'}`;
+            
+            gameState.explanation = {
+                title: 'So geht das Runden:',
+                steps: buildRoundingSteps(num, roundTo, gameState.correctAnswer)
+            };
+            
+            gameState.taskData = { num, roundTo, operation: 'rounding' };
+            document.getElementById('task').innerHTML = gameState.currentTask;
+        }
+
+        function buildRoundingSteps(num, roundTo, result) {
+            const steps = [];
+            
+            if (roundTo === 10) {
+                const ones = num % 10;
+                const lowerTen = Math.floor(num / 10) * 10;
+                const upperTen = lowerTen + 10;
+                
+                steps.push(`Ich schaue mir die Einer-Stelle an: ${ones}`);
+                steps.push(`Die nächsten Zehner sind ${formatNumber(lowerTen)} und ${formatNumber(upperTen)}`);
+                
+                if (ones < 5) {
+                    steps.push(`Da ${ones} kleiner als 5 ist, runde ich ab`);
+                } else {
+                    steps.push(`Da ${ones} gleich oder größer als 5 ist, runde ich auf`);
+                }
+            } else {
+                const tens = Math.floor((num % 100) / 10);
+                const lowerHundred = Math.floor(num / 100) * 100;
+                const upperHundred = lowerHundred + 100;
+                
+                steps.push(`Ich schaue mir die Zehner-Stelle an: ${tens}`);
+                steps.push(`Die nächsten Hunderter sind ${formatNumber(lowerHundred)} und ${formatNumber(upperHundred)}`);
+                
+                if (tens < 5) {
+                    steps.push(`Da ${tens} kleiner als 5 ist, runde ich ab`);
+                } else {
+                    steps.push(`Da ${tens} gleich oder größer als 5 ist, runde ich auf`);
+                }
+            }
+            
+            steps.push(`= ${formatNumber(result)}`);
+            return steps;
+        }
+
+        function generateNotationTask() {
+            const taskTypes = ['unitConversion', 'mixedNotation', 'fractionDecimal'];
+            const taskType = taskTypes[Math.floor(Math.random() * taskTypes.length)];
+
+            switch(taskType) {
+                case 'unitConversion':
+                    generateUnitConversionTask();
+                    break;
+                case 'mixedNotation':
+                    generateMixedNotationTask();
+                    break;
+                case 'fractionDecimal':
+                    generateFractionDecimalTask();
+                    break;
+            }
+        }
+
+        // Dedicated Units Category
+        function generateUnitsTask() {
+            const categories = Object.keys(unitDefinitions);
+            const category = categories[Math.floor(Math.random() * categories.length)];
+            const unitData = unitDefinitions[category];
+
+            const isMixedTask = Math.random() > 0.5; 
+
+            if (isMixedTask) {
+                const units = unitData.units;
+                const validPairs = [];
+                for(let i = 1; i < units.length; i++) {
+                    validPairs.push({large: units[i], small: units[i-1]});
+                }
+
+                const pair = validPairs[Math.floor(Math.random() * validPairs.length)];
+                const largerUnit = pair.large;
+                const smallerUnit = pair.small;
+                const largerName = unitData.names[unitData.units.indexOf(largerUnit)];
+                const smallerName = unitData.names[unitData.units.indexOf(smallerUnit)];
+
+                const largerValue = Math.floor(Math.random() * 10) + 1;
+                let smallerValue;
+                if (category === 'length' && largerUnit === 'km') smallerValue = [100, 200, 500, 750][Math.floor(Math.random()*4)];
+                else if (category === 'weight' && largerUnit === 't') smallerValue = [100, 200, 500][Math.floor(Math.random()*3)];
+                else smallerValue = Math.floor(Math.random() * 9) * 50; 
+
+                const conversionKey = `${largerUnit}-${smallerUnit}`;
+                const factor = unitData.conversions[conversionKey];
+                gameState.correctAnswer = largerValue * factor + smallerValue;
+                
+                gameState.currentTask = `${largerValue} ${largerUnit} ${smallerValue} ${smallerUnit} = ? ${smallerUnit}`;
+                
+                gameState.explanation = {
+                    title: 'So geht die Umrechnung:',
+                    steps: buildMixedNotationSteps(largerValue, smallerValue, largerUnit, smallerUnit, largerName, smallerName, factor, gameState.correctAnswer)
+                };
+            } else {
+                const availableConversions = Object.keys(unitData.conversions);
+                const conversionKey = availableConversions[Math.floor(Math.random() * availableConversions.length)];
+                const [fromUnit, toUnit] = conversionKey.split('-');
+                
+                const fromIndex = unitData.units.indexOf(fromUnit);
+                const toIndex = unitData.units.indexOf(toUnit);
+                const fromName = unitData.names[fromIndex];
+                const toName = unitData.names[toIndex];
+                
+                const factor = unitData.conversions[conversionKey];
+                
+                let value;
+                if (factor < 1) {
+                    const targetResults = [0.5, 1, 2, 5, 10, 20];
+                    const target = targetResults[Math.floor(Math.random() * targetResults.length)];
+                    value = target / factor;
+                } else {
+                    value = Math.floor(Math.random() * 20) + 1;
+                }
+                
+                gameState.correctAnswer = Math.round(value * factor * 1000) / 1000;
+                
+                gameState.currentTask = `${value} ${fromUnit} = ? ${toUnit}`;
+                
+                gameState.explanation = {
+                    title: 'So geht die Umrechnung:',
+                    steps: buildUnitConversionSteps(value, fromUnit, toUnit, fromName, toName, factor, gameState.correctAnswer)
+                };
+            }
+
+            document.getElementById('task').innerHTML = gameState.currentTask;
+        }
+
+        function generateUnitConversionTask() {
+            const categories = Object.keys(unitDefinitions);
+            const category = categories[Math.floor(Math.random() * categories.length)];
+            const unitData = unitDefinitions[category];
+            
+            const availableConversions = Object.keys(unitData.conversions);
+            const conversionKey = availableConversions[Math.floor(Math.random() * availableConversions.length)];
+            const [fromUnit, toUnit] = conversionKey.split('-');
+            
+            const fromIndex = unitData.units.indexOf(fromUnit);
+            const toIndex = unitData.units.indexOf(toUnit);
+            const fromName = unitData.names[fromIndex];
+            const toName = unitData.names[toIndex];
+            
+            const factor = unitData.conversions[conversionKey];
+            
+            let value;
+            if (factor < 1) {
+                value = Math.floor(Math.random() * 100) + 1;
+                const result = value * factor;
+                if (result % 1 !== 0 && result * 10 % 1 !== 0) {
+                    value = Math.round(result) / factor;
+                }
+            } else {
+                value = Math.floor(Math.random() * 20) + 1;
+            }
+            
+            gameState.correctAnswer = Math.round(value * factor * 1000) / 1000;
+            if (gameState.correctAnswer % 1 === 0) {
+                gameState.correctAnswer = Math.round(gameState.correctAnswer);
+            }
+            
+            gameState.currentTask = `${value} ${fromUnit} = ? ${toUnit}`;
+            
+            gameState.explanation = {
+                title: 'So geht die Umrechnung:',
+                steps: buildUnitConversionSteps(value, fromUnit, toUnit, fromName, toName, factor, gameState.correctAnswer)
+            };
+            
+            gameState.taskData = { value, fromUnit, toUnit, factor, operation: 'unitConversion' };
+            document.getElementById('task').innerHTML = gameState.currentTask;
+        }
+
+        function buildUnitConversionSteps(value, fromUnit, toUnit, fromName, toName, factor, result) {
+            const steps = [];
+            steps.push(`Umrechnung von ${fromName} in ${toName}`);
+            
+            if (factor < 1) {
+                const divisor = Math.round(1 / factor);
+                steps.push(`1 ${fromUnit} = ${factor} ${toUnit}`);
+                steps.push(`Also teile ich durch ${divisor}: ${value} ÷ ${divisor}`);
+            } else {
+                steps.push(`1 ${fromUnit} = ${factor} ${toUnit}`);
+                steps.push(`Also multipliziere ich mit ${factor}: ${value} × ${factor}`);
+            }
+            
+            steps.push(`= ${formatNumber(result)} ${toUnit}`);
+            return steps;
+        }
+
+        function generateMixedNotationTask() {
+            const categories = ['length', 'weight'];
+            const category = categories[Math.floor(Math.random() * categories.length)];
+            const unitData = unitDefinitions[category];
+            
+            const largerUnitIndex = 1;
+            const smallerUnitIndex = 0;
+            
+            const largerUnit = unitData.units[largerUnitIndex];
+            const smallerUnit = unitData.units[smallerUnitIndex];
+            const largerName = unitData.names[largerUnitIndex];
+            const smallerName = unitData.names[smallerUnitIndex];
+            
+            const largerValue = Math.floor(Math.random() * 5) + 1;
+            const smallerValue = [250, 500, 750, 100, 200, 300, 400, 600, 700, 800, 900][Math.floor(Math.random() * 11)];
+            
+            const conversionKey = `${largerUnit}-${smallerUnit}`;
+            const factor = unitData.conversions[conversionKey];
+            gameState.correctAnswer = largerValue * factor + smallerValue;
+            
+            gameState.currentTask = `${largerValue} ${largerUnit} ${smallerValue} ${smallerUnit} = ? ${smallerUnit}`;
+            
+            gameState.explanation = {
+                title: 'So geht die Umrechnung:',
+                steps: buildMixedNotationSteps(largerValue, smallerValue, largerUnit, smallerUnit, largerName, smallerName, factor, gameState.correctAnswer)
+            };
+            
+            gameState.taskData = { largerValue, smallerValue, largerUnit, smallerUnit, operation: 'mixedNotation' };
+            document.getElementById('task').innerHTML = gameState.currentTask;
+        }
+
+        function buildMixedNotationSteps(largerValue, smallerValue, largerUnit, smallerUnit, largerName, smallerName, factor, result) {
+            const steps = [];
+            steps.push(`Ich habe ${largerValue} ${largerName} und ${smallerValue} ${smallerName}`);
+            steps.push(`Zuerst rechne ich ${largerValue} ${largerUnit} in ${smallerUnit} um:`);
+            steps.push(`${largerValue} × ${factor} = ${formatNumber(largerValue * factor)} ${smallerUnit}`);
+            steps.push(`Dann addiere ich die ${smallerValue} ${smallerUnit}:`);
+            steps.push(`${formatNumber(largerValue * factor)} + ${smallerValue} = ${formatNumber(result)} ${smallerUnit}`);
+            return steps;
+        }
+
+        function generateFractionDecimalTask() {
+            const fraction = fractions[Math.floor(Math.random() * fractions.length)];
+            const wholeNumber = Math.random() > 0.5 ? Math.floor(Math.random() * 5) + 1 : 0;
+            
+            if (wholeNumber === 0) {
+                gameState.currentTask = `Schreibe als Dezimalzahl: ${fraction.short}`;
+                gameState.correctAnswer = fraction.decimal;
+            } else {
+                gameState.currentTask = `Schreibe als Dezimalzahl: ${wholeNumber} ${fraction.short}`;
+                gameState.correctAnswer = wholeNumber + fraction.decimal;
+            }
+            
+            gameState.explanation = {
+                title: 'So wandelt man um:',
+                steps: buildFractionDecimalSteps(fraction, wholeNumber, gameState.correctAnswer)
+            };
+            
+            gameState.taskData = { fraction, wholeNumber, operation: 'fractionDecimal' };
+            document.getElementById('task').innerHTML = gameState.currentTask;
+        }
+
+        function buildFractionDecimalSteps(fraction, wholeNumber, result) {
+            const steps = [];
+            steps.push(`${fraction.short} bedeutet: 1 geteilt durch ${fraction.of}`);
+            steps.push(`1 ÷ ${fraction.of} = ${fraction.decimal}`);
+            
+            if (wholeNumber > 0) {
+                steps.push(`Da ich ${wholeNumber} ganze habe, rechne ich:`);
+                steps.push(`${wholeNumber} + ${fraction.decimal} = ${result}`);
+            }
+            return steps;
+        }
+
+        function generateMentalVsWrittenTask() {
+            const type = Math.floor(Math.random() * 4);
+            let num1, num2, result, steps, title;
+
+            if (type === 0) { // 999, 1001 Trick
+                const isAdd999 = Math.random() > 0.5;
+                const base = Math.floor(Math.random() * 50000) + 1000;
+                if (isAdd999) {
+                    num1 = base;
+                    num2 = 999;
+                    result = base + 999;
+                    title = "✅ Im Kopf lösen (Der 999er-Trick)";
+                    steps = [
+                        `${num2} ist fast 1000.`,
+                        `Ich rechne: ${num1} + 1000 = ${num1 + 1000}.`,
+                        `Dann ziehe ich 1 ab: ${num1 + 1000} - 1 = ${result}.`
+                    ];
+                } else {
+                    num1 = base;
+                    num2 = 1001;
+                    result = base + 1001;
+                    title = "✅ Im Kopf lösen (Der 1001er-Trick)";
+                    steps = [
+                        `${num2} ist fast 1000.`,
+                        `Ich rechne: ${num1} + 1000 = ${num1 + 1000}.`,
+                        `Dann addiere ich noch 1 dazu: ${num1 + 1000} + 1 = ${result}.`
+                    ];
+                }
+            } 
+            else if (type === 1) { // Compensation (-1 and +1)
+                const roundBase = Math.floor(Math.random() * 200) * 100 + 1000; 
+                num1 = roundBase - 1;
+                num2 = roundBase + 1; 
+                result = num1 + num2;
+                title = "✅ Im Kopf lösen (Ausgleich)";
+                steps = [
+                    `${num1} ist 1 weniger als ${roundBase}.`,
+                    `${num2} ist 1 mehr als ${roundBase}.`,
+                    `Die -1 und +1 heben sich auf.`,
+                    `Rechnung: ${roundBase} + ${roundBase} = ${result}.`
+                ];
+            }
+            else if (type === 2) { // Round Thousands simply
+                const f1 = Math.floor(Math.random() * 90) + 10; 
+                const f2 = Math.floor(Math.random() * 90) + 10;
+                num1 = f1 * 1000;
+                num2 = f2 * 1000;
+                result = num1 + num2;
+                title = "✅ Im Kopf lösen (Tausender addieren)";
+                steps = [
+                    `Beide Zahlen sind runde Tausender.`,
+                    `Ich ignoriere die Nullen vorerst: ${f1} + ${f2} = ${f1 + f2}.`,
+                    `Jetzt hänge ich die drei Nullen wieder an: ${result}.`
+                ];
+            }
+            else { // Written (Hard numbers)
+                num1 = Math.floor(Math.random() * 90000) + 10000;
+                num2 = Math.floor(Math.random() * 90000) + 1000;
+                if (num1 % 100 === 0) num1 += 37;
+                if (num2 % 100 === 0) num2 += 14;
+                result = num1 + num2;
+                title = "✍️ Schriftlich lösen (Kein Trick)";
+                steps = [
+                    `Die Zahlen ${num1} und ${num2} haben keine einfache Rundung.`,
+                    `Ein Kopfrechen-Trick ist hier schwer anzuwenden.`,
+                    `Am besten schriftlich rechnen oder Zerlegen in Tausender/Hunderter/Zehner/Einer.`
+                ];
+            }
+
+            gameState.correctAnswer = result;
+            gameState.currentTask = `${num1} + ${num2}`;
+            gameState.explanation = { title, steps };
+            gameState.taskData = { num1, num2, operation: 'mental' };
+            document.getElementById('task').innerHTML = gameState.currentTask;
         }
 
         function showExplanation() {
@@ -1021,7 +1489,7 @@
         }
 
         function createGraffitiEffect() {
-            const words = ['SUPER!', 'WOW!', 'TOLL!', 'GENIAL!', 'SPITZE!'];
+            const words = ['SUPER!', 'WOW!', 'TOLL!', 'GENIAL!', 'SPITZE!', 'PRIMA!', 'KLASSE!'];
             const colors = ['#FF6B9D', '#4ECDC4', '#95E1D3', '#FFD93D', '#A8E6CF'];
             
             for (let i = 0; i < 3; i++) {
@@ -1075,6 +1543,7 @@
             gameState.mode = mode;
             gameState.score = 0;
             gameState.streak = 0;
+            updateProgress();
             
             document.querySelectorAll('.nav-button').forEach(btn => {
                 btn.classList.remove('active');
@@ -1082,8 +1551,7 @@
                     btn.classList.add('active');
                 }
             });
-
-            updateProgress();
+            
             generateTask();
         }
 
@@ -1107,6 +1575,7 @@
             let isCorrect = false;
             let userAnswer;
 
+            // Input parsing
             userAnswer = parseFloat(userAnswerRaw);
             if (isNaN(userAnswer)) {
                 feedback.textContent = 'Bitte gib eine gültige Zahl ein! 🔢';
@@ -1144,7 +1613,8 @@
             } else {
                 gameState.streak = 0;
                 let correctDisplay = gameState.correctAnswer;
-                if (typeof correctDisplay === 'number') {
+                // Only format if NOT mental mode, to keep integers without dots
+                if (typeof correctDisplay === 'number' && gameState.mode !== 'mental') {
                     correctDisplay = formatNumber(gameState.correctAnswer);
                 }
                 feedback.textContent = `Ups! Die richtige Antwort ist ${correctDisplay}. 💪`;
@@ -1156,21 +1626,27 @@
 
         function updateProgress() {
             const progress = document.getElementById('progress');
+            const scoreDisplay = document.getElementById('scoreDisplay');
             progress.style.width = `${Math.min(gameState.score, 100)}%`;
-        }
-
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') {
-                if (gameState.isAnswered) {
-                    nextTask();
-                } else {
-                    checkAnswer();
-                }
-            }
+            scoreDisplay.textContent = gameState.score;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             initBubbles();
+
+            // FIX: Event-Listener direkt am Input-Feld
+            const answerInput = document.getElementById('answer');
+            answerInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault(); // Verhindert den Reload und Form-Submit
+
+                    if (gameState.isAnswered) {
+                        nextTask();
+                    } else {
+                        checkAnswer();
+                    }
+                }
+            });
         });
     </script>
 </body>
