@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Zahlenzauberer Zappelfix: Die lustige Mathe-Lern-App für Kinder zum Üben von Multiplikation, Division und Runden">
+    <meta name="description" content="Zahlenzauberer Zappelfix Lite: Die lustige Mathe-Lern-App für Kinder zum Üben von Multiplikation, Division und Runden">
     <meta name="keywords" content="Mathe lernen, Kinderspiel, Mathematik, Multiplikation, Division, Runden, Lernspiel">
     <title>Zahlenzauberer Zappelfix: Mathe-Mampf und Rechenspaß</title>
     <style>
@@ -11,181 +11,331 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+        :root {
+            --primary-pink: #FF6B9D;
+            --primary-blue: #4ECDC4;
+            --primary-green: #95E1D3;
+            --primary-yellow: #FFD93D;
+            --primary-purple: #A8E6CF;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            --text-dark: #2D3436;
+            --text-light: #636E72;
         }
 
         body {
-            background: linear-gradient(135deg, #FFD700, #FFE55C);
+            font-family: 'Nunito', 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffd93d 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             padding: 20px;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         .branding {
             text-align: center;
             padding: 10px;
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1em;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
         }
 
         .branding a {
-            color: #1E90FF;
+            color: white;
             text-decoration: none;
             transition: all 0.3s ease;
-            padding: 5px 15px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            display: inline-block;
         }
 
         .branding a:hover {
-            color: #FF69B4;
-            background: rgba(255, 255, 255, 0.5);
-            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.3);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            animation: bounce 2s infinite;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .header h1 {
-            color: #FF69B4;
-            text-shadow: 3px 3px 0 #1E90FF, 
-                         6px 6px 0 rgba(0,0,0,0.1);
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            color: white;
+            text-shadow: 
+                0 0 20px rgba(255, 107, 157, 0.5),
+                0 0 40px rgba(255, 107, 157, 0.3),
+                0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: clamp(1.8em, 5vw, 3em);
+            margin-bottom: 8px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            animation: bounce 2s infinite;
         }
 
         .header p {
-            color: #1E90FF;
-            font-size: 1.5em;
-            text-shadow: 1px 1px 0 white;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: clamp(1.1em, 3vw, 1.5em);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: var(--glass-shadow);
+            border: 1px solid var(--glass-border);
             position: relative;
             z-index: 1;
         }
 
         .nav {
             display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
+            justify-content: center;
+            margin-bottom: 25px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .nav-button {
-            background: #1E90FF;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.9), rgba(240, 147, 251, 0.9));
             color: white;
             border: none;
-            padding: 15px 25px;
-            border-radius: 25px;
+            padding: 14px 22px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            min-width: 200px;
+            font-size: clamp(0.95em, 2.5vw, 1.1em);
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+            min-width: 160px;
+            font-family: 'Nunito', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
         }
 
         .nav-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            background: #FF69B4;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+        }
+
+        .nav-button.active {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.95), rgba(149, 225, 211, 0.95));
+            box-shadow: 0 4px 20px rgba(78, 205, 196, 0.5);
         }
 
         .game-area {
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #f0f0f0, #e5e5e5);
-            border-radius: 15px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 25px;
             margin-bottom: 20px;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 20px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .task {
-            font-size: 2.5em;
-            color: #1E90FF;
-            margin: 20px 0;
-            text-shadow: 2px 2px 0 white;
-            font-weight: bold;
+            font-size: clamp(1.6em, 5vw, 2.4em);
+            color: white;
+            margin: 15px 0;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            font-weight: 800;
+            line-height: 1.4;
         }
 
         .input-area {
-            margin: 20px 0;
+            margin: 25px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
         }
-      .answer-input {
-            font-size: 2em;
-            padding: 15px;
-            border: 4px solid #32CD32;
-            border-radius: 15px;
-            width: 180px;
+
+        .answer-input {
+            font-size: clamp(1.5em, 4vw, 2em);
+            padding: 15px 20px;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            width: 220px;
             text-align: center;
-            background: white;
-            color: #1E90FF;
-            font-weight: bold;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            font-weight: 700;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            font-family: 'Nunito', sans-serif;
         }
 
         .answer-input:focus {
             outline: none;
-            border-color: #FF69B4;
+            border-color: var(--primary-pink);
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.4);
+            background: white;
         }
 
         .answer-input::-webkit-inner-spin-button,
         .answer-input::-webkit-outer-spin-button {
             opacity: 1;
-            height: 40px;
+            height: 30px;
             cursor: pointer;
         }
 
-        .submit-button {
-            background: #32CD32;
+        .submit-button, .next-button {
             color: white;
             border: none;
             padding: 15px 40px;
             border-radius: 25px;
-            font-size: 1.4em;
+            font-size: clamp(1.2em, 3vw, 1.4em);
             cursor: pointer;
-            margin: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-weight: 800;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Nunito', sans-serif;
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .submit-button {
+            background: linear-gradient(135deg, #95E1D3, #4ECDC4);
+            box-shadow: 0 4px 20px rgba(149, 225, 211, 0.4);
+            display: block;
+        }
+        
+        .next-button {
+            background: linear-gradient(135deg, #9B59B6, #8E44AD);
+            box-shadow: 0 4px 20px rgba(155, 89, 182, 0.4);
+            margin-top: 10px;
+        }
+
+        .submit-button::before, .next-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-button:hover::before, .next-button:hover::before {
+            left: 100%;
         }
 
         .submit-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            background: #FF69B4;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(149, 225, 211, 0.5);
+        }
+        
+        .next-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(155, 89, 182, 0.5);
         }
 
         .settings-button {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #1E90FF;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: white;
-            border: none;
-            padding: 10px 20px;
+            border: 1px solid var(--glass-border);
+            padding: 12px 20px;
             border-radius: 25px;
             cursor: pointer;
             font-size: 1.2em;
+            font-weight: 700;
             transition: all 0.3s ease;
             z-index: 1000;
+            box-shadow: var(--glass-shadow);
+            font-family: 'Nunito', sans-serif;
         }
 
         .settings-button:hover {
-            background: #FF69B4;
+            background: rgba(255, 255, 255, 0.4);
             transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(31, 38, 135, 0.3);
         }
 
         .settings-modal {
@@ -194,18 +344,34 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             z-index: 1001;
             max-width: 90%;
-            width: 400px;
+            width: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .settings-modal.show {
             display: block;
-            animation: modal-pop 0.3s ease-out;
+            animation: modal-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .settings-modal h2 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .settings-modal p {
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .modal-overlay {
@@ -215,82 +381,184 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             z-index: 1000;
         }
 
         .modal-overlay.show {
             display: block;
+            animation: fade-in 0.3s ease;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .range-slider {
             width: 100%;
             margin: 20px 0;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--primary-pink), var(--primary-blue));
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--primary-pink);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--primary-pink);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .range-value {
             text-align: center;
-            font-size: 1.5em;
-            color: #1E90FF;
-            margin: 10px 0;
+            font-size: 1.6em;
+            color: var(--primary-pink);
+            margin: 15px 0;
+            font-weight: 800;
         }
 
         .feedback {
-            min-height: 50px;
-            font-size: 1.4em;
+            min-height: 60px;
+            font-size: clamp(1.1em, 3vw, 1.4em);
             margin: 20px 0;
-            padding: 10px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 20px;
             transition: all 0.3s ease;
+            font-weight: 700;
         }
 
         .feedback.correct {
-            color: #32CD32;
-            background: rgba(50, 205, 50, 0.1);
+            color: #27ae60;
+            background: rgba(39, 174, 96, 0.15);
+            border: 2px solid rgba(39, 174, 96, 0.3);
         }
 
         .feedback.incorrect {
-            color: #FF69B4;
-            background: rgba(255, 105, 180, 0.1);
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.15);
+            border: 2px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            text-align: left;
+            color: var(--text-dark);
+            font-size: clamp(0.95em, 2.5vw, 1.1em);
+            line-height: 1.6;
+            animation: slide-in 0.4s ease;
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .explanation-title {
+            font-weight: 800;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .explanation-step {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .explanation-step::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: 800;
         }
 
         .progress-container {
-            background: #f0f0f0;
-            border-radius: 15px;
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
             margin-top: 20px;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .progress-bar {
-            height: 25px;
-            background: #f0f0f0;
-            border-radius: 12.5px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .progress {
             height: 100%;
-            background: linear-gradient(90deg, #32CD32, #1E90FF);
+            background: linear-gradient(90deg, #FFD93D, #FF6B9D, #4ECDC4);
+            background-size: 200% 100%;
+            animation: progressShine 2s linear infinite;
             width: 0%;
-            transition: width 0.5s ease;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            border-radius: 12.5px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(255, 217, 61, 0.5);
+            border-radius: 10px;
+        }
+
+        @keyframes progressShine {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         .graffiti {
             position: fixed;
-            font-family: 'Comic Sans MS', cursive;
-            font-size: 5em;
-            font-weight: bold;
-            color: transparent;
-            -webkit-text-stroke: 3px;
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(3em, 10vw, 5em);
+            font-weight: 900;
+            color: white;
+            text-shadow: 
+                0 0 20px rgba(255, 107, 157, 0.8),
+                0 0 40px rgba(255, 107, 157, 0.5),
+                0 0 60px rgba(255, 107, 157, 0.3);
             transform: rotate(-15deg);
             opacity: 0;
             z-index: 1000;
             pointer-events: none;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+            -webkit-text-stroke: 2px white;
         }
 
         .graffiti-animation {
@@ -316,7 +584,7 @@
             position: fixed;
             width: 2px;
             height: 20px;
-            background: linear-gradient(transparent, #1E90FF);
+            background: linear-gradient(transparent, rgba(78, 205, 196, 0.8));
             animation: rain-fall 1s linear infinite;
             z-index: 998;
         }
@@ -351,12 +619,12 @@
             position: fixed;
             width: 120px;
             height: 70px;
-            background: #4a4a4a;
+            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
             border-radius: 35px;
             box-shadow: 
                 30px -20px 0 10px #4a4a4a,
                 -30px -20px 0 10px #4a4a4a,
-                0 0 20px rgba(0,0,0,0.3);
+                0 0 30px rgba(0, 0, 0, 0.5);
             animation: thunder-move 3s ease-in forwards;
             opacity: 0;
             z-index: 999;
@@ -368,12 +636,12 @@
             position: absolute;
             width: 8px;
             height: 80px;
-            background: #FFD700;
+            background: linear-gradient(to bottom, #FFD93D, transparent);
             left: 57px;
             bottom: -80px;
             transform: rotate(-15deg);
             animation: lightning-flash 0.5s ease-in infinite;
-            box-shadow: 0 0 30px #FFD700;
+            box-shadow: 0 0 30px #FFD93D;
         }
 
         @keyframes thunder-move {
@@ -425,75 +693,108 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes modal-pop {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        }
-
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 1.8em;
+            body {
+                padding: 15px;
             }
 
-            .nav {
-                flex-direction: column;
-                align-items: center;
+            .container {
+                padding: 20px 15px;
+                border-radius: 20px;
             }
 
             .nav-button {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
+                padding: 12px;
             }
 
-            .task {
-                font-size: 2em;
+            .input-area {
+                flex-direction: column;
+            }
+
+            .answer-input {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .settings-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 1em;
+            }
+            
+            .submit-button, .next-button {
+                width: 100%;
+                max-width: 250px;
+                padding: 12px 20px;
+            }
+
+            .settings-modal {
+                padding: 25px 20px;
+            }
+
+            .explanation {
+                padding: 15px;
+            }
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .container {
+                -webkit-transform: translateZ(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
+    <div class="bubbles" id="bubbles"></div>
+
     <div class="branding">
-        <a href="https://platformeconomies.com" target="_blank" rel="noopener">Präsentiert von platformeconomies.com</a>
+        <a href="https://mohammed-brueckner.com" target="_blank" rel="noopener">Präsentiert von mohammed-brueckner.com</a>
     </div>
 
-    <button class="settings-button" onclick="toggleSettings()">⚙️ Einstellungen</button>
+    <button class="settings-button" onclick="toggleSettings()">⚙️ Zahlenraum</button>
 
     <div class="modal-overlay" id="modalOverlay" onclick="toggleSettings()"></div>
     <div class="settings-modal" id="settingsModal">
-        <h2>Einstellungen</h2>
+        <h2>⚙️ Zahlenraum</h2>
         <p>Maximale Ergebniszahl:</p>
-        <input type="range" class="range-slider" id="maxNumber" min="20" max="1000" step="10" value="200" oninput="updateMaxNumber(this.value)">
+        <input type="range" class="range-slider" id="maxNumber" min="20" max="2000" step="10" value="200" oninput="updateMaxNumber(this.value)">
         <div class="range-value" id="maxNumberValue">200</div>
         <button class="submit-button" onclick="toggleSettings()">Schließen</button>
-    </div><div class="container">
+    </div>
+
+    <div class="container">
         <header class="header">
             <h1>Zahlenzauberer Zappelfix</h1>
             <p>Mathe-Mampf und Rechenspaß</p>
         </header>
 
         <nav class="nav">
-            <button class="nav-button" onclick="setMode('multiplication')">Multy's Multiplikation</button>
-            <button class="nav-button" onclick="setMode('division')">Divi's Division</button>
-            <button class="nav-button" onclick="setMode('rounding')">Rundy's Runderei</button>
+            <button class="nav-button" onclick="setMode('multiplication')" data-mode="multiplication">🌟 Multy's Multiplikation</button>
+            <button class="nav-button" onclick="setMode('division')" data-mode="division">⚡ Divi's Division</button>
+            <button class="nav-button" onclick="setMode('rounding')" data-mode="rounding">🎯 Rundy's Runderei</button>
         </nav>
 
         <div class="game-area">
-            <div class="task" id="task">Wähle eine Rechenart!</div>
+            <div class="task" id="task">Wähle eine Rechenart! 🎮</div>
             <div class="input-area">
-                <input type="number" class="answer-input" id="answer" placeholder="?" onkeypress="handleKeyPress(event)">
-                <button class="submit-button" onclick="checkAnswer()">Prüfen!</button>
+                <input type="number" class="answer-input" id="answer" placeholder="?" inputmode="decimal" onkeydown="handleKeyPress(event)">
+                <button class="submit-button" id="submitBtn" onclick="checkAnswer()">Prüfen! 🚀</button>
+                <button class="next-button" id="nextBtn" onclick="nextTask()">Weiter ➡️</button>
             </div>
             <div class="feedback" id="feedback"></div>
+            <div id="explanation"></div>
         </div>
 
         <div class="progress-container">
@@ -511,8 +812,35 @@
             score: 0,
             level: 'easy',
             maxResult: 200,
-            streak: 0
+            streak: 0,
+            explanation: null,
+            isAnswered: false
         };
+
+        // Utility: Format numbers with dots (e.g. 100.000)
+        function formatNumber(num) {
+            if (num === undefined || num === null) return '';
+            let parts = num.toString().split('.');
+            let integerPart = parts[0];
+            let decimalPart = parts.length > 1 ? ',' + parts[1] : '';
+            let formattedInt = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return formattedInt + decimalPart;
+        }
+
+        function initBubbles() {
+            const bubblesContainer = document.getElementById('bubbles');
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 60 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                bubblesContainer.appendChild(bubble);
+            }
+        }
 
         function toggleSettings() {
             const modal = document.getElementById('settingsModal');
@@ -523,7 +851,7 @@
 
         function updateMaxNumber(value) {
             gameState.maxResult = parseInt(value);
-            document.getElementById('maxNumberValue').textContent = value;
+            document.getElementById('maxNumberValue').textContent = formatNumber(gameState.maxResult);
             if (gameState.mode) {
                 generateTask();
             }
@@ -531,6 +859,20 @@
 
         function generateTask() {
             if (!gameState.mode) return;
+
+            // Reset UI state
+            gameState.isAnswered = false;
+            const explanationEl = document.getElementById('explanation');
+            explanationEl.innerHTML = '';
+            gameState.explanation = null;
+            
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').disabled = false;
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('submitBtn').style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('answer').focus();
 
             let num1, num2;
             do {
@@ -540,6 +882,7 @@
                         num2 = Math.floor(Math.random() * Math.ceil(Math.sqrt(gameState.maxResult))) + 1;
                         gameState.correctAnswer = num1 * num2;
                         gameState.currentTask = `${num1} × ${num2}`;
+                        buildMultiplicationExplanation(num1, num2);
                         break;
                     case 'division':
                         num2 = Math.floor(Math.random() * 12) + 1;
@@ -547,20 +890,83 @@
                             num1 = num2 * (Math.floor(Math.random() * Math.floor(gameState.maxResult / num2)) + 1);
                         } while (num1 > gameState.maxResult);
                         gameState.correctAnswer = num1 / num2;
-                        gameState.currentTask = `${num1} ÷ ${num2}`;
+                        gameState.currentTask = `${formatNumber(num1)} ÷ ${num2}`;
+                        buildDivisionExplanation(num1, num2, gameState.correctAnswer);
                         break;
                     case 'rounding':
                         num1 = Math.floor(Math.random() * gameState.maxResult) + 1;
                         gameState.correctAnswer = Math.round(num1 / 10) * 10;
-                        gameState.currentTask = `Runde ${num1} auf Zehner`;
+                        gameState.currentTask = `Runde ${formatNumber(num1)} auf Zehner`;
+                        buildRoundingExplanation(num1, gameState.correctAnswer);
                         break;
                 }
             } while (gameState.correctAnswer > gameState.maxResult);
 
             document.getElementById('task').textContent = gameState.currentTask;
-            document.getElementById('answer').value = '';
-            document.getElementById('feedback').textContent = '';
-            document.getElementById('answer').focus();
+        }
+
+        function buildMultiplicationExplanation(a, b) {
+            // For simple numbers, show repeated addition
+            const addition = Array(b).fill(a).join(' + ');
+            gameState.explanation = {
+                title: 'So geht das Rechnen:',
+                steps: [
+                    `${a} × ${b} bedeutet: ${addition}`,
+                    `Das ergibt ${formatNumber(a * b)}`
+                ]
+            };
+        }
+
+        function buildDivisionExplanation(a, b, result) {
+            gameState.explanation = {
+                title: 'So geht das Rechnen:',
+                steps: [
+                    `${formatNumber(a)} ÷ ${b} bedeutet: Wie oft passt ${b} in ${formatNumber(a)}?`,
+                    `Ich überlege: ${result} × ${b} = ${formatNumber(a)}`,
+                    `Also ist die Antwort ${result}`
+                ]
+            };
+        }
+
+        function buildRoundingExplanation(num, result) {
+            const ones = num % 10;
+            const lowerTen = Math.floor(num / 10) * 10;
+            const upperTen = lowerTen + 10;
+            
+            let stepText = '';
+            if (ones < 5) {
+                stepText = `Da die Einerstelle ${ones} ist (< 5), runde ich auf ${formatNumber(lowerTen)} ab.`;
+            } else {
+                stepText = `Da die Einerstelle ${ones} ist (>= 5), runde ich auf ${formatNumber(upperTen)} auf.`;
+            }
+
+            gameState.explanation = {
+                title: 'So geht das Runden:',
+                steps: [
+                    `Ich schaue auf die Einerstelle: ${ones}`,
+                    stepText
+                ]
+            };
+        }
+
+        function nextTask() {
+            generateTask();
+        }
+
+        function showExplanation() {
+            if (!gameState.explanation) return;
+            
+            const explanationEl = document.getElementById('explanation');
+            const stepsHtml = gameState.explanation.steps.map(step => 
+                `<div class="explanation-step">${step}</div>`
+            ).join('');
+            
+            explanationEl.innerHTML = `
+                <div class="explanation">
+                    <div class="explanation-title">${gameState.explanation.title}</div>
+                    ${stepsHtml}
+                </div>
+            `;
         }
 
         function createRainEffect() {
@@ -578,7 +984,6 @@
         }
 
         function createThunderEffect() {
-            // Erste Wolke und Blitz
             const cloud = document.createElement('div');
             cloud.className = 'thunder-cloud';
             cloud.style.left = `${Math.random() * 60 + 20}vw`;
@@ -595,7 +1000,6 @@
                 setTimeout(() => flash.remove(), 500);
             }, 300);
 
-            // Zweiter Donner und Blitz nach kurzer Verzögerung
             setTimeout(() => {
                 const cloud2 = document.createElement('div');
                 cloud2.className = 'thunder-cloud';
@@ -610,24 +1014,22 @@
                     setTimeout(() => flash2.remove(), 500);
                 }, 300);
 
-                // Cleanup
                 setTimeout(() => cloud2.remove(), 3000);
             }, 1000);
 
-            // Cleanup erste Wolke
             setTimeout(() => cloud.remove(), 3000);
         }
 
         function createGraffitiEffect() {
             const words = ['SUPER!', 'WOW!', 'TOLL!', 'GENIAL!', 'SPITZE!'];
-            const colors = ['#FF1493', '#32CD32', '#1E90FF', '#FFD700', '#FF69B4'];
+            const colors = ['#FF6B9D', '#4ECDC4', '#95E1D3', '#FFD93D', '#A8E6CF'];
             
             for (let i = 0; i < 3; i++) {
                 setTimeout(() => {
                     const graffiti = document.createElement('div');
                     graffiti.className = 'graffiti';
                     graffiti.textContent = words[Math.floor(Math.random() * words.length)];
-                    graffiti.style.webkitTextStrokeColor = colors[Math.floor(Math.random() * colors.length)];
+                    graffiti.style.color = colors[Math.floor(Math.random() * colors.length)];
                     graffiti.style.left = `${Math.random() * 60 + 20}vw`;
                     graffiti.style.top = `${Math.random() * 60 + 20}vh`;
                     
@@ -639,7 +1041,7 @@
         }
 
         function createConfetti() {
-            const colors = ['#FFD700', '#1E90FF', '#32CD32', '#FF69B4'];
+            const colors = ['#FFD93D', '#FF6B9D', '#4ECDC4', '#95E1D3', '#A8E6CF', '#F093FB'];
             const shapes = ['circle', 'square', 'triangle'];
             
             for (let i = 0; i < 50; i++) {
@@ -673,43 +1075,81 @@
             gameState.mode = mode;
             gameState.score = 0;
             gameState.streak = 0;
+            
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.mode === mode) {
+                    btn.classList.add('active');
+                }
+            });
+
             updateProgress();
             generateTask();
         }
 
         function checkAnswer() {
-            if (!gameState.mode) return;
+            if (!gameState.mode || gameState.isAnswered) return;
 
             const answerInput = document.getElementById('answer');
-            const userAnswer = parseInt(answerInput.value);
+            const userAnswerRaw = answerInput.value.trim().toLowerCase().replace(',', '.');
             const feedback = document.getElementById('feedback');
+            const explanationEl = document.getElementById('explanation');
+            
+            explanationEl.innerHTML = '';
 
-            if (isNaN(userAnswer)) {
-                feedback.textContent = 'Bitte gib eine Zahl ein!';
+            if (userAnswerRaw === '') {
+                feedback.textContent = 'Bitte gib eine Antwort ein! 📝';
                 feedback.className = 'feedback incorrect';
                 createThunderEffect();
                 return;
             }
 
-            if (userAnswer === gameState.correctAnswer) {
+            let isCorrect = false;
+            let userAnswer;
+
+            userAnswer = parseFloat(userAnswerRaw);
+            if (isNaN(userAnswer)) {
+                feedback.textContent = 'Bitte gib eine gültige Zahl ein! 🔢';
+                feedback.className = 'feedback incorrect';
+                createThunderEffect();
+                return;
+            }
+            
+            const tolerance = 0.01;
+            isCorrect = Math.abs(userAnswer - gameState.correctAnswer) < tolerance;
+
+            // Lock state
+            gameState.isAnswered = true;
+            document.getElementById('answer').disabled = true;
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').focus();
+
+            if (isCorrect) {
                 gameState.streak++;
                 const messages = [
                     '🌟 Super! Das ist richtig! 🌟',
                     '🎉 Fantastisch! Weiter so! 🎉',
                     '🚀 Wahnsinn! Du bist unschlagbar! 🚀',
-                    '💫 Mega! Du bist ein Mathe-Genie! 💫'
+                    '💫 Mega! Du bist ein Mathe-Genie! 💫',
+                    '🏆 Perfekt! Du machst das großartig! 🏆'
                 ];
                 feedback.textContent = messages[Math.floor(Math.random() * messages.length)];
                 feedback.className = 'feedback correct';
                 createConfetti();
                 createGraffitiEffect();
+                showExplanation();
                 gameState.score += 10;
                 updateProgress();
-                setTimeout(generateTask, 1500);
             } else {
                 gameState.streak = 0;
-                feedback.textContent = `Ups! Probier's nochmal! Die richtige Antwort wäre ${gameState.correctAnswer} gewesen.`;
+                let correctDisplay = gameState.correctAnswer;
+                if (typeof correctDisplay === 'number') {
+                    correctDisplay = formatNumber(gameState.correctAnswer);
+                }
+                feedback.textContent = `Ups! Die richtige Antwort ist ${correctDisplay}. 💪`;
                 feedback.className = 'feedback incorrect';
+                showExplanation();
                 createThunderEffect();
             }
         }
@@ -721,12 +1161,17 @@
 
         function handleKeyPress(e) {
             if (e.key === 'Enter') {
-                checkAnswer();
+                if (gameState.isAnswered) {
+                    nextTask();
+                } else {
+                    checkAnswer();
+                }
             }
         }
 
-        // Initialisiere Event-Listener für Eingabefeld
-        document.getElementById('answer').addEventListener('keypress', handleKeyPress);
+        document.addEventListener('DOMContentLoaded', () => {
+            initBubbles();
+        });
     </script>
 </body>
 </html>
