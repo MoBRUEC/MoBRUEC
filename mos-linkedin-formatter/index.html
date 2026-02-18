@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Paste Markdown, Google Docs rich text, or plain text and get perfectly formatted LinkedIn posts using Unicode styling. Free browser tool by Mohammed Brückner." />
+<meta name="author" content="Mohammed Brückner" />
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/929/929610.png" />
+<title>LinkedInReady — Free LinkedIn Post Formatter by Mohammed Brückner</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f4f1ec; --white: #ffffff; --border: #e0dbd3; --border2: #c8c2b8;
+  --text: #1c1917; --muted: #7c756e; --placeholder: #b8b2aa;
+  --linkedin: #0a66c2; --linkedin-bg: #e8f3ff;
+  --amber-bg: #fefce8; --amber-txt: #78530a; --amber-bdr: #fde68a;
+  --red-bg: #ffebee; --red-txt: #c62828; --red-bdr: #ef5350;
+}
+html, body { height: 100%; font-family: system-ui, sans-serif; font-size: 15px; background: var(--bg); color: var(--text); }
+.topbar { height: 54px; background: var(--white); border-bottom: 2px solid var(--border); display: flex; align-items: center; padding: 0 24px; gap: 14px; flex-shrink: 0; }
+.logo { font-weight: 700; font-size: 1rem; color: var(--text); letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+.logo-badge { background: var(--linkedin); color: #fff; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; }
+.topbar-sub { font-size: 0.78rem; color: var(--muted); border-left: 1px solid var(--border2); padding-left: 14px; }
+.topbar-link { color: var(--linkedin); text-decoration: none; font-weight: 600; }
+.topbar-link:hover { text-decoration: underline; }
+.topbar-shortcuts { margin-left: auto; font-size: 0.72rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; padding: 1px 5px; font-size: 0.68rem; color: var(--text); }
+.layout { display: flex; flex-direction: column; height: calc(100vh - 54px); }
+.panes { flex: 1; display: grid; grid-template-columns: 1fr 1fr; min-height: 0; }
+.pane { display: flex; flex-direction: column; min-height: 0; background: var(--white); }
+.pane.left { border-right: 2px solid var(--border); position: relative; }
+.pane-label { flex-shrink: 0; height: 44px; padding: 0 20px; display: flex; align-items: center; gap: 9px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.step-num { width: 21px; height: 21px; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-num.dark { background: var(--text); color: #fff; }
+.step-num.blue { background: var(--linkedin); color: #fff; }
+.pane-title { font-weight: 600; font-size: 0.83rem; color: var(--text); }
+.pane-hint { font-size: 0.76rem; color: var(--muted); }
+.detected-badge { margin-left: auto; font-size: 0.68rem; font-weight: 600; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border2); color: var(--muted); background: var(--white); visibility: hidden; }
+.detected-badge.show { visibility: visible; background: var(--linkedin-bg); border-color: var(--linkedin); color: var(--linkedin); }
+
+.editor-container { flex: 1; position: relative; overflow: hidden; }
+#input-box, #highlight-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 20px 22px; font-family: system-ui, sans-serif; font-size: 0.9rem; line-height: 1.75; border: none; outline: none; resize: none; overflow: auto; white-space: pre-wrap; word-wrap: break-word; }
+#input-box { z-index: 2; background: transparent; color: var(--text); caret-color: var(--linkedin); }
+#input-box::placeholder { color: var(--placeholder); opacity: 1; }
+#highlight-layer { z-index: 1; background: var(--white); color: var(--text); pointer-events: none; }
+#highlight-layer .md-header { color: var(--linkedin); font-weight: 700; }
+#highlight-layer .md-bold { font-weight: 700; color: #000; }
+#highlight-layer .md-italic { font-style: italic; color: #5a5450; }
+#highlight-layer .md-link { color: var(--linkedin); text-decoration: underline; }
+#highlight-layer code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: #6b3a1a; }
+
+/* Rich HTML preview panel (left pane, shown when rich content is pasted) */
+#rich-preview {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  padding: 20px 22px; overflow-y: auto; overflow-x: hidden;
+  background: var(--white); font-family: system-ui, sans-serif;
+  font-size: 0.9rem; line-height: 1.75; color: var(--text);
+  z-index: 3; cursor: text;
+}
+/* Render rich content naturally */
+#rich-preview b, #rich-preview strong { font-weight: 700; }
+#rich-preview i, #rich-preview em { font-style: italic; }
+#rich-preview h1, #rich-preview h2, #rich-preview h3,
+#rich-preview h4, #rich-preview h5, #rich-preview h6 {
+  font-size: 1rem; font-weight: 700; color: var(--linkedin);
+  margin: 0.6em 0 0.3em;
+}
+#rich-preview ul { list-style: disc; padding-left: 1.4em; margin: 0.4em 0; }
+#rich-preview ol { list-style: decimal; padding-left: 1.4em; margin: 0.4em 0; }
+#rich-preview li { margin: 0.15em 0; }
+#rich-preview p { margin: 0 0 0.6em; }
+#rich-preview a { color: var(--linkedin); }
+/* "Clear rich paste" button inside preview */
+#rich-clear-btn {
+  position: absolute; top: 10px; right: 12px; z-index: 4;
+  font-size: 0.7rem; font-weight: 600; padding: 3px 10px;
+  border-radius: 4px; border: 1.5px solid var(--border2);
+  background: var(--white); color: var(--muted); cursor: pointer;
+  transition: all 0.1s;
+}
+#rich-clear-btn:hover { border-color: var(--text); color: var(--text); }
+
+.output-scroll { flex: 1; overflow-y: auto; position: relative; background: #fafafa; }
+.empty-state { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; pointer-events: none; text-align: center; padding: 48px; color: var(--placeholder); }
+.empty-icon { font-size: 2rem; opacity: 0.25; }
+.empty-state p { font-size: 0.8rem; line-height: 1.6; max-width: 180px; }
+#output-render { padding: 20px 22px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 0.95rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; }
+#output-render .post-line { margin-bottom: 10px; display: block; }
+#output-render .post-break { height: 4px; display: block; }
+
+#warnings { display: none; flex-shrink: 0; padding: 7px 22px; font-size: 0.73rem; font-weight: 500; color: var(--amber-txt); background: var(--amber-bg); border-top: 1px solid var(--amber-bdr); }
+#warnings.show { display: block; }
+#warnings.error { background: var(--red-bg); border-top-color: var(--red-bdr); color: var(--red-txt); }
+
+.action-bar { flex-shrink: 0; height: 60px; background: var(--white); border-top: 2px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 9px; }
+.btn { font-family: system-ui, sans-serif; font-size: 0.81rem; font-weight: 600; padding: 8px 18px; border-radius: 6px; border: 1.5px solid var(--border2); background: var(--white); color: var(--muted); cursor: pointer; transition: all 0.12s; white-space: nowrap; line-height: 1; }
+.btn:hover { border-color: var(--text); color: var(--text); background: var(--bg); }
+.btn-convert { background: var(--linkedin); color: #fff; border-color: var(--linkedin); padding: 8px 22px; font-weight: 700; }
+.btn-convert:hover { background: #004182; border-color: #004182; color: #fff; }
+.sc { font-size: 0.66rem; font-weight: 400; opacity: 0.5; margin-left: 3px; }
+.btn-copy { background: var(--text); color: #fff; border-color: var(--text); padding: 8px 22px; font-weight: 700; }
+.btn-copy:hover, .btn-copy.copied { background: #000; border-color: #000; color: #fff; }
+.sep { width: 1px; height: 26px; background: var(--border); flex-shrink: 0; }
+.stats { margin-left: auto; font-size: 0.73rem; color: var(--muted); display: flex; gap: 12px; }
+.site-footer { flex-shrink: 0; background: var(--bg); border-top: 1px solid var(--border); padding: 9px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 0.72rem; color: var(--muted); }
+.site-footer a { color: var(--linkedin); text-decoration: none; font-weight: 600; }
+.site-footer a:hover { text-decoration: underline; }
+.footer-right { display: flex; gap: 14px; align-items: center; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+@media (max-width: 600px) {
+  .panes { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+  .pane.left { border-right: none; border-bottom: 2px solid var(--border); }
+  .topbar-sub, .topbar-shortcuts { display: none; }
+  .stats { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">LinkedInReady <span class="logo-badge">Free Tool</span></div>
+  <span class="topbar-sub">Paste anything, get LinkedIn-perfect Unicode output — by <a href="https://mohammed-brueckner.com/publications" target="_blank" rel="noopener" class="topbar-link">Mohammed Brückner</a></span>
+  <div class="topbar-shortcuts">Convert <kbd>⌘</kbd><kbd>↵</kbd> · Copy <kbd>⌘</kbd><kbd>⇧</kbd><kbd>C</kbd></div>
+</div>
+<div class="layout">
+  <div class="panes">
+    <div class="pane left">
+      <div class="pane-label">
+        <div class="step-num dark">1</div>
+        <span class="pane-title">Paste your content here</span>
+        <span class="pane-hint">&nbsp;— format detected automatically</span>
+        <span class="detected-badge" id="detected-badge">Auto-detect</span>
+      </div>
+      <div class="editor-container">
+        <textarea id="input-box" placeholder="Paste here — then click Convert (or ⌘↵).
+
+Accepts:
+  Markdown (Claude, GitHub, etc.)
+  Rich text from Google Docs, Copilot, Word
+  Plain text or raw HTML
+
+Converts formatting to Unicode characters that survive LinkedIn's paste." spellcheck="false"></textarea>
+        <pre id="highlight-layer" aria-hidden="true"></pre>
+        <!-- Rich HTML preview — shown instead of textarea when rich content is pasted -->
+        <div id="rich-preview" aria-label="Rich content preview" style="display:none;"></div>
+      </div>
+    </div>
+    <div class="pane">
+      <div class="pane-label">
+        <div class="step-num blue">2</div>
+        <span class="pane-title">LinkedIn-ready output</span>
+        <span class="pane-hint">&nbsp;— click Copy, paste straight into LinkedIn</span>
+      </div>
+      <div class="output-scroll">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">💼</div>
+          <p>Converted content appears here</p>
+        </div>
+        <div id="output-render"></div>
+      </div>
+    </div>
+  </div>
+  <div id="warnings"></div>
+  <div class="action-bar">
+    <button class="btn btn-convert" onclick="convert()">Convert <span class="sc">⌘↵</span></button>
+    <div class="sep"></div>
+    <button class="btn btn-copy" id="copy-btn" onclick="copyToClipboard()">Copy to clipboard</button>
+    <div class="sep"></div>
+    <button class="btn" onclick="loadSample()">Load sample</button>
+    <button class="btn" onclick="clearAll()">Clear</button>
+    <span class="stats" id="stats"></span>
+  </div>
+  <footer class="site-footer">
+    <span>Built by <a href="https://mohammed-brueckner.com/publications" target="_blank" rel="noopener author">Mohammed Brückner</a> — runs entirely in your browser, nothing is sent anywhere. <strong>More tools:</strong> <a href="https://mohammed-brueckner.com/publications" target="_blank" rel="noopener">MediumReady</a></span>
+    <div class="footer-right">
+      <a href="https://mohammed-brueckner.com/publications" target="_blank" rel="noopener">mohammed-brueckner.com/publications</a>
+      <span>&copy; Mohammed Brückner</span>
+    </div>
+  </footer>
+</div>
+<script>
+'use strict';
+
+// ---------------------------------------------------------------------------
+// Unicode conversion maps for LinkedIn-compatible "formatting"
+// ---------------------------------------------------------------------------
+const unicodeMaps = {
+  bold: {
+    'A':'𝗔','B':'𝗕','C':'𝗖','D':'𝗗','E':'𝗘','F':'𝗙','G':'𝗚','H':'𝗛','I':'𝗜','J':'𝗝','K':'𝗞','L':'𝗟','M':'𝗠','N':'𝗡','O':'𝗢','P':'𝗣','Q':'𝗤','R':'𝗥','S':'𝗦','T':'𝗧','U':'𝗨','V':'𝗩','W':'𝗪','X':'𝗫','Y':'𝗬','Z':'𝗭',
+    'a':'𝗮','b':'𝗯','c':'𝗰','d':'𝗱','e':'𝗲','f':'𝗳','g':'𝗴','h':'𝗵','i':'𝗶','j':'𝗷','k':'𝗸','l':'𝗹','m':'𝗺','n':'𝗻','o':'𝗼','p':'𝗽','q':'𝗾','r':'𝗿','s':'𝘀','t':'𝘁','u':'𝘂','v':'𝘃','w':'𝘄','x':'𝘅','y':'𝘆','z':'𝘇',
+    '0':'𝟬','1':'𝟭','2':'𝟮','3':'𝟯','4':'𝟰','5':'𝟱','6':'𝟲','7':'𝟳','8':'𝟴','9':'𝟵'
+  },
+  italic: {
+    'A':'𝘈','B':'𝘉','C':'𝘊','D':'𝘋','E':'𝘌','F':'𝘍','G':'𝘎','H':'𝘏','I':'𝘐','J':'𝘑','K':'𝘒','L':'𝘓','M':'𝘔','N':'𝘕','O':'𝘖','P':'𝘗','Q':'𝘘','R':'𝘙','S':'𝘚','T':'𝘛','U':'𝘜','V':'𝘝','W':'𝘞','X':'𝘟','Y':'𝘠','Z':'𝘡',
+    'a':'𝘢','b':'𝘣','c':'𝘤','d':'𝘥','e':'𝘦','f':'𝘧','g':'𝘨','h':'𝘩','i':'𝘪','j':'𝘫','k':'𝘬','l':'𝘭','m':'𝘮','n':'𝘯','o':'𝘰','p':'𝘱','q':'𝘲','r':'𝘳','s':'𝘴','t':'𝘵','u':'𝘶','v':'𝘷','w':'𝘸','x':'𝘹','y':'𝘺','z':'𝘻'
+  },
+  boldItalic: {
+    'A':'𝘼','B':'𝘽','C':'𝘾','D':'𝘿','E':'𝙀','F':'𝙁','G':'𝙂','H':'𝙃','I':'𝙄','J':'𝙅','K':'𝙆','L':'𝙇','M':'𝙈','N':'𝙉','O':'𝙊','P':'𝙋','Q':'𝙌','R':'𝙍','S':'𝙎','T':'𝙏','U':'𝙐','V':'𝙑','W':'𝙒','X':'𝙓','Y':'𝙔','Z':'𝙕',
+    'a':'𝙖','b':'𝙗','c':'𝙘','d':'𝙙','e':'𝙚','f':'𝙛','g':'𝙜','h':'𝙝','i':'𝙞','j':'𝙟','k':'𝙠','l':'𝙡','m':'𝙢','n':'𝙣','o':'𝙤','p':'𝙥','q':'𝙦','r':'𝙧','s':'𝙨','t':'𝙩','u':'𝙪','v':'𝙫','w':'𝙬','x':'𝙭','y':'𝙮','z':'𝙯'
+  }
+};
+
+let outputText = '';
+let richPasteHTML = null;
+const inputBox = document.getElementById('input-box');
+const highlightLayer = document.getElementById('highlight-layer');
+
+function toUnicode(text, style) {
+  const map = unicodeMaps[style];
+  return text.split('').map(c => map[c] || c).join('');
+}
+
+// ---------------------------------------------------------------------------
+// Source detection helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Detect whether HTML originates from Google Docs.
+ * Google Docs always injects a <b id="docs-internal-guid-..."> wrapper.
+ */
+function isGoogleDocsHTML(html) {
+  return /docs-internal-guid/.test(html);
+}
+
+/**
+ * Detect whether HTML originates from Microsoft Copilot / Edge / Teams.
+ * Copilot typically uses `data-contrast`, `SpellingError`, or
+ * the `SourceApp` meta tag set to "MSWord"/"Teams".
+ */
+function isCopilotHTML(html) {
+  return /data-contrast|SourceApp.*MSWord|ckeditor|ms-editor/i.test(html);
+}
+
+// ---------------------------------------------------------------------------
+// Main entry point
+// ---------------------------------------------------------------------------
+
+function convertToLinkedIn(text, html = null) {
+  const warnings = [];
+  let processed = '';
+
+  if (html && html.trim()) {
+    const markdown = htmlToMarkdown(html);
+    processed = processMarkdown(markdown);
+  } else {
+    processed = processMarkdown(text);
+  }
+
+  processed = optimizeForLinkedIn(processed, warnings);
+  return { text: processed, warnings };
+}
+
+// ---------------------------------------------------------------------------
+// HTML → Markdown conversion (fixed for Google Docs & Copilot)
+// ---------------------------------------------------------------------------
+
+function htmlToMarkdown(html) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  doc.querySelectorAll('script, style, meta, link').forEach(el => el.remove());
+
+  // ------------------------------------------------------------------
+  // FIX 1 — Google Docs wraps everything in <b id="docs-internal-guid-…">
+  // with font-weight:normal on the <b> itself (so it is NOT actually bold).
+  // Unwrap those phantom bold wrappers before any other processing.
+  // ------------------------------------------------------------------
+  doc.querySelectorAll('b[id^="docs-internal-guid"]').forEach(el => {
+    // Replace the <b> with its children in place
+    const parent = el.parentNode;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+
+  // ------------------------------------------------------------------
+  // FIX 2 — Normalise inline styles that carry formatting information.
+  // Both Google Docs and Copilot use inline CSS instead of semantic tags.
+  // We promote them to proper <b>/<i> tags so the recursive walker below
+  // can handle them uniformly.
+  // ------------------------------------------------------------------
+  doc.querySelectorAll('[style]').forEach(el => {
+    const style = el.getAttribute('style') || '';
+
+    const isBold =
+      /font-weight\s*:\s*(bold|700|800|900)/i.test(style) &&
+      // Guard: GDocs sometimes sets font-weight:700 on the outer wrapper but
+      // font-weight:normal on a child — respect explicit normal overrides.
+      !/font-weight\s*:\s*normal/i.test(style);
+
+    const isItalic = /font-style\s*:\s*italic/i.test(style);
+
+    if (isBold && isItalic) {
+      // Wrap content in <strong><em>
+      const wrapper = doc.createElement('strong');
+      const innerWrapper = doc.createElement('em');
+      while (el.firstChild) innerWrapper.appendChild(el.firstChild);
+      wrapper.appendChild(innerWrapper);
+      el.appendChild(wrapper);
+      el.removeAttribute('style');
+    } else if (isBold) {
+      const wrapper = doc.createElement('strong');
+      while (el.firstChild) wrapper.appendChild(el.firstChild);
+      el.appendChild(wrapper);
+      el.removeAttribute('style');
+    } else if (isItalic) {
+      const wrapper = doc.createElement('em');
+      while (el.firstChild) wrapper.appendChild(el.firstChild);
+      el.appendChild(wrapper);
+      el.removeAttribute('style');
+    }
+  });
+
+  // ------------------------------------------------------------------
+  // Recursive DOM-to-Markdown walker
+  // ------------------------------------------------------------------
+
+  function processChildren(parent) {
+    let result = '';
+    for (const node of parent.childNodes) {
+      result += processNode(node);
+    }
+    return result;
+  }
+
+  function processNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return node.textContent;
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+
+    // -- Lists (handled specially to avoid double-wrapping) --
+    if (tag === 'ul') {
+      let listContent = '';
+      for (const child of node.childNodes) {
+        if (child.nodeType === Node.ELEMENT_NODE && child.tagName.toLowerCase() === 'li') {
+          listContent += '- ' + processChildren(child).trim() + '\n';
+        }
+      }
+      return '\n' + listContent + '\n';
+    }
+
+    if (tag === 'ol') {
+      let listContent = '';
+      let index = 1;
+      for (const child of node.childNodes) {
+        if (child.nodeType === Node.ELEMENT_NODE && child.tagName.toLowerCase() === 'li') {
+          listContent += index + '. ' + processChildren(child).trim() + '\n';
+          index++;
+        }
+      }
+      return '\n' + listContent + '\n';
+    }
+
+    // -- Everything else: get inner content first --
+    const content = processChildren(node);
+
+    switch (tag) {
+      case 'h1': case 'h2': case 'h3':
+      case 'h4': case 'h5': case 'h6':
+        return '\n\n# ' + content.trim() + '\n\n';
+
+      case 'b':
+      case 'strong':
+        // Only treat as bold if font-weight is not explicitly normal
+        // (catches remaining edge-cases after the unwrap above).
+        if (/font-weight\s*:\s*normal/i.test(node.getAttribute('style') || '')) {
+          return content;
+        }
+        return '**' + content + '**';
+
+      case 'i':
+      case 'em':
+        return '*' + content + '*';
+
+      case 'br':
+        return '\n';
+
+      case 'p':
+        return content.trim() + '\n\n';
+
+      case 'div':
+        return content + (content.endsWith('\n') ? '' : '\n');
+
+      case 'span':
+        // After the style-promotion pass above, spans should be plain text.
+        // But handle any remaining bold/italic spans defensively.
+        return content;
+
+      case 'li':
+        // Handled by parent ul/ol loop; return raw content if orphaned.
+        return content;
+
+      case 'a': {
+        const href = node.getAttribute('href');
+        if (href && !href.startsWith('javascript:')) {
+          return content.trim() + ' (' + href + ')';
+        }
+        return content;
+      }
+
+      case 'blockquote':
+        return '> ' + content.trim().replace(/\n/g, '\n> ') + '\n\n';
+
+      case 'pre':
+        return '```\n' + content + '\n```\n\n';
+
+      case 'code':
+        return '`' + content + '`';
+
+      case 'table': {
+        // Convert each row to a pipe-separated line
+        let tableText = '\n';
+        node.querySelectorAll('tr').forEach(row => {
+          const cells = [];
+          row.querySelectorAll('td, th').forEach(cell => {
+            cells.push(processChildren(cell).trim());
+          });
+          if (cells.length) tableText += cells.join(' · ') + '\n';
+        });
+        return tableText + '\n';
+      }
+
+      default:
+        return content;
+    }
+  }
+
+  let markdown = processChildren(doc.body);
+
+  // Clean up excessive newlines
+  markdown = markdown.replace(/\n{3,}/g, '\n\n').trim();
+
+  return markdown;
+}
+
+// ---------------------------------------------------------------------------
+// Markdown → LinkedIn Unicode text
+// ---------------------------------------------------------------------------
+
+function processMarkdown(text) {
+  let result = text;
+
+  // Code blocks — extract and neutralise Markdown markers inside them
+  result = result.replace(/```[\s\S]*?```/g, match => {
+    const code = match.replace(/^```[^\n]*\n?|```$/g, '').trim();
+    return '\n[Code]\n' + code + '\n[/Code]\n';
+  });
+
+  // Inline code — convert to quoted string so backticks don't leak through
+  result = result.replace(/`([^`\n]+)`/g, '"$1"');
+
+  // Headers (# / ## / etc.)
+  result = result.replace(/^#{1,6}\s+(.+)$/gm, (_, content) =>
+    '\n' + toUnicode(content.trim(), 'bold') + '\n'
+  );
+
+  // Bold-italic (must come before bold and italic individually)
+  result = result.replace(/\*\*\*([^*\n]+?)\*\*\*/g, (_, p1) => toUnicode(p1, 'boldItalic'));
+  result = result.replace(/___([^_\n]+?)___/g, (_, p1) => toUnicode(p1, 'boldItalic'));
+
+  // Bold
+  result = result.replace(/\*\*([^*\n]+?)\*\*/g, (_, p1) => toUnicode(p1, 'bold'));
+  result = result.replace(/__([^_\n]+?)__/g, (_, p1) => toUnicode(p1, 'bold'));
+
+  // Italic — use a tighter pattern that won't match stray asterisks
+  // Only match *text* when surrounded by word characters or spaces,
+  // and NOT when the asterisk is already part of a ** pair.
+  result = result.replace(/(?<!\*)\*([^*\n]+?)\*(?!\*)/g, (_, p1) => toUnicode(p1, 'italic'));
+  result = result.replace(/(?<!_)_([^_\n]+?)_(?!_)/g, (_, p1) => toUnicode(p1, 'italic'));
+
+  // Links — keep display text, drop URL (or append in parens)
+  result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)');
+
+  // Blockquotes
+  result = result.replace(/^>\s?(.+)$/gm, (_, p1) => '💬 ' + toUnicode(p1, 'italic'));
+
+  // Unordered list items
+  result = result.replace(/^(\s*)[-*+]\s+(.+)$/gm, '$1• $2');
+
+  // Ordered list items
+  result = result.replace(/^(\s*)\d+\.\s+(.+)$/gm, '$1→ $2');
+
+  // Horizontal rules
+  result = result.replace(/^(-{3,}|\*{3,}|_{3,})$/gm, '• • • • •');
+
+  // Tables (pipe syntax) — convert to dot-separated lines
+  result = result.replace(/^\|(.+)\|$/gm, (_, content) => {
+    const cells = content.split('|').map(c => c.trim()).filter(c => c && !/^[-:]+$/.test(c));
+    return cells.length ? cells.join(' · ') : '';
+  });
+  // Remove table separator rows entirely
+  result = result.replace(/^\|?[-| :]+\|?\s*$/gm, '');
+
+  // ------------------------------------------------------------------
+  // FIX 3 — Clean up any stray lone asterisks or underscores that were
+  // NOT part of valid Markdown pairs and slipped through the regex.
+  // We only strip truly isolated markers (surrounded by whitespace or
+  // start/end-of-line) to avoid corrupting intentional punctuation.
+  // ------------------------------------------------------------------
+  // Lone ** or * at line start/end or surrounded by spaces
+  result = result.replace(/(^|\s)\*{1,3}($|\s)/gm, '$1$2');
+  // Lone __ or _ similarly
+  result = result.replace(/(^|\s)_{1,3}($|\s)/gm, '$1$2');
+
+  return result;
+}
+
+// ---------------------------------------------------------------------------
+// LinkedIn-specific optimisations
+// ---------------------------------------------------------------------------
+
+function optimizeForLinkedIn(text, warnings) {
+  let optimized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // Collapse 4+ blank lines to a maximum of 3 (2 real + 1 visual gap)
+  optimized = optimized.replace(/\n{4,}/g, '\n\n\n');
+
+  if (optimized.length > 3000) {
+    warnings.push('Post is quite long (' + optimized.length + ' chars). Consider splitting into multiple posts.');
+  }
+  if (optimized.length > 0 && optimized.length < 100) {
+    warnings.push('Post is very short. Add more substance for engagement.');
+  }
+
+  const unicodeCount = (optimized.match(/[\u{1D400}-\u{1D7FF}]/gu) || []).length;
+  if (unicodeCount > optimized.length * 0.5) {
+    warnings.push('Heavy Unicode formatting may impact accessibility for screen readers.');
+  }
+
+  return optimized.trim();
+}
+
+// ---------------------------------------------------------------------------
+// Auto-detect input format for the badge
+// ---------------------------------------------------------------------------
+
+function detectType(text) {
+  if (richPasteHTML) {
+    if (isGoogleDocsHTML(richPasteHTML)) return 'googledocs';
+    if (isCopilotHTML(richPasteHTML)) return 'copilot';
+    return 'richhtml';
+  }
+  const t = text.trim();
+  if (/^<(!DOCTYPE|html|body)/i.test(t)) return 'html';
+  const mdSignals = [/^#{1,6}\s/m, /\*\*[^*\n]+\*\*/, /^[-*+]\s/m, /^>\s/m, /^```/m, /\[.+?\]\(.+?\)/];
+  const score = mdSignals.filter(r => r.test(t)).length;
+  return score >= 2 ? 'markdown' : 'plain';
+}
+
+function updateBadge() {
+  const badge = document.getElementById('detected-badge');
+  const val = inputBox.value.trim();
+  if (!val && !richPasteHTML) { badge.className = 'detected-badge'; return; }
+  const labels = {
+    googledocs: 'Google Docs',
+    copilot:    'Copilot / Word',
+    richhtml:   'Rich HTML',
+    html:       'HTML',
+    markdown:   'Markdown',
+    plain:      'Plain text'
+  };
+  badge.textContent = labels[detectType(val)] || 'Auto';
+  badge.className = 'detected-badge show';
+}
+
+// ---------------------------------------------------------------------------
+// Syntax highlighting for the input textarea overlay
+// ---------------------------------------------------------------------------
+
+function updateHighlight() {
+  const text = inputBox.value;
+  if (!text) { highlightLayer.innerHTML = ''; return; }
+  let html = text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/^(#{1,6}\s+)(.+)$/gm, '<span class="md-header">$1$2</span>')
+    .replace(/\*\*\*([^*\n]+)\*\*\*/g, '<span class="md-bold" style="font-style:italic;">***$1***</span>')
+    .replace(/\*\*([^*\n]+)\*\*/g, '<span class="md-bold">**$1**</span>')
+    .replace(/\*([^*\n]+)\*/g, '<span class="md-italic">*$1*</span>')
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<span class="md-link">[$1]($2)</span>');
+  if (text[text.length - 1] === '\n') html += ' ';
+  highlightLayer.innerHTML = html;
+}
+
+// ---------------------------------------------------------------------------
+// Rich preview helpers
+// ---------------------------------------------------------------------------
+
+const richPreview = document.getElementById('rich-preview');
+
+/**
+ * Sanitise the pasted HTML for safe display in the preview.
+ * We allow only the formatting tags we care about; everything else is stripped.
+ * Scripts, styles, images, iframes are removed outright.
+ */
+function sanitiseForPreview(html) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  // Remove dangerous elements completely
+  doc.querySelectorAll('script,style,link,meta,img,iframe,object,embed,form,input').forEach(el => el.remove());
+
+  // Unwrap Google Docs guid wrappers (they add no visual value)
+  doc.querySelectorAll('b[id^="docs-internal-guid"]').forEach(el => {
+    while (el.firstChild) el.parentNode.insertBefore(el.firstChild, el);
+    el.remove();
+  });
+
+  // Strip all attributes except those we explicitly allow
+  const ALLOW_ATTRS = { a: ['href'], img: [] };
+  doc.body.querySelectorAll('*').forEach(el => {
+    const tag = el.tagName.toLowerCase();
+    const allowed = ALLOW_ATTRS[tag] || [];
+    [...el.attributes].forEach(attr => {
+      if (!allowed.includes(attr.name)) el.removeAttribute(attr.name);
+    });
+  });
+
+  return doc.body.innerHTML;
+}
+
+function showRichPreview(html) {
+  const clean = sanitiseForPreview(html);
+
+  // Inject a small "clear" button into the preview container
+  const editorContainer = richPreview.parentElement;
+  let clearBtn = document.getElementById('rich-clear-btn');
+  if (!clearBtn) {
+    clearBtn = document.createElement('button');
+    clearBtn.id = 'rich-clear-btn';
+    clearBtn.textContent = '✕ Clear';
+    clearBtn.addEventListener('click', clearAll);
+    editorContainer.appendChild(clearBtn);
+  }
+  clearBtn.style.display = '';
+
+  richPreview.innerHTML = clean;
+  richPreview.style.display = '';
+
+  // Hide textarea + highlight layer while preview is shown
+  inputBox.style.display = 'none';
+  highlightLayer.style.display = 'none';
+}
+
+function hideRichPreview() {
+  richPreview.style.display = 'none';
+  richPreview.innerHTML = '';
+  inputBox.style.display = '';
+  highlightLayer.style.display = '';
+  const clearBtn = document.getElementById('rich-clear-btn');
+  if (clearBtn) clearBtn.style.display = 'none';
+}
+
+// ---------------------------------------------------------------------------
+// Event listeners
+// ---------------------------------------------------------------------------
+
+inputBox.addEventListener('paste', function (e) {
+  const html = e.clipboardData.getData('text/html');
+  if (html && html.trim()) {
+    richPasteHTML = html;
+    // Show rich preview after the browser has finished the paste
+    setTimeout(() => {
+      showRichPreview(html);
+      updateBadge();
+    }, 0);
+  } else {
+    richPasteHTML = null;
+    setTimeout(() => { updateBadge(); updateHighlight(); }, 0);
+  }
+});
+
+inputBox.addEventListener('input', function () { updateBadge(); updateHighlight(); });
+
+inputBox.addEventListener('scroll', function () {
+  highlightLayer.scrollTop = inputBox.scrollTop;
+  highlightLayer.scrollLeft = inputBox.scrollLeft;
+});
+
+// ---------------------------------------------------------------------------
+// Convert action
+// ---------------------------------------------------------------------------
+
+function convert() {
+  const raw = inputBox.value.trim();
+  if (!raw && !richPasteHTML) return;
+
+  const result = convertToLinkedIn(raw, richPasteHTML);
+  outputText = result.text;
+
+  document.getElementById('empty-state').style.display = 'none';
+  const renderDiv = document.getElementById('output-render');
+  renderDiv.innerHTML = outputText.split('\n').map(line => {
+    if (!line.trim()) return '<span class="post-break"></span>';
+    return '<span class="post-line">' + escapeHtml(line) + '</span>';
+  }).join('');
+
+  showWarnings(result.warnings);
+  updateStats(outputText);
+  richPasteHTML = null;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function showWarnings(list) {
+  const el = document.getElementById('warnings');
+  const unique = [...new Set(list || [])];
+  if (!unique.length) { el.className = ''; el.innerHTML = ''; return; }
+  el.innerHTML = '⚠️ ' + unique.join(' &nbsp;•&nbsp; ');
+  el.className = 'show';
+}
+
+function updateStats(text) {
+  const chars = text.length;
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  const lines = text.split('\n').length;
+  document.getElementById('stats').innerHTML =
+    `<span>${chars} chars</span><span>${words} words</span><span>${lines} lines</span>`;
+}
+
+// ---------------------------------------------------------------------------
+// Clipboard copy
+// ---------------------------------------------------------------------------
+
+async function copyToClipboard() {
+  if (!outputText) { flashCopy('Convert first!', false); return; }
+  try {
+    await navigator.clipboard.writeText(outputText);
+    flashCopy('✓ Copied — paste into LinkedIn', true);
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = outputText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    flashCopy('✓ Copied (fallback)', true);
+  }
+}
+
+function flashCopy(label, ok) {
+  const btn = document.getElementById('copy-btn');
+  btn.textContent = label;
+  if (ok) btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Copy to clipboard'; btn.classList.remove('copied'); }, 2600);
+}
+
+// ---------------------------------------------------------------------------
+// Utility actions
+// ---------------------------------------------------------------------------
+
+function clearAll() {
+  inputBox.value = '';
+  highlightLayer.innerHTML = '';
+  document.getElementById('output-render').innerHTML = '';
+  document.getElementById('empty-state').style.display = '';
+  document.getElementById('warnings').className = '';
+  document.getElementById('stats').innerHTML = '';
+  document.getElementById('detected-badge').className = 'detected-badge';
+  outputText = '';
+  richPasteHTML = null;
+  hideRichPreview();
+}
+
+function loadSample() {
+  richPasteHTML = null;
+  hideRichPreview();
+  inputBox.value = `# Why Your LinkedIn Posts Aren't Getting Engagement
+
+**The hard truth?** It's not the algorithm.
+
+It's your *formatting*.
+
+## The LinkedIn Formatting Problem
+
+LinkedIn strips all HTML when you paste. That means:
+• No bold buttons
+• No italic options  
+• No bullet lists
+
+But there's a workaround.
+
+## The Unicode Solution
+
+Smart creators use **mathematical Unicode characters** to simulate formatting:
+
+→ 𝗕𝗼𝗹𝗱 text grabs attention
+→ 𝘐𝘵𝘢𝘭𝘪𝘤 adds emphasis
+→ • Bullets create structure
+
+## Three Quick Wins
+
+1. **Break up paragraphs**
+   Walls of text kill engagement
+
+2. *Use line breaks strategically*
+   Short sentences work better
+
+3. Add visual hierarchy
+   → Headers
+   → Sub-points
+   → Clear CTAs
+
+---
+
+*Try this tool to convert your Markdown into LinkedIn-ready Unicode formatting.*`;
+  updateBadge();
+  updateHighlight();
+}
+
+// ---------------------------------------------------------------------------
+// Keyboard shortcuts
+// ---------------------------------------------------------------------------
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); convert(); }
+  if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'c') { e.preventDefault(); copyToClipboard(); }
+});
+
+updateHighlight();
+</script>
+</body>
+</html>
