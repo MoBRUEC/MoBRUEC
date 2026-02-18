@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Paste Markdown, Google Docs rich text, or plain text and get perfectly formatted output ready to copy-paste into Medium.com. Free browser tool by Mohammed Brückner." />
+<meta name="author" content="Mohammed Brückner" />
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2911/2911230.png" />
+<title>MediumReady — Free Medium.com Formatter by Mohammed Brückner</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f4f1ec; --white: #ffffff; --border: #e0dbd3; --border2: #c8c2b8;
+  --text: #1c1917; --muted: #7c756e; --placeholder: #b8b2aa;
+  --green: #15622f; --green-bg: #edf7f1;
+  --amber-bg: #fefce8; --amber-txt: #78530a; --amber-bdr: #fde68a;
+  --md-header: #15622f; --md-bold: #1c1917; --md-italic: #5a5450; --md-code: #6b3a1a; --md-link: #15622f;
+}
+html, body { height: 100%; font-family: system-ui, sans-serif; font-size: 15px; background: var(--bg); color: var(--text); }
+.topbar { height: 54px; background: var(--white); border-bottom: 2px solid var(--border); display: flex; align-items: center; padding: 0 24px; gap: 14px; flex-shrink: 0; }
+.logo { font-weight: 700; font-size: 1rem; color: var(--text); letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+.logo-badge { background: var(--green); color: #fff; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; }
+.topbar-sub { font-size: 0.78rem; color: var(--muted); border-left: 1px solid var(--border2); padding-left: 14px; }
+.topbar-link { color: var(--green); text-decoration: none; font-weight: 600; }
+.topbar-link:hover { text-decoration: underline; }
+.topbar-shortcuts { margin-left: auto; font-size: 0.72rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; padding: 1px 5px; font-size: 0.68rem; color: var(--text); }
+.layout { display: flex; flex-direction: column; height: calc(100vh - 54px); }
+.panes { flex: 1; display: grid; grid-template-columns: 1fr 1fr; min-height: 0; }
+.pane { display: flex; flex-direction: column; min-height: 0; background: var(--white); }
+.pane.left { border-right: 2px solid var(--border); position: relative; }
+.pane-label { flex-shrink: 0; height: 44px; padding: 0 20px; display: flex; align-items: center; gap: 9px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.step-num { width: 21px; height: 21px; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-num.dark { background: var(--text); color: #fff; }
+.step-num.grn  { background: var(--green); color: #fff; }
+.pane-title { font-weight: 600; font-size: 0.83rem; color: var(--text); }
+.pane-hint { font-size: 0.76rem; color: var(--muted); }
+.detected-badge { margin-left: auto; font-size: 0.68rem; font-weight: 600; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border2); color: var(--muted); background: var(--white); visibility: hidden; }
+.detected-badge.show { visibility: visible; background: var(--green-bg); border-color: var(--green); color: var(--green); }
+
+/* Editor container with overlay technique */
+.editor-container { flex: 1; position: relative; overflow: hidden; }
+#input-box, #highlight-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 20px 22px; font-family: system-ui, sans-serif; font-size: 0.9rem; line-height: 1.75; border: none; outline: none; resize: none; overflow: auto; white-space: pre-wrap; word-wrap: break-word; }
+#input-box { z-index: 2; background: transparent; color: transparent; caret-color: var(--green); -webkit-text-fill-color: transparent; }
+#input-box::placeholder { color: var(--placeholder); -webkit-text-fill-color: var(--placeholder); }
+#highlight-layer { z-index: 1; background: var(--white); color: var(--text); pointer-events: none; }
+#highlight-layer code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: var(--md-code); }
+#highlight-layer .md-header { color: var(--md-header); font-weight: 700; }
+#highlight-layer .md-bold { font-weight: 700; color: var(--md-bold); }
+#highlight-layer .md-italic { font-style: italic; color: var(--md-italic); }
+#highlight-layer .md-link { color: var(--md-link); text-decoration: underline; }
+#highlight-layer .md-code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: var(--md-code); }
+
+.output-scroll { flex: 1; overflow-y: auto; position: relative; }
+.empty-state { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; pointer-events: none; text-align: center; padding: 48px; color: var(--placeholder); }
+.empty-icon { font-size: 2rem; opacity: 0.25; }
+.empty-state p { font-size: 0.8rem; line-height: 1.6; max-width: 180px; }
+#output-render { padding: 20px 22px; font-family: Georgia, serif; font-size: 0.92rem; line-height: 1.8; color: var(--text); }
+#output-render h1, #output-render h2, #output-render h3, #output-render h4 { font-size: 1.05rem; font-weight: 700; margin: 20px 0 8px; color: var(--text); }
+#output-render h4 { font-style: italic; color: #5a5450; }
+#output-render p  { margin: 0 0 13px; }
+#output-render strong { font-weight: 700; }
+#output-render em { font-style: italic; color: #5a5450; }
+#output-render a  { color: var(--green); text-decoration: underline; }
+#output-render blockquote { border-left: 3px solid var(--border2); padding: 2px 0 2px 14px; margin: 14px 0; color: #6a6460; font-style: italic; }
+#output-render ul, #output-render ol { padding-left: 18px; margin: 0 0 13px; }
+#output-render li { margin-bottom: 4px; }
+#output-render pre { background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; padding: 12px 16px; overflow-x: auto; margin: 12px 0; }
+#output-render pre code { font-family: monospace; font-size: 0.78rem; color: #1a3010; background: none; padding: 0; border: none; }
+#output-render code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: #6b3a1a; }
+#output-render hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+#warnings { display: none; flex-shrink: 0; padding: 7px 22px; font-size: 0.73rem; font-weight: 500; color: var(--amber-txt); background: var(--amber-bg); border-top: 1px solid var(--amber-bdr); }
+#warnings.show { display: block; }
+.action-bar { flex-shrink: 0; height: 60px; background: var(--white); border-top: 2px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 9px; }
+.btn { font-family: system-ui, sans-serif; font-size: 0.81rem; font-weight: 600; padding: 8px 18px; border-radius: 6px; border: 1.5px solid var(--border2); background: var(--white); color: var(--muted); cursor: pointer; transition: all 0.12s; white-space: nowrap; line-height: 1; }
+.btn:hover { border-color: var(--text); color: var(--text); background: var(--bg); }
+.btn-convert { background: var(--text); color: #fff; border-color: var(--text); padding: 8px 22px; font-weight: 700; }
+.btn-convert:hover { background: #000; border-color: #000; color: #fff; }
+.sc { font-size: 0.66rem; font-weight: 400; opacity: 0.5; margin-left: 3px; }
+.btn-copy { background: var(--green); color: #fff; border-color: var(--green); padding: 8px 22px; font-weight: 700; }
+.btn-copy:hover, .btn-copy.copied { background: #0f4a22; border-color: #0f4a22; color: #fff; }
+.sep { width: 1px; height: 26px; background: var(--border); flex-shrink: 0; }
+.stats { margin-left: auto; font-size: 0.73rem; color: var(--muted); }
+.site-footer { flex-shrink: 0; background: var(--bg); border-top: 1px solid var(--border); padding: 9px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 0.72rem; color: var(--muted); }
+.site-footer a { color: var(--green); text-decoration: none; font-weight: 600; }
+.site-footer a:hover { text-decoration: underline; }
+.footer-right { display: flex; gap: 14px; align-items: center; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+@media (max-width: 600px) {
+  .panes { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+  .pane.left { border-right: none; border-bottom: 2px solid var(--border); }
+  .topbar-sub, .topbar-shortcuts { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">MediumReady <span class="logo-badge">Free Tool</span></div>
+  <span class="topbar-sub">Paste anything, get Medium-perfect output &mdash; by <a href="https://mohammed-brueckner.com/publications " target="_blank" rel="noopener" class="topbar-link">Mohammed Brückner</a></span>
+  <div class="topbar-shortcuts">Convert <kbd>⌘</kbd><kbd>↵</kbd> &nbsp;·&nbsp; Copy <kbd>⌘</kbd><kbd>⇧</kbd><kbd>C</kbd></div>
+</div>
+<div class="layout">
+  <div class="panes">
+    <div class="pane left">
+      <div class="pane-label">
+        <div class="step-num dark">1</div>
+        <span class="pane-title">Paste your content here</span>
+        <span class="pane-hint">&nbsp;— format detected automatically</span>
+        <span class="detected-badge" id="detected-badge">Markdown</span>
+      </div>
+      <div class="editor-container">
+        <textarea id="input-box" placeholder="Paste here — then click Convert (or ⌘↵).
+
+Accepts:
+  Markdown (Claude, GitHub, etc.)
+  Rich text from Google Docs or Word
+  Plain text or raw HTML" spellcheck="false"></textarea>
+        <pre id="highlight-layer" aria-hidden="true"></pre>
+      </div>
+    </div>
+    <div class="pane">
+      <div class="pane-label">
+        <div class="step-num grn">2</div>
+        <span class="pane-title">Medium-ready output</span>
+        <span class="pane-hint">&nbsp;— click Copy, paste straight into Medium</span>
+      </div>
+      <div class="output-scroll">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">↗</div>
+          <p>Converted content appears here</p>
+        </div>
+        <div id="output-render"></div>
+      </div>
+    </div>
+  </div>
+  <div id="warnings"></div>
+  <div class="action-bar">
+    <button class="btn btn-convert" onclick="convert()">Convert <span class="sc">⌘↵</span></button>
+    <div class="sep"></div>
+    <button class="btn btn-copy" id="copy-btn" onclick="copyToClipboard()">Copy to clipboard</button>
+    <div class="sep"></div>
+    <button class="btn" onclick="loadSample()">Load sample</button>
+    <button class="btn" onclick="clearAll()">Clear</button>
+    <span class="stats" id="stats"></span>
+  </div>
+  <footer class="site-footer">
+    <span>Built by <a href="https://mohammed-brueckner.com/publications " target="_blank" rel="noopener author">Mohammed Brückner</a> &mdash; runs entirely in your browser, nothing is sent anywhere.</span>
+    <div class="footer-right">
+      <a href="https://mohammed-brueckner.com/publications " target="_blank" rel="noopener">mohammed-brueckner.com/publications</a>
+      <span>&copy; Mohammed Brückner</span>
+    </div>
+  </footer>
+</div>
+<script>
+'use strict';
+let outputHTML = '', richPasteHTML = null;
+const inputBox = document.getElementById('input-box');
+const highlightLayer = document.getElementById('highlight-layer');
+
+inputBox.addEventListener('paste', function(e) {
+  const html = e.clipboardData.getData('text/html');
+  richPasteHTML = (html && html.trim()) ? html : null;
+  
+  // Allow default paste to complete, then update highlight
+  setTimeout(() => {
+    updateBadge();
+    updateHighlight();
+  }, 0);
+});
+inputBox.addEventListener('input', function() {
+  updateBadge();
+  updateHighlight();
+});
+inputBox.addEventListener('scroll', function() {
+  highlightLayer.scrollTop = inputBox.scrollTop;
+  highlightLayer.scrollLeft = inputBox.scrollLeft;
+});
+
+function updateHighlight() {
+  const text = inputBox.value;
+  if (!text) {
+    highlightLayer.innerHTML = '';
+    return;
+  }
+  
+  // If we have rich HTML pasted, render it sanitized in the highlight layer
+  if (richPasteHTML) {
+    const sanitized = sanitizeHTMLForHighlight(richPasteHTML);
+    highlightLayer.innerHTML = sanitized;
+    return;
+  }
+  
+  // Otherwise, apply markdown highlighting
+  let html = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    // Headers
+    .replace(/^(#{1,6}\s+)(.+)$/gm, '<span class="md-header">$1$2</span>')
+    // Bold
+    .replace(/\*\*([^*\n]+)\*\*/g, '<span class="md-bold">**$1**</span>')
+    .replace(/__([^_\n]+)__/g, '<span class="md-bold">__$1__</span>')
+    // Italic (but not bold-italic)
+    .replace(/\*([^*\n]+)\*/g, '<span class="md-italic">*$1*</span>')
+    .replace(/_([^_\n]+)_/g, '<span class="md-italic">_$1_</span>')
+    // Code inline
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<span class="md-link">[$1]($2)</span>')
+    // Blockquotes
+    .replace(/^(&gt;.+)$/gm, '<span style="color:#6a6460;border-left:2px solid var(--border2);padding-left:8px;display:block;">$1</span>');
+  
+  // Handle trailing newline for scrolling
+  if (text[text.length - 1] === '\n') {
+    html += ' ';
+  }
+  
+  highlightLayer.innerHTML = html;
+}
+
+// Lightweight sanitizer for highlight layer (allows basic formatting tags)
+function sanitizeHTMLForHighlight(raw) {
+  const doc = new DOMParser().parseFromString(raw, 'text/html');
+  
+  // Remove dangerous elements but keep formatting
+  doc.querySelectorAll('script,style,meta,link,head,svg,form,input,button,img,noscript,iframe').forEach(el => el.remove());
+  
+  // Convert b to strong, i to em for consistency
+  doc.querySelectorAll('b').forEach(el => {
+    const n = doc.createElement('strong');
+    n.innerHTML = el.innerHTML;
+    el.replaceWith(n);
+  });
+  doc.querySelectorAll('i').forEach(el => {
+    const n = doc.createElement('em');
+    n.innerHTML = el.innerHTML;
+    el.replaceWith(n);
+  });
+  
+  // Clean attributes but keep href on links
+  doc.querySelectorAll('*').forEach(el => {
+    const href = el.tagName === 'A' ? el.getAttribute('href') : null;
+    [...el.attributes].forEach(a => el.removeAttribute(a.name));
+    if (href) el.setAttribute('href', href);
+  });
+  
+  return doc.body.innerHTML;
+}
+
+function detectType(text) {
+  if (richPasteHTML) return 'richhtml';
+  const t = text.trim();
+  if (/^<(!DOCTYPE|html|body)/i.test(t)) return 'html';
+  const score = [/^#{1,6}\s/m,/\*\*[^*\n]+\*\*/,/^[-*+]\s/m,/^>\s/m,/^```/m,/\[.+?\]\(.+?\)/].filter(r=>r.test(t)).length;
+  return score >= 2 ? 'markdown' : 'plain';
+}
+
+function updateBadge() {
+  const badge = document.getElementById('detected-badge');
+  const val = inputBox.value.trim();
+  if (!val && !richPasteHTML) { badge.className = 'detected-badge'; return; }
+  const labels = { richhtml:'Rich HTML', html:'HTML', markdown:'Markdown', plain:'Plain text' };
+  badge.textContent = labels[detectType(val)] || 'Auto';
+  badge.className = 'detected-badge show';
+}
+
+function convert() {
+  const raw = inputBox.value.trim();
+  if (!raw && !richPasteHTML) return;
+  const type = detectType(raw);
+  let result;
+  if      (type==='richhtml') { result=sanitizeHTML(richPasteHTML); richPasteHTML=null; }
+  else if (type==='html')     { result=sanitizeHTML(raw); }
+  else if (type==='markdown') { result=parseMarkdown(raw); }
+  else                        { result=parsePlain(raw); }
+  outputHTML = result.html;
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('output-render').innerHTML = outputHTML;
+  showWarnings(result.warnings);
+  updateStats(raw);
+}
+
+function parseMarkdown(text) {
+  const warnings=[], lines=text.split('\n');
+  let html='', i=0;
+  while (i<lines.length) {
+    const line=lines[i];
+    if (/^```/.test(line)) {
+      let code=''; i++;
+      while (i<lines.length&&!/^```/.test(lines[i])) { code+=esc(lines[i])+'\n'; i++; }
+      html+=`<pre><code>${code.trimEnd()}</code></pre>\n`; i++; continue;
+    }
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) { html+='<hr>\n'; i++; continue; }
+    // ALL headers become h4
+    if (/^# /.test(line))   { html+=`<h4>${inl(line.slice(2).trim())}</h4>\n`;  i++; continue; }
+    if (/^## /.test(line))  { html+=`<h4>${inl(line.slice(3).trim())}</h4>\n`;  i++; continue; }
+    if (/^### /.test(line)) { html+=`<h4>${inl(line.slice(4).trim())}</h4>\n`;  i++; continue; }
+    if (/^#### /.test(line)) { html+=`<h4>${inl(line.slice(5).trim())}</h4>\n`;  i++; continue; }
+    if (/^#{5,} /.test(line)) { warnings.push('H5+ demoted to H4'); html+=`<h4>${inl(line.replace(/^#{5,} /,'').trim())}</h4>\n`; i++; continue; }
+    if (/^> ?/.test(line)) {
+      let q='';
+      while (i<lines.length&&/^> ?/.test(lines[i])) { q+=lines[i].replace(/^> ?/,'')+' '; i++; }
+      html+=`<blockquote><p>${inl(q.trim())}</p></blockquote>\n`; continue;
+    }
+    if (/^\s*[-*+•→▸◆▪]\s/.test(line)) {
+      html+='<ul>\n';
+      while (i<lines.length&&/^\s*[-*+•→▸◆▪]\s/.test(lines[i])) { html+=`  <li>${inl(lines[i].replace(/^\s*[-*+•→▸◆▪]\s+/,''))}</li>\n`; i++; }
+      html+='</ul>\n'; continue;
+    }
+    if (/^\d+\.\s/.test(line)) {
+      html+='<ol>\n';
+      while (i<lines.length&&/^\d+\.\s/.test(lines[i])) { html+=`  <li>${inl(lines[i].replace(/^\d+\.\s+/,''))}</li>\n`; i++; }
+      html+='</ol>\n'; continue;
+    }
+    if (/^\|/.test(line)) {
+      warnings.push('Table converted to list — Medium has no table support');
+      const rows=[];
+      while (i<lines.length&&/^\|/.test(lines[i])) { rows.push(lines[i]); i++; }
+      html+=tableToList(rows); continue;
+    }
+    if (!line.trim()) { i++; continue; }
+    let para='';
+    while (i<lines.length&&lines[i].trim()&&!/^(#{1,6}\s|>\s?|```|\s*[-*+•→▸◆▪]\s|\d+\.\s|\||-{3,}|\*{3,}|_{3,})/.test(lines[i])) { para+=lines[i]+' '; i++; }
+    if (para.trim()) html+=`<p>${inl(para.trim())}</p>\n`; else i++;
+  }
+  return { html: html.trim(), warnings };
+}
+
+function inl(t) {
+  return t
+    .replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/__(.+?)__/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/_(.+?)_/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code>$1</code>')
+    .replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2">$1</a>')
+    .replace(/~~(.+?)~~/g,'$1');
+}
+function esc(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function tableToList(lines) {
+  const rows=lines.filter(l=>!/^\|[\s\-:|]+\|/.test(l)).map(l=>l.replace(/^\||\|$/g,'').split('|').map(c=>c.trim()));
+  if (!rows.length) return '';
+  const headers=rows[0], body=rows.slice(1);
+  if (!body.length) return '<ul>\n'+headers.map(h=>`  <li>${inl(h)}</li>`).join('\n')+'\n</ul>\n';
+  let out='<ul>\n';
+  body.forEach(row=>{ out+=`  <li>${headers.map((h,i)=>`<strong>${esc(h)}:</strong> ${inl(row[i]||'')}`).join(' &middot; ')}</li>\n`; });
+  return out+'</ul>\n';
+}
+
+function sanitizeHTML(raw) {
+  const warnings=[], doc=new DOMParser().parseFromString(raw,'text/html');
+  doc.querySelectorAll('script,style,meta,link,head,svg,form,input,button,img,noscript,iframe').forEach(el=>el.remove());
+  const wrappers=['div','section','article','main','aside','header','footer','nav','center','span','font','figure','figcaption','label'];
+  for (let p=0;p<5;p++) wrappers.forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
+  doc.querySelectorAll('b').forEach(el=>{const n=doc.createElement('strong');n.innerHTML=el.innerHTML;el.replaceWith(n);});
+  doc.querySelectorAll('i').forEach(el=>{const n=doc.createElement('em');n.innerHTML=el.innerHTML;el.replaceWith(n);});
+  // ALL headers become h4
+  doc.querySelectorAll('h1,h2,h3,h5,h6').forEach(el=>{
+    if (el.tagName !== 'H4') warnings.push(`${el.tagName} normalized to H4`);
+    const n=doc.createElement('h4');
+    n.innerHTML = el.innerHTML;
+    el.replaceWith(n);
+  });
+  ['u','s','strike','mark','ins','del','abbr','cite','small','sup','sub'].forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
+  doc.querySelectorAll('table').forEach(table=>{
+    warnings.push('Table converted to list');
+    const rows=[...table.querySelectorAll('tr')];
+    const headers=[...(rows[0]?.querySelectorAll('th,td')||[])].map(c=>c.textContent.trim());
+    const ul=doc.createElement('ul');
+    rows.slice(rows[0]?.querySelector('th')?1:0).forEach(row=>{
+      const cells=[...row.querySelectorAll('td,th')]; if(!cells.length)return;
+      const li=doc.createElement('li');
+      li.innerHTML=cells.map((c,i)=>headers[i]?`<strong>${esc(headers[i])}:</strong> ${c.innerHTML.trim()}`:c.innerHTML.trim()).join(' &middot; ');
+      ul.appendChild(li);
+    });
+    if(ul.children.length)table.replaceWith(ul);else table.remove();
+  });
+  doc.querySelectorAll('*').forEach(el=>{
+    const href=el.tagName==='A'?el.getAttribute('href'):null;
+    [...el.attributes].forEach(a=>el.removeAttribute(a.name));
+    if(href)el.setAttribute('href',href);
+  });
+  doc.querySelectorAll('p').forEach(el=>{if(!el.textContent.trim())el.remove();});
+  return { html:(doc.body?.innerHTML||'').trim(), warnings };
+}
+
+function parsePlain(text) {
+  let html='';
+  text.split(/\n{2,}/).forEach(block=>{
+    const t=block.trim(); if(!t)return;
+    const lines=t.split('\n'), hits=lines.filter(l=>/^[-*•→▸◆]\s/.test(l));
+    if(hits.length&&hits.length===lines.length) html+='<ul>\n'+hits.map(l=>`  <li>${esc(l.replace(/^[-*•→▸◆]\s+/,''))}</li>`).join('\n')+'\n</ul>\n';
+    else html+=`<p>${esc(t.replace(/\n/g,' '))}</p>\n`;
+  });
+  return { html:html.trim(), warnings:[] };
+}
+
+async function copyToClipboard() {
+  if (!outputHTML) { flashCopy('Convert first!',false); return; }
+  const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${outputHTML}</body></html>`;
+  try {
+    await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([full],{type:'text/html'}),'text/plain':new Blob([document.getElementById('output-render').textContent],{type:'text/plain'})})]);
+    flashCopy('✓ Copied — paste into Medium',true);
+  } catch {
+    try {
+      const el=document.getElementById('output-render'), range=document.createRange(), sel=window.getSelection();
+      range.selectNodeContents(el); sel.removeAllRanges(); sel.addRange(range);
+      document.execCommand('copy'); sel.removeAllRanges();
+      flashCopy('✓ Copied (fallback)',true);
+    } catch { flashCopy('Select manually ↑',false); }
+  }
+}
+
+function flashCopy(label,ok) {
+  const btn=document.getElementById('copy-btn');
+  btn.textContent=label; if(ok)btn.classList.add('copied');
+  setTimeout(()=>{btn.textContent='Copy to clipboard';btn.classList.remove('copied');},2600);
+}
+
+function showWarnings(list) {
+  const el=document.getElementById('warnings'), u=[...new Set(list||[])];
+  if(!u.length){el.classList.remove('show');return;}
+  el.innerHTML='⚠ '+u.join(' &nbsp;·&nbsp; '); el.classList.add('show');
+}
+
+function updateStats(raw) {
+  const words=raw.trim().split(/\s+/).filter(Boolean).length;
+  const els=(outputHTML.match(/<(h[1234]|p|li|pre|blockquote)\b/gi)||[]).length;
+  document.getElementById('stats').textContent=`${words} words · ${els} elements`;
+}
+
+function clearAll() {
+  inputBox.value='';
+  highlightLayer.innerHTML='';
+  document.getElementById('output-render').innerHTML='';
+  document.getElementById('empty-state').style.display='';
+  document.getElementById('warnings').classList.remove('show');
+  document.getElementById('stats').textContent='';
+  document.getElementById('detected-badge').className='detected-badge';
+  outputHTML=''; richPasteHTML=null;
+}
+
+function loadSample() {
+  inputBox.value=`# The Architect's Guide to Doing Less
+
+A surprisingly effective strategy in software architecture is the *intentional removal* of complexity rather than adding layers to manage it.
+
+## Why Simplicity Wins
+
+Most systems fail not because they lack features, but because they carry **too many moving parts** for any one person to hold in their head.
+
+### Three Principles
+
+- **Single responsibility** — each component does one thing and does it well
+- **Explicit over implicit** — favor clarity over cleverness
+- **Reversibility** — prefer decisions you can undo
+
+## The Real Cost
+
+> Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+
+## Before You Reach for a Framework
+
+1. Does this solve a problem I actually have?
+2. What does the debugging story look like at 2am?
+3. Who on my team can maintain this in six months?
+
+\`\`\`json
+{
+  "complexity": "minimal",
+  "dependencies": [],
+  "maintainer": "future-you"
+}
+\`\`\`
+
+| Approach | Benefit | Risk |
+|---|---|---|
+| Simple | Easy to debug | May not scale |
+| Complex | Handles edge cases | Hard to maintain |
+
+---
+
+*Build the simplest thing that could possibly work. Then stop.*`;
+  richPasteHTML=null; 
+  updateBadge();
+  updateHighlight();
+}
+
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){e.preventDefault();convert();}
+  if((e.metaKey||e.ctrlKey)&&e.shiftKey&&e.key.toLowerCase()==='c'){e.preventDefault();copyToClipboard();}
+});
+
+// Initialize highlight on load
+updateHighlight();
+</script>
+</body>
+</html>
