@@ -38,26 +38,34 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 .detected-badge { margin-left: auto; font-size: 0.68rem; font-weight: 600; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border2); color: var(--muted); background: var(--white); visibility: hidden; }
 .detected-badge.show { visibility: visible; background: var(--green-bg); border-color: var(--green); color: var(--green); }
 
-/* Editor container with overlay technique */
+/* Editor container with perfectly overlapping monospace layers to prevent cursor desync */
 .editor-container { flex: 1; position: relative; overflow: hidden; }
-#input-box, #highlight-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 20px 22px; font-family: system-ui, sans-serif; font-size: 0.9rem; line-height: 1.75; border: none; outline: none; resize: none; overflow: auto; white-space: pre-wrap; word-wrap: break-word; }
+#input-box, #highlight-layer { 
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 20px 22px; 
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; 
+  font-size: 0.88rem; line-height: 1.7; border: none; outline: none; resize: none; overflow: auto; 
+  white-space: pre-wrap; word-wrap: break-word; 
+}
 #input-box { z-index: 2; background: transparent; color: transparent; caret-color: var(--green); -webkit-text-fill-color: transparent; }
 #input-box::placeholder { color: var(--placeholder); -webkit-text-fill-color: var(--placeholder); }
 #highlight-layer { z-index: 1; background: var(--white); color: var(--text); pointer-events: none; }
-#highlight-layer code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: var(--md-code); }
+
+/* Highlight CSS stripped of horizontal padding & font-changes to keep cursor perfectly synced */
 #highlight-layer .md-header { color: var(--md-header); font-weight: 700; }
 #highlight-layer .md-bold { font-weight: 700; color: var(--md-bold); }
 #highlight-layer .md-italic { font-style: italic; color: var(--md-italic); }
 #highlight-layer .md-link { color: var(--md-link); text-decoration: underline; }
-#highlight-layer .md-code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: var(--md-code); }
+#highlight-layer .md-code { background: #ede8e0; border-radius: 3px; color: var(--md-code); }
 
 .output-scroll { flex: 1; overflow-y: auto; position: relative; }
 .empty-state { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; pointer-events: none; text-align: center; padding: 48px; color: var(--placeholder); }
 .empty-icon { font-size: 2rem; opacity: 0.25; }
 .empty-state p { font-size: 0.8rem; line-height: 1.6; max-width: 180px; }
 #output-render { padding: 20px 22px; font-family: Georgia, serif; font-size: 0.92rem; line-height: 1.8; color: var(--text); }
-#output-render h1, #output-render h2, #output-render h3, #output-render h4 { font-size: 1.05rem; font-weight: 700; margin: 20px 0 8px; color: var(--text); }
-#output-render h4 { font-style: italic; color: #5a5450; }
+#output-render h1 { font-size: 1.6rem; font-weight: 700; margin: 24px 0 12px; color: var(--text); }
+#output-render h2 { font-size: 1.3rem; font-weight: 700; margin: 22px 0 10px; color: var(--text); }
+#output-render h3 { font-size: 1.15rem; font-weight: 700; margin: 20px 0 8px; color: var(--text); }
+#output-render h4 { font-size: 1.05rem; font-weight: 600; margin: 18px 0 8px; color: var(--text); font-style: italic; }
 #output-render p  { margin: 0 0 13px; }
 #output-render strong { font-weight: 700; }
 #output-render em { font-style: italic; color: #5a5450; }
@@ -65,8 +73,7 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 #output-render blockquote { border-left: 3px solid var(--border2); padding: 2px 0 2px 14px; margin: 14px 0; color: #6a6460; font-style: italic; }
 #output-render ul, #output-render ol { padding-left: 18px; margin: 0 0 13px; }
 #output-render li { margin-bottom: 4px; }
-#output-render pre { background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; padding: 12px 16px; overflow-x: auto; margin: 12px 0; }
-#output-render pre code { font-family: monospace; font-size: 0.78rem; color: #1a3010; background: none; padding: 0; border: none; }
+#output-render pre { background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; padding: 12px 16px; overflow-x: auto; margin: 12px 0; font-family: monospace; font-size: 0.78rem; color: #1a3010; }
 #output-render code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: #6b3a1a; }
 #output-render hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
 #warnings { display: none; flex-shrink: 0; padding: 7px 22px; font-size: 0.73rem; font-weight: 500; color: var(--amber-txt); background: var(--amber-bg); border-top: 1px solid var(--amber-bdr); }
@@ -154,24 +161,73 @@ Accepts:
 </div>
 <script>
 'use strict';
-let outputHTML = '', richPasteHTML = null;
+let outputHTML = '';
 const inputBox = document.getElementById('input-box');
 const highlightLayer = document.getElementById('highlight-layer');
 
+// Converts Rich Text into editable Markdown on paste
+function htmlToMarkdown(html, plain) {
+  if (/(^#{1,6}\s|^\s*[-*+]\s|^\s*>\s|```|\*\*[^*]+\*\*)/m.test(plain)) return plain; 
+  
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  doc.querySelectorAll('script,style,meta,noscript').forEach(el => el.remove());
+  
+  function convertNodeToMd(node) {
+    if (node.nodeType === 3) return node.textContent;
+    if (node.nodeType !== 1) return '';
+    let tag = node.tagName.toLowerCase();
+    let inner = Array.from(node.childNodes).map(convertNodeToMd).join('');
+    
+    switch(tag) {
+      case 'h1': return `\n# ${inner}\n\n`;
+      case 'h2': return `\n## ${inner}\n\n`;
+      case 'h3': return `\n### ${inner}\n\n`;
+      case 'h4': case 'h5': case 'h6': return `\n#### ${inner}\n\n`;
+      case 'p': case 'div': return `\n${inner}\n`;
+      case 'strong': case 'b': return `**${inner}**`;
+      case 'em': case 'i': return `*${inner}*`;
+      case 'code': return `\`${inner}\``;
+      case 'pre': return `\n\`\`\`\n${node.textContent.trim()}\n\`\`\`\n\n`;
+      case 'a': return `[${inner}](${node.getAttribute('href')||''})`;
+      case 'ul': case 'ol': return `\n${inner}\n`;
+      case 'li': return `\n- ${inner}\n`;
+      case 'blockquote': return `\n> ${inner}\n\n`;
+      case 'br': return `\n`;
+      default: return inner;
+    }
+  }
+  let md = convertNodeToMd(doc.body);
+  return md.replace(/\n{3,}/g, '\n\n').trim();
+}
+
 inputBox.addEventListener('paste', function(e) {
   const html = e.clipboardData.getData('text/html');
-  richPasteHTML = (html && html.trim()) ? html : null;
+  const plain = e.clipboardData.getData('text/plain');
   
-  // Allow default paste to complete, then update highlight
+  if (html && html.trim()) {
+    const md = htmlToMarkdown(html, plain);
+    if (md !== plain) {
+      e.preventDefault();
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+      this.value = this.value.substring(0, start) + md + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = start + md.length;
+      updateBadge();
+      updateHighlight();
+      return;
+    }
+  }
   setTimeout(() => {
     updateBadge();
     updateHighlight();
   }, 0);
 });
+
 inputBox.addEventListener('input', function() {
   updateBadge();
   updateHighlight();
 });
+
 inputBox.addEventListener('scroll', function() {
   highlightLayer.scrollTop = inputBox.scrollTop;
   highlightLayer.scrollLeft = inputBox.scrollLeft;
@@ -184,96 +240,44 @@ function updateHighlight() {
     return;
   }
   
-  // If we have rich HTML pasted, render it sanitized in the highlight layer
-  if (richPasteHTML) {
-    const sanitized = sanitizeHTMLForHighlight(richPasteHTML);
-    highlightLayer.innerHTML = sanitized;
-    return;
-  }
-  
-  // Otherwise, apply markdown highlighting
   let html = text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    // Headers
     .replace(/^(#{1,6}\s+)(.+)$/gm, '<span class="md-header">$1$2</span>')
-    // Bold
     .replace(/\*\*([^*\n]+)\*\*/g, '<span class="md-bold">**$1**</span>')
     .replace(/__([^_\n]+)__/g, '<span class="md-bold">__$1__</span>')
-    // Italic (but not bold-italic)
     .replace(/\*([^*\n]+)\*/g, '<span class="md-italic">*$1*</span>')
     .replace(/_([^_\n]+)_/g, '<span class="md-italic">_$1_</span>')
-    // Code inline
-    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
-    // Links
+    .replace(/`([^`\n]+)`/g, '<span class="md-code">`$1`</span>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<span class="md-link">[$1]($2)</span>')
-    // Blockquotes
-    .replace(/^(&gt;.+)$/gm, '<span style="color:#6a6460;border-left:2px solid var(--border2);padding-left:8px;display:block;">$1</span>');
+    .replace(/^(\s*[-*+]\s+)(.+)$/gm, '<span class="md-list" style="color:#5a5450;">$1$2</span>')
+    .replace(/^(&gt;.+)$/gm, '<span style="color:#6a6460;border-left:2px solid var(--border2);padding-left:8px;display:inline-block;">$1</span>');
   
-  // Handle trailing newline for scrolling
-  if (text[text.length - 1] === '\n') {
-    html += ' ';
-  }
-  
+  if (text[text.length - 1] === '\n') { html += ' '; }
   highlightLayer.innerHTML = html;
 }
 
-// Lightweight sanitizer for highlight layer (allows basic formatting tags)
-function sanitizeHTMLForHighlight(raw) {
-  const doc = new DOMParser().parseFromString(raw, 'text/html');
-  
-  // Remove dangerous elements but keep formatting
-  doc.querySelectorAll('script,style,meta,link,head,svg,form,input,button,img,noscript,iframe').forEach(el => el.remove());
-  
-  // Convert b to strong, i to em for consistency
-  doc.querySelectorAll('b').forEach(el => {
-    const n = doc.createElement('strong');
-    n.innerHTML = el.innerHTML;
-    el.replaceWith(n);
-  });
-  doc.querySelectorAll('i').forEach(el => {
-    const n = doc.createElement('em');
-    n.innerHTML = el.innerHTML;
-    el.replaceWith(n);
-  });
-  
-  // Clean attributes but keep href on links
-  doc.querySelectorAll('*').forEach(el => {
-    const href = el.tagName === 'A' ? el.getAttribute('href') : null;
-    [...el.attributes].forEach(a => el.removeAttribute(a.name));
-    if (href) el.setAttribute('href', href);
-  });
-  
-  return doc.body.innerHTML;
-}
-
 function detectType(text) {
-  if (richPasteHTML) return 'richhtml';
   const t = text.trim();
   if (/^<(!DOCTYPE|html|body)/i.test(t)) return 'html';
-  const score = [/^#{1,6}\s/m,/\*\*[^*\n]+\*\*/,/^[-*+]\s/m,/^>\s/m,/^```/m,/\[.+?\]\(.+?\)/].filter(r=>r.test(t)).length;
-  return score >= 2 ? 'markdown' : 'plain';
+  return 'markdown';
 }
 
 function updateBadge() {
   const badge = document.getElementById('detected-badge');
   const val = inputBox.value.trim();
-  if (!val && !richPasteHTML) { badge.className = 'detected-badge'; return; }
-  const labels = { richhtml:'Rich HTML', html:'HTML', markdown:'Markdown', plain:'Plain text' };
-  badge.textContent = labels[detectType(val)] || 'Auto';
+  if (!val) { badge.className = 'detected-badge'; return; }
+  badge.textContent = detectType(val) === 'html' ? 'HTML' : 'Markdown';
   badge.className = 'detected-badge show';
 }
 
 function convert() {
   const raw = inputBox.value.trim();
-  if (!raw && !richPasteHTML) return;
+  if (!raw) return;
   const type = detectType(raw);
-  let result;
-  if      (type==='richhtml') { result=sanitizeHTML(richPasteHTML); richPasteHTML=null; }
-  else if (type==='html')     { result=sanitizeHTML(raw); }
-  else if (type==='markdown') { result=parseMarkdown(raw); }
-  else                        { result=parsePlain(raw); }
+  let result = type === 'html' ? sanitizeHTML(raw) : parseMarkdown(raw);
+  
   outputHTML = result.html;
   document.getElementById('empty-state').style.display = 'none';
   document.getElementById('output-render').innerHTML = outputHTML;
@@ -286,18 +290,40 @@ function parseMarkdown(text) {
   let html='', i=0;
   while (i<lines.length) {
     const line=lines[i];
+    
+    // MEDIUM HACK: Output code blocks as VS Code does (each line wrapped in a div) to stop Medium from splitting on empty lines
     if (/^```/.test(line)) {
-      let code=''; i++;
-      while (i<lines.length&&!/^```/.test(lines[i])) { code+=esc(lines[i])+'\n'; i++; }
-      html+=`<pre><code>${code.trimEnd()}</code></pre>\n`; i++; continue;
+      let codeLines = [];
+      i++;
+      while (i < lines.length && !/^```/.test(lines[i])) { 
+        codeLines.push(lines[i]); 
+        i++; 
+      }
+      
+      // Clean up trailing empty lines 
+      while(codeLines.length > 0 && codeLines[codeLines.length - 1].trim() === '') {
+        codeLines.pop();
+      }
+      
+      let codeHTML = '';
+      codeLines.forEach(l => {
+        // Medium bypass: Empty lines become <div><br></div>, defeating their double-newline paragraph split
+        codeHTML += `<div>${l === '' ? '<br>' : esc(l)}</div>`;
+      });
+      
+      html += `<pre style="white-space: pre-wrap;">${codeHTML}</pre>\n`; 
+      i++; continue;
     }
+
     if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) { html+='<hr>\n'; i++; continue; }
-    // ALL headers become h4
-    if (/^# /.test(line))   { html+=`<h4>${inl(line.slice(2).trim())}</h4>\n`;  i++; continue; }
-    if (/^## /.test(line))  { html+=`<h4>${inl(line.slice(3).trim())}</h4>\n`;  i++; continue; }
-    if (/^### /.test(line)) { html+=`<h4>${inl(line.slice(4).trim())}</h4>\n`;  i++; continue; }
+    
+    // Headers safely translated sequentially
+    if (/^# /.test(line))   { html+=`<h1>${inl(line.slice(2).trim())}</h1>\n`;  i++; continue; }
+    if (/^## /.test(line))  { html+=`<h2>${inl(line.slice(3).trim())}</h2>\n`;  i++; continue; }
+    if (/^### /.test(line)) { html+=`<h3>${inl(line.slice(4).trim())}</h3>\n`;  i++; continue; }
     if (/^#### /.test(line)) { html+=`<h4>${inl(line.slice(5).trim())}</h4>\n`;  i++; continue; }
     if (/^#{5,} /.test(line)) { warnings.push('H5+ demoted to H4'); html+=`<h4>${inl(line.replace(/^#{5,} /,'').trim())}</h4>\n`; i++; continue; }
+    
     if (/^> ?/.test(line)) {
       let q='';
       while (i<lines.length&&/^> ?/.test(lines[i])) { q+=lines[i].replace(/^> ?/,'')+' '; i++; }
@@ -321,7 +347,7 @@ function parseMarkdown(text) {
     }
     if (!line.trim()) { i++; continue; }
     let para='';
-    while (i<lines.length&&lines[i].trim()&&!/^(#{1,6}\s|>\s?|```|\s*[-*+•→▸◆▪]\s|\d+\.\s|\||-{3,}|\*{3,}|_{3,})/.test(lines[i])) { para+=lines[i]+' '; i++; }
+    while (i<lines.length&&lines[i].trim()&&!/^(#{1,6}\s|>\s?|```|\s*[-*+•→▸◆▪]\s|\d+\.\s|\||-{3,}|\*{3,}|_{3,})/.test(lines[i])) { para+=lines[i]+'\n'; i++; }
     if (para.trim()) html+=`<p>${inl(para.trim())}</p>\n`; else i++;
   }
   return { html: html.trim(), warnings };
@@ -338,6 +364,7 @@ function inl(t) {
     .replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2">$1</a>')
     .replace(/~~(.+?)~~/g,'$1');
 }
+
 function esc(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function tableToList(lines) {
@@ -357,12 +384,13 @@ function sanitizeHTML(raw) {
   for (let p=0;p<5;p++) wrappers.forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
   doc.querySelectorAll('b').forEach(el=>{const n=doc.createElement('strong');n.innerHTML=el.innerHTML;el.replaceWith(n);});
   doc.querySelectorAll('i').forEach(el=>{const n=doc.createElement('em');n.innerHTML=el.innerHTML;el.replaceWith(n);});
-  // ALL headers become h4
-  doc.querySelectorAll('h1,h2,h3,h5,h6').forEach(el=>{
-    if (el.tagName !== 'H4') warnings.push(`${el.tagName} normalized to H4`);
-    const n=doc.createElement('h4');
-    n.innerHTML = el.innerHTML;
-    el.replaceWith(n);
+  doc.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(el=>{
+    if (el.tagName === 'H5' || el.tagName === 'H6') {
+      warnings.push(`${el.tagName} normalized to H4`);
+      const n=doc.createElement('h4');
+      n.innerHTML = el.innerHTML;
+      el.replaceWith(n);
+    }
   });
   ['u','s','strike','mark','ins','del','abbr','cite','small','sup','sub'].forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
   doc.querySelectorAll('table').forEach(table=>{
@@ -387,22 +415,15 @@ function sanitizeHTML(raw) {
   return { html:(doc.body?.innerHTML||'').trim(), warnings };
 }
 
-function parsePlain(text) {
-  let html='';
-  text.split(/\n{2,}/).forEach(block=>{
-    const t=block.trim(); if(!t)return;
-    const lines=t.split('\n'), hits=lines.filter(l=>/^[-*•→▸◆]\s/.test(l));
-    if(hits.length&&hits.length===lines.length) html+='<ul>\n'+hits.map(l=>`  <li>${esc(l.replace(/^[-*•→▸◆]\s+/,''))}</li>`).join('\n')+'\n</ul>\n';
-    else html+=`<p>${esc(t.replace(/\n/g,' '))}</p>\n`;
-  });
-  return { html:html.trim(), warnings:[] };
-}
-
 async function copyToClipboard() {
   if (!outputHTML) { flashCopy('Convert first!',false); return; }
   const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${outputHTML}</body></html>`;
   try {
-    await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([full],{type:'text/html'}),'text/plain':new Blob([document.getElementById('output-render').textContent],{type:'text/plain'})})]);
+    // Note: switched to .innerText here so the plain-text fallback retains correct div-based newlines
+    await navigator.clipboard.write([new ClipboardItem({
+      'text/html': new Blob([full],{type:'text/html'}),
+      'text/plain': new Blob([document.getElementById('output-render').innerText],{type:'text/plain'})
+    })]);
     flashCopy('✓ Copied — paste into Medium',true);
   } catch {
     try {
@@ -440,7 +461,7 @@ function clearAll() {
   document.getElementById('warnings').classList.remove('show');
   document.getElementById('stats').textContent='';
   document.getElementById('detected-badge').className='detected-badge';
-  outputHTML=''; richPasteHTML=null;
+  outputHTML='';
 }
 
 function loadSample() {
@@ -468,12 +489,20 @@ Most systems fail not because they lack features, but because they carry **too m
 2. What does the debugging story look like at 2am?
 3. Who on my team can maintain this in six months?
 
-\`\`\`json
-{
-  "complexity": "minimal",
-  "dependencies": [],
-  "maintainer": "future-you"
+\`\`\`javascript
+function calculateTotal(cart) {
+  if (!cart || cart.length === 0) {
+    return 0;
+  }
+
+  return cart.reduce((total, item) => {
+    return total + (item.price * item.quantity);
+  }, 0);
 }
+
+// Example usage:
+const myCart = [{ price: 10, quantity: 2 }];
+console.log(calculateTotal(myCart)); // Output: 20
 \`\`\`
 
 | Approach | Benefit | Risk |
@@ -484,7 +513,6 @@ Most systems fail not because they lack features, but because they carry **too m
 ---
 
 *Build the simplest thing that could possibly work. Then stop.*`;
-  richPasteHTML=null; 
   updateBadge();
   updateHighlight();
 }
