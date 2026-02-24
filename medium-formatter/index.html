@@ -38,7 +38,6 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 .detected-badge { margin-left: auto; font-size: 0.68rem; font-weight: 600; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border2); color: var(--muted); background: var(--white); visibility: hidden; }
 .detected-badge.show { visibility: visible; background: var(--green-bg); border-color: var(--green); color: var(--green); }
 
-/* Editor container with perfectly overlapping monospace layers to prevent cursor desync */
 .editor-container { flex: 1; position: relative; overflow: hidden; }
 #input-box, #highlight-layer { 
   position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 20px 22px; 
@@ -50,7 +49,6 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 #input-box::placeholder { color: var(--placeholder); -webkit-text-fill-color: var(--placeholder); }
 #highlight-layer { z-index: 1; background: var(--white); color: var(--text); pointer-events: none; }
 
-/* Highlight CSS stripped of horizontal padding & font-changes to keep cursor perfectly synced */
 #highlight-layer .md-header { color: var(--md-header); font-weight: 700; }
 #highlight-layer .md-bold { font-weight: 700; color: var(--md-bold); }
 #highlight-layer .md-italic { font-style: italic; color: var(--md-italic); }
@@ -61,11 +59,11 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 .empty-state { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; pointer-events: none; text-align: center; padding: 48px; color: var(--placeholder); }
 .empty-icon { font-size: 2rem; opacity: 0.25; }
 .empty-state p { font-size: 0.8rem; line-height: 1.6; max-width: 180px; }
+
+/* No H1/H2 styles at all - directly starting from H3 */
 #output-render { padding: 20px 22px; font-family: Georgia, serif; font-size: 0.92rem; line-height: 1.8; color: var(--text); }
-#output-render h1 { font-size: 1.6rem; font-weight: 700; margin: 24px 0 12px; color: var(--text); }
-#output-render h2 { font-size: 1.3rem; font-weight: 700; margin: 22px 0 10px; color: var(--text); }
-#output-render h3 { font-size: 1.15rem; font-weight: 700; margin: 20px 0 8px; color: var(--text); }
-#output-render h4 { font-size: 1.05rem; font-weight: 600; margin: 18px 0 8px; color: var(--text); font-style: italic; }
+#output-render h3 { font-size: 1.25rem; font-weight: 700; margin: 24px 0 10px; color: var(--text); }
+#output-render h4 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 8px; color: var(--text); font-style: italic; }
 #output-render p  { margin: 0 0 13px; }
 #output-render strong { font-weight: 700; }
 #output-render em { font-style: italic; color: #5a5450; }
@@ -76,6 +74,7 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 #output-render pre { background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; padding: 12px 16px; overflow-x: auto; margin: 12px 0; font-family: monospace; font-size: 0.78rem; color: #1a3010; }
 #output-render code { font-family: monospace; font-size: 0.78rem; background: #ede8e0; border: 1px solid var(--border); padding: 1px 4px; border-radius: 3px; color: #6b3a1a; }
 #output-render hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
 #warnings { display: none; flex-shrink: 0; padding: 7px 22px; font-size: 0.73rem; font-weight: 500; color: var(--amber-txt); background: var(--amber-bg); border-top: 1px solid var(--amber-bdr); }
 #warnings.show { display: block; }
 .action-bar { flex-shrink: 0; height: 60px; background: var(--white); border-top: 2px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 9px; }
@@ -165,7 +164,6 @@ let outputHTML = '';
 const inputBox = document.getElementById('input-box');
 const highlightLayer = document.getElementById('highlight-layer');
 
-// Converts Rich Text into editable Markdown on paste
 function htmlToMarkdown(html, plain) {
   if (/(^#{1,6}\s|^\s*[-*+]\s|^\s*>\s|```|\*\*[^*]+\*\*)/m.test(plain)) return plain; 
   
@@ -291,7 +289,8 @@ function parseMarkdown(text) {
   while (i<lines.length) {
     const line=lines[i];
     
-    // MEDIUM HACK: Output code blocks as VS Code does (each line wrapped in a div) to stop Medium from splitting on empty lines
+    // MEDIUM CODE FIX: Uses standard <pre><code> but ensures no truly empty lines exist (which Medium treats as a paragraph split). 
+    // We inject a harmless single space (' ') onto empty lines.
     if (/^```/.test(line)) {
       let codeLines = [];
       i++;
@@ -299,28 +298,21 @@ function parseMarkdown(text) {
         codeLines.push(lines[i]); 
         i++; 
       }
-      
-      // Clean up trailing empty lines 
       while(codeLines.length > 0 && codeLines[codeLines.length - 1].trim() === '') {
         codeLines.pop();
       }
       
-      let codeHTML = '';
-      codeLines.forEach(l => {
-        // Medium bypass: Empty lines become <div><br></div>, defeating their double-newline paragraph split
-        codeHTML += `<div>${l === '' ? '<br>' : esc(l)}</div>`;
-      });
-      
-      html += `<pre style="white-space: pre-wrap;">${codeHTML}</pre>\n`; 
+      let codeHTML = codeLines.map(l => l.length === 0 ? ' ' : esc(l)).join('<br>');
+      html += `<pre><code>${codeHTML}</code></pre>\n`; 
       i++; continue;
     }
 
     if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) { html+='<hr>\n'; i++; continue; }
     
-    // Headers safely translated sequentially
-    if (/^# /.test(line))   { html+=`<h1>${inl(line.slice(2).trim())}</h1>\n`;  i++; continue; }
-    if (/^## /.test(line))  { html+=`<h2>${inl(line.slice(3).trim())}</h2>\n`;  i++; continue; }
-    if (/^### /.test(line)) { html+=`<h3>${inl(line.slice(4).trim())}</h3>\n`;  i++; continue; }
+    // NO H1 OR H2 ALLOWED. Everything converts strictly to H3 (Medium Large Title) or H4 (Medium Small Title)
+    if (/^# /.test(line))   { html+=`<h3>${inl(line.slice(2).trim())}</h3>\n`;  i++; continue; }
+    if (/^## /.test(line))  { html+=`<h3>${inl(line.slice(3).trim())}</h3>\n`;  i++; continue; }
+    if (/^### /.test(line)) { html+=`<h4>${inl(line.slice(4).trim())}</h4>\n`;  i++; continue; }
     if (/^#### /.test(line)) { html+=`<h4>${inl(line.slice(5).trim())}</h4>\n`;  i++; continue; }
     if (/^#{5,} /.test(line)) { warnings.push('H5+ demoted to H4'); html+=`<h4>${inl(line.replace(/^#{5,} /,'').trim())}</h4>\n`; i++; continue; }
     
@@ -384,14 +376,23 @@ function sanitizeHTML(raw) {
   for (let p=0;p<5;p++) wrappers.forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
   doc.querySelectorAll('b').forEach(el=>{const n=doc.createElement('strong');n.innerHTML=el.innerHTML;el.replaceWith(n);});
   doc.querySelectorAll('i').forEach(el=>{const n=doc.createElement('em');n.innerHTML=el.innerHTML;el.replaceWith(n);});
+  
+  // Explicitly mapping H1/H2 to H3, and H5/H6 to H4
   doc.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(el=>{
-    if (el.tagName === 'H5' || el.tagName === 'H6') {
-      warnings.push(`${el.tagName} normalized to H4`);
+    const tag = el.tagName;
+    if (tag === 'H1' || tag === 'H2') {
+      warnings.push(`${tag} normalized to H3`);
+      const n=doc.createElement('h3');
+      n.innerHTML = el.innerHTML;
+      el.replaceWith(n);
+    } else if (tag === 'H5' || tag === 'H6') {
+      warnings.push(`${tag} normalized to H4`);
       const n=doc.createElement('h4');
       n.innerHTML = el.innerHTML;
       el.replaceWith(n);
     }
   });
+
   ['u','s','strike','mark','ins','del','abbr','cite','small','sup','sub'].forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
   doc.querySelectorAll('table').forEach(table=>{
     warnings.push('Table converted to list');
@@ -419,7 +420,6 @@ async function copyToClipboard() {
   if (!outputHTML) { flashCopy('Convert first!',false); return; }
   const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${outputHTML}</body></html>`;
   try {
-    // Note: switched to .innerText here so the plain-text fallback retains correct div-based newlines
     await navigator.clipboard.write([new ClipboardItem({
       'text/html': new Blob([full],{type:'text/html'}),
       'text/plain': new Blob([document.getElementById('output-render').innerText],{type:'text/plain'})
