@@ -161,8 +161,6 @@ const highlightLayer = document.getElementById('highlight-layer');
 inputBox.addEventListener('paste', function(e) {
   const html = e.clipboardData.getData('text/html');
   richPasteHTML = (html && html.trim()) ? html : null;
-  
-  // Allow default paste to complete, then update highlight
   setTimeout(() => {
     updateBadge();
     updateHighlight();
@@ -183,50 +181,30 @@ function updateHighlight() {
     highlightLayer.innerHTML = '';
     return;
   }
-  
-  // If we have rich HTML pasted, render it sanitized in the highlight layer
   if (richPasteHTML) {
     const sanitized = sanitizeHTMLForHighlight(richPasteHTML);
     highlightLayer.innerHTML = sanitized;
     return;
   }
-  
-  // Otherwise, apply markdown highlighting
   let html = text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    // Headers
     .replace(/^(#{1,6}\s+)(.+)$/gm, '<span class="md-header">$1$2</span>')
-    // Bold
     .replace(/\*\*([^*\n]+)\*\*/g, '<span class="md-bold">**$1**</span>')
     .replace(/__([^_\n]+)__/g, '<span class="md-bold">__$1__</span>')
-    // Italic (but not bold-italic)
     .replace(/\*([^*\n]+)\*/g, '<span class="md-italic">*$1*</span>')
     .replace(/_([^_\n]+)_/g, '<span class="md-italic">_$1_</span>')
-    // Code inline
     .replace(/`([^`\n]+)`/g, '<code>$1</code>')
-    // Links
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<span class="md-link">[$1]($2)</span>')
-    // Blockquotes
     .replace(/^(&gt;.+)$/gm, '<span style="color:#6a6460;border-left:2px solid var(--border2);padding-left:8px;display:block;">$1</span>');
-  
-  // Handle trailing newline for scrolling
-  if (text[text.length - 1] === '\n') {
-    html += ' ';
-  }
-  
+  if (text[text.length - 1] === '\n') html += ' ';
   highlightLayer.innerHTML = html;
 }
 
-// Lightweight sanitizer for highlight layer (allows basic formatting tags)
 function sanitizeHTMLForHighlight(raw) {
   const doc = new DOMParser().parseFromString(raw, 'text/html');
-  
-  // Remove dangerous elements but keep formatting
   doc.querySelectorAll('script,style,meta,link,head,svg,form,input,button,img,noscript,iframe').forEach(el => el.remove());
-  
-  // Convert b to strong, i to em for consistency
   doc.querySelectorAll('b').forEach(el => {
     const n = doc.createElement('strong');
     n.innerHTML = el.innerHTML;
@@ -237,14 +215,11 @@ function sanitizeHTMLForHighlight(raw) {
     n.innerHTML = el.innerHTML;
     el.replaceWith(n);
   });
-  
-  // Clean attributes but keep href on links
   doc.querySelectorAll('*').forEach(el => {
     const href = el.tagName === 'A' ? el.getAttribute('href') : null;
     [...el.attributes].forEach(a => el.removeAttribute(a.name));
     if (href) el.setAttribute('href', href);
   });
-  
   return doc.body.innerHTML;
 }
 
@@ -270,10 +245,23 @@ function convert() {
   if (!raw && !richPasteHTML) return;
   const type = detectType(raw);
   let result;
-  if      (type==='richhtml') { result=sanitizeHTML(richPasteHTML); richPasteHTML=null; }
+  if (type==='richhtml') {
+    // Extract plain text from the rich HTML first
+    const tempDoc = new DOMParser().parseFromString(richPasteHTML, 'text/html');
+    // Replace <br> with newlines before extracting text
+    tempDoc.querySelectorAll('br').forEach(br => br.replaceWith('\n'));
+    // Replace block elements with their text + newline
+    tempDoc.querySelectorAll('p,div,li,h1,h2,h3,h4,h5,h6,pre').forEach(el => {
+      el.insertAdjacentText('afterend', '\n');
+    });
+    const plainText = tempDoc.body?.innerText || tempDoc.body?.textContent || '';
+    richPasteHTML = null;
+    // Re-parse the extracted plain text — this preserves newlines and code structure
+    result = parsePlain(normalizeInlineCodeBlocks(plainText.trim()));
+  }
   else if (type==='html')     { result=sanitizeHTML(raw); }
-  else if (type==='markdown') { result=parseMarkdown(raw); }
-  else                        { result=parsePlain(raw); }
+  else if (type==='markdown') { result=parseMarkdown(normalizeInlineCodeBlocks(raw)); }
+  else                        { result=parsePlain(normalizeInlineCodeBlocks(raw)); }
   outputHTML = result.html;
   document.getElementById('empty-state').style.display = 'none';
   document.getElementById('output-render').innerHTML = outputHTML;
@@ -281,22 +269,99 @@ function convert() {
   updateStats(raw);
 }
 
+// List of common programming languages and script types
+const LANGUAGES = new Set([
+  'powershell', 'python', 'javascript', 'js', 'typescript', 'ts', 'java', 'cpp', 'c++', 'csharp', 'c#',
+  'go', 'golang', 'rust', 'ruby', 'php', 'bash', 'shell', 'sh', 'cmd', 'batch', 'sql', 'yaml', 'yml',
+  'json', 'xml', 'html', 'css', 'scss', 'sass', 'markdown', 'md', 'dockerfile', 'makefile', 'vim',
+  'lua', 'perl', 'r', 'matlab', 'swift', 'kotlin', 'scala', 'groovy', 'dart', 'elixir', 'erlang',
+  'haskell', 'clojure', 'lisp', 'scheme', 'julia', 'fortran', 'cobol', 'pascal', 'ada', 'asm',
+  'nasm', 'verilog', 'vhdl', 'zig', 'nim', 'crystal', 'd', 'ocaml', 'f#', 'elm', 'coffee',
+  'coffeescript', 'jsx', 'tsx', 'vue', 'svelte', 'graphql', 'regex', 'diff', 'ini', 'toml',
+  'conf', 'config', 'env', 'nginx', 'apache', 'http', 'rest', 'curl', 'wget', 'ps1', 'psm1',
+  'bat', 'vbs', 'applescript', 'osascript', 'zsh', 'fish', 'ksh', 'csh', 'tcsh', 'nu', 'nushell'
+]);
+
+// Build regex patterns for language detection
+const LANG_PATTERN = [...LANGUAGES].sort((a,b) => b.length - a.length)
+  .map(l => l.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+
+// Case 1: language name immediately followed by non-alpha/non-space (e.g. "powershell#...")
+const INLINE_LANG_NOSPACE_RE = new RegExp('^(' + LANG_PATTERN + ')([^a-zA-Z\\s].*)$', 'gim');
+// Case 2: language name followed by space then code (e.g. "powershell $appName = ...")
+const INLINE_LANG_SPACE_RE   = new RegExp('^(' + LANG_PATTERN + ') (.+)$', 'gim');
+
+/**
+ * Pre-processing pass: split lines where a language name is fused with code content,
+ * either directly ("powershell#...") or with a space ("powershell $appName = ...").
+ * The entire remainder of the line becomes a single code line — we cannot recover
+ * internal newlines lost during copy-paste, but <pre> wrapping still makes it
+ * visually distinct and Medium-pasteable as a code block.
+ */
+function normalizeInlineCodeBlocks(text) {
+  // Pass 1: no-space fusion — "powershell# comment" → "powershell\n# comment"
+  let result = text.replace(INLINE_LANG_NOSPACE_RE, (_, lang, rest) => lang + '\n' + rest);
+  // Pass 2: space-separated fusion — "powershell $x = 1 ..." → "powershell\n$x = 1 ..."
+  result = result.replace(INLINE_LANG_SPACE_RE, (_, lang, rest) => lang + '\n' + rest);
+  return result;
+}
+
+/**
+ * Heuristic: does this line look like code (shell, PowerShell, etc.)?
+ * Used to decide whether to keep collecting lines into a code block.
+ */
+function looksLikeCode(line) {
+  const t = line.trim();
+  if (!t) return false;
+  if (/^\$[A-Za-z_]/.test(t)) return true;                           // $variable
+  if (/^[A-Z][a-z]+-[A-Z]/.test(t)) return true;                    // Verb-Noun cmdlet
+  if (/^\s*[#{}]/.test(t)) return true;                              // # comment or { } block
+  if (/^(if|else|elseif|for|while|foreach|function|return|try|catch|switch|do|end|begin)\b/i.test(t)) return true;
+  if (/[;{}()\[\]]/.test(t)) return true;                            // code punctuation (semicolons count!)
+  if (/^(netsh|ipconfig|reg |ping |curl |wget |git |npm |pip |apt |brew )/i.test(t)) return true;
+  if (/^(Get-|Set-|New-|Remove-|Start-|Stop-|Restart-|Enable-|Disable-|Add-|Clear-|Copy-|Move-|Rename-|Select-|Where-|ForEach-|Write-|Read-|Test-|Invoke-|Import-|Export-)/i.test(t)) return true;
+  if (/^\s*&\s/.test(t)) return true;                                // & command invocation
+  if (/^-[A-Za-z]/.test(t)) return true;                            // -Parameter flag
+  if (/`$/.test(t)) return true;                                     // PS line continuation
+  if (/^(var|let|const|def|class|import|from|export|return|async|await)\s/.test(t)) return true;
+  // Long lines with multiple command-like tokens (e.g. one-liner chains)
+  if (t.length > 40 && (t.match(/\$[A-Za-z]/g) || []).length >= 2) return true;
+  return false;
+}
+
+/**
+ * Heuristic: does this line look like prose (natural language sentence)?
+ * Used to stop code block collection before swallowing narrative text.
+ */
+function looksLikeProse(line) {
+  const t = line.trim();
+  if (!t || looksLikeCode(t)) return false;
+  if (t.length < 20) return false;
+  // Must NOT contain code-like punctuation
+  if (/[;{}()\[\]`]/.test(t)) return false;
+  // Must NOT look like a command invocation (contains - flags or $vars)
+  if (/\$[A-Za-z_]/.test(t) || / -[A-Za-z]/.test(t)) return false;
+  // Has 4+ lowercase English words (clear prose pattern)
+  const lowerWords = t.split(/\s+/).filter(w => /^[a-z]{3,}$/.test(w));
+  if (lowerWords.length >= 4) return true;
+  // Ends with colon (transitional sentence introducing next block)
+  if (/:\s*$/.test(t) && lowerWords.length >= 2) return true;
+  return false;
+}
+
+// Check if a line is just a language identifier
+function isLanguageLine(line) {
+  const trimmed = line.trim().toLowerCase();
+  return LANGUAGES.has(trimmed);
+}
+
 // Detect if a line looks like a sub-header (short, title case, no ending punctuation)
 function isSubHeader(line) {
-  // Must be reasonable length (not too short, not too long)
   if (line.length < 5 || line.length > 60) return false;
-  
-  // Should not end with common sentence punctuation
   if (/[.!?;:]$/.test(line)) return false;
-  
-  // Should not contain markdown links or other markdown syntax
   if (/\[.*\]\(.*\)/.test(line) || /^[#>`\-*+]/.test(line)) return false;
-  
-  // Should look like title case or all caps (at least 2 words, each starting with capital)
   const words = line.trim().split(/\s+/);
   if (words.length < 2) return false;
-  
-  // Check if most words start with uppercase (allowing for small words like "and", "the", "of")
   const capitalizedWords = words.filter(w => /^[A-Z]/.test(w));
   return capitalizedWords.length >= words.length * 0.5;
 }
@@ -306,70 +371,114 @@ function parseMarkdown(text) {
   let html='', i=0;
   while (i<lines.length) {
     const line=lines[i];
-    
-    // Handle code blocks first (including indented ones)
-    if (/^\s*```/.test(line)) {
-      let code=''; 
-      const indent = line.match(/^(\s*)/)[1];
+
+    // Handle language indicator lines (e.g., "powershell" on its own line followed by code)
+    if (isLanguageLine(line)) {
       i++;
-      while (i<lines.length && !lines[i].match(/^\s*```/)) { 
-        code+=lines[i]+'\n'; 
-        i++; 
+      while (i < lines.length && !lines[i].trim()) i++;
+      let code = '';
+      let inFencedBlock = false;
+      if (i < lines.length && lines[i].trim().startsWith('```')) {
+        inFencedBlock = true;
+        i++;
+        while (i < lines.length && !lines[i].trim().startsWith('```')) {
+          code += lines[i] + '\n';
+          i++;
+        }
+        if (i < lines.length) i++;
+      } else {
+        while (i < lines.length) {
+          // Cross blank lines only if the next non-blank line still looks like code
+          if (!lines[i].trim()) {
+            let j = i + 1;
+            while (j < lines.length && !lines[j].trim()) j++;
+            if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
+            code += '\n'; i++; continue;
+          }
+          // Stop on another language label, blockquote, list, or table — but NOT # (that's a code comment)
+          if (isLanguageLine(lines[i]) || /^(>\s?|\s*[-*+•→▸◆▪]\s|\d+\.\s|\|)/.test(lines[i])) {
+            break;
+          }
+          // Stop collecting if this line looks like prose, not code
+          if (looksLikeProse(lines[i])) break;
+          const codeLine = lines[i].replace(/^[ \t]{1,4}/, '');
+          code += codeLine + '\n';
+          i++;
+        }
       }
-      html+=`<pre><code>${esc(code.trimEnd())}</code></pre>\n`; 
-      i++; 
+      if (code.trim()) {
+        html += `<pre><code>${esc(code.trimEnd())}</code></pre>\n`;
+      }
       continue;
     }
-    
+
+    if (/^\s*```/.test(line)) {
+      let code='';
+      i++;
+      while (i<lines.length && !lines[i].match(/^\s*```/)) { code+=lines[i]+'\n'; i++; }
+      html+=`<pre><code>${esc(code.trimEnd())}</code></pre>\n`; i++; continue;
+    }
+
+    if (/^(\s{4,}|\t)/.test(line)) {
+      let code = '';
+      while (i < lines.length && /^(\s{4,}|\t)/.test(lines[i])) {
+        const codeLine = lines[i].replace(/^(\s{4,}|\t)/, '');
+        code += codeLine + '\n';
+        i++;
+      }
+      while (i < lines.length && lines[i].trim() === '') {
+        let j = i + 1;
+        while (j < lines.length && lines[j].trim() === '') j++;
+        if (j < lines.length && /^(\s{4,}|\t)/.test(lines[j])) {
+          code += '\n'; i++;
+        } else { break; }
+      }
+      if (code.trim()) {
+        html += `<pre><code>${esc(code.trimEnd())}</code></pre>\n`;
+      }
+      continue;
+    }
+
     if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) { html+='<hr>\n'; i++; continue; }
-    
-    // ALL headers become h4
+
     if (/^# /.test(line))   { html+=`<h4>${inl(line.slice(2).trim())}</h4>\n`;  i++; continue; }
     if (/^## /.test(line))  { html+=`<h4>${inl(line.slice(3).trim())}</h4>\n`;  i++; continue; }
     if (/^### /.test(line)) { html+=`<h4>${inl(line.slice(4).trim())}</h4>\n`;  i++; continue; }
     if (/^#### /.test(line)) { html+=`<h4>${inl(line.slice(5).trim())}</h4>\n`;  i++; continue; }
     if (/^#{5,} /.test(line)) { warnings.push('H5+ demoted to H4'); html+=`<h4>${inl(line.replace(/^#{5,} /,'').trim())}</h4>\n`; i++; continue; }
-    
+
     if (/^> ?/.test(line)) {
       let q='';
       while (i<lines.length&&/^> ?/.test(lines[i])) { q+=lines[i].replace(/^> ?/,'')+' '; i++; }
-      html+=`<blockquote><p>${inl(q.trim())}</p></blockquote>\n`; 
-      continue;
+      html+=`<blockquote><p>${inl(q.trim())}</p></blockquote>\n`; continue;
     }
-    
+
     if (/^\s*[-*+•→▸◆▪]\s/.test(line)) {
       html+='<ul>\n';
       while (i<lines.length&&/^\s*[-*+•→▸◆▪]\s/.test(lines[i])) { html+=`  <li>${inl(lines[i].replace(/^\s*[-*+•→▸◆▪]\s+/,''))}</li>\n`; i++; }
-      html+='</ul>\n'; 
-      continue;
+      html+='</ul>\n'; continue;
     }
-    
+
     if (/^\d+\.\s/.test(line)) {
       html+='<ol>\n';
       while (i<lines.length&&/^\d+\.\s/.test(lines[i])) { html+=`  <li>${inl(lines[i].replace(/^\d+\.\s+/,''))}</li>\n`; i++; }
-      html+='</ol>\n'; 
-      continue;
+      html+='</ol>\n'; continue;
     }
-    
+
     if (/^\|/.test(line)) {
       warnings.push('Table converted to list — Medium has no table support');
       const rows=[];
       while (i<lines.length&&/^\|/.test(lines[i])) { rows.push(lines[i]); i++; }
-      html+=tableToList(rows); 
-      continue;
+      html+=tableToList(rows); continue;
     }
-    
+
     if (!line.trim()) { i++; continue; }
-    
-    // Treat each non-block line as its own paragraph (single newlines create paragraph breaks)
+
     let para = line.trim();
     i++;
-    
-    // Check if this looks like a sub-header and wrap in bold if so
     if (isSubHeader(para)) {
       para = '**' + para + '**';
     }
-    
     if (para) html+=`<p>${inl(para)}</p>\n`;
   }
   return { html: html.trim(), warnings };
@@ -401,18 +510,85 @@ function tableToList(lines) {
 function sanitizeHTML(raw) {
   const warnings=[], doc=new DOMParser().parseFromString(raw,'text/html');
   doc.querySelectorAll('script,style,meta,link,head,svg,form,input,button,img,noscript,iframe').forEach(el=>el.remove());
+
+  // ── Preserve <pre> and <code> blocks BEFORE any unwrapping ──────────────────
+  // Convert existing <pre> blocks to clean <pre><code> and mark them with a
+  // sentinel attribute so the wrapper-unwrap loop below leaves them alone.
+  doc.querySelectorAll('pre').forEach(pre => {
+    const codeText = pre.textContent; // preserves internal newlines
+    const newPre = doc.createElement('pre');
+    newPre.setAttribute('data-keep', '1');
+    const newCode = doc.createElement('code');
+    newCode.textContent = codeText;
+    newPre.appendChild(newCode);
+    pre.replaceWith(newPre);
+  });
+  // Also promote bare <code> that isn't inside a <pre> to inline code spans —
+  // do nothing special, they'll survive the attribute-strip below.
+
+  // ── Detect paragraphs whose text starts with a language label ───────────────
+  // e.g. a <p> whose textContent is "powershell\n$x = Get-Service..."
+  // Convert those to <pre><code> blocks too.
+  doc.querySelectorAll('p, li').forEach(el => {
+    if (el.closest('pre')) return; // already inside a code block
+    const text = el.textContent.trim();
+    // Check if this paragraph IS just a language label (standalone "powershell")
+    if (isLanguageLine(text)) {
+      // The next sibling may be the code block — handled below via text extraction
+      el.setAttribute('data-lang-label', text.toLowerCase());
+      return;
+    }
+    // Check if it STARTS with a language label followed by code
+    const normalized = normalizeInlineCodeBlocks(text);
+    if (normalized !== text) {
+      // It changed — means it started with a language label smashed onto code
+      const newPre = doc.createElement('pre');
+      newPre.setAttribute('data-keep', '1');
+      const newCode = doc.createElement('code');
+      // The normalized text splits "powershell\n...code..." — take everything after first \n
+      const codeText = normalized.split('\n').slice(1).join('\n');
+      newCode.textContent = codeText;
+      newPre.appendChild(newCode);
+      el.replaceWith(newPre);
+    }
+  });
+
+  // ── Handle lang-label paragraphs followed by code content ───────────────────
+  // Walk all data-lang-label elements and merge with the following sibling's text
+  doc.querySelectorAll('[data-lang-label]').forEach(el => {
+    const next = el.nextElementSibling;
+    if (!next) { el.remove(); return; }
+    const codeText = next.getAttribute('data-keep')
+      ? next.textContent  // already a pre block
+      : next.textContent.trim();
+    if (codeText) {
+      const newPre = doc.createElement('pre');
+      newPre.setAttribute('data-keep', '1');
+      const newCode = doc.createElement('code');
+      newCode.textContent = codeText;
+      newPre.appendChild(newCode);
+      el.replaceWith(newPre);
+      if (!next.getAttribute('data-keep')) next.remove();
+    } else {
+      el.remove();
+    }
+  });
+
   const wrappers=['div','section','article','main','aside','header','footer','nav','center','span','font','figure','figcaption','label'];
-  for (let p=0;p<5;p++) wrappers.forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
+  for (let p=0;p<5;p++) wrappers.forEach(tag=>doc.querySelectorAll(tag).forEach(el=>{
+    if (!el.closest('[data-keep]')) el.replaceWith(...el.childNodes);
+  }));
   doc.querySelectorAll('b').forEach(el=>{const n=doc.createElement('strong');n.innerHTML=el.innerHTML;el.replaceWith(n);});
   doc.querySelectorAll('i').forEach(el=>{const n=doc.createElement('em');n.innerHTML=el.innerHTML;el.replaceWith(n);});
-  // ALL headers become h4
   doc.querySelectorAll('h1,h2,h3,h5,h6').forEach(el=>{
     if (el.tagName !== 'H4') warnings.push(`${el.tagName} normalized to H4`);
     const n=doc.createElement('h4');
     n.innerHTML = el.innerHTML;
     el.replaceWith(n);
   });
-  ['u','s','strike','mark','ins','del','abbr','cite','small','sup','sub'].forEach(tag=>doc.querySelectorAll(tag).forEach(el=>el.replaceWith(...el.childNodes)));
+  ['u','s','strike','mark','ins','del','abbr','cite','small','sup','sub'].forEach(tag=>doc.querySelectorAll(tag).forEach(el=>{
+    if (!el.closest('[data-keep]')) el.replaceWith(...el.childNodes);
+  }));
   doc.querySelectorAll('table').forEach(table=>{
     warnings.push('Table converted to list');
     const rows=[...table.querySelectorAll('tr')];
@@ -426,31 +602,73 @@ function sanitizeHTML(raw) {
     });
     if(ul.children.length)table.replaceWith(ul);else table.remove();
   });
+  // Strip attributes except href on links and data-keep on pre
   doc.querySelectorAll('*').forEach(el=>{
     const href=el.tagName==='A'?el.getAttribute('href'):null;
+    const keep=el.tagName==='PRE'?el.getAttribute('data-keep'):null;
     [...el.attributes].forEach(a=>el.removeAttribute(a.name));
     if(href)el.setAttribute('href',href);
+    if(keep)el.setAttribute('data-keep',keep);
   });
   doc.querySelectorAll('p').forEach(el=>{if(!el.textContent.trim())el.remove();});
+  // Final cleanup: remove data-keep sentinels
+  doc.querySelectorAll('[data-keep]').forEach(el=>el.removeAttribute('data-keep'));
   return { html:(doc.body?.innerHTML||'').trim(), warnings };
 }
 
 function parsePlain(text) {
   let html='';
-  // In plain text mode, treat single newlines as paragraph breaks too
-  text.split('\n').forEach(line=>{
-    const t=line.trim(); 
-    if(!t)return;
-    
-    // Check if this looks like a sub-header
+  const lines = text.split('\n');
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (isLanguageLine(line)) {
+      i++;
+      while (i < lines.length && !lines[i].trim()) i++;
+      let code = '';
+      while (i < lines.length) {
+        // Skip blank lines but only continue if the next non-blank line is still code
+        if (!lines[i].trim()) {
+          // Peek ahead: if next non-blank line is prose or a language label, stop
+          let j = i + 1;
+          while (j < lines.length && !lines[j].trim()) j++;
+          if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
+          code += '\n'; i++; continue;
+        }
+        if (isLanguageLine(lines[i])) break;
+        // Stop collecting if this line looks like prose, not code
+        if (looksLikeProse(lines[i])) break;
+        const codeLine = lines[i].replace(/^[ \t]{1,4}/, '');
+        code += codeLine + '\n';
+        i++;
+      }
+      if (code.trim()) {
+        html += `<pre><code>${esc(code.trimEnd())}</code></pre>\n`;
+      }
+      continue;
+    }
+    if (/^(\s{4,}|\t)/.test(line)) {
+      let code = '';
+      while (i < lines.length && /^(\s{4,}|\t)/.test(lines[i])) {
+        const codeLine = lines[i].replace(/^(\s{4,}|\t)/, '');
+        code += codeLine + '\n';
+        i++;
+      }
+      if (code.trim()) {
+        html += `<pre><code>${esc(code.trimEnd())}</code></pre>\n`;
+      }
+      continue;
+    }
+    const t = line.trim();
+    if (!t) { i++; continue; }
     let content = t;
     if (isSubHeader(t)) {
       content = '**' + t + '**';
     }
-    
-    html+=`<p>${esc(content)}</p>\n`;
-  });
-  return { html:html.trim(), warnings:[] };
+    html += `<p>${esc(content)}</p>\n`;
+    i++;
+  }
+  return { html: html.trim(), warnings: [] };
 }
 
 async function copyToClipboard() {
@@ -539,7 +757,7 @@ Most systems fail not because they lack features, but because they carry **too m
 ---
 
 *Build the simplest thing that could possibly work. Then stop.*`;
-  richPasteHTML=null; 
+  richPasteHTML=null;
   updateBadge();
   updateHighlight();
 }
@@ -549,7 +767,6 @@ document.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&e.shiftKey&&e.key.toLowerCase()==='c'){e.preventDefault();copyToClipboard();}
 });
 
-// Initialize highlight on load
 updateHighlight();
 </script>
 </body>
