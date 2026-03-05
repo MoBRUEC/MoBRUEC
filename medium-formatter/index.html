@@ -224,44 +224,40 @@ function sanitizeHTMLForHighlight(raw) {
 }
 
 function detectType(text) {
-  if (richPasteHTML) return 'richhtml';
+  // Always use inputBox.value as ground truth — never check richPasteHTML here
   const t = text.trim();
   if (/^<(!DOCTYPE|html|body)/i.test(t)) return 'html';
-  const score = [/^#{1,6}\s/m,/\*\*[^*\n]+\*\*/,/^[-*+]\s/m,/^>\s/m,/^```/m,/\[.+?\]\(.+?\)/].filter(r=>r.test(t)).length;
+  const signals = [/^#{1,6}\s/m, /\*\*[^*\n]+\*\*/, /^[-*+]\s/m, /^>\s/m, /^```/m, /\[.+?\]\(.+?\)/];
+  const score = signals.filter(r => r.test(t)).length;
+  // Bold (**) alone is sufficient — it never appears in plain prose accidentally
+  if (/\*\*[^*\n]+\*\*/.test(t)) return 'markdown';
   return score >= 2 ? 'markdown' : 'plain';
 }
 
 function updateBadge() {
   const badge = document.getElementById('detected-badge');
   const val = inputBox.value.trim();
-  if (!val && !richPasteHTML) { badge.className = 'detected-badge'; return; }
-  const labels = { richhtml:'Rich HTML', html:'HTML', markdown:'Markdown', plain:'Plain text' };
+  if (!val) { badge.className = 'detected-badge'; return; }
+  const labels = { html:'HTML', markdown:'Markdown', plain:'Plain text' };
   badge.textContent = labels[detectType(val)] || 'Auto';
   badge.className = 'detected-badge show';
 }
 
 function convert() {
   const raw = inputBox.value.trim();
-  if (!raw && !richPasteHTML) return;
+  if (!raw) return;
+
+  // Always use inputBox.value as the source of truth.
+  // richPasteHTML is only used when the textarea itself is empty (i.e. the user
+  // pasted something that didn't land as text — extremely rare).
   const type = detectType(raw);
   let result;
-  if (type==='richhtml') {
-    // Extract plain text from the rich HTML first
-    const tempDoc = new DOMParser().parseFromString(richPasteHTML, 'text/html');
-    // Replace <br> with newlines before extracting text
-    tempDoc.querySelectorAll('br').forEach(br => br.replaceWith('\n'));
-    // Replace block elements with their text + newline
-    tempDoc.querySelectorAll('p,div,li,h1,h2,h3,h4,h5,h6,pre').forEach(el => {
-      el.insertAdjacentText('afterend', '\n');
-    });
-    const plainText = tempDoc.body?.innerText || tempDoc.body?.textContent || '';
-    richPasteHTML = null;
-    // Re-parse the extracted plain text — this preserves newlines and code structure
-    result = parsePlain(normalizeInlineCodeBlocks(plainText.trim()));
-  }
-  else if (type==='html')     { result=sanitizeHTML(raw); }
-  else if (type==='markdown') { result=parseMarkdown(normalizeInlineCodeBlocks(raw)); }
-  else                        { result=parsePlain(normalizeInlineCodeBlocks(raw)); }
+
+  if      (type === 'html')     { result = sanitizeHTML(raw); }
+  else if (type === 'markdown') { result = parseMarkdown(normalizeInlineCodeBlocks(raw)); }
+  else                          { result = parsePlain(normalizeInlineCodeBlocks(raw)); }
+
+  richPasteHTML = null; // always clear — we never need it
   outputHTML = result.html;
   document.getElementById('empty-state').style.display = 'none';
   document.getElementById('output-render').innerHTML = outputHTML;
@@ -314,17 +310,25 @@ function looksLikeCode(line) {
   const t = line.trim();
   if (!t) return false;
   if (/^\$[A-Za-z_]/.test(t)) return true;                           // $variable
-  if (/^[A-Z][a-z]+-[A-Z]/.test(t)) return true;                    // Verb-Noun cmdlet
-  if (/^\s*[#{}]/.test(t)) return true;                              // # comment or { } block
-  if (/^(if|else|elseif|for|while|foreach|function|return|try|catch|switch|do|end|begin)\b/i.test(t)) return true;
-  if (/[;{}()\[\]]/.test(t)) return true;                            // code punctuation (semicolons count!)
-  if (/^(netsh|ipconfig|reg |ping |curl |wget |git |npm |pip |apt |brew )/i.test(t)) return true;
+  if (/^\s*[{}]/.test(t) || /^\s*#\s/.test(t)) return true;          // { } block or # comment
+  if (/^(if|else|elseif|for|while|foreach|function|return|try|catch|switch|do|end|begin|echo|exit|fi|then|done|esac|elif|case|break|continue)\b/.test(t)) return true;
+  if (/^[A-Za-z_][A-Za-z0-9_]*\s*=/.test(t)) return true; // Variable assignment
+  if (/[{}]/.test(t)) return true;                                   // braces (NOT parens or brackets)
+  if (/^(netsh|ipconfig|reg |ping |curl |wget |git |npm |pip |apt |brew |gcloud |kubectl |docker |terraform |helm |aws |az )/.test(t)) return true;
+  if (/^(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|JOIN|GROUP BY|ORDER BY|HAVING)\b/.test(t)) return true;
   if (/^(Get-|Set-|New-|Remove-|Start-|Stop-|Restart-|Enable-|Disable-|Add-|Clear-|Copy-|Move-|Rename-|Select-|Where-|ForEach-|Write-|Read-|Test-|Invoke-|Import-|Export-)/i.test(t)) return true;
   if (/^\s*&\s/.test(t)) return true;                                // & command invocation
-  if (/^-[A-Za-z]/.test(t)) return true;                            // -Parameter flag
+  if (/^--?[A-Za-z]/.test(t)) return true;                           // -Parameter or --flag
   if (/`$/.test(t)) return true;                                     // PS line continuation
   if (/^(var|let|const|def|class|import|from|export|return|async|await)\s/.test(t)) return true;
-  // Long lines with multiple command-like tokens (e.g. one-liner chains)
+  // key = value assignments (HCL, shell): word = "string" or word = digit/[ / {
+  if (/^\w[\w.-]*\s*=\s*["'\d\[{]/.test(t)) return true;
+  // key: value config (YAML/HCL): ONLY when key is a simple lowercase identifier (no spaces, no punctuation)
+  // Avoids matching prose like "Identity: the new perimeter" or "Note: this is important"
+  if (/^[a-z_][\w.-]*:\s*(\S.*)?$/.test(t) && !/^https?:/.test(t) && /^[a-z_][\w.-]*:/.test(t)) return true;
+  // Indented assignment inside a block
+  if (/^\s{2,}\w[\w.-]*\s*[=:]/.test(t)) return true;
+  // Long lines with multiple $variables
   if (t.length > 40 && (t.match(/\$[A-Za-z]/g) || []).length >= 2) return true;
   return false;
 }
@@ -338,14 +342,14 @@ function looksLikeProse(line) {
   if (!t || looksLikeCode(t)) return false;
   if (t.length < 20) return false;
   // Must NOT contain code-like punctuation
-  if (/[;{}()\[\]`]/.test(t)) return false;
+  if (/[{}`]|==|!=|\$\(|\|\||&&/.test(t)) return false;
   // Must NOT look like a command invocation (contains - flags or $vars)
-  if (/\$[A-Za-z_]/.test(t) || / -[A-Za-z]/.test(t)) return false;
-  // Has 4+ lowercase English words (clear prose pattern)
-  const lowerWords = t.split(/\s+/).filter(w => /^[a-z]{3,}$/.test(w));
-  if (lowerWords.length >= 4) return true;
-  // Ends with colon (transitional sentence introducing next block)
-  if (/:\s*$/.test(t) && lowerWords.length >= 2) return true;
+  if (/\$[A-Za-z_]/.test(t) || /(^|\s)--?[A-Za-z]/.test(t)) return false;
+  
+  // Count words that are purely alphabetical and >= 3 chars
+  const words = t.replace(/[.,:;!?()\[\]"']/g, '').split(/\s+/).filter(w => /^[a-zA-Z]{3,}$/.test(w));
+  if (words.length >= 3) return true;
+  
   return false;
 }
 
@@ -395,8 +399,8 @@ function parseMarkdown(text) {
             if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
             code += '\n'; i++; continue;
           }
-          // Stop on another language label, blockquote, list, or table — but NOT # (that's a code comment)
-          if (isLanguageLine(lines[i]) || /^(>\s?|\s*[-*+•→▸◆▪]\s|\d+\.\s|\|)/.test(lines[i])) {
+          // Stop on another language label
+          if (isLanguageLine(lines[i])) {
             break;
           }
           // Stop collecting if this line looks like prose, not code
@@ -474,12 +478,35 @@ function parseMarkdown(text) {
 
     if (!line.trim()) { i++; continue; }
 
+    // Bare code line (e.g. "gcloud ...", "kubectl ...", "SELECT ...") — collect into a code block
+    if (looksLikeCode(line.trim())) {
+      let code = '';
+      while (i < lines.length) {
+        if (!lines[i].trim()) {
+          // Peek ahead: stop if next non-blank line is prose, a markdown block marker, or blank run before prose
+          let j = i + 1;
+          while (j < lines.length && !lines[j].trim()) j++;
+          if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
+          code += '\n'; i++; continue;
+        }
+        if (isLanguageLine(lines[i]) || looksLikeProse(lines[i])) break;
+        if (!looksLikeCode(lines[i].trim()) && !isLanguageLine(lines[i])) break;
+        code += lines[i].replace(/^[ \t]{1,4}/, '') + '\n';
+        i++;
+      }
+      if (code.trim()) html += `<pre><code>${esc(code.trimEnd())}</code></pre>\n`;
+      continue;
+    }
+
     let para = line.trim();
     i++;
-    if (isSubHeader(para)) {
-      para = '**' + para + '**';
+    if (para) {
+      if (isSubHeader(para)) {
+        html += `<p><strong>${esc(para)}</strong></p>\n`;
+      } else {
+        html += `<p>${inl(para)}</p>\n`;
+      }
     }
-    if (para) html+=`<p>${inl(para)}</p>\n`;
   }
   return { html: html.trim(), warnings };
 }
@@ -661,11 +688,29 @@ function parsePlain(text) {
     }
     const t = line.trim();
     if (!t) { i++; continue; }
-    let content = t;
-    if (isSubHeader(t)) {
-      content = '**' + t + '**';
+    // Also check looksLikeCode for bare code lines in plain text
+    if (looksLikeCode(t)) {
+      let code = '';
+      while (i < lines.length) {
+        if (!lines[i].trim()) {
+          let j = i + 1;
+          while (j < lines.length && !lines[j].trim()) j++;
+          if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
+          code += '\n'; i++; continue;
+        }
+        if (isLanguageLine(lines[i]) || looksLikeProse(lines[i])) break;
+        if (!looksLikeCode(lines[i].trim()) && !isLanguageLine(lines[i])) break;
+        code += lines[i].replace(/^[ \t]{1,4}/, '') + '\n';
+        i++;
+      }
+      if (code.trim()) html += `<pre><code>${esc(code.trimEnd())}</code></pre>\n`;
+      continue;
     }
-    html += `<p>${esc(content)}</p>\n`;
+    if (isSubHeader(t)) {
+      html += `<p><strong>${esc(t)}</strong></p>\n`;
+    } else {
+      html += `<p>${inl(t)}</p>\n`;
+    }
     i++;
   }
   return { html: html.trim(), warnings: [] };
