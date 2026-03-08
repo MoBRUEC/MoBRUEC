@@ -275,6 +275,7 @@ function convert() {
   outputHTML = result.html;
   document.getElementById('empty-state').style.display = 'none';
   document.getElementById('output-render').innerHTML = outputHTML;
+  if (outputHTML.includes('<pre>')) result.warnings.push('Code blocks require manual conversion in Medium (use { } button)');
   showWarnings(result.warnings);
   updateStats(raw);
 }
@@ -426,7 +427,7 @@ function parseMarkdown(text) {
         }
       }
       if (code.trim()) {
-        html += `<pre class="graf graf--pre">${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
+        html += `<pre>${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
       }
       continue;
     }
@@ -435,7 +436,7 @@ function parseMarkdown(text) {
       let code='';
       i++;
       while (i<lines.length && !lines[i].match(/^\s*```/)) { code+=lines[i]+'\n'; i++; }
-      html+=`<pre class="graf graf--pre">${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`; i++; continue;
+      html+=`<pre>${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`; i++; continue;
     }
 
     if (/^(\s{4,}|\t)/.test(line)) {
@@ -453,7 +454,7 @@ function parseMarkdown(text) {
         } else { break; }
       }
       if (code.trim()) {
-        html += `<pre class="graf graf--pre">${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
+        html += `<pre>${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
       }
       continue;
     }
@@ -473,14 +474,14 @@ function parseMarkdown(text) {
     }
 
     if (/^\s*[-*+•→▸◆▪]\s/.test(line)) {
-      html+='<ul>\n';
-      while (i<lines.length&&/^\s*[-*+•→▸◆▪]\s/.test(lines[i])) { html+=`  <li>${inl(lines[i].replace(/^\s*[-*+•→▸◆▪]\s+/,''))}</li>\n`; i++; }
+      html+='<ul>';
+      while (i<lines.length&&/^\s*[-*+•→▸◆▪]\s/.test(lines[i])) { html+=`<li>${inl(lines[i].replace(/^\s*[-*+•→▸◆▪]\s+/,''))}</li>`; i++; }
       html+='</ul>\n'; continue;
     }
 
     if (/^\d+\.\s/.test(line)) {
-      html+='<ol>\n';
-      while (i<lines.length&&/^\d+\.\s/.test(lines[i])) { html+=`  <li>${inl(lines[i].replace(/^\d+\.\s+/,''))}</li>\n`; i++; }
+      html+='<ol>';
+      while (i<lines.length&&/^\d+\.\s/.test(lines[i])) { html+=`<li>${inl(lines[i].replace(/^\d+\.\s+/,''))}</li>`; i++; }
       html+='</ol>\n'; continue;
     }
 
@@ -509,7 +510,7 @@ function parseMarkdown(text) {
         code += lines[i].replace(/^[ \t]{1,4}/, '') + '\n';
         i++;
       }
-      if (code.trim()) html += `<pre class="graf graf--pre">${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
+      if (code.trim()) html += `<pre>${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
       continue;
     }
 
@@ -543,9 +544,9 @@ function tableToList(lines) {
   const rows=lines.filter(l=>!/^\|[\s\-:|]+\|/.test(l)).map(l=>l.replace(/^\||\|$/g,'').split('|').map(c=>c.trim()));
   if (!rows.length) return '';
   const headers=rows[0], body=rows.slice(1);
-  if (!body.length) return '<ul>\n'+headers.map(h=>`  <li>${inl(h)}</li>`).join('\n')+'\n</ul>\n';
-  let out='<ul>\n';
-  body.forEach(row=>{ out+=`  <li>${headers.map((h,i)=>`<strong>${esc(h)}:</strong> ${inl(row[i]||'')}`).join(' &middot; ')}</li>\n`; });
+  if (!body.length) return '<ul>'+headers.map(h=>`<li>${inl(h)}</li>`).join('')+'</ul>\n';
+  let out='<ul>';
+  body.forEach(row=>{ out+=`<li>${headers.map((h,i)=>`<strong>${esc(h)}:</strong> ${inl(row[i]||'')}`).join(' &middot; ')}</li>`; });
   return out+'</ul>\n';
 }
 
@@ -560,8 +561,7 @@ function sanitizeHTML(raw) {
     const codeText = pre.textContent; // preserves internal newlines
     const newPre = doc.createElement('pre');
     newPre.setAttribute('data-keep', '1');
-    newPre.className = "graf graf--pre";
-    newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
+        newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
     pre.replaceWith(newPre);
   });
   // Also promote bare <code> that isn't inside a <pre> to inline code spans —
@@ -585,8 +585,7 @@ function sanitizeHTML(raw) {
       // It changed — means it started with a language label smashed onto code
       const newPre = doc.createElement('pre');
       newPre.setAttribute('data-keep', '1');
-      newPre.className = "graf graf--pre";
-      const codeText = normalized.split('\n').slice(1).join('\n');
+            const codeText = normalized.split('\n').slice(1).join('\n');
       newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
       el.replaceWith(newPre);
     }
@@ -603,8 +602,7 @@ function sanitizeHTML(raw) {
     if (codeText) {
       const newPre = doc.createElement('pre');
       newPre.setAttribute('data-keep', '1');
-      newPre.className = "graf graf--pre";
-      newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
+            newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
       el.replaceWith(newPre);
       if (!next.getAttribute('data-keep')) next.remove();
     } else {
@@ -683,7 +681,7 @@ function parsePlain(text) {
         i++;
       }
       if (code.trim()) {
-        html += `<pre class="graf graf--pre">${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
+        html += `<pre>${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
       }
       continue;
     }
@@ -695,7 +693,7 @@ function parsePlain(text) {
         i++;
       }
       if (code.trim()) {
-        html += `<pre class="graf graf--pre">${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
+        html += `<pre>${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
       }
       continue;
     }
@@ -716,7 +714,7 @@ function parsePlain(text) {
         code += lines[i].replace(/^[ \t]{1,4}/, '') + '\n';
         i++;
       }
-      if (code.trim()) html += `<pre class="graf graf--pre">${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
+      if (code.trim()) html += `<pre>${esc(code.trimEnd()).replace(/\n/g, '<br>')}</pre>\n`;
       continue;
     }
     if (isSubHeader(t)) {
@@ -731,7 +729,8 @@ function parsePlain(text) {
 
 async function copyToClipboard() {
   if (!outputHTML) { flashCopy('Convert first!',false); return; }
-  const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${outputHTML}</body></html>`;
+  const clipboardHTML = outputHTML.replace(/<pre([^>]*)>([\s\S]*?)<\/pre>/g, (_, attrs, body) => '<pre' + attrs + '>' + body.replace(/<br\s*\/?>/gi, '\n') + '</pre>');
+  const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${clipboardHTML}</body></html>`;
   try {
     await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([full],{type:'text/html'}),'text/plain':new Blob([document.getElementById('output-render').innerText],{type:'text/plain'})})]);
     flashCopy('✓ Copied — paste into Medium',true);
