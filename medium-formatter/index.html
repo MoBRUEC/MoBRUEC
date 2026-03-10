@@ -158,23 +158,32 @@ const inputBox = document.getElementById('input-box');
 const highlightLayer = document.getElementById('highlight-layer');
 
 function extractLLMContent(text) {
-  // 1. Look for explicitly labeled markdown blocks (```markdown or ```md)
-  const startRegex = /(`{3,})(?:markdown|md)\s*\n/i;
-  const startMatch = text.match(startRegex);
-  if (startMatch) {
-    const preamble = text.substring(0, startMatch.index);
-    // LLM preambles are usually short. If the preamble is very long, it's probably a normal article.
+  // Helper to find the last matching fence
+  function findLastFence(text, backticks, startIndex) {
+    const endRegex = new RegExp('^' + backticks + '\\s*$', 'igm');
+    let endMatch;
+    let lastEndIndex = -1;
+    while ((endMatch = endRegex.exec(text)) !== null) {
+      if (endMatch.index > startIndex) {
+        lastEndIndex = endMatch.index;
+      }
+    }
+    return lastEndIndex;
+  }
+
+  // 1. Look for explicitly labeled markdown blocks (```markdown, ```md, or ```text)
+  const explicitRegex = /^(`{3,})(?:markdown|md|text)\s*$/im;
+  const explicitMatch = text.match(explicitRegex);
+  
+  if (explicitMatch) {
+    const preamble = text.substring(0, explicitMatch.index);
     if (preamble.length < 2000) {
-      const backticks = startMatch[1];
-      const startIndex = startMatch.index + startMatch[0].length;
+      const backticks = explicitMatch[1];
+      const startIndex = explicitMatch.index + explicitMatch[0].length;
+      const lastEndIndex = findLastFence(text, backticks, startIndex);
       
-      const endRegex = new RegExp('\\n\\s*' + backticks + '\\s*(?:\\n|$)', 'i');
-      const endMatch = text.substring(startIndex).match(endRegex);
-      
-      if (endMatch) {
-        const inner = text.substring(startIndex, startIndex + endMatch.index);
-        
-        // If the inner content is substantial, extract it
+      if (lastEndIndex !== -1) {
+        const inner = text.substring(startIndex, lastEndIndex);
         if (inner.length > text.length * 0.3) {
           return inner.trim();
         }
@@ -182,17 +191,26 @@ function extractLLMContent(text) {
     }
   }
   
-  // 2. Fallback for unlabeled blocks that take up the vast majority of the text
-  const fallbackRegex = /(`{3,})[a-zA-Z0-9+_-]*\s*\n([\s\S]*?)\n\s*\1\s*(?:\n|$)/g;
-  let m;
-  let largestBlock = null;
-  while ((m = fallbackRegex.exec(text)) !== null) {
-    if (!largestBlock || m[2].length > largestBlock.length) {
-      largestBlock = m[2];
+  // 2. Fallback for unlabeled blocks (``` without language)
+  const fallbackRegex = /^(`{3,})\s*$/im;
+  const fallbackMatch = text.match(fallbackRegex);
+  
+  if (fallbackMatch) {
+    const preamble = text.substring(0, fallbackMatch.index);
+    // For unlabeled blocks, ensure it's the VERY FIRST fence in the text to avoid matching a closing fence.
+    if (preamble.length < 2000 && !preamble.includes('```')) {
+      const backticks = fallbackMatch[1];
+      const startIndex = fallbackMatch.index + fallbackMatch[0].length;
+      const lastEndIndex = findLastFence(text, backticks, startIndex);
+      
+      if (lastEndIndex !== -1) {
+        const inner = text.substring(startIndex, lastEndIndex);
+        // Require a higher threshold (80%) for unlabeled blocks to avoid false positives
+        if (inner.length > text.length * 0.8) {
+          return inner.trim();
+        }
+      }
     }
-  }
-  if (largestBlock && largestBlock.length > text.length * 0.8) {
-    return largestBlock.trim();
   }
   
   return text;
