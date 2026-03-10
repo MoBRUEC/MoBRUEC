@@ -157,6 +157,47 @@ let outputHTML = '', richPasteHTML = null;
 const inputBox = document.getElementById('input-box');
 const highlightLayer = document.getElementById('highlight-layer');
 
+function extractLLMContent(text) {
+  // 1. Look for explicitly labeled markdown blocks (```markdown or ```md)
+  const startRegex = /(`{3,})(?:markdown|md)\s*\n/i;
+  const startMatch = text.match(startRegex);
+  if (startMatch) {
+    const preamble = text.substring(0, startMatch.index);
+    // LLM preambles are usually short. If the preamble is very long, it's probably a normal article.
+    if (preamble.length < 2000) {
+      const backticks = startMatch[1];
+      const startIndex = startMatch.index + startMatch[0].length;
+      
+      const endRegex = new RegExp('\\n\\s*' + backticks + '\\s*(?:\\n|$)', 'i');
+      const endMatch = text.substring(startIndex).match(endRegex);
+      
+      if (endMatch) {
+        const inner = text.substring(startIndex, startIndex + endMatch.index);
+        
+        // If the inner content is substantial, extract it
+        if (inner.length > text.length * 0.3) {
+          return inner.trim();
+        }
+      }
+    }
+  }
+  
+  // 2. Fallback for unlabeled blocks that take up the vast majority of the text
+  const fallbackRegex = /(`{3,})[a-zA-Z0-9+_-]*\s*\n([\s\S]*?)\n\s*\1\s*(?:\n|$)/g;
+  let m;
+  let largestBlock = null;
+  while ((m = fallbackRegex.exec(text)) !== null) {
+    if (!largestBlock || m[2].length > largestBlock.length) {
+      largestBlock = m[2];
+    }
+  }
+  if (largestBlock && largestBlock.length > text.length * 0.8) {
+    return largestBlock.trim();
+  }
+  
+  return text;
+}
+
 inputBox.addEventListener('paste', function(e) {
   const html = e.clipboardData.getData('text/html');
   richPasteHTML = (html && html.trim()) ? html : null;
@@ -165,21 +206,8 @@ inputBox.addEventListener('paste', function(e) {
   if (text) {
     let fixedText = text;
     
-    // 1. Strip LLM markdown wrappers and optional preambles
-    const wrapperRegex = /^(?:[^`]*?)\n?\s*```([a-zA-Z0-9+_-]*)\s*\n([\s\S]*?)\n?\s*```\s*$/;
-    const match = fixedText.match(wrapperRegex);
-    if (match) {
-      const lang = match[1].toLowerCase();
-      const inner = match[2];
-      const hasInternalBackticks = /```/.test(inner);
-      const hasPreamble = !/^\s*```/.test(fixedText);
-      
-      // Only unwrap if it's explicitly marked as markdown (and has no preamble), 
-      // OR if there are no internal code blocks at all.
-      if (!hasInternalBackticks || (!hasPreamble && (lang === 'markdown' || lang === 'md'))) {
-        fixedText = inner;
-      }
-    }
+    // 1. Strip LLM markdown wrappers, preambles, and postambles
+    fixedText = extractLLMContent(fixedText);
     
     // 2. Fix inline bullet points
     fixedText = fixedText.replace(/([^\n])\s*([•→▸◆▪])\s*/g, '$1\n$2 ');
@@ -278,19 +306,8 @@ function convert() {
   let raw = inputBox.value.trim();
   if (!raw) return;
 
-  // 1. Strip LLM markdown wrappers and optional preambles
-  const wrapperRegex = /^(?:[^`]*?)\n?\s*```([a-zA-Z0-9+_-]*)\s*\n([\s\S]*?)\n?\s*```\s*$/;
-  const match = raw.match(wrapperRegex);
-  if (match) {
-    const lang = match[1].toLowerCase();
-    const inner = match[2];
-    const hasInternalBackticks = /```/.test(inner);
-    const hasPreamble = !/^\s*```/.test(raw);
-    
-    if (!hasInternalBackticks || (!hasPreamble && (lang === 'markdown' || lang === 'md'))) {
-      raw = inner.trim();
-    }
-  }
+  // 1. Strip LLM markdown wrappers, preambles, and postambles
+  raw = extractLLMContent(raw);
 
   // 2. Fix inline bullet points that lost their newlines (e.g. from PDF/Medium copy-paste)
   raw = raw.replace(/([^\n])\s*([•→▸◆▪])\s*/g, '$1\n$2 ');
