@@ -163,7 +163,27 @@ inputBox.addEventListener('paste', function(e) {
   
   const text = e.clipboardData.getData('text/plain');
   if (text) {
-    const fixedText = text.replace(/([^\n])\s*([•→▸◆▪])\s*/g, '$1\n$2 ');
+    let fixedText = text;
+    
+    // 1. Strip LLM markdown wrappers and optional preambles
+    const wrapperRegex = /^(?:[^`]*?)\n?\s*```([a-zA-Z0-9+_-]*)\s*\n([\s\S]*?)\n?\s*```\s*$/;
+    const match = fixedText.match(wrapperRegex);
+    if (match) {
+      const lang = match[1].toLowerCase();
+      const inner = match[2];
+      const hasInternalBackticks = /```/.test(inner);
+      const hasPreamble = !/^\s*```/.test(fixedText);
+      
+      // Only unwrap if it's explicitly marked as markdown (and has no preamble), 
+      // OR if there are no internal code blocks at all.
+      if (!hasInternalBackticks || (!hasPreamble && (lang === 'markdown' || lang === 'md'))) {
+        fixedText = inner;
+      }
+    }
+    
+    // 2. Fix inline bullet points
+    fixedText = fixedText.replace(/([^\n])\s*([•→▸◆▪])\s*/g, '$1\n$2 ');
+    
     if (fixedText !== text) {
       e.preventDefault();
       document.execCommand('insertText', false, fixedText);
@@ -258,7 +278,21 @@ function convert() {
   let raw = inputBox.value.trim();
   if (!raw) return;
 
-  // Fix inline bullet points that lost their newlines (e.g. from PDF/Medium copy-paste)
+  // 1. Strip LLM markdown wrappers and optional preambles
+  const wrapperRegex = /^(?:[^`]*?)\n?\s*```([a-zA-Z0-9+_-]*)\s*\n([\s\S]*?)\n?\s*```\s*$/;
+  const match = raw.match(wrapperRegex);
+  if (match) {
+    const lang = match[1].toLowerCase();
+    const inner = match[2];
+    const hasInternalBackticks = /```/.test(inner);
+    const hasPreamble = !/^\s*```/.test(raw);
+    
+    if (!hasInternalBackticks || (!hasPreamble && (lang === 'markdown' || lang === 'md'))) {
+      raw = inner.trim();
+    }
+  }
+
+  // 2. Fix inline bullet points that lost their newlines (e.g. from PDF/Medium copy-paste)
   raw = raw.replace(/([^\n])\s*([•→▸◆▪])\s*/g, '$1\n$2 ');
 
   // Always use inputBox.value as the source of truth.
