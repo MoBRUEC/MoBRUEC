@@ -158,62 +158,85 @@ const inputBox = document.getElementById('input-box');
 const highlightLayer = document.getElementById('highlight-layer');
 
 function extractLLMContent(text) {
-  // Helper to find the last matching fence
-  function findLastFence(text, backticks, startIndex) {
-    const endRegex = new RegExp('^' + backticks + '\\s*$', 'igm');
-    let endMatch;
-    let lastEndIndex = -1;
-    while ((endMatch = endRegex.exec(text)) !== null) {
-      if (endMatch.index > startIndex) {
-        lastEndIndex = endMatch.index;
-      }
-    }
-    return lastEndIndex;
-  }
-
+  text = text.trim();
+  
   // 1. Look for explicitly labeled markdown blocks (```markdown, ```md, or ```text)
-  const explicitRegex = /^(`{3,})(?:markdown|md|text)\s*$/im;
+  const explicitRegex = /^([\s\S]*?)^(`{3,})(?:markdown|md|text)\s*$/im;
   const explicitMatch = text.match(explicitRegex);
   
   if (explicitMatch) {
-    const preamble = text.substring(0, explicitMatch.index);
+    const preamble = explicitMatch[1];
     if (preamble.length < 2000) {
-      const backticks = explicitMatch[1];
+      const backticks = explicitMatch[2];
       const startIndex = explicitMatch.index + explicitMatch[0].length;
-      const lastEndIndex = findLastFence(text, backticks, startIndex);
+      const content = text.substring(startIndex);
       
-      if (lastEndIndex !== -1) {
-        const inner = text.substring(startIndex, lastEndIndex);
-        if (inner.length > text.length * 0.3) {
-          return inner.trim();
+      const fenceRegex = new RegExp('^' + backticks + '.*$', 'gm');
+      const fences = content.match(fenceRegex) || [];
+      
+      let extracted = content.trim();
+      if (fences.length % 2 !== 0) {
+        const lastFence = fences[fences.length - 1];
+        if (lastFence.trim() === backticks) {
+          const lastIdx = content.lastIndexOf(lastFence);
+          extracted = content.substring(0, lastIdx).trim();
         }
+      }
+      
+      if (extracted.length > text.length * 0.3) {
+        return extracted;
       }
     }
   }
   
   // 2. Fallback for unlabeled blocks (``` without language)
-  const fallbackRegex = /^(`{3,})\s*$/im;
+  const fallbackRegex = /^([\s\S]*?)^(`{3,})\s*$/im;
   const fallbackMatch = text.match(fallbackRegex);
   
   if (fallbackMatch) {
-    const preamble = text.substring(0, fallbackMatch.index);
+    const preamble = fallbackMatch[1];
     // For unlabeled blocks, ensure it's the VERY FIRST fence in the text to avoid matching a closing fence.
     if (preamble.length < 2000 && !preamble.includes('```')) {
-      const backticks = fallbackMatch[1];
+      const backticks = fallbackMatch[2];
       const startIndex = fallbackMatch.index + fallbackMatch[0].length;
-      const lastEndIndex = findLastFence(text, backticks, startIndex);
+      const content = text.substring(startIndex);
       
-      if (lastEndIndex !== -1) {
-        const inner = text.substring(startIndex, lastEndIndex);
-        // Require a higher threshold (80%) for unlabeled blocks to avoid false positives
-        if (inner.length > text.length * 0.8) {
-          return inner.trim();
+      const fenceRegex = new RegExp('^' + backticks + '.*$', 'gm');
+      const fences = content.match(fenceRegex) || [];
+      
+      let extracted = content.trim();
+      if (fences.length % 2 !== 0) {
+        const lastFence = fences[fences.length - 1];
+        if (lastFence.trim() === backticks) {
+          const lastIdx = content.lastIndexOf(lastFence);
+          extracted = content.substring(0, lastIdx).trim();
         }
+      }
+      
+      // Require a higher threshold (80%) for unlabeled blocks to avoid false positives
+      if (extracted.length > text.length * 0.8) {
+        return extracted;
       }
     }
   }
   
   return text;
+}
+
+// FIX 1: Replace deprecated document.execCommand('insertText') with a reliable
+// textarea value setter. execCommand is deprecated in Chrome 126+ / Safari and
+// can silently fail after e.preventDefault(), leaving the field empty or unchanged.
+function setTextareaValue(value) {
+  const start = inputBox.selectionStart;
+  const end = inputBox.selectionEnd;
+  const current = inputBox.value;
+  const before = current.substring(0, start);
+  const after = current.substring(end);
+  inputBox.value = before + value + after;
+  const cursor = start + value.length;
+  inputBox.setSelectionRange(cursor, cursor);
+  // Dispatch input event so updateBadge / updateHighlight fire
+  inputBox.dispatchEvent(new Event('input'));
 }
 
 inputBox.addEventListener('paste', function(e) {
@@ -232,7 +255,9 @@ inputBox.addEventListener('paste', function(e) {
     
     if (fixedText !== text) {
       e.preventDefault();
-      document.execCommand('insertText', false, fixedText);
+      // FIX 1 applied: use reliable direct assignment instead of deprecated execCommand
+      setTextareaValue(fixedText);
+      return;
     }
   }
   
@@ -300,13 +325,18 @@ function sanitizeHTMLForHighlight(raw) {
   return doc.body.innerHTML;
 }
 
+// FIX 3: Improved type detection — any ## heading alone is sufficient for 'markdown'.
+// Previously the article was classified as 'plain' when it lacked ** bold markers,
+// because ## headers alone only scored 1/2 required signals.
 function detectType(text) {
-  // Always use inputBox.value as ground truth — never check richPasteHTML here
   const t = text.trim();
   if (/^<(!DOCTYPE|html|body)/i.test(t)) return 'html';
-  const signals = [/^#{1,6}\s/m, /\*\*[^*\n]+\*\*/, /^[-*+]\s/m, /^>\s/m, /^```/m, /\[.+?\]\(.+?\)/];
+  // A leading markdown code fence that survived extraction is still markdown content
+  if (/^`{3,}(?:markdown|md)\b/i.test(t)) return 'markdown';
+  // Any heading marker is a strong enough signal on its own
+  if (/^#{1,6}\s/m.test(t)) return 'markdown';
+  const signals = [/\*\*[^*\n]+\*\*/, /^[-*+]\s/m, /^>\s/m, /^```/m, /\[.+?\]\(.+?\)/];
   const score = signals.filter(r => r.test(t)).length;
-  // Bold (**) alone is sufficient — it never appears in plain prose accidentally
   if (/\*\*[^*\n]+\*\*/.test(t)) return 'markdown';
   return score >= 2 ? 'markdown' : 'plain';
 }
@@ -330,9 +360,6 @@ function convert() {
   // 2. Fix inline bullet points that lost their newlines (e.g. from PDF/Medium copy-paste)
   raw = raw.replace(/([^\n])\s*([•→▸◆▪])\s*/g, '$1\n$2 ');
 
-  // Always use inputBox.value as the source of truth.
-  // richPasteHTML is only used when the textarea itself is empty (i.e. the user
-  // pasted something that didn't land as text — extremely rare).
   const type = detectType(raw);
   let result;
 
@@ -374,13 +401,6 @@ const INLINE_LANG_NOSPACE_RE = new RegExp('^(' + LANG_PATTERN + ')([^a-zA-Z\\s].
 // Case 2: language name followed by space then code (e.g. "powershell $appName = ...")
 const INLINE_LANG_SPACE_RE   = new RegExp('^(' + LANG_PATTERN + ') (.+)$', 'gim');
 
-/**
- * Pre-processing pass: split lines where a language name is fused with code content,
- * either directly ("powershell#...") or with a space ("powershell $appName = ...").
- * The entire remainder of the line becomes a single code line — we cannot recover
- * internal newlines lost during copy-paste, but <pre> wrapping still makes it
- * visually distinct and Medium-pasteable as a code block.
- */
 function normalizeInlineCodeBlocks(text) {
   // Pass 1: no-space fusion — "powershell# comment" → "powershell\n# comment"
   let result = text.replace(INLINE_LANG_NOSPACE_RE, (_, lang, rest) => lang + '\n' + rest);
@@ -389,62 +409,44 @@ function normalizeInlineCodeBlocks(text) {
   return result;
 }
 
-/**
- * Heuristic: does this line look like code (shell, PowerShell, etc.)?
- * Used to decide whether to keep collecting lines into a code block.
- */
 function looksLikeCode(line) {
   const t = line.trim();
   if (!t) return false;
-  if (/^\$[A-Za-z_]/.test(t)) return true;                           // $variable
-  if (/^\s*[{}]/.test(t) || /^\s*#\s/.test(t)) return true;          // { } block or # comment
+  if (/^\$[A-Za-z_]/.test(t)) return true;
+  if (/^\s*[{}]/.test(t) || /^\s*#\s/.test(t)) return true;
   if (/^(if|else|elseif|for|while|foreach|function|return|try|catch|switch|do|end|begin|echo|exit|fi|then|done|esac|elif|case|break|continue)(\s|\b)/.test(t)) return true;
-  if (/^[A-Za-z_][A-Za-z0-9_]*\s*=/.test(t)) return true; // Variable assignment
-  if (/[{}]/.test(t)) return true;                                   // braces (NOT parens or brackets)
+  if (/^[A-Za-z_][A-Za-z0-9_]*\s*=/.test(t)) return true;
+  if (/[{}]/.test(t)) return true;
   if (/^(netsh|ipconfig|reg |ping |curl |wget |git |npm |pip |apt |brew |gcloud |kubectl |docker |terraform |helm |aws |az )/.test(t)) return true;
   if (/^(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|JOIN|GROUP BY|ORDER BY|HAVING)\b/.test(t)) return true;
   if (/^(Get|Set|New|Remove|Start|Stop|Restart|Enable|Disable|Add|Clear|Copy|Move|Rename|Select|Where|ForEach|Write|Read|Test|Invoke|Import|Export|Connect|Disconnect|Update|Show|Hide|Find|Search|Resolve|Out|Wait|Measure|Trace|Debug)-[A-Za-z]+/.test(t)) return true;
-  if (/^\s*&\s/.test(t)) return true;                                // & command invocation
-  if (/^--?[A-Za-z]/.test(t)) return true;                           // -Parameter or --flag
-  if (/`$/.test(t)) return true;                                     // PS line continuation
+  if (/^\s*&\s/.test(t)) return true;
+  if (/^--?[A-Za-z]/.test(t)) return true;
+  if (/`$/.test(t)) return true;
   if (/^(var|let|const|def|class|import|from|export|return|async|await)\s/.test(t)) return true;
-  // key = value assignments (HCL, shell): word = "string" or word = digit/[ / {
   if (/^\w[\w.-]*\s*=\s*["'\d\[{]/.test(t)) return true;
-  if (/^[A-Za-z_][\w.-]*:\s*(\S.*)?$/.test(t) && !/^https?:/.test(t)) return true; // YAML/HCL key: value
-  // Indented assignment inside a block
+  if (/^[A-Za-z_][\w.-]*:\s*(\S.*)?$/.test(t) && !/^https?:/.test(t)) return true;
   if (/^\s{2,}\w[\w.-]*\s*[=:]/.test(t)) return true;
-  // Long lines with multiple $variables
   if (t.length > 40 && (t.match(/\$[A-Za-z]/g) || []).length >= 2) return true;
   return false;
 }
 
-/**
- * Heuristic: does this line look like prose (natural language sentence)?
- * Used to stop code block collection before swallowing narrative text.
- */
 function looksLikeProse(line) {
   const t = line.trim();
   if (!t || looksLikeCode(t)) return false;
   if (t.length < 20) return false;
-  // Must NOT contain code-like punctuation
   if (/[{}`]|==|!=|\$\(|\|\||&&/.test(t)) return false;
-  // Must NOT look like a command invocation (contains - flags or $vars)
   if (/\$[A-Za-z_]/.test(t) || /(^|\s)--?[A-Za-z]/.test(t)) return false;
-  
-  // Count words that are purely alphabetical and >= 3 chars
   const words = t.replace(/[.,:;!?()\[\]"']/g, '').split(/\s+/).filter(w => /^[a-zA-Z]{3,}$/.test(w));
   if (words.length >= 3) return true;
-  
   return false;
 }
 
-// Check if a line is just a language identifier
 function isLanguageLine(line) {
   const trimmed = line.trim().toLowerCase();
   return LANGUAGES.has(trimmed);
 }
 
-// Detect if a line looks like a sub-header (short, title case, no ending punctuation)
 function isSubHeader(line) {
   if (line.length < 5 || line.length > 60) return false;
   if (/[.!?;:]$/.test(line)) return false;
@@ -458,6 +460,17 @@ function isSubHeader(line) {
 function parseMarkdown(text) {
   const warnings=[], lines=text.split('\n');
   let html='', i=0;
+
+  // FIX 2: Strip a leading ```markdown / ```md fence line that survived extractLLMContent.
+  // If parseMarkdown receives fenced text, the fence handler wraps the ENTIRE article in
+  // a single <pre> block. Detect and discard the opening fence line here as a safety net.
+  if (/^`{3,}(?:markdown|md)\s*$/i.test(lines[0] && lines[0].trim())) {
+    i = 1; // skip opening fence line
+    // Also skip the matching closing fence at the very end
+    while (lines.length > i && lines[lines.length - 1].trim() === '') lines.pop();
+    if (lines.length > i && /^`{3,}$/.test(lines[lines.length - 1].trim())) lines.pop();
+  }
+
   while (i<lines.length) {
     const line=lines[i];
 
@@ -477,18 +490,15 @@ function parseMarkdown(text) {
         if (i < lines.length) i++;
       } else {
         while (i < lines.length) {
-          // Cross blank lines only if the next non-blank line still looks like code
           if (!lines[i].trim()) {
             let j = i + 1;
             while (j < lines.length && !lines[j].trim()) j++;
             if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
             code += '\n'; i++; continue;
           }
-          // Stop on another language label
           if (isLanguageLine(lines[i])) {
             break;
           }
-          // Stop collecting if this line looks like prose, not code
           if (looksLikeProse(lines[i])) break;
           const codeLine = lines[i].replace(/^[ \t]{1,4}/, '');
           code += codeLine + '\n';
@@ -568,7 +578,6 @@ function parseMarkdown(text) {
       let code = '';
       while (i < lines.length) {
         if (!lines[i].trim()) {
-          // Peek ahead: stop if next non-blank line is prose, a markdown block marker, or blank run before prose
           let j = i + 1;
           while (j < lines.length && !lines[j].trim()) j++;
           if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
@@ -623,55 +632,41 @@ function sanitizeHTML(raw) {
   const warnings=[], doc=new DOMParser().parseFromString(raw,'text/html');
   doc.querySelectorAll('script,style,meta,link,head,svg,form,input,button,img,noscript,iframe').forEach(el=>el.remove());
 
-  // ── Preserve <pre> and <code> blocks BEFORE any unwrapping ──────────────────
-  // Convert existing <pre> blocks to clean <pre><code> and mark them with a
-  // sentinel attribute so the wrapper-unwrap loop below leaves them alone.
   doc.querySelectorAll('pre').forEach(pre => {
-    const codeText = pre.textContent; // preserves internal newlines
+    const codeText = pre.textContent;
     const newPre = doc.createElement('pre');
     newPre.setAttribute('data-keep', '1');
-        newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
+    newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
     pre.replaceWith(newPre);
   });
-  // Also promote bare <code> that isn't inside a <pre> to inline code spans —
-  // do nothing special, they'll survive the attribute-strip below.
 
-  // ── Detect paragraphs whose text starts with a language label ───────────────
-  // e.g. a <p> whose textContent is "powershell\n$x = Get-Service..."
-  // Convert those to <pre><code> blocks too.
   doc.querySelectorAll('p, li').forEach(el => {
-    if (el.closest('pre')) return; // already inside a code block
+    if (el.closest('pre')) return;
     const text = el.textContent.trim();
-    // Check if this paragraph IS just a language label (standalone "powershell")
     if (isLanguageLine(text)) {
-      // The next sibling may be the code block — handled below via text extraction
       el.setAttribute('data-lang-label', text.toLowerCase());
       return;
     }
-    // Check if it STARTS with a language label followed by code
     const normalized = normalizeInlineCodeBlocks(text);
     if (normalized !== text) {
-      // It changed — means it started with a language label smashed onto code
       const newPre = doc.createElement('pre');
       newPre.setAttribute('data-keep', '1');
-            const codeText = normalized.split('\n').slice(1).join('\n');
+      const codeText = normalized.split('\n').slice(1).join('\n');
       newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
       el.replaceWith(newPre);
     }
   });
 
-  // ── Handle lang-label paragraphs followed by code content ───────────────────
-  // Walk all data-lang-label elements and merge with the following sibling's text
   doc.querySelectorAll('[data-lang-label]').forEach(el => {
     const next = el.nextElementSibling;
     if (!next) { el.remove(); return; }
     const codeText = next.getAttribute('data-keep')
-      ? next.textContent  // already a pre block
+      ? next.textContent
       : next.textContent.trim();
     if (codeText) {
       const newPre = doc.createElement('pre');
       newPre.setAttribute('data-keep', '1');
-            newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
+      newPre.innerHTML = esc(codeText).replace(/\n/g, '<br>');
       el.replaceWith(newPre);
       if (!next.getAttribute('data-keep')) next.remove();
     } else {
@@ -707,7 +702,6 @@ function sanitizeHTML(raw) {
     });
     if(ul.children.length)table.replaceWith(ul);else table.remove();
   });
-  // Strip attributes except href on links and data-keep on pre
   doc.querySelectorAll('*').forEach(el=>{
     const href=el.tagName==='A'?el.getAttribute('href'):null;
     const keep=el.tagName==='PRE'?el.getAttribute('data-keep'):null;
@@ -718,12 +712,22 @@ function sanitizeHTML(raw) {
     if(cls)el.setAttribute('class',cls);
   });
   doc.querySelectorAll('p').forEach(el=>{if(!el.textContent.trim())el.remove();});
-  // Final cleanup: remove data-keep sentinels
   doc.querySelectorAll('[data-keep]').forEach(el=>el.removeAttribute('data-keep'));
   return { html:(doc.body?.innerHTML||'').trim(), warnings };
 }
 
+// FIX 4: parsePlain now routes to parseMarkdown when markdown signals are present.
+// Previously parsePlain ignored ## headings, > blockquotes, - bullets, and ``` fences,
+// causing them to render as literal text. Since parseMarkdown handles all of these,
+// the simplest fix is to delegate when the content is actually markdown-ish.
 function parsePlain(text) {
+  // If it has any markdown structural markers, delegate to parseMarkdown
+  // (detectType already filtered out clear markdown; this catches borderline cases
+  //  where detectType fell through to 'plain' but the content still has headings etc.)
+  if (/^#{1,6}\s/m.test(text) || /^> /m.test(text) || /^\s*[-*+]\s/m.test(text) || /^`{3}/m.test(text)) {
+    return parseMarkdown(text);
+  }
+
   let html='';
   const lines = text.split('\n');
   let i = 0;
@@ -734,16 +738,13 @@ function parsePlain(text) {
       while (i < lines.length && !lines[i].trim()) i++;
       let code = '';
       while (i < lines.length) {
-        // Skip blank lines but only continue if the next non-blank line is still code
         if (!lines[i].trim()) {
-          // Peek ahead: if next non-blank line is prose or a language label, stop
           let j = i + 1;
           while (j < lines.length && !lines[j].trim()) j++;
           if (j >= lines.length || isLanguageLine(lines[j]) || looksLikeProse(lines[j])) break;
           code += '\n'; i++; continue;
         }
         if (isLanguageLine(lines[i])) break;
-        // Stop collecting if this line looks like prose, not code
         if (looksLikeProse(lines[i])) break;
         const codeLine = lines[i].replace(/^[ \t]{1,4}/, '');
         code += codeLine + '\n';
@@ -768,7 +769,6 @@ function parsePlain(text) {
     }
     const t = line.trim();
     if (!t) { i++; continue; }
-    // Also check looksLikeCode for bare code lines in plain text
     if (looksLikeCode(t)) {
       let code = '';
       while (i < lines.length) {
