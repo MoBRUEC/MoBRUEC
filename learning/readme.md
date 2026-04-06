@@ -7,8 +7,7 @@ A curated collection of my most requested materials — from cloud integration d
 ### 🔧 Core Files
 
 - **M365 Copilot Cheat Sheet**  
-  **[m365copilot.pdf](#)**  
-  *(URL pending — file not yet published on mohammed-brueckner.com)*  
+  **[m365copilot.pdf](#)**    
   A compact reference for Microsoft 365 Copilot, covering essential prompts, usage patterns, and productivity accelerators.
 
 ---
