@@ -8,32 +8,22 @@
     <meta name="keywords" content="Databricks, architecture, data engineering, Delta Lake, Unity Catalog, MLflow, Photon Engine, data lakehouse, Apache Spark, DBFS, Delta Live Tables, data platform, cloud computing, big data">
     <meta name="author" content="Mohammed Brueckner">
     <meta property="og:title" content="Databricks Architecture Overview - Interactive Visual Guide">
-    <meta property="og:description" content="Explore Databricks core building blocks with an interactive LEGO-style visualization. Learn about Unity Catalog, Delta Lake, MLflow, and more.">
+    <meta property="og:description" content="Explore Databricks core building blocks with an interactive LEGO-style visualization. Learn about the Lakehouse architecture layers.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mohammed-brueckner.com">
+    <meta property="og:url" content="https://mohammed-brueckner.com/databricks/databricks-architecture.html">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Databricks Architecture Overview">
-    <meta name="twitter:description" content="Interactive guide to Databricks architecture components and their interactions">
-    <link rel="canonical" href="https://mohammed-brueckner.com">
+    <meta name="twitter:description" content="Interactive visual guide to Databricks architecture and core components.">
     
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-    </style>
+    <!-- Cloudflare Rocket Loader Exclusion setup for Babel Standalone execution -->
+    <script data-cfasync="false" crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script data-cfasync="false" crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script data-cfasync="false" src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <div id="root"></div>
 
-    <script type="text/babel" data-type="module">
+    <script data-cfasync="false" type="text/babel" data-type="module">
         const { useState } = React;
 
         // Lucide React icons as inline SVG components
@@ -473,7 +463,6 @@
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<DatabricksArchitecture />);
     </script>
-
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script data-cfasync="false" src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </body>
 </html>
