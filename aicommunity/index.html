@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI in Product: IT Community Workshop von Mohammed Brückner, München, 5. Mai 2026. Insights und Publikationen.">
+    <meta name="keywords" content="Mohammed Brückner, AI, Artificial Intelligence, Product Management, Munich, IT Community Workshop, Presentation, Publikationen, AI in Product">
+    <meta name="author" content="Mohammed Brückner">
+    <meta property="og:title" content="AI in Product: IT Community Workshop - Mohammed Brückner">
+    <meta property="og:description" content="Offizielle Präsentation zum AI in Product Workshop von Mohammed Brückner, München am 5. Mai 2026. Besuchen Sie mohammed-brueckner.com für weitere Publikationen.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohammed-brueckner.com/">
+    <title>Mohammed Brückner | AI in Product: IT Community Workshop</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f7f2; /* Beige tone matching the slides */
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        #slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .slide {
+            max-width: 100%;
+            max-height: 100%;
+            margin: 0 auto;
+            display: none;
+            user-select: none;
+        }
+        img.slide {
+            object-fit: contain;
+        }
+        img.slide.active {
+            display: block;
+        }
+        div.slide {
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #333333;
+            padding: 2rem;
+            box-sizing: border-box;
+            background: #f8f7f2; /* Exact beige background */
+            position: relative;
+        }
+        div.slide.active {
+            display: flex;
+        }
+        .title-slide h1 {
+            font-size: 7vw;
+            margin-bottom: 0.5rem;
+            color: #cc1c1c; /* Vibrant Red from Slide1.jpg */
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        .title-slide h2 {
+            font-size: 4vw;
+            color: #555555;
+            font-weight: 300;
+            margin-top: 0;
+        }
+        .title-slide p {
+            margin-top: 3rem;
+            font-size: 2vw;
+            color: #777777;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        
+        .publications-link {
+            position: absolute;
+            left: 5vw;
+            bottom: 5vw;
+            font-size: 2vw;
+            color: #cc1c1c; /* Passend zum Rot der Slidevorgaben */
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-align: left;
+            border-left: 4px solid #cc1c1c;
+            padding-left: 1.5vw;
+        }
+        .publications-link:hover {
+            color: #b61011;
+            text-decoration: underline;
+        }
+        #fullscreen-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        #fullscreen-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        #fullscreen-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        #counter {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        #no-images {
+            color: #333;
+            font-size: 18px;
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="fullscreen-btn" title="Toggle Fullscreen">
+        <!-- SVG for Maximize -->
+        <svg id="icon-maximize" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        <!-- SVG for Minimize (hidden by default) -->
+        <svg id="icon-minimize" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>
+    </button>
+
+    <div id="slide-container">
+        <!-- Introductory HTML Slide -->
+        <div class="slide title-slide active">
+            <h1>AI in Product: IT Community Workshop</h1>
+            <p>Presented by <strong>Mohammed Brückner</strong><br>Munich, May 5th, 2026</p>
+            <a href="https://mohammed-brueckner.com/publications" target="_blank" class="publications-link">
+                My Publications &rarr;<br>
+                <span style="font-size: 1.2vw; font-weight: 400; color: #777;">mohammed-brueckner.com</span>
+            </a>
+        </div>
+
+        <!-- The script loads image slides here -->
+        <div id="no-images">
+            No images found. <br><br>
+            Please adjust the <code>imageFiles</code> array in the HTML code.
+        </div>
+    </div>
+
+    <div id="counter" style="display:none;">1 / 1</div>
+
+    <script>
+        // === INSERT YOUR IMAGES HERE === //
+        // Enter the filenames of your images that are located in the same folder.
+        // Example: "Slide1.jpg", "Slide2.jpg", "Slide3.jpg"
+        const imageFiles = [
+            "Slide1.jpg",
+            "Slide2.jpg",
+            "Slide3.jpg",
+            "Slide4.jpg",
+            "Slide5.jpg",
+            "Slide6.jpg",
+            "Slide7.jpg",
+            "Slide8.jpg",
+            "Slide9.jpg",
+            "Slide10.jpg",
+            "Slide11.jpg",
+            "Slide12.jpg",
+            "Slide13.jpg"
+        ];
+        // ================================= //
+
+        let currentIndex = 0;
+        const container = document.getElementById('slide-container');
+        const counter = document.getElementById('counter');
+        const noImagesMsg = document.getElementById('no-images');
+        
+        // Collect existing HTML slides (like the title slide)
+        const slides = Array.from(document.querySelectorAll('.slide'));
+
+        // Load images
+        if (imageFiles.length === 0 && slides.length === 0) {
+            noImagesMsg.style.display = 'block';
+        } else {
+            counter.style.display = 'block';
+            imageFiles.forEach((src) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'slide';
+                container.appendChild(img);
+                slides.push(img);
+            });
+        }
+
+        function updateView() {
+            if (slides.length === 0) return;
+            slides.forEach((slide, index) => {
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            counter.innerText = `${currentIndex + 1} / ${slides.length}`;
+        }
+
+        // Initialize the view with the first slide active
+        updateView();
+
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateView();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateView();
+            }
+        }
+
+        // Click on the container = Next slide
+        container.addEventListener('click', (e) => {
+            // Prevent triggering if clicked on fullscreen button or its children
+            if (e.target.closest('#fullscreen-btn')) return;
+            nextSlide();
+        });
+
+        // Keyboard controls
+        window.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Fullscreen functionality
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const iconMaximize = document.getElementById('icon-maximize');
+        const iconMinimize = document.getElementById('icon-minimize');
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        fullscreenBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFullscreen();
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                iconMaximize.style.display = 'none';
+                iconMinimize.style.display = 'block';
+            } else {
+                iconMaximize.style.display = 'block';
+                iconMinimize.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
