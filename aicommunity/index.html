@@ -132,6 +132,11 @@
             font-size: 14px;
             pointer-events: none;
             z-index: 10;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #counter.fade-out {
+            opacity: 0;
         }
         #no-images {
             color: #333;
@@ -193,6 +198,7 @@
         // ================================= //
 
         let currentIndex = 0;
+        let fadeTimeout;
         const container = document.getElementById('slide-container');
         const counter = document.getElementById('counter');
         const noImagesMsg = document.getElementById('no-images');
@@ -224,6 +230,12 @@
                 }
             });
             counter.innerText = `${currentIndex + 1} / ${slides.length}`;
+            
+            counter.classList.remove('fade-out');
+            clearTimeout(fadeTimeout);
+            fadeTimeout = setTimeout(() => {
+                counter.classList.add('fade-out');
+            }, 3000);
         }
 
         // Initialize the view with the first slide active
