@@ -120,24 +120,104 @@
             width: 24px;
             height: 24px;
         }
-        #counter {
+        
+        /* Bottom Navigation Bar (Desktop & General Counter) */
+        #bottom-nav {
             position: absolute;
             bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
             background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 14px;
-            pointer-events: none;
+            padding: 4px 6px;
+            border-radius: 20px;
             z-index: 10;
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
         }
-        #counter.fade-out {
+        #bottom-nav.fade-out {
             opacity: 0;
         }
+        #counter {
+            color: white;
+            font-size: 14px;
+            pointer-events: none;
+            padding: 0 4px;
+            font-variant-numeric: tabular-nums;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Mobile Side Navigation Arrows */
+        .mobile-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            border: none;
+            padding: 20px 10px;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out, background 0.2s;
+            display: none; /* Hidden on desktop by default */
+        }
+        .mobile-nav-btn:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .mobile-nav-btn svg {
+            width: 32px;
+            height: 32px;
+        }
+        .mobile-nav-btn.fade-out {
+            opacity: 0;
+        }
+        #mobile-nav-left {
+            left: 0;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        #mobile-nav-right {
+            right: 0;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+
+        /* Responsive Logic */
+        @media (max-width: 768px) {
+            .nav-btn {
+                display: none; /* Hide desktop arrows in bottom bar on mobile */
+            }
+            .mobile-nav-btn {
+                display: flex; /* Show the large side arrows on mobile */
+                align-items: center;
+                justify-content: center;
+            }
+            #bottom-nav {
+                padding: 4px 12px; /* Adjust padding since arrows are gone */
+            }
+        }
+        
         #no-images {
             color: #333;
             font-size: 18px;
@@ -174,7 +254,24 @@
         </div>
     </div>
 
-    <div id="counter" style="display:none;">1 / 1</div>
+    <!-- Mobile Side Navigation -->
+    <button id="mobile-nav-left" class="mobile-nav-btn" title="Previous Slide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button id="mobile-nav-right" class="mobile-nav-btn" title="Next Slide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+
+    <!-- Desktop Bottom Navigation -->
+    <div id="bottom-nav" style="display:none;">
+        <button id="nav-desktop-prev" class="nav-btn" title="Previous Slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div id="counter">1 / 1</div>
+        <button id="nav-desktop-next" class="nav-btn" title="Next Slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+    </div>
 
     <script>
         // === INSERT YOUR IMAGES HERE === //
@@ -200,8 +297,16 @@
         let currentIndex = 0;
         let fadeTimeout;
         const container = document.getElementById('slide-container');
+        const bottomNav = document.getElementById('bottom-nav');
         const counter = document.getElementById('counter');
         const noImagesMsg = document.getElementById('no-images');
+
+        // Navigation elements
+        const navDesktopPrev = document.getElementById('nav-desktop-prev');
+        const navDesktopNext = document.getElementById('nav-desktop-next');
+        const mobileNavLeft = document.getElementById('mobile-nav-left');
+        const mobileNavRight = document.getElementById('mobile-nav-right');
+        const navElements = [bottomNav, mobileNavLeft, mobileNavRight];
         
         // Collect existing HTML slides (like the title slide)
         const slides = Array.from(document.querySelectorAll('.slide'));
@@ -210,7 +315,7 @@
         if (imageFiles.length === 0 && slides.length === 0) {
             noImagesMsg.style.display = 'block';
         } else {
-            counter.style.display = 'block';
+            bottomNav.style.display = 'flex';
             imageFiles.forEach((src) => {
                 const img = document.createElement('img');
                 img.src = src;
@@ -218,6 +323,14 @@
                 container.appendChild(img);
                 slides.push(img);
             });
+        }
+
+        function wakeUpNav() {
+            navElements.forEach(el => el.classList.remove('fade-out'));
+            clearTimeout(fadeTimeout);
+            fadeTimeout = setTimeout(() => {
+                navElements.forEach(el => el.classList.add('fade-out'));
+            }, 3000);
         }
 
         function updateView() {
@@ -230,13 +343,12 @@
                 }
             });
             counter.innerText = `${currentIndex + 1} / ${slides.length}`;
-            
-            counter.classList.remove('fade-out');
-            clearTimeout(fadeTimeout);
-            fadeTimeout = setTimeout(() => {
-                counter.classList.add('fade-out');
-            }, 3000);
+            wakeUpNav();
         }
+
+        // Mouse move wakes up nav
+        document.addEventListener('mousemove', wakeUpNav);
+        document.addEventListener('touchstart', wakeUpNav, {passive: true});
 
         // Initialize the view with the first slide active
         updateView();
@@ -255,10 +367,16 @@
             }
         }
 
+        // Button Listeners
+        navDesktopPrev.addEventListener('click', (e) => { e.stopPropagation(); prevSlide(); });
+        navDesktopNext.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); });
+        mobileNavLeft.addEventListener('click', (e) => { e.stopPropagation(); prevSlide(); });
+        mobileNavRight.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); });
+
         // Click on the container = Next slide
         container.addEventListener('click', (e) => {
             // Prevent triggering if clicked on fullscreen button or its children
-            if (e.target.closest('#fullscreen-btn')) return;
+            if (e.target.closest('#fullscreen-btn') || e.target.closest('a') || e.target.closest('.nav-btn') || e.target.closest('.mobile-nav-btn')) return;
             nextSlide();
         });
 
