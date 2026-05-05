@@ -225,6 +225,13 @@
             text-align: center;
             padding: 20px;
         }
+        body.blacked-out * {
+            visibility: hidden !important;
+        }
+        body.blacked-out {
+            background-color: #000 !important;
+            cursor: none;
+        }
     </style>
 </head>
 <body>
@@ -380,17 +387,6 @@
             nextSlide();
         });
 
-        // Keyboard controls
-        window.addEventListener('keydown', (e) => {
-            if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
-                e.preventDefault();
-                nextSlide();
-            } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
-                e.preventDefault();
-                prevSlide();
-            }
-        });
-
         // Fullscreen functionality
         const fullscreenBtn = document.getElementById('fullscreen-btn');
         const iconMaximize = document.getElementById('icon-maximize');
@@ -407,6 +403,60 @@
                 }
             }
         }
+
+        // Keyboard controls (Supports Presentation Clickers)
+        window.addEventListener('keydown', (e) => {
+            // Un-blank screen on any key press if it's blacked out (except for the 'b' key itself which toggles it)
+            if (document.body.classList.contains('blacked-out') && !['b', 'B', '.'].includes(e.key)) {
+                document.body.classList.remove('blacked-out');
+                e.preventDefault();
+                return;
+            }
+
+            // Next Slide triggers (Space, Arrows, PageDown, Enter)
+            if ([' ', 'ArrowRight', 'ArrowDown', 'PageDown', 'Enter', 'n', 'N'].includes(e.key)) {
+                e.preventDefault();
+                nextSlide();
+            } 
+            // Previous Slide triggers (Arrows, PageUp, Backspace)
+            else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace', 'p', 'P'].includes(e.key)) {
+                e.preventDefault();
+                prevSlide();
+            }
+            // Screen blanking ('B' or '.' commonly used by clickers)
+            else if (['b', 'B', '.'].includes(e.key)) {
+                e.preventDefault();
+                document.body.classList.toggle('blacked-out');
+            }
+            // First Slide (Home)
+            else if (e.key === 'Home') {
+                e.preventDefault();
+                currentIndex = 0;
+                updateView();
+            }
+            // Last Slide (End)
+            else if (e.key === 'End') {
+                e.preventDefault();
+                if (slides.length > 0) {
+                    currentIndex = slides.length - 1;
+                    updateView();
+                }
+            }
+            // Fullscreen (F5, Shift+F5)
+            else if (e.key === 'F5') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    // Shift+F5 usually starts from current slide (which we already do)
+                    if (!document.fullscreenElement) toggleFullscreen();
+                } else {
+                    // Normal F5 usually starts from the first slide
+                    currentIndex = 0;
+                    updateView();
+                    if (!document.fullscreenElement) toggleFullscreen();
+                }
+            }
+            // Escape is handled by the browser to exit fullscreen, so we don't need to explicitly catch it
+        });
 
         fullscreenBtn.addEventListener('click', (e) => {
             e.stopPropagation();
