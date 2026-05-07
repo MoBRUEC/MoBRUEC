@@ -91,14 +91,14 @@ Watch my discussion on modern **enterprise architecture** with OPITZ CONSULTING,
 
 Explore key topics on **technology strategy**, **AI innovation**, and **leadership** with these informative podcast episodes from my "Platform Economies" series:
 
-* 🎧 [**Platform Economics & Cloud Transformation**](https://open.spotify.com/episode/0Uta648a12bgT6x6v0XFXE?si=DZDDYHzhTJmppy01tK6dGQ) 👉
-This episode looks at the intersection of platform economics and cloud transformation, exploring how smart cloud use can power platform growth and create new business options.
+* 🎧 [**Platform Economics & Cloud Transformation**](https://open.spotify.com/episode/0Uta648a12bgT6x6v0XFXE?si=DZDDYHzhTJmppy01tK6dGQ) 👉  
+  This episode looks at the intersection of platform economics and cloud transformation, exploring how smart cloud use can power platform growth and create new business options.
 
-* 🎧 [**AI's Role in Modern Enterprise Architecture**](https://open.spotify.com/episode/5GPzIee2Q0PREXjGSt83tg?si=RRPTWwSRQZOLvfz62BdeVA) 👉
-Discover how artificial intelligence is changing enterprise architecture, from automating design processes to aiding decision-making and guiding smarter system designs.
+* 🎧 [**AI's Role in Modern Enterprise Architecture**](https://open.spotify.com/episode/5GPzIee2Q0PREXjGSt83tg?si=RRPTWwSRQZOLvfz62BdeVA) 👉  
+  Discover how artificial intelligence is changing enterprise architecture, from automating design processes to aiding decision-making and guiding smarter system designs.
 
-* 🎧 [**Navigating Digital Transformation Challenges**](https://open.spotify.com/episode/3a6FpbumwmJhoaw6nWQGKS?si=RYgx1Nn0R2Sb_5fFttE44g) 👉
-This episode provides useful advice for overcoming common difficulties in digital transformation, focusing on leadership approaches, cultural shifts, and using technology for successful business change.
+* 🎧 [**Navigating Digital Transformation Challenges**](https://open.spotify.com/episode/3a6FpbumwmJhoaw6nWQGKS?si=RYgx1Nn0R2Sb_5fFttE44g) 👉  
+  This episode provides useful advice for overcoming common difficulties in digital transformation, focusing on leadership approaches, cultural shifts, and using technology for successful business change.
 
 ## Blogging & More
 
@@ -107,6 +107,11 @@ Explore my thoughts on **technology**, **society**, and **economics** in my Medi
 ## Professional Engagement
 
 Connect on [LinkedIn](https://linkedin.com/in/mbrueckner) to discuss **enterprise transformation**, **technology strategy**, and **new solutions** that drive lasting business growth and market advantage.
+
+### Speaking Engagements
+
+- **AI in Product: IT Community Workshop — Munich, 5 May**  
+  I joined the practitioner‑led **AI in Product** IT Community Workshop in Munich to open a panel discussion on practical AI adoption in product and platform teams. The workshop brought together over 50 practitioners for peer‑to‑peer conversations about real‑world challenges — from hallucinations and ego‑driven adoption to the persistent people and change management issues that determine AI success. Read more and view materials from the talk: https://mohammed-brueckner.com/aicommunity/
 
 ---
 
