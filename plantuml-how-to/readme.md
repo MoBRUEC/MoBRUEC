@@ -2,6 +2,8 @@
 
 A comprehensive guide for using PlantUML with ArchiMate extensions for enterprise architecture modeling.
 
+&gt; 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://mohammed-brueckner.com/publications) (production-grade MLOps systems).
+
 ---
 
 ## Table of Contents
@@ -25,15 +27,19 @@ PlantUML is a powerful tool for creating diagrams from plain text descriptions. 
 If you want to master not only your diagrams but IT Architecture overall, check out:
 [“IT’s not magic, it’s architecture”](https://www.amazon.com/dp/B0CVZ1BWPN) *today*!
 
+For the full collection of architecture and MLOps resources, visit [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications).
+
 ---
 
 ## Quick Start Examples
+
+&gt; 💡 The cloud and ML pipeline patterns below align with concepts explored in [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://mohammed-brueckner.com/publications).
 
 ### Simple Example
 
 ```plantuml
 @startuml
-!include <archimate/Archimate>
+!include &lt;archimate/Archimate&gt;
 left to right direction
 !theme plain
 !global $ARCH_SPECIAL_SHAPES = %true()
@@ -106,7 +112,7 @@ Rel_Flow(internet, awsCloud, "Exposes")
 
 ```plantuml
 @startuml
-!include <archimate/Archimate>
+!include &lt;archimate/Archimate&gt;
 left to right direction
 !theme plain
 !global $ARCH_SPECIAL_SHAPES = %true()
@@ -302,7 +308,7 @@ PLANTUML_SECURITY_PROFILE=DEFAULT
 
 ```plantuml
 @startuml
-Alice -> Bob: Hello
+Alice -&gt; Bob: Hello
 @enduml
 ```
 
@@ -332,12 +338,14 @@ java -jar plantuml.jar file.puml
 
 ## Advanced Features
 
+&gt; 🏛️ Deepening your ArchiMate and enterprise architecture practice? [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) covers the principles and patterns that complement these modeling techniques.
+
 ### ArchiMate Library 🏛️
 
 **Preferred Method (Built-in stdlib):**
 ```plantuml
-!include <archimate/Archimate>
-!theme archimate-standard from <archimate/themes>
+!include &lt;archimate/Archimate&gt;
+!theme archimate-standard from &lt;archimate/themes&gt;
 ```
 
 **If Built-in Fails:**
@@ -370,7 +378,7 @@ Technology_Interface(alias, "Label")
 Rel_Serving(a, b, "label")
 
 ' Shorthand
-a -[serving]-> b : label
+a -[serving]-&gt; b : label
 ```
 
 ### Diagram Layout & Styling 🎨
@@ -412,7 +420,7 @@ java -jar plantuml.jar -v file.puml
 
 **Preprocessor Output:**
 ```bash
-java -jar plantuml.jar -preproc file.puml > file.preproc
+java -jar plantuml.jar -preproc file.puml &gt; file.preproc
 ```
 
 **Check Stdlib:**
@@ -441,8 +449,8 @@ jar tf plantuml.jar | findstr archimate
 archimate #Business "Customer" as customer
 archimate #Business "Order Service" as service
 archimate #Application "Order App" as app
-service -up-> customer : serves
-app .up.> service : realizes
+service -up-&gt; customer : serves
+app .up.&gt; service : realizes
 @enduml
 ```
 
@@ -458,19 +466,19 @@ archimate #Application "Notebooks & Jobs" as apps_jobs
 archimate #Application "Delta Live Tables" as dlt
 archimate #Application "MLflow Tracking" as mlflow
 archimate #Application "Unity Catalog" as uc
-archimate #Application "Delta Lake (Bronze/Silver/Gold)" as delta <<DataObject>>
+archimate #Application "Delta Lake (Bronze/Silver/Gold)" as delta &lt;&lt;DataObject&gt;&gt;
 
-biz_bi -down-> sqlwh : consumes insights
-biz_de -down-> dlt : defines pipelines
-biz_strategy -down-> ws : governs platform use
-ws .down.> apps_jobs : hosts
-ws .down.> sqlwh : provides
-ws .down.> uc : governs data access
-apps_jobs .down.> dlt : orchestrates
-mlflow .down.> apps_jobs : integrates
-uc .down.> delta : catalogs and policies
-dlt .down.> delta : writes curated tables
-sqlwh .down.> delta : queries
+biz_bi -down-&gt; sqlwh : consumes insights
+biz_de -down-&gt; dlt : defines pipelines
+biz_strategy -down-&gt; ws : governs platform use
+ws .down.&gt; apps_jobs : hosts
+ws .down.&gt; sqlwh : provides
+ws .down.&gt; uc : governs data access
+apps_jobs .down.&gt; dlt : orchestrates
+mlflow .down.&gt; apps_jobs : integrates
+uc .down.&gt; delta : catalogs and policies
+dlt .down.&gt; delta : writes curated tables
+sqlwh .down.&gt; delta : queries
 @enduml
 ```
 
@@ -479,6 +487,8 @@ sqlwh .down.> delta : queries
 ---
 
 ## Integration with Archi
+
+&gt; 🔗 For more on enterprise architecture tooling, strategy, and IT leadership, see the [author's publications](https://mohammed-brueckner.com/publications).
 
 ### Archi vs. Enterprise Tools
 
@@ -516,7 +526,7 @@ sqlwh .down.> delta : queries
 
 ```plantuml
 @startuml
-!include <archimate/Archimate>
+!include &lt;archimate/Archimate&gt;
 Technology_Device(firewall, "Firewall")
 Technology_Node(loadBalancer, "Load Balancer")
 Technology_Node(webServer, "Web Server")
@@ -643,12 +653,12 @@ The Miro PlantUML plugin renders diagrams as images (not editable models).
 
 ```plantuml
 @startuml
-!include <archimate/Archimate>
+!include &lt;archimate/Archimate&gt;
 left to right direction
 !global $ARCH_SPECIAL_SHAPES = %true()
 skinparam linetype ortho
 
-<style>
+&lt;style&gt;
   diagram {
     BackgroundColor #2E2E2E
   }
@@ -715,7 +725,7 @@ skinparam linetype ortho
   appServer, database, backupServer {
     BackGroundColor #4169E1 !important
   }
-</style>
+&lt;/style&gt;
 
 title E-Commerce Infrastructure-Focused Architecture
 
@@ -781,6 +791,8 @@ Rel_Flow(secureInterZone, privateVNET, "Secures")
 
 ## Business Domain Views
 
+&gt; 📊 Business architecture, capability mapping, and IT service design are core themes in [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN).
+
 When standard ArchiMate business components aren't available, use stereotype rectangles:
 
 ```plantuml
@@ -796,22 +808,22 @@ skinparam actor {
   StereotypeFontSize 12
 }
 
-skinparam rectangle<<Business_Capability>> {
+skinparam rectangle&lt;&lt;Business_Capability&gt;&gt; {
   BackgroundColor #99FF99
   BorderColor #006600
   shadowing false
 }
-skinparam rectangle<<Business_Process>> {
+skinparam rectangle&lt;&lt;Business_Process&gt;&gt; {
   BackgroundColor #99CCFF
   BorderColor #003366
   shadowing false
 }
-skinparam rectangle<<Business_Service>> {
+skinparam rectangle&lt;&lt;Business_Service&gt;&gt; {
   BackgroundColor #FFD700
   BorderColor #B8860B
   shadowing false
 }
-skinparam actor<<Business_Role>> {
+skinparam actor&lt;&lt;Business_Role&gt;&gt; {
   BackgroundColor #FFB6C1
   BorderColor #8B008B
   shadowing false
@@ -820,53 +832,53 @@ skinparam actor<<Business_Role>> {
 title ServiceNow Incident Management Business Architecture
 
 rectangle "IT Service Domain" as itServiceDomain {
-  rectangle "User Verification Capability" as userVerification <<Business_Capability>>
-  rectangle "Incident Retrieval Capability" as incidentRetrieval <<Business_Capability>>
-  rectangle "Escalation Alerting Capability" as escalationAlerting <<Business_Capability>>
+  rectangle "User Verification Capability" as userVerification &lt;&lt;Business_Capability&gt;&gt;
+  rectangle "Incident Retrieval Capability" as incidentRetrieval &lt;&lt;Business_Capability&gt;&gt;
+  rectangle "Escalation Alerting Capability" as escalationAlerting &lt;&lt;Business_Capability&gt;&gt;
   
-  rectangle "OAuth Authentication Process" as authenticationProcess <<Business_Process>>
-  rectangle "User Details Fetch Process" as userFetchProcess <<Business_Process>>
-  rectangle "Open Incidents Query Process" as incidentQueryProcess <<Business_Process>>
-  rectangle "Alert Generation Process" as alertGenerationProcess <<Business_Process>>
+  rectangle "OAuth Authentication Process" as authenticationProcess &lt;&lt;Business_Process&gt;&gt;
+  rectangle "User Details Fetch Process" as userFetchProcess &lt;&lt;Business_Process&gt;&gt;
+  rectangle "Open Incidents Query Process" as incidentQueryProcess &lt;&lt;Business_Process&gt;&gt;
+  rectangle "Alert Generation Process" as alertGenerationProcess &lt;&lt;Business_Process&gt;&gt;
   
-  rectangle "API Orchestration Service" as apiOrchestrationService <<Business_Service>>
+  rectangle "API Orchestration Service" as apiOrchestrationService &lt;&lt;Business_Service&gt;&gt;
   
-  actor "Incident Manager Role" as incidentManager <<Business_Role>>
+  actor "Incident Manager Role" as incidentManager &lt;&lt;Business_Role&gt;&gt;
 }
 
 actor "External User (Caller)" as externalUser
 actor "ServiceNow System" as serviceNowSystem
 
 ' Capability to Process relationships
-userVerification ..> authenticationProcess : Supports
-userVerification ..> userFetchProcess : Supports
-incidentRetrieval ..> incidentQueryProcess : Supports
-escalationAlerting ..> alertGenerationProcess : Supports
+userVerification ..&gt; authenticationProcess : Supports
+userVerification ..&gt; userFetchProcess : Supports
+incidentRetrieval ..&gt; incidentQueryProcess : Supports
+escalationAlerting ..&gt; alertGenerationProcess : Supports
 
 ' Role performing processes
-incidentManager ..> authenticationProcess : Performs
-incidentManager ..> userFetchProcess : Performs
-incidentManager ..> incidentQueryProcess : Performs
-incidentManager ..> alertGenerationProcess : Performs
+incidentManager ..&gt; authenticationProcess : Performs
+incidentManager ..&gt; userFetchProcess : Performs
+incidentManager ..&gt; incidentQueryProcess : Performs
+incidentManager ..&gt; alertGenerationProcess : Performs
 
 ' Service orchestration
-apiOrchestrationService ..> authenticationProcess : Orchestrates
-apiOrchestrationService ..> userFetchProcess : Orchestrates
-apiOrchestrationService ..> incidentQueryProcess : Orchestrates
-apiOrchestrationService ..> alertGenerationProcess : Orchestrates
+apiOrchestrationService ..&gt; authenticationProcess : Orchestrates
+apiOrchestrationService ..&gt; userFetchProcess : Orchestrates
+apiOrchestrationService ..&gt; incidentQueryProcess : Orchestrates
+apiOrchestrationService ..&gt; alertGenerationProcess : Orchestrates
 
 ' Process flow
-externalUser --> authenticationProcess : Initiates
-authenticationProcess --> userFetchProcess : Triggers
-userFetchProcess --> incidentQueryProcess : Triggers
-incidentQueryProcess --> alertGenerationProcess : Triggers
+externalUser --&gt; authenticationProcess : Initiates
+authenticationProcess --&gt; userFetchProcess : Triggers
+userFetchProcess --&gt; incidentQueryProcess : Triggers
+incidentQueryProcess --&gt; alertGenerationProcess : Triggers
 
 ' Capability dependencies
-userVerification ..> incidentRetrieval : Enables
-incidentRetrieval ..> escalationAlerting : Informs
+userVerification ..&gt; incidentRetrieval : Enables
+incidentRetrieval ..&gt; escalationAlerting : Informs
 
 ' External system
-serviceNowSystem ..> apiOrchestrationService : Provides Data To
+serviceNowSystem ..&gt; apiOrchestrationService : Provides Data To
 
 @enduml
 ```
@@ -875,6 +887,7 @@ serviceNowSystem ..> apiOrchestrationService : Provides Data To
 
 ## Resources
 
+- [Author Publications — Mohammed Brückner](https://mohammed-brueckner.com/publications) — IT architecture, MLOps, and enterprise integration resources
 - [PlantUML Official Site](https://plantuml.com)
 - [PlantUML Download](https://plantuml.com/download)
 - [Graphviz](https://graphviz.org)
