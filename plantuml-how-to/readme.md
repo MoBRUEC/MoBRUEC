@@ -2,7 +2,7 @@
 
 A comprehensive guide for using PlantUML with ArchiMate extensions for enterprise architecture modeling.
 
-&gt; 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://mohammed-brueckner.com/publications) (production-grade MLOps systems).
+&gt; 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) (production-grade MLOps systems).
 
 ---
 
@@ -33,7 +33,7 @@ For the full collection of architecture and MLOps resources, visit [mohammed-bru
 
 ## Quick Start Examples
 
-&gt; 💡 The cloud and ML pipeline patterns below align with concepts explored in [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://mohammed-brueckner.com/publications).
+&gt; 💡 The cloud and ML pipeline patterns below align with concepts explored in [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR).
 
 ### Simple Example
 
