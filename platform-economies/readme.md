@@ -20,6 +20,18 @@ This book is the forensic autopsy of what I got wrong, what I got right, and wha
 
 ---
 
+### Where to Buy
+
+**Amazon Marketplaces**
+
+- **US** — https://www.amazon.com/dp/B0GXN4PRB5  
+- **Germany** — https://www.amazon.de/dp/B0GXN4PRB5  
+- **UK** — https://www.amazon.co.uk/dp/B0GXN4PRB5  
+- **Japan** — https://www.amazon.co.jp/dp/B0GXN4PRB5  
+- **Canada** — https://www.amazon.ca/dp/B0GXN4PRB5  
+
+---
+
 ### What Is Inside
 
 Six parts. Twenty-three chapters. Two hundred and forty-one pages of no gradualism, no journeys, and no consultant language.
@@ -57,17 +69,11 @@ Six parts. Twenty-three chapters. Two hundred and forty-one pages of no graduali
 
 M. Brückner is a Senior Enterprise Architect and Digital Transformation Strategist based in Munich, working across large-scale European and international organisations. He has spent years inside the rooms where platform decisions get made, the budgets get allocated, and the layoff memos get written. This book is what he wishes he had read before he walked into those rooms.
 
-More at [mohammed-brueckner.com](https://mohammed-brueckner.com)
-
 ---
 
 ### Stay in the Loop
 
-The book drops September 2026. In the meantime.
-
-→ [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) for articles, essays, and early thinking
-
-→ [itbookhub.com](https://itbookhub.com) for curated reads from authors who saw this coming
+The book drops September 2026. In the meantime, the only links you need are the Amazon marketplaces above.
 
 ---
 
