@@ -24,11 +24,11 @@ This book is the forensic autopsy of what I got wrong, what I got right, and wha
 
 **Amazon Marketplaces**
 
-- **US** — https://www.amazon.com/dp/B0GXN4PRB5  
-- **Germany** — https://www.amazon.de/dp/B0GXN4PRB5  
-- **UK** — https://www.amazon.co.uk/dp/B0GXN4PRB5  
-- **Japan** — https://www.amazon.co.jp/dp/B0GXN4PRB5  
-- **Canada** — https://www.amazon.ca/dp/B0GXN4PRB5  
+- **[US](https://www.amazon.com/dp/B0GXN4PRB5)** — https://www.amazon.com/dp/B0GXN4PRB5  
+- **[Germany](https://www.amazon.de/dp/B0GXN4PRB5)** — https://www.amazon.de/dp/B0GXN4PRB5  
+- **[UK](https://www.amazon.co.uk/dp/B0GXN4PRB5)** — https://www.amazon.co.uk/dp/B0GXN4PRB5  
+- **[Japan](https://www.amazon.co.jp/dp/B0GXN4PRB5)** — https://www.amazon.co.jp/dp/B0GXN4PRB5  
+- **[Canada](https://www.amazon.ca/dp/B0GXN4PRB5)** — https://www.amazon.ca/dp/B0GXN4PRB5 
 
 ---
 
