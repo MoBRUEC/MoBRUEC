@@ -2,6 +2,12 @@
 
 A comprehensive guide for using PlantUML with ArchiMate extensions for enterprise architecture modeling.
 
+BY THE WAY:
+**Platform Economies** — launching September 1, 2026.  
+[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).
+The middle ground didn’t fade; it vanished in a single cycle. A strategic‑operational guide for leaders building or surviving in platform economies, built around three irreversible rule shifts: efficiency over headcount, value over volume, and platforms over features.  
+Full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
+
 &gt; 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) (production-grade MLOps systems).
 
 ---
