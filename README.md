@@ -2,15 +2,21 @@
 
 Welcome to my digital workspace. I'm Mohammed Brueckner (or Mohammed BRÜCKNER as it were in German), an expert focused on **enterprise architecture**, **digital transformation**, and **technology solutions** that consistently drive **business value** and **organizational growth**.
 
+## Upcoming Book
+
+**Platform Economies** — launching September 1, 2026. The middle ground didn't erode slowly. It disappeared overnight. A strategic-operational guide for leaders building or surviving in platform economies, covering three rule shifts that reshape business: efficiency over headcount, value over volume, and platforms over features.
+
+[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).
+
 ## Highlighted Publications
 
 Explore my full collection of publications at [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications).
 
 [**IT's not magic, it's architecture**](https://www.amazon.com/-/de/dp/B0CVZ1BWPN) guides organizations through current IT environments, bringing together principles, adaptability, and AI to create lasting business advantages. This practical guide makes complex architectural ideas into clear plans—because even the best tech needs a solid design. The foreword is written by my friend and Master Data expert, Tiankai Feng – you can see his thoughts [here](https://www.linkedin.com/posts/tiankaifeng_book-itarchitecture-tiankaistuff-activity-7188812661340467200-0KUW). I am happy about the good Amazon review from Tobias Zwingmann, the AI expert behind those LinkedIn courses on making money with AI, who said:
 
-> “This book is a quick but important read for anyone who wants to understand IT architecture better, especially in company settings. With a great mix of theory and practice, the book covers the main patterns of IT architecture and strategy, giving IT architects clear directions to bring real value within their organizations. The chapter on ‘Agility and IT Architecture’ is gold as most organizations cannot link being flexible and structured / organized at a large scale. I liked the Lego examples the author used. On every page, the author's practical experience and deep knowledge show through, without making it sound too technical or difficult. I strongly suggest reading this book!!”
->
-> — **Tobias Zwingmann**, AI expert
+&gt; “This book is a quick but important read for anyone who wants to understand IT architecture better, especially in company settings. With a great mix of theory and practice, the book covers the main patterns of IT architecture and strategy, giving IT architects clear directions to bring real value within their organizations. The chapter on ‘Agility and IT Architecture’ is gold as most organizations cannot link being flexible and structured / organized at a large scale. I liked the Lego examples the author used. On every page, the author's practical experience and deep knowledge show through, without making it sound too technical or difficult. I strongly suggest reading this book!!”
+&gt;
+&gt; — **Tobias Zwingmann**, AI expert
 
 
 [**Machine Learning Operations (MLOps) with Databricks on Azure End-To-End**](https://www.amazon.com/dp/B0FTSY78DR) is your hands-on guide to mastering Databricks in 2025. Whether you're a data engineer, analyst, or ML enthusiast, this book shows you how to build scalable pipelines, harness Delta Lake, deploy reproducible ML models, and avoid common pitfalls — all with real-world clarity and speed.
