@@ -125,4 +125,4 @@ Connect on [LinkedIn](https://linkedin.com/in/mbrueckner) to discuss **enterpris
 
 ---
 
-Imprint / Impressum -- This website is operated by: Mohammed Brückner | Sachsenkamstrase 15, Munich | Email: impressum@mohammed-brueckner.com
+Imprint / Impressum -- This website is operated by: Mohammed Brückner | Sachsenkamstr 15, Munich | Email: impressum@mohammed-brueckner.com
