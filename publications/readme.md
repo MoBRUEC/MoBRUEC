@@ -7,8 +7,11 @@ The foundation of successful IT delivery remains architecture and team dynamics 
 These resources explore leading IT innovation through AI and building production-grade MLOps systems.
 
 * **[IT's not magic, it's architecture](https://www.amazon.com/dp/B0CVZ1BWPN)**
+
 Focuses on leading and innovating IT and business with principles, agility, and AI.
+
 * **[Machine Learning Operations (MLOps) with Databricks on Azure End-to-End](https://www.amazon.com/dp/B0FTSY78DR)**
+
 A guide for building production-grade MLOps systems on Databricks and Azure.
 
 [![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
