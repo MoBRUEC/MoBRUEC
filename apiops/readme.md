@@ -37,7 +37,19 @@ APIOps treats the API lifecycle like a pipeline: versioned specifications, autom
 
 ## The APIOps Cycle
 
-Six stages, one cycle. The diagram is PlantUML — copy it, adapt it, put it in your repo.
+Six stages, one cycle — at a glance:
+
+```mermaid
+flowchart LR
+    D["1. Design<br>OpenAPI spec in Git"] --> R["2. Review<br>linting, governance"]
+    R --> B["3. Build &amp; Test<br>contract tests, mocks"]
+    B --> P["4. Publish<br>catalog, docs, keys"]
+    P --> O["5. Operate<br>monitor value, not uptime"]
+    O --> E["6. Evolve / Retire<br>version, deprecate"]
+    E -.->|"feedback loop"| D
+```
+
+The same cycle as PlantUML source — copy it, adapt it, put it in your repo:
 
 ```plantuml
 @startuml

@@ -27,6 +27,20 @@ Every digital business sits in one of three layers:
 
 For two decades there was a comfortable middle ground between these layers: companies that were not quite platforms but more than features. Niche SaaS, integration vendors, tooling companies. That middle ground is where most of the software industry lived.
 
+```mermaid
+flowchart TB
+    subgraph layers["The three layers"]
+        I["Infrastructure owners<br>compute, models, rails"]
+        P["Platform owners<br>foundations others build on"]
+        F["Feature owners<br>products inside someone else's platform"]
+    end
+    I -->|"AI moves up the stack"| P
+    P -->|"absorbs what proves itself"| F
+    M["The middle ground<br>niche SaaS, tooling, integration vendors"]
+    P -.->|"compression"| M
+    style M stroke:#DC2626,stroke-width:2px,stroke-dasharray: 5 5
+```
+
 ## What Is Platform Compression?
 
 **Platform compression is the collapse of that middle ground.** AI gives infrastructure owners the ability to move up the stack and absorb features directly. It gives platform owners the ability to replicate any feature that proves itself. And it gives feature owners no defensible ground to retreat to — because the feature was never the moat. The user relationship was. And the platform owns that.
