@@ -36,7 +36,3 @@ A roadmap for IT leaders to evolve into servant leaders who empower teams and dr
 
 * **[The Software Architect Elevator: Redefining the Architect's Role in the Digital Enterprise](https://amzn.to/3SjtF75)**
 This work focuses on the architect's role in bridging high-level business strategy with technical execution to drive organizational alignment.
-
-## Presentation Archives
-
-Access the [German version of the Azure Summit 2023 presentation](../presentations/Integration%20in%20einer%20serverlosen%20Welt%20M%20Brueckner%2015-03-2023%20MSFT-1005-Azure-Summit-PPT_DE.pdf) for additional context on modern integration strategies.

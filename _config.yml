@@ -27,9 +27,6 @@ social_links:
 
 # Ensure Jekyll includes what is needed
 include:
-  - changemanagement/presentations/Change Management a pragmatic take M Brueckner.pdf
-  - "cdmp-exam-simulator/**/*"
   - "**/*.jpg"
   - "**/*.png"
-  - "**/*.pdf"
   - "**/*.json"

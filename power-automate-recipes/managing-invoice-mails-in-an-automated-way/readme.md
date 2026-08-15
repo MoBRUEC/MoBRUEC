@@ -20,7 +20,7 @@ Why? Simply that will make using it later on for uploading a receipt to the Expe
 And some tweaking and creating the Todo:
 ![switch clause in Power Automate](../images/11.png)
 
-And that's it. Now I can safely delete the mail, the attachment is stored and linked to. I could in addition [create a OneNote entry, if I wanted](/turn%20newsletters%20in%20onenote%20entries.md).
+And that's it. Now I can safely delete the mail, the attachment is stored and linked to. I could in addition [create a OneNote entry, if I wanted](../turn-newsletters-into-onenote-entries/).
 
 Want to learn more? Check out my many other articles:
 

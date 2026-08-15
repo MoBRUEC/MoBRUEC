@@ -83,7 +83,6 @@ For effective change, you have to start with yourself and your team. A powerful 
 Explore these resources to deepen your understanding of effective change management:
 
 * [Publications on Change Management](https://mohammed-brueckner.com/publications)
-* [The New Reality for Outsourcing](https://mohammed-brueckner.com/outsourcing)
 * [How to Get Started with AI](https://mohammed-brueckner.com/how-to-ai)
 
 ---
