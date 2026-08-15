@@ -2,7 +2,7 @@
 permalink: /platform-economies/
 title: "Platform Economies: How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships"
 description: "The middle ground did not erode — it vanished. The September 2026 book on platform compression: efficiency over headcount, value over volume, platforms over features."
-image: platform-economies-cover-lowres.jpg
+image: /platform-economies/platform-economies-cover-lowres.jpg
 ---
 
 <script type="application/ld+json">

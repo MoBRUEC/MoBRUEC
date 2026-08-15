@@ -76,7 +76,7 @@ The first half of 2026 may vindicate Nadella's emphasis on execution rigor. The 
 * [**HBR: 6 Ways AI Changed Business in 2024**](https://hbr.org/2025/01/6-ways-ai-changed-business-in-2024-according-to-executives) - Organizations reporting real business value from AI investments, with transformation being gradual but measurable
 * [**McKinsey: The State of AI in 2025**](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai) - Comprehensive analysis of agents, innovation, and enterprise transformation with data from 1,993 participants across 105 nations
 * [**Deloitte Tech Trends 2026**](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends.html) - Five interconnected forces reshaping business, with emphasis on AI economics and organizational readiness
-* [**Microsoft: 1,000+ AI Success Stories**](https://blogs.microsoft.com/blog/2025/04/22/https-blogs-microsoft-com-blog-2024-11-12-how-real-world-businesses-are-transforming-with-ai/) - Real-world examples of organizations transforming with AI across industries and use cases
+* [**Microsoft: 1,000+ AI Success Stories**](https://www.microsoft.com/en-us/microsoft-cloud/blog/2025/07/24/ai-powered-success-with-1000-stories-of-customer-transformation-and-innovation/) - Real-world examples of organizations transforming with AI across industries and use cases
 
 **Implementation Strategy & Frameworks**
 
@@ -130,7 +130,7 @@ If you're working through talent scarcity, cost unpredictability, data readiness
 
 Want to learn more? You probably need to integrate some tools and systems, so why not pick up some integration tricks while you're learning:
 
-[Integration in a serverless world](https://mobruec.github.io/MoBRUEC/integration/)
+[Integration in a serverless world](https://mohammed-brueckner.com/MoBRUEC/integration/)
 
 And even more reads:
 

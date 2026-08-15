@@ -106,7 +106,7 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 
 <!-- Episode list starts -->
 <div class="episode-card">
-  <h3><a href="https://platformeconomies.com/episodes/42">Episode 42: The Hidden Costs of Cloud Migration</a></h3>
+  <h3><a href="https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW">Episode 42: The Hidden Costs of Cloud Migration</a></h3>
   
   ```
   📅 Released: March 15, 2025 | ⏱️ Duration: 48:32 | 🔊 Featured Guest: Cloud Economics Expert
@@ -118,7 +118,7 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 </div>
 
 <div class="episode-card">
-  <h3><a href="https://platformeconomies.com/episodes/41">Episode 41: Architecture Audits That Actually Deliver Value</a></h3>
+  <h3><a href="https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW">Episode 41: Architecture Audits That Actually Deliver Value</a></h3>
   
   ```
   📅 Released: March 1, 2025 | ⏱️ Duration: 52:18 | 🔊 Featured Guest: Enterprise Architect
@@ -130,7 +130,7 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 </div>
 
 <div class="episode-card">
-  <h3><a href="https://platformeconomies.com/episodes/40">Episode 40: Java in 2025 - Dead or Evolving?</a></h3>
+  <h3><a href="https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW">Episode 40: Java in 2025 - Dead or Evolving?</a></h3>
   
   ```
   📅 Released: February 15, 2025 | ⏱️ Duration: 55:45 | 🔊 Featured Guest: Java Champion
@@ -145,7 +145,7 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 </div>
 
 <div align="center">
-  <a href="https://platformeconomies.com/episodes">View All Episodes</a>
+  <a href="https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW">View All Episodes</a>
 </div>
 
 ## 📊 Listener Demographics

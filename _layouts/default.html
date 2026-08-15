@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'de-DE' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    {% if page.title %}
-      <title>Mohammed Brückner | {{ page.title }}</title>
-    {% else %}
-      <title>Mohammed Brückner | Enterprise Architect & AI Specialist</title>
-    {% endif %}
-
-    <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}" />
 
     {% if site.author %}
         <meta name="author" content="Mohammed Brückner">
@@ -171,7 +164,7 @@
           <div class="sidebar-section">
             <h3>Newsletter</h3>
             <p>
-              My <strong><a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673" target="_blank" rel="noopener noreferrer">LinkedIn Newsletter</a></strong> gibt Ihnen regelmäßige Einblicke für IT-Profis.
+              My <strong><a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7253781971229724673" target="_blank" rel="noopener noreferrer">LinkedIn Newsletter</a></strong> — regular insights for IT professionals, straight to your LinkedIn inbox.
             </p>
           </div>
         </aside>

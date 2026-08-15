@@ -31,7 +31,7 @@ Explore my full collection of publications at [mohammed-brueckner.com/publicatio
 
 [**Machine Learning Operations (MLOps) with Databricks on Azure End-To-End**](https://www.amazon.com/dp/B0FTSY78DR) is your hands-on guide to mastering Databricks in 2025. Whether you're a data engineer, analyst, or ML enthusiast, this book shows you how to build scalable pipelines, harness Delta Lake, deploy reproducible ML models, and avoid common pitfalls — all with real-world clarity and speed.
 
-[**The Office Adventure Digital Transformation Quest**](https://a.co/d/iSCChrf) changes how teams approach digital transformation. This new gamebook makes organizational change an engaging trip. Players go through real-world situations while putting AI to use, handling cloud moves, and building digital abilities. Teams find practical transformation plans through interactive stories and choice-making tasks. You can try a [digital version of this adventure](https://platformeconomies.com/gamebook25webapp), based on the [book](https://platformeconomies.com/gamebook25).
+[**The Office Adventure Digital Transformation Quest**](https://a.co/d/iSCChrf) changes how teams approach digital transformation. This new gamebook makes organizational change an engaging trip. Players go through real-world situations while putting AI to use, handling cloud moves, and building digital abilities. Teams find practical transformation plans through interactive stories and choice-making tasks. You can find it on Amazon alongside my other books.
 
 ## Technical Expertise
 
@@ -87,7 +87,7 @@ My career shows a strong commitment to **innovation**, **strategic guidance**, a
 
 ### Platform Economics
 
-Current business growth calls for **platform-driven plans**. Explore the details of **platform economics** and their effect on digital business models through my [specialized AI consultant](https://chat.openai.com/g/g-ZcYuscMSi-platform-economist) and learn more with [FAZ's expert analysis](https://www.linkedin.com/showcase/fazdeconomy/). For more understanding, check out my [podcast](https://platformeconomies.com/podcast).
+Current business growth calls for **platform-driven plans**. Explore the details of **platform economics** and their effect on digital business models through my [specialized AI consultant](https://chat.openai.com/g/g-ZcYuscMSi-platform-economist) and learn more with [FAZ's expert analysis](https://www.linkedin.com/showcase/fazdeconomy/). For more understanding, check out my [podcast](https://mohammed-brueckner.com/podcast/).
 
 ### Enterprise Architecture Implementation
 

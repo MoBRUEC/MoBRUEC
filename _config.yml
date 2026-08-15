@@ -31,3 +31,10 @@ include:
   - "**/*.jpg"
   - "**/*.png"
   - "**/*.json"
+
+# Default front matter: every page gets an og:image unless it sets its own
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /platform-economies/platform-economies-cover-lowres.jpg

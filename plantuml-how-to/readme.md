@@ -1033,4 +1033,4 @@ A few things have settled since this guide was first written, and they are worth
 
 ---
 
-**Last Updated:** November 2025
+**Last Updated:** August 2026
