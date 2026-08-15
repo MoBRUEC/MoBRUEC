@@ -1,4 +1,5 @@
 ---
+permalink: /databricks/cost-calculator/
 title: "Azure Data & ML Platform Cost Calculator"
 description: "Quick ballpark cost estimates for Azure data and ML platforms: Databricks, storage, and compute — a no-fuss calculator for early architecture conversations."
 ---

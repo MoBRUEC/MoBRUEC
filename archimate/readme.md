@@ -1,4 +1,5 @@
 ---
+permalink: /archimate/
 title: "Architecture as Code: Why Your Diagrams Deserve Better"
 description: "Stop drawing architecture diagrams like it is 1995. PlantUML and ArchiMate bring version control and automation to enterprise architecture documentation."
 ---

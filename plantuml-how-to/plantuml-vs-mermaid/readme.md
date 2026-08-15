@@ -1,4 +1,5 @@
 ---
+permalink: /plantuml-how-to/plantuml-vs-mermaid/
 title: "PlantUML vs. Mermaid: An Honest Comparison for Architecture Work (2026)"
 description: "PlantUML or Mermaid? A practitioner's comparison for architecture diagrams: notation depth, ArchiMate support, layout control, tooling, CI, and when to use which."
 ---

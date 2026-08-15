@@ -1,4 +1,5 @@
 ---
+permalink: /plantuml-how-to/troubleshooting/
 title: "PlantUML Troubleshooting: Every Error I Have Hit (and Fixed)"
 description: "The PlantUML error catalog: include failures, size limits, linetype ortho and skinparam syntax, blurry exports, theme conflicts, Graphviz issues, VS Code and Kroki fixes."
 ---

@@ -1,4 +1,5 @@
 ---
+permalink: /plantuml-how-to/
 title: "PlantUML with ArchiMate: Complete Guide (2026)"
 description: "Create ArchiMate diagrams as code with PlantUML: local setup, export, styling, business domain views, troubleshooting and copy-paste enterprise examples."
 ---

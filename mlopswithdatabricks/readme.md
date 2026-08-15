@@ -1,4 +1,5 @@
 ---
+permalink: /mlopswithdatabricks/
 title: "MLOps with Databricks on Azure: Complete Code Companion"
 description: "Every code snippet from the MLOps with Databricks on Azure book: CLI setup, MLflow, compute economics, deployment, monitoring and governance — copy-paste ready."
 ---

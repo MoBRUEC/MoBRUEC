@@ -1,4 +1,5 @@
 ---
+permalink: /integration/
 title: "Integration in a Serverless World"
 description: "Why low-code and serverless belong in your integration strategy — patterns, essential books and real Azure event-driven examples from an enterprise architect."
 ---

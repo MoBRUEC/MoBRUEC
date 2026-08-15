@@ -1,4 +1,5 @@
 ---
+permalink: /databricks/
 title: "Databricks Architecture Overview: A Visual Guide to the Lakehouse"
 description: "Understand Databricks lakehouse architecture at a glance: workspace, Unity Catalog, Photon, MLflow, Delta Live Tables — with an Azure cost calculator."
 ---

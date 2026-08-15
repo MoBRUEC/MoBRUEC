@@ -1,4 +1,5 @@
 ---
+permalink: /how-to-ai/
 title: "From Discovery to Deployment with AI: A 2026 Reality Check"
 description: "Nadella vs. Vogels, 405 billion dollars of AI capex, and why only 6% of Copilot rollouts finish — a practitioner reality check on enterprise AI adoption in 2026."
 ---

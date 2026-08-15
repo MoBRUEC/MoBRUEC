@@ -1,4 +1,5 @@
 ---
+permalink: /changemanagement/
 title: "Change Management Never Really Changes... Now Wait."
 description: "Why more than 70% of projects still fail, and the Double Trinity Pyramid model that explains it: people, processes, technology meets motivated people."
 ---

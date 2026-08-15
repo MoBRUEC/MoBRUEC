@@ -1,4 +1,5 @@
 ---
+permalink: /won-contests-mohammed-brueckner/
 title: "Contests and Achievements"
 description: "CloudShow wins, AI Pitch Perfect, and other contests — proof that architecture can be fun and occasionally trophy-shaped."
 ---

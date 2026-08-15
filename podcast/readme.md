@@ -1,4 +1,5 @@
 ---
+permalink: /podcast/
 title: "The Platform Economist Podcast"
 description: "Podcast episodes on platform economics, cloud transformation, AI in enterprise architecture, and digital transformation — practical takes, no fluff."
 ---

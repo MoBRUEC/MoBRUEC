@@ -1,4 +1,5 @@
 ---
+permalink: /publications/
 title: "Publications by Mohammed Brückner"
 description: "Books on IT architecture, MLOps with Databricks, and platform economics — practical guides for leaders and architects, plus the industry reads that shaped them."
 ---

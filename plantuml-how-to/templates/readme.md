@@ -1,4 +1,5 @@
 ---
+permalink: /plantuml-how-to/templates/
 title: "PlantUML ArchiMate Templates: Copy-Paste Starting Points (2026)"
 description: "Ready-made PlantUML ArchiMate templates: application landscape, technology layer, business view, migration view and system architecture diagrams. Copy, paste, adapt."
 ---
