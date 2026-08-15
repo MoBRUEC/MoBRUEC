@@ -7,6 +7,11 @@ description: "Curated strategic frameworks for cloud architecture, analytics pla
 # Enterprise Technology Leadership Insights
 
 *Strategic frameworks for cloud architecture, analytics platforms, and AI implementation*
+BY THE WAY:
+**Platform Economies** — launching September 1, 2026. [**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle now; paperback September 1 ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5)). Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
+
+More from me: [Publications](https://mohammed-brueckner.com/publications/) · [Homepage](https://mohammed-brueckner.com/)
+
 
 **Key Topics Covered:**  
 ✅ Databricks vs Snowflake vs Fabric Comparison  

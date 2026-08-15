@@ -1,3 +1,9 @@
+---
+title: "Turn Newsletters into OneNote Entries"
+description: "Automatically convert newsletter emails into OneNote pages with a Power Automate flow."
+permalink: /power-automate-recipes/turn-newsletters-into-onenote-entries/
+---
+
 ## Turn newsletters into OneNote entries 
 
 Want to save newsletters or any other precious mails you receive to OneNote, where they're indexed?
@@ -33,3 +39,7 @@ And even more:
 
 Cheers!
 [Mo](https://platformeconomies.com)
+
+---
+
+← [All Power Automate recipes](https://mohammed-brueckner.com/power-automate-recipes/) · [mohammed-brueckner.com](https://mohammed-brueckner.com/)

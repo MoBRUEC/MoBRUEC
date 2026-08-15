@@ -1,3 +1,9 @@
+---
+title: "Managing Invoice Mails in an Automated Way"
+description: "Save invoice attachments from email to cloud storage automatically with Power Automate — the pragmatic recipe."
+permalink: /power-automate-recipes/managing-invoice-mails-in-an-automated-way/
+---
+
 ## Clean out tasks marked done
 
 Power Automate is just great for managing inbound messages and events - be it lists or, like in this case, mails.
@@ -36,3 +42,7 @@ And even more:
 
 Cheers!
 [Mo](https://platformeconomies.com)
+
+---
+
+← [All Power Automate recipes](https://mohammed-brueckner.com/power-automate-recipes/) · [mohammed-brueckner.com](https://mohammed-brueckner.com/)

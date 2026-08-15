@@ -1,3 +1,9 @@
+---
+title: "Get Notified About Your OneNote Notebook Size"
+description: "A Power Automate recipe that notifies you when your OneNote notebook grows beyond a size threshold."
+permalink: /power-automate-recipes/get-notification-on-the-size-of-your-onenote-book/
+---
+
 ## Get yourself a note about the size of your OneNote book. 
 
 ![Checking your OneNote book size](../images/01.png)
@@ -21,3 +27,7 @@ And even more:
 
 Cheers!
 [Mo](https://platformeconomies.com)
+
+---
+
+← [All Power Automate recipes](https://mohammed-brueckner.com/power-automate-recipes/) · [mohammed-brueckner.com](https://mohammed-brueckner.com/)

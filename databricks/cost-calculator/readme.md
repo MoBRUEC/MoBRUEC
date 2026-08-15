@@ -5,6 +5,9 @@ description: "Quick ballpark cost estimates for Azure data and ML platforms: Dat
 ---
 
 # The Azure Cost Calculator: Your Ballpark Buddy!
+BY THE WAY:
+**Platform Economies** — launching September 1, 2026. [**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle now; paperback September 1 ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5)). Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
+
 
 Tired of Azure cost estimates that feel like they were pulled from a magic hat? We get it. The official calculators are powerful, but sometimes you just need a quick, no-fuss number to get the conversation started.
 

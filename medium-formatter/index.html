@@ -96,7 +96,7 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 <body>
 <div class="topbar">
   <div class="logo">MediumReady <span class="logo-badge">Free Tool</span></div>
-  <span class="topbar-sub">Paste anything, get Medium-perfect output &mdash; by <a href="https://mohammed-brueckner.com/publications " target="_blank" rel="noopener" class="topbar-link">Mohammed Brückner</a></span>
+  <span class="topbar-sub">Paste anything, get Medium-perfect output &mdash; by <a href="https://mohammed-brueckner.com/publications" target="_blank" rel="noopener" class="topbar-link">Mohammed Brückner</a></span>
   <div class="topbar-shortcuts">Convert <kbd>⌘</kbd><kbd>↵</kbd> &nbsp;·&nbsp; Copy <kbd>⌘</kbd><kbd>⇧</kbd><kbd>C</kbd></div>
 </div>
 <div class="layout">
@@ -144,9 +144,9 @@ Accepts:
     <span class="stats" id="stats"></span>
   </div>
   <footer class="site-footer">
-    <span>Built by <a href="https://mohammed-brueckner.com/publications " target="_blank" rel="noopener author">Mohammed Brückner</a> &mdash; runs entirely in your browser, nothing is sent anywhere.</span>
+    <span>Built by <a href="https://mohammed-brueckner.com/publications" target="_blank" rel="noopener author">Mohammed Brückner</a> &mdash; runs entirely in your browser, nothing is sent anywhere.</span>
     <div class="footer-right">
-      <a href="https://mohammed-brueckner.com/publications " target="_blank" rel="noopener">mohammed-brueckner.com/publications</a>
+      <a href="https://mohammed-brueckner.com/publications" target="_blank" rel="noopener">mohammed-brueckner.com/publications</a>
       <span>&copy; Mohammed Brückner</span>
     </div>
   </footer>
@@ -799,7 +799,8 @@ function parsePlain(text) {
 async function copyToClipboard() {
   if (!outputHTML) { flashCopy('Convert first!',false); return; }
   const clipboardHTML = outputHTML.replace(/<pre([^>]*)>([\s\S]*?)<\/pre>/g, (_, attrs, body) => '<pre' + attrs + '>' + body.replace(/<br\s*\/?>/gi, '\n') + '</pre>');
-  const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${clipboardHTML}</body></html>`;
+  const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${clipboardHTML}<p style="text-align:center;padding:16px;"><a href="https://mohammed-brueckner.com/">← mohammed-brueckner.com</a></p>
+</body></html>`;
   try {
     await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([full],{type:'text/html'}),'text/plain':new Blob([document.getElementById('output-render').innerText],{type:'text/plain'})})]);
     flashCopy('✓ Copied — paste into Medium',true);
@@ -895,5 +896,6 @@ document.addEventListener('keydown',e=>{
 
 updateHighlight();
 </script>
+<p style="text-align:center;padding:16px;"><a href="https://mohammed-brueckner.com/">← mohammed-brueckner.com</a></p>
 </body>
 </html>

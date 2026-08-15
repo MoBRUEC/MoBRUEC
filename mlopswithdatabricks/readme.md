@@ -15,7 +15,7 @@ BY THE WAY:
 
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Getting Started: Hands-On Setup](#getting-started-hands-on-setup)
 - [Chapter 2: The Three Workspaces](#chapter-2-the-three-workspaces)

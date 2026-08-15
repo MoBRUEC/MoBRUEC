@@ -5,6 +5,9 @@ description: "Podcast episodes on platform economics, cloud transformation, AI i
 ---
 
 # 🎧 The Platform Economist
+BY THE WAY:
+**Platform Economies** — launching September 1, 2026. [**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle now; paperback September 1 ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5)). Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
+
 
 ![The Platform Economist](https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo/42335916/42335916-1730223882481-fd60742f62b52.jpg)
 
@@ -108,10 +111,6 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 <div class="episode-card">
   <h3><a href="https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW">Episode 42: The Hidden Costs of Cloud Migration</a></h3>
   
-  ```
-  📅 Released: March 15, 2025 | ⏱️ Duration: 48:32 | 🔊 Featured Guest: Cloud Economics Expert
-  ```
-  
   We unpack the unexpected expenses that can derail your cloud strategy and how to mitigate them effectively. This episode provides a comprehensive framework for calculating true TCO of cloud initiatives.
   
   **Key Topics:** Cloud Economics, TCO Analysis, Migration Strategy, Cost Optimization
@@ -120,10 +119,6 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 <div class="episode-card">
   <h3><a href="https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW">Episode 41: Architecture Audits That Actually Deliver Value</a></h3>
   
-  ```
-  📅 Released: March 1, 2025 | ⏱️ Duration: 52:18 | 🔊 Featured Guest: Enterprise Architect
-  ```
-  
   Learn our proven framework for conducting architecture assessments that lead to actionable improvements, not just shelf reports. Includes real-world case studies and downloadable templates.
   
   **Key Topics:** Architecture Assessment, Technical Debt, Value Stream Mapping, Implementation Planning
@@ -131,10 +126,6 @@ Our episodes explore cutting-edge topics in technology leadership that deliver t
 
 <div class="episode-card">
   <h3><a href="https://open.spotify.com/show/0LUvemwzThUrQR8f5UmFRW">Episode 40: Java in 2025 - Dead or Evolving?</a></h3>
-  
-  ```
-  📅 Released: February 15, 2025 | ⏱️ Duration: 55:45 | 🔊 Featured Guest: Java Champion
-  ```
   
   Industry experts debate whether Java remains relevant in today's technology landscape, exploring its enterprise footprint, performance improvements, and adaptation to cloud-native paradigms.
   

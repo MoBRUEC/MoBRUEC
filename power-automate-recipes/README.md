@@ -1,10 +1,9 @@
 # Power Automate Recipes for Everyone
 
-* [Clean ToDo Tasks](./clean-microsoft-to-do-task-lists/readme.md)
-* [OneNote Book Size Notification](./get-notification-on-the-size-of-your-onenote-book/readme.md)
-* [Turn Newsletters into OneNote Entries](./turn-newsletters-into-onenote-entries/readme.md)
-* [Manage Invoice Mails](./managing-invoice-mails-in-an-automated-way/readme.md)
-* [RSS Feed to Teams Adaptive Card](./turn-newsletters-into-onenote-entries/readme.md)
+* [Clean ToDo Tasks](./clean-microsoft-to-do-task-lists/)
+* [OneNote Book Size Notification](./get-notification-on-the-size-of-your-onenote-book/)
+* [Turn Newsletters into OneNote Entries](./turn-newsletters-into-onenote-entries/)
+* [Manage Invoice Mails](./managing-invoice-mails-in-an-automated-way/)
 
 Want to learn more? Check out my many other articles:
 

@@ -1,3 +1,9 @@
+---
+title: "Clean Microsoft To Do Task Lists with Power Automate"
+description: "Automatically clean completed tasks from Microsoft To Do lists using a Power Automate flow — step by step recipe."
+permalink: /power-automate-recipes/clean-microsoft-to-do-task-lists/
+---
+
 ## Clean out tasks marked done
 
 Power Automate is just great for cleaning things - be it lists, mailboxes or, like in this case, tasks.
@@ -19,3 +25,7 @@ And even more:
 
 Cheers!
 [Mo](https://platformeconomies.com)
+
+---
+
+← [All Power Automate recipes](https://mohammed-brueckner.com/power-automate-recipes/) · [mohammed-brueckner.com](https://mohammed-brueckner.com/)
