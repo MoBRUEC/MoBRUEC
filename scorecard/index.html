@@ -1,0 +1,331 @@
+---
+permalink: /scorecard/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Compression Scorecard | Mohammed Brueckner</title>
+    <meta name="description" content="Score your organization on the five platform compression signals: workforce composition, pricing evolution, platform behavior, feature absorption, structural optionality. From the book Platform Economies.">
+    <meta name="author" content="Mohammed Brueckner">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mohammed-brueckner.com/scorecard/">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F7F3F0; color: #374151; line-height: 1.6; }
+        h1, h2, h3 { font-family: Georgia, serif; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.6rem; }
+        p { margin-bottom: 1rem; }
+        a { color: #D97706; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        header.hero { background: linear-gradient(135deg, #F7F3F0 0%, #E5E7EB 50%, #D1D5DB 100%); padding: 70px 0 50px; }
+        .badge { display: inline-block; background: #D97706; color: #fff; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 12px; margin-bottom: 16px; }
+        .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 28px; margin-bottom: 24px; }
+        .signal-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+        .signal-head h3 { margin-bottom: 0.25rem; }
+        .signal-num { font-family: Georgia, serif; font-size: 1.8rem; color: #D97706; font-weight: 700; }
+        .question { font-size: 0.95rem; color: #6B7280; margin-bottom: 14px; }
+        .slider-row { display: flex; align-items: center; gap: 16px; }
+        input[type="range"] { flex: 1; accent-color: #D97706; height: 32px; }
+        .score-val { font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; min-width: 28px; text-align: center; }
+        .scale-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: #9CA3AF; margin-top: 2px; }
+        .results { display: none; }
+        .results.visible { display: block; }
+        .verdict { border-left: 4px solid #D97706; padding: 12px 16px; background: #FDF6EC; border-radius: 0 8px 8px 0; margin-bottom: 16px; }
+        .verdict.blind { border-left-color: #DC2626; background: #FEF2F2; }
+        .verdict.good { border-left-color: #6B7A5A; background: #F4F6F0; }
+        .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .btn { display: inline-block; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none; }
+        .btn-primary { background: #D97706; color: #fff; }
+        .btn-secondary { background: #fff; color: #D97706; border: 2px solid #D97706; }
+        .btn-primary:hover, .btn-secondary:hover { opacity: 0.9; text-decoration: none; }
+        button.btn-primary { border: none; cursor: pointer; font-size: 1rem; }
+        canvas { display: block; margin: 0 auto; max-width: 100%; }
+        .promo { background: #D97706; color: #fff; padding: 40px 0; }
+        .promo h2, .promo h3 { color: #fff; }
+        .promo a.btn { background: #fff; color: #D97706; }
+        .promo a.plain { color: #fff; text-decoration: underline; }
+        footer { background: #374151; color: #fff; padding: 30px 0; text-align: center; font-size: 0.9rem; }
+        footer a { color: #D97706; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+        @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } h1 { font-size: 1.7rem; } }
+        .note { font-size: 0.85rem; color: #6B7280; margin-top: 8px; }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="container">
+        <span class="badge">Interactive Tool</span>
+        <h1>The Platform Compression Scorecard</h1>
+        <p style="font-size: 1.1rem; max-width: 720px;">Seventy percent of organizations track API volume. Less than ten percent track API business value. In that gap is where compression happens. Score your organization on the five signals that actually predict it — from the book <a href="https://mohammed-brueckner.com/platform-economies/"><strong>Platform Economies</strong></a>.</p>
+    </div>
+</header>
+
+<main class="container" style="padding: 50px 20px;">
+
+    <div class="card">
+        <h2>How it works</h2>
+        <p>Score each signal category from 1 to 5. One means critical vulnerability. Five means resilient strength. Then look at the <em>shape</em>: a symmetrical shape with nothing below 3 means you are reading the signals. A spiky shape with a score at 1 marks your blind spot — and the blind spot is where the attack will come.</p>
+        <p class="note">Trajectory beats position: low scores that are improving are healthier than high scores that are declining.</p>
+    </div>
+
+    <div id="signals"></div>
+
+    <div class="card" style="text-align: center;">
+        <button id="scoreBtn" class="btn btn-primary">Compute my scorecard</button>
+    </div>
+
+    <div id="results" class="results">
+        <div class="card">
+            <h2>Your signal shape</h2>
+            <canvas id="radar" width="520" height="460"></canvas>
+        </div>
+        <div class="card">
+            <h2>Reading</h2>
+            <div id="verdicts"></div>
+            <p class="note">This is a diagnostic, not a maturity model. There is no perfect score — the question is whether you are measuring motion or measuring direction.</p>
+        </div>
+    </div>
+
+</main>
+
+<section class="promo">
+    <div class="container">
+        <h2>From the book Platform Economies</h2>
+        <p style="max-width: 720px;">The scorecard is one tool from Part Six, "Building Your Platform Economy". The book covers the three rule shifts behind compression — efficiency over headcount, value over volume, platforms over features — and what to do when you see the signals. Launching September 1, 2026.</p>
+        <div class="cta-row">
+            <a class="btn" href="https://www.amazon.com/dp/B0GXN4PRB5">Pre-order on Amazon</a>
+            <a class="plain" style="align-self: center;" href="https://mohammed-brueckner.com/platform-economies/">Book details and ISBN</a>
+            <a class="plain" style="align-self: center;" href="https://platformeconomies.com">Extended materials</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>By <a href="https://mohammed-brueckner.com/">Mohammed Brückner</a> · <a href="https://mohammed-brueckner.com/publications/">Publications</a> · <a href="https://www.linkedin.com/in/mbrueckner/">LinkedIn</a></p>
+    </div>
+</footer>
+
+<script>
+var SIGNALS = [
+  {
+    name: "Workforce Composition",
+    question: "Are engineers outnumbering consultants in your new hires? Are product managers outnumbering project managers in promotions? Is AI skill development keeping pace with AI tool spending?",
+    low: "Ratios stable or reversing; partner pyramid intact",
+    high: "Technical hiring and AI skills clearly lead",
+    blindText: "Workforce composition is your blind spot. It is the earliest predictor of structural change — it shows up in hiring data two to three years before the financials confirm it. Automating the junior tier is not transformation."
+  },
+  {
+    name: "Pricing Evolution",
+    question: "What percentage of your revenue is tied to outcomes versus hours? Are subscription terms replacing project terms? Does recurring revenue compound?",
+    low: "Hourly billing, project contracts, one-time revenue",
+    high: "Outcome-based pricing growing, recurring revenue compounding",
+    blindText: "Pricing evolution is your blind spot. Pricing is the hardest signal to fake — and no signal indicates business model health more directly. If AI efficiency gains flow to margins instead of client value, the Status-Quo Trap is operating."
+  },
+  {
+    name: "Platform Behavior",
+    question: "Are your infrastructure providers becoming data marketplaces? Are your API gateways adding monetization layers? Are vendors adding AI training clauses to their terms of service?",
+    low: "Providers quietly becoming competitors; unread ToS",
+    high: "Dependencies mapped, terms monitored, no silent tolls",
+    blindText: "Platform behavior is your blind spot. The infrastructure you depend on may be becoming a competitor — and the visible signals (like paid crawling) arrive after the invisible ones inside the terms of service."
+  },
+  {
+    name: "Feature Absorption",
+    question: "How many standalone tools in your stack were replaced by platform features this year? One absorbed feature is an inconvenience. Five is a business model threat. Ten is a terminal diagnosis.",
+    low: "Multiple subscriptions quietly absorbed by platforms",
+    high: "Vendor diversification tracked as a deliberate choice",
+    blindText: "Feature absorption is your blind spot. Each replacement is a compression event. The CIO celebrates the cost savings; nobody tracks the loss of vendor diversification — until the platform that controls your user relationship absorbs your function too."
+  },
+  {
+    name: "Structural Optionality",
+    question: "Could your organization survive a six-month disruption to its primary revenue source? Has leadership discussed a pivot scenario in the past year? Are revenue streams diversifying or concentrating?",
+    low: "Locked into one model, one client, one revenue stream",
+    high: "Multiple viable models; pivot scenarios actually discussed",
+    blindText: "Structural optionality is your blind spot — and it is the meta-signal. It predicts whether you can absorb shocks, pivot models, and survive compression events. Organizations that score low here are vulnerable regardless of every other score."
+  }
+];
+
+var scores = [3, 3, 3, 3, 3];
+var signalsEl = document.getElementById("signals");
+
+SIGNALS.forEach(function (s, i) {
+  var card = document.createElement("div");
+  card.className = "card";
+
+  var head = document.createElement("div");
+  head.className = "signal-head";
+  var h3 = document.createElement("h3");
+  h3.textContent = (i + 1) + ". " + s.name;
+  var num = document.createElement("span");
+  num.className = "signal-num";
+  num.id = "val" + i;
+  num.textContent = "3";
+  head.appendChild(h3);
+  head.appendChild(num);
+
+  var q = document.createElement("p");
+  q.className = "question";
+  q.textContent = s.question;
+
+  var row = document.createElement("div");
+  row.className = "slider-row";
+  var low = document.createElement("span");
+  low.style.cssText = "font-size:0.8rem;color:#DC2626;min-width:110px;text-align:right;";
+  low.textContent = "1 — vulnerable";
+  var slider = document.createElement("input");
+  slider.type = "range";
+  slider.min = "1";
+  slider.max = "5";
+  slider.step = "1";
+  slider.value = "3";
+  slider.setAttribute("aria-label", s.name + " score");
+  slider.addEventListener("input", function () {
+    scores[i] = parseInt(slider.value, 10);
+    num.textContent = slider.value;
+  });
+  var high = document.createElement("span");
+  high.style.cssText = "font-size:0.8rem;color:#6B7A5A;min-width:110px;";
+  high.textContent = "5 — resilient";
+  row.appendChild(low);
+  row.appendChild(slider);
+  row.appendChild(high);
+
+  var labels = document.createElement("div");
+  labels.className = "scale-labels";
+  var l1 = document.createElement("span");
+  l1.textContent = s.low;
+  var l2 = document.createElement("span");
+  l2.textContent = s.high;
+  labels.appendChild(l1);
+  labels.appendChild(l2);
+
+  card.appendChild(head);
+  card.appendChild(q);
+  card.appendChild(row);
+  card.appendChild(labels);
+  signalsEl.appendChild(card);
+});
+
+function drawRadar() {
+  var canvas = document.getElementById("radar");
+  var ctx = canvas.getContext("2d");
+  var cx = canvas.width / 2, cy = canvas.height / 2 + 10;
+  var R = 160, n = 5;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  function point(idx, r) {
+    var angle = -Math.PI / 2 + idx * 2 * Math.PI / n;
+    return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
+  }
+
+  for (var ring = 1; ring <= 5; ring++) {
+    ctx.beginPath();
+    for (var i = 0; i <= n; i++) {
+      var p = point(i % n, R * ring / 5);
+      if (i === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]);
+    }
+    ctx.strokeStyle = ring === 3 ? "#D97706" : "#E5E7EB";
+    ctx.lineWidth = ring === 3 ? 2 : 1;
+    ctx.stroke();
+  }
+
+  for (var a = 0; a < n; a++) {
+    var pe = point(a, R);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(pe[0], pe[1]);
+    ctx.strokeStyle = "#E5E7EB";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    var lp = point(a, R + 42);
+    ctx.fillStyle = "#374151";
+    ctx.font = "600 13px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    var words = SIGNALS[a].name.split(" ");
+    var mid = Math.ceil(words.length / 2);
+    ctx.fillText(words.slice(0, mid).join(" "), lp[0], lp[1] - 4);
+    if (words.length > mid) ctx.fillText(words.slice(mid).join(" "), lp[0], lp[1] + 12);
+  }
+
+  ctx.beginPath();
+  for (var j = 0; j <= n; j++) {
+    var idx = j % n;
+    var pv = point(idx, R * scores[idx] / 5);
+    if (j === 0) ctx.moveTo(pv[0], pv[1]); else ctx.lineTo(pv[0], pv[1]);
+  }
+  ctx.closePath();
+  ctx.fillStyle = "rgba(217,119,6,0.25)";
+  ctx.fill();
+  ctx.strokeStyle = "#D97706";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  for (var k = 0; k < n; k++) {
+    var pd = point(k, R * scores[k] / 5);
+    ctx.beginPath();
+    ctx.arc(pd[0], pd[1], 5, 0, 2 * Math.PI);
+    ctx.fillStyle = scores[k] <= 2 ? "#DC2626" : "#D97706";
+    ctx.fill();
+  }
+}
+
+document.getElementById("scoreBtn").addEventListener("click", function () {
+  drawRadar();
+  var verdicts = document.getElementById("verdicts");
+  verdicts.textContent = "";
+
+  var min = Math.min.apply(null, scores);
+  var max = Math.max.apply(null, scores);
+
+  var overall = document.createElement("div");
+  if (min >= 3) {
+    overall.className = "verdict good";
+    var p = document.createElement("p");
+    var strong = document.createElement("strong");
+    strong.textContent = "A symmetrical shape with nothing below 3. ";
+    p.appendChild(strong);
+    p.appendChild(document.createTextNode("You are reading the signals. The discipline now is keeping it that way — compression does not announce itself, it accumulates. Re-run this quarterly and watch the trajectory, not the position."));
+    overall.appendChild(p);
+  } else {
+    overall.className = "verdict blind";
+    var p2 = document.createElement("p");
+    var strong2 = document.createElement("strong");
+    strong2.textContent = "A spiky shape. ";
+    p2.appendChild(strong2);
+    p2.appendChild(document.createTextNode("Anything at 1 or 2 is a blind spot, and the blind spot is where the attack will come. Read the category readings below — then read the chapter behind them."));
+    overall.appendChild(p2);
+  }
+  verdicts.appendChild(overall);
+
+  if (max - min >= 3) {
+    var spread = document.createElement("div");
+    spread.className = "verdict blind";
+    var ps = document.createElement("p");
+    ps.appendChild(document.createTextNode("The spread between your strongest and weakest signal is " + (max - min) + " points. Large spreads are typical when dashboards track activity metrics — motion looks green while direction goes red."));
+    spread.appendChild(ps);
+    verdicts.appendChild(spread);
+  }
+
+  scores.forEach(function (v, i) {
+    if (v <= 2) {
+      var d = document.createElement("div");
+      d.className = "verdict blind";
+      var dp = document.createElement("p");
+      dp.textContent = SIGNALS[i].blindText;
+      d.appendChild(dp);
+      verdicts.appendChild(d);
+    }
+  });
+
+  var res = document.getElementById("results");
+  res.className = "results visible";
+  res.scrollIntoView({ behavior: "smooth" });
+});
+</script>
+
+</body>
+</html>
