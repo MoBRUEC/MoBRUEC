@@ -70,6 +70,7 @@ Both are text, so both are LLM-friendly — paste a system description, get a fi
 ## Further Reading
 
 - [PlantUML with ArchiMate: Complete Guide](../) — if you picked PlantUML
+- [PlantUML C4 Diagrams](../c4-diagrams/) — if C4 is your notation
 - [Architecture as Code: Why Your Diagrams Deserve Better](https://mohammed-brueckner.com/archimate/) — the case for text-based diagrams at all
 - [PlantUML ArchiMate Templates](../templates/) — starting points once you have decided
 - [PlantUML Troubleshooting](../troubleshooting/) — for when the decision fights back
