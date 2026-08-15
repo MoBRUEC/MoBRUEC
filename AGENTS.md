@@ -10,7 +10,7 @@ Jekyll site (`jekyll-theme-architect`) on GitHub Pages, served at https://mohamm
 
 - All agent git operations use a **fine-grained PAT** (`MOBRUEC_SITE_PAT`, stored as a Codespaces secret on `MoBRUEC/platformeconomies`, value write-only). Scope: this repo only — Contents RW, Pages RW, Pull requests RW. 90-day expiry.
 - The broad codespace `GITHUB_TOKEN` must NOT be used for this repo.
-- The remote URL is token-free; the PAT lives ONLY in `~/.mobr_site_pat` (chmod 600, outside any repo). Use it per-command without printing it: `MOBRUEC_SITE_PAT=$(cat ~/.mobr_site_pat); git push "https://x-access-token:${MOBRUEC_SITE_PAT}@github.com/MoBRUEC/MoBRUEC.git" <branch>`. NEVER write the literal token into commands, chat output, files inside a repo, or logs.
+- The remote URL is token-free. PAT resolution order: (1) `$MOBRUEC_SITE_PAT` env var — injected into every NEW codespace from the Codespaces secret, use it as-is; (2) ONLY in codespaces that predate the secret: `~/.mobr_site_pat` (chmod 600, transient — delete it when the session's work ends, never recreate it if the env var exists). Usage without printing: `MOBRUEC_SITE_PAT=${MOBRUEC_SITE_PAT:-$(cat ~/.mobr_site_pat)}; git push "https://x-access-token:${MOBRUEC_SITE_PAT}@github.com/MoBRUEC/MoBRUEC.git" <branch>`. NEVER write the literal token into commands, chat output, files inside a repo, or logs.
 - Deploy verification loop after every push: poll `gh api repos/MoBRUEC/MoBRUEC/pages/builds/latest` until `built` for the pushed commit SHA (check the SHA — "built" alone may be the previous build), then `curl` the changed pages and assert HTTP 200 + content markers. Rollback: `git revert` + push, never force-push.
 
 ## Hard Rules
