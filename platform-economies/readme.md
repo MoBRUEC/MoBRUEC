@@ -107,6 +107,8 @@ M. Brückner is a Senior Enterprise Architect and Digital Transformation Strateg
 
 ---
 
+**Interactive:** [The Platform Compression Scorecard](https://mohammed-brueckner.com/scorecard/) — score your organization on the five signals from Part Six. New to the topic? Start with [What Is a Platform Economy?](https://mohammed-brueckner.com/platform-economy/)
+
 ### Further Reading on This Site
 
 The ideas in the book connect to work already published here:

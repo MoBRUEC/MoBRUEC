@@ -1012,6 +1012,9 @@ A few things have settled since this guide was first written, and they are worth
 - **[PlantUML ArchiMate Templates](templates/)** — copy-paste starting points: application landscape, technology layer, business view, migration view
 - **[PlantUML Troubleshooting](troubleshooting/)** — the full error catalog with fixes
 - **[PlantUML vs. Mermaid](plantuml-vs-mermaid/)** — an honest comparison for architecture work
+- **[PlantUML C4 Diagrams](c4-diagrams/)** — context, container, and component diagrams with the C4-PlantUML library
+- **[Deutsche Anleitung](https://mohammed-brueckner.com/plantuml-anleitung/)** — the compact German version of this guide
+- **[APIOps as Code](https://mohammed-brueckner.com/apiops/)** — the API lifecycle, documented with the same diagrams-as-code discipline
 - **[Building jArchi 1.11.0 for Archi 5.6](https://mohammed-brueckner.com/jArchi-Build/)** — when you want scripting inside Archi itself
 - **[MLOps with Databricks on Azure](https://mohammed-brueckner.com/mlopswithdatabricks/)** — the cloud and ML pipeline patterns from the examples above, in book form
 

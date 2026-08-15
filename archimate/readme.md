@@ -56,7 +56,7 @@ Suddenly, your enterprise architecture lives as readable text files. You describ
 
 The transformation from manual diagramming to architecture as code isn't optional anymore. It's the logical extension of everything we've learned about treating infrastructure, configuration, and specifications as code.
 
-[Find hands-on guides for getting started with ArchiMate using PlantUML](/plantuml-how-to) — and when you are building, go straight to the [ArchiMate templates](https://mohammed-brueckner.com/plantuml-how-to/templates/) or the [troubleshooting catalog](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/).
+[Find hands-on guides for getting started with ArchiMate using PlantUML](/plantuml-how-to) — and when you are building, go straight to the [ArchiMate templates](https://mohammed-brueckner.com/plantuml-how-to/templates/) or the [troubleshooting catalog](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/). Working on APIs? See [APIOps as Code](https://mohammed-brueckner.com/apiops/).
 
 ## Why This Matters Now
 
