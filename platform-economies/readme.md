@@ -1,7 +1,37 @@
 ---
 title: "Platform Economies: How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships"
-description: "The middle ground did not erode — it vanished. The September 2026 book on platform compression: efficiency over headcount, value over volume, platforms over features. Pre-order now."
+description: "The middle ground did not erode — it vanished. The September 2026 book on platform compression: efficiency over headcount, value over volume, platforms over features."
+image: platform-economies-cover-lowres.jpg
 ---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Platform Economies",
+  "alternateName": "Platform Economies: How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships",
+  "author": {
+    "@type": "Person",
+    "name": "Mohammed Brückner",
+    "alternateName": ["Mohammed Brueckner", "M. Brückner"],
+    "url": "https://mohammed-brueckner.com"
+  },
+  "isbn": "979-8-1954-5157-8",
+  "numberOfPages": 241,
+  "bookFormat": "https://schema.org/Paperback",
+  "inLanguage": "en",
+  "datePublished": "2026-09-01",
+  "image": "https://mohammed-brueckner.com/platform-economies/platform-economies-cover-lowres.jpg",
+  "url": "https://mohammed-brueckner.com/platform-economies/",
+  "offers": [
+    { "@type": "Offer", "url": "https://www.amazon.com/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
+    { "@type": "Offer", "url": "https://www.amazon.co.uk/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
+    { "@type": "Offer", "url": "https://www.amazon.de/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
+    { "@type": "Offer", "url": "https://www.amazon.co.jp/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
+    { "@type": "Offer", "url": "https://www.amazon.ca/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" }
+  ]
+}
+</script>
 
 # Platform Economies
 

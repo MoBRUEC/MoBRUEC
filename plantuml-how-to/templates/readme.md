@@ -95,8 +95,8 @@ Technology_CommunicationNetwork(lan, "Internal Network")
 Technology_CommunicationNetwork(internet, "Internet")
 Technology_Device(userDevice, "User Device")
 
-Rel_Assignment(jvm, appServer, "Installed on")
-Rel_Assignment(rdbms, dbServer, "Installed on")
+Rel_Assignment(appServer, jvm, "Runs")
+Rel_Assignment(dbServer, rdbms, "Runs")
 Rel_Realization(appJar, jvm, "Runs on")
 Rel_Realization(schema, rdbms, "Hosted by")
 Rel_Flow(appServer, dbServer, "JDBC")
@@ -123,8 +123,8 @@ skinparam linetype ortho
 
 title Business View — Template
 
-Business_Capability(sales, "Sales")
-Business_Capability(fulfillment, "Fulfillment")
+Strategy_Capability(sales, "Sales")
+Strategy_Capability(fulfillment, "Fulfillment")
 
 Business_Role(accountMgr, "Account Manager")
 Business_Role(warehouse, "Warehouse Operator")
@@ -237,7 +237,7 @@ Rel_Access(worker, store, "Reads/Writes")
 Rel_Assignment(frontend, container, "Deployed on")
 Rel_Assignment(backend, container, "Deployed on")
 Rel_Assignment(worker, container, "Deployed on")
-Rel_Realization(engine, container, "Realizes")
+Rel_Assignment(container, engine, "Runs")
 Rel_Flow(container, database, "SQL")
 
 @enduml
@@ -253,7 +253,7 @@ Rel_Flow(container, database, "SQL")
 
 **Keep the header block identical everywhere.** The `!theme plain` + `$ARCH_SPECIAL_SHAPES` + `linetype ortho` combination is the baseline that survives PlantUML updates. Style per-view below it, never inside the includes.
 
-**Direction variants are your layout steering wheel.** Every relationship macro accepts `_U`, `_D`, `_L`, `_R` suffixes (e.g. `Rel_Flow_R(a, b, "label")`). Use them when the automatic layout crosses lines — but if you need more than three or four, the diagram wants to be two diagrams.
+**Direction variants are your layout steering wheel.** Every relationship macro accepts `_Up`, `_Down`, `_Left`, `_Right` suffixes (e.g. `Rel_Flow_Right(a, b, "label")`). Use them when the automatic layout crosses lines — but if you need more than three or four, the diagram wants to be two diagrams.
 
 ---
 

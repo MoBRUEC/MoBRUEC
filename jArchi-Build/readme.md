@@ -554,4 +554,8 @@ No — always install via `Help > Manage Plug-ins > Install New...`. Manual copy
 
 ---
 
+**Related:** [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/) · [ArchiMate Templates](https://mohammed-brueckner.com/plantuml-how-to/templates/) · [PlantUML Troubleshooting](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/)
+
+---
+
 **Last Updated:** August 2026

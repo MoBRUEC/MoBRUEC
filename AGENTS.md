@@ -45,7 +45,7 @@ Direct practitioner voice, first person. Bold key terms. Short punchy sentences 
 - Folder-per-page: `<topic>/readme.md` (or `index.html` for standalone pages like developer-platforms, double-trinity-change-model). Sub-pages as nested folders (`plantuml-how-to/templates/readme.md`).
 - Internal links between cluster pages are relative (`../troubleshooting/`); links from other sections are absolute (`https://mohammed-brueckner.com/plantuml-how-to/`).
 - After ANY content change: run a repo-wide dead-link check (relative + absolute internal links) before pushing. A dead-link checker trap: `learning`, `excel` etc. also match plain words — check for actual link syntax only.
-- PlantUML code blocks in new pages should pass `java -jar plantuml.jar -syntax` before shipping (jar: `https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar`).
+- PlantUML code blocks in new pages must **render** cleanly before shipping: download the jar (`https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar`), render each block with `java -jar plantuml.jar -tpng` into a scratch dir (add `!pragma layout smetana` if Graphviz is absent) and assert no "contains errors" on stderr. `java -jar plantuml.jar -syntax` is NOT sufficient — stdlib macros and relationship suffixes (e.g. `Strategy_Capability`, `Rel_Flow_Right`) only resolve at render time; wrong ones pass `-syntax` silently (trap hit and fixed 2026-08-15).
 
 ## History
 

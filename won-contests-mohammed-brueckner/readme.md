@@ -1,3 +1,8 @@
+---
+title: "Contests and Achievements"
+description: "CloudShow wins, AI Pitch Perfect, and other contests — proof that architecture can be fun and occasionally trophy-shaped."
+---
+
 ### I definitely like a challenge every now and then!
 
 Like Al Bundy will never forget about this one time he scored three touchdowns in one game, I will never forget about the time when [I won a Microsoft CloudShow contest and donated the price to a child hospital](https://www.facebook.com/MicrosoftCloudShow/photos/pcb.1486882274730662/1486881964730693/). Yes, still proud of that one!

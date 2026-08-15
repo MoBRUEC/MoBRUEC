@@ -1,6 +1,6 @@
 ---
 title: "Architecture as Code: Why Your Diagrams Deserve Better"
-description: "Stop drawing architecture diagrams like it is 1995. PlantUML and ArchiMate bring version control, automation and CI/CD discipline to enterprise architecture documentation."
+description: "Stop drawing architecture diagrams like it is 1995. PlantUML and ArchiMate bring version control and automation to enterprise architecture documentation."
 ---
 
 # Architecture as Code: Why Your Diagrams Deserve Better
@@ -55,7 +55,7 @@ Suddenly, your enterprise architecture lives as readable text files. You describ
 
 The transformation from manual diagramming to architecture as code isn't optional anymore. It's the logical extension of everything we've learned about treating infrastructure, configuration, and specifications as code.
 
-[Find hands-on guides for getting started with ArchiMate using PlantUML](/plantuml-how-to)
+[Find hands-on guides for getting started with ArchiMate using PlantUML](/plantuml-how-to) — and when you are building, go straight to the [ArchiMate templates](https://mohammed-brueckner.com/plantuml-how-to/templates/) or the [troubleshooting catalog](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/).
 
 ## Why This Matters Now
 

@@ -1,6 +1,6 @@
 ---
 title: "Databricks Architecture Overview: A Visual Guide to the Lakehouse"
-description: "Understand Databricks lakehouse architecture at a glance: workspace, Unity Catalog, Photon, MLflow and Delta Live Tables — interactive diagram plus an Azure cost calculator."
+description: "Understand Databricks lakehouse architecture at a glance: workspace, Unity Catalog, Photon, MLflow, Delta Live Tables — with an Azure cost calculator."
 ---
 
 ## [Check out my book on Amazon for everything MLOps with Databricks →](https://www.amazon.com/dp/B0FTSY78DR)

@@ -82,7 +82,7 @@ skinparam linetype ortho
 
 **Symptom:** two elements insist on sitting next to each other (or refuse to).
 
-- Steering arrows: every ArchiMate relationship macro accepts direction suffixes `_U`, `_D`, `_L`, `_R`: `Rel_Flow_R(a, b, "label")` hints a left-to-right flow. For plain arrows: `a -down-> b`, `a -right-> b`.
+- Steering arrows: every ArchiMate relationship macro accepts direction suffixes `_Up`, `_Down`, `_Left`, `_Right`: `Rel_Flow_Right(a, b, "label")` hints a left-to-right flow. For plain arrows: `a -down-> b`, `a -right-> b`.
 - `[hidden]` links create ranking constraints without visible arrows: `a -[hidden]-> b` pulls b near a.
 - **The honest rule:** if you need more than three or four manual hints, the layout engine is telling you the diagram wants to be two diagrams. Listen to it.
 

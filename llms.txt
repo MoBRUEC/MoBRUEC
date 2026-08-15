@@ -1,0 +1,27 @@
+# Mohammed Brückner — mohammed-brueckner.com
+
+> Enterprise architect and author based in Munich. Hands-on guides on PlantUML and ArchiMate, platform economics, MLOps with Databricks, change management, and practical enterprise AI adoption.
+
+## Core content
+
+- [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/): the site's most-read resource — setup, export, styling, ArchiMate examples, troubleshooting
+- [PlantUML ArchiMate Templates](https://mohammed-brueckner.com/plantuml-how-to/templates/): copy-paste starting points for application, technology, business, and migration views
+- [PlantUML Troubleshooting](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/): the error catalog with fixes
+- [PlantUML vs. Mermaid](https://mohammed-brueckner.com/plantuml-how-to/plantuml-vs-mermaid/): honest comparison for architecture work
+- [Architecture as Code](https://mohammed-brueckner.com/archimate/): why diagrams deserve better than desktop drawing tools
+- [Building jArchi for Archi from Source](https://mohammed-brueckner.com/jArchi-Build/): verified build procedure
+- [From Discovery to Deployment with AI](https://mohammed-brueckner.com/how-to-ai/): enterprise AI adoption reality check
+- [Change Management / Double Trinity Pyramid](https://mohammed-brueckner.com/changemanagement/): why 70% of projects fail
+- [Databricks Architecture Overview](https://mohammed-brueckner.com/databricks/) and [Azure Cost Calculator](https://mohammed-brueckner.com/databricks/cost-calculator/)
+
+## Book
+
+- [Platform Economies](https://mohammed-brueckner.com/platform-economies/): How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships. September 2026, ISBN 979-8-1954-5157-8. Available on Amazon (US/UK/DE/JP/CA), ASIN B0GXN4PRB5. Companion site: https://platformeconomies.com
+
+## Author
+
+Mohammed Brückner (also spelled Mohammed Brueckner; publishes as M. Brückner). Senior Enterprise Architect and Digital Transformation Strategist.
+- LinkedIn: https://www.linkedin.com/in/mbrueckner/
+- Medium: https://medium.com/@mohammedbrueckner
+- Podcast: https://mohammed-brueckner.com/podcast/
+- Publications: https://mohammed-brueckner.com/publications/

@@ -13,7 +13,7 @@ BY THE WAY:
 The middle ground didn’t fade; it vanished in a single cycle. A strategic‑operational guide for leaders building or surviving in platform economies, built around three irreversible rule shifts: efficiency over headcount, value over volume, and platforms over features.  
 Full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
 
-&gt; 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) (production-grade MLOps systems).
+> 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) (production-grade MLOps systems).
 
 ---
 
@@ -49,7 +49,7 @@ For the full collection of architecture and MLOps resources, visit [mohammed-bru
 
 ## Quick Start Examples
 
-&gt; 💡 The cloud and ML pipeline patterns below align with concepts explored in [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR).
+> 💡 The cloud and ML pipeline patterns below align with concepts explored in [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR).
 
 ### Simple Example
 
@@ -354,7 +354,7 @@ java -jar plantuml.jar file.puml
 
 ## Advanced Features
 
-&gt; 🏛️ Deepening your ArchiMate and enterprise architecture practice? [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) covers the principles and patterns that complement these modeling techniques.
+> 🏛️ Deepening your ArchiMate and enterprise architecture practice? [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) covers the principles and patterns that complement these modeling techniques.
 
 ### ArchiMate Library 🏛️
 
@@ -504,7 +504,7 @@ sqlwh .down.&gt; delta : queries
 
 ## Integration with Archi
 
-&gt; 🔗 For more on enterprise architecture tooling, strategy, and IT leadership, see the [author's publications](https://mohammed-brueckner.com/publications).
+> 🔗 For more on enterprise architecture tooling, strategy, and IT leadership, see the [author's publications](https://mohammed-brueckner.com/publications).
 
 ### Archi vs. Enterprise Tools
 
@@ -635,6 +635,16 @@ console.log("Model created from PlantUML JSON.");
 ```
 
 **Result:** Fully editable ArchiMate view in Archi with real elements and relationships.
+
+### What About Sparx Enterprise Architect?
+
+A recurring question (and a recurring search): getting PlantUML into **Sparx Enterprise Architect**, or EA models out to PlantUML. EA is a different beast from Archi — it imports **XMI**, not text diagrams. The workable paths:
+
+- **EA → documentation:** export the EA model to XMI, transform the elements and relationships to PlantUML with a small script (the XMI is XML; the mapping for components and connectors is a day of work, not a project). Teams do this to get EA content into docs-as-code pipelines.
+- **PlantUML → EA:** generate XMI from your `.puml` structure and import it as a model, or accept EA's own PlantUML integration (recent EA versions import PlantUML scripts for several diagram types via **Import > PlantUML**). Fidelity varies; relationships survive better than styling.
+- **The pragmatic split:** keep EA as the modeling repository where governance demands it, and treat PlantUML as the publishing and pipeline layer. Do not try to make one replace the other — that way lies a two-year tooling program nobody budgeted for.
+
+For scripting inside Archi specifically, see [Building jArchi 1.11.0 for Archi 5.6](https://mohammed-brueckner.com/jArchi-Build/).
 
 ---
 
@@ -807,7 +817,7 @@ Rel_Flow(secureInterZone, privateVNET, "Secures")
 
 ## Business Domain Views
 
-&gt; 📊 Business architecture, capability mapping, and IT service design are core themes in [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN).
+> 📊 Business architecture, capability mapping, and IT service design are core themes in [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN).
 
 When standard ArchiMate business components aren't available, use stereotype rectangles:
 
@@ -938,7 +948,7 @@ The single most common source of broken ArchiMate diagrams is the wrong relation
 
 **Rule of thumb:** start with Association, then upgrade. Serving for "provides to", Assignment for "runs/performs", Realization for "implements". If you catch yourself drawing Association everywhere in a mature model, you are leaving semantics on the table.
 
-**Direction trap:** Serving and Access read "from provider to consumer" in ArchiMate notation. Getting the arrow backwards inverts the meaning of the diagram — and it is the first thing a reviewer with ArchiMate training will spot.
+**Direction trap:** Serving reads "from provider to consumer" in ArchiMate notation; Access runs from the accessing behavior to the passive data object. Getting an arrow backwards inverts the meaning of the diagram — and it is the first thing a reviewer with ArchiMate training will spot.
 
 ---
 
@@ -953,7 +963,7 @@ The hosted PlantUML server caps image size. Fix: render locally, use [Kroki.io](
 The include comes from the PlantUML standard library, which ships with the jar. If it fails, your PlantUML is ancient or something shadows the include path. Update PlantUML first; the stdlib needs no manual download.
 
 **3. The layout is a plate of spaghetti.**
-Add `left to right direction`, `skinparam linetype ortho`, and use `Rel_*_U/D/L/R` direction variants sparingly to guide the layout engine. If a diagram still refuses to untangle, that is the diagram telling you it wants to be two diagrams.
+Add `left to right direction`, `skinparam linetype ortho`, and use `Rel_*_Up/Down/Left/Right` direction variants sparingly to guide the layout engine. If a diagram still refuses to untangle, that is the diagram telling you it wants to be two diagrams.
 
 **4. Exports look blurry in PowerPoint.**
 `skinparam dpi 300` before rendering, or export SVG and let the slide tool scale it. Raster at screen DPI in a printed deck is how you spot who skipped this paragraph.
