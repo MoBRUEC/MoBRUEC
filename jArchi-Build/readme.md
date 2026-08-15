@@ -1,3 +1,8 @@
+---
+title: "Building jArchi 1.11.0 for Archi 5.6 from Source: Complete Guide"
+description: "Verified, repeatable procedure to compile the jArchi scripting plugin from source and install it into Archi 5.6 — all 8 traps documented, no Patreon binary required."
+---
+
 # Building jArchi 1.11.0 for Archi 5.6 from Source: Complete Guide
 
 A verified, repeatable procedure for compiling the jArchi scripting plugin from source and installing it into Archi 5.6 — no Patreon binary required.

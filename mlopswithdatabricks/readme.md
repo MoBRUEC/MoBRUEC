@@ -1,3 +1,8 @@
+---
+title: "MLOps with Databricks on Azure: Complete Code Companion"
+description: "Every code snippet from the MLOps with Databricks on Azure book: CLI setup, MLflow, compute economics, deployment, monitoring and governance — copy-paste ready."
+---
+
 # Machine Learning Operations (MLOps) with Databricks on Azure End-to-End
 
 This document contains a complete compilation of all the code snippets from the "Machine Learning Operations (MLOps) with Databricks on Azure End-to-End" guide by Mohammed Brückner. 

@@ -1,3 +1,8 @@
+---
+title: "Publications by Mohammed Brückner"
+description: "Books on IT architecture, MLOps with Databricks, and platform economics — practical guides for leaders and architects, plus the industry reads that shaped them."
+---
+
 # IT's not magic, it's architecture
 
 The foundation of successful IT delivery remains architecture and team dynamics regardless of the specific development philosophy or team composition. Tools like low-code and serverless are components within a larger strategic equation.

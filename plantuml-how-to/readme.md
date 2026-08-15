@@ -1,3 +1,8 @@
+---
+title: "PlantUML with ArchiMate: Complete Guide (2026)"
+description: "Create ArchiMate diagrams as code with PlantUML: local setup, export, styling, business domain views, troubleshooting and copy-paste enterprise examples."
+---
+
 # PlantUML with ArchiMate: Complete Guide
 
 A comprehensive guide for using PlantUML with ArchiMate extensions for enterprise architecture modeling.
@@ -23,6 +28,11 @@ Full context and extended materials: **[Platform Economies Site](https://platfor
 - [Integration with Archi](#integration-with-archi)
 - [Styling and Customization](#styling-and-customization)
 - [Business Domain Views](#business-domain-views)
+- [ArchiMate Relationship Cheat-Sheet](#archimate-relationship-cheat-sheet)
+- [Troubleshooting](#troubleshooting)
+- [A Real-World Enterprise Case](#a-real-world-enterprise-case)
+- [Working with PlantUML in 2026](#working-with-plantuml-in-2026)
+- [Templates and Further Reading](#templates-and-further-reading)
 
 ---
 
@@ -888,6 +898,111 @@ serviceNowSystem ..&gt; apiOrchestrationService : Provides Data To
 
 @enduml
 ```
+
+---
+
+## ArchiMate Relationship Cheat-Sheet
+
+The single most common source of broken ArchiMate diagrams is the wrong relationship. ArchiMate is strict about which relationship may connect which layers, and PlantUML will happily render whatever you type — correct or not. This table is the mapping I use daily.
+
+### Structural Relationships (the backbone)
+
+| Relationship | PlantUML Macro | Use it when | Typical pair |
+|---|---|---|---|
+| Composition | `Rel_Composition` | An element consists of another | Application Component → Data Object |
+| Aggregation | `Rel_Aggregation` | An element groups others (weaker than composition) | Grouping → Nodes |
+| Assignment | `Rel_Assignment` | An active element performs a behavior | Node → System Software, Component → Function |
+| Realization | `Rel_Realization` | A concrete element implements an abstract one | Node → Device, Component → Service |
+
+### Dependency Relationships
+
+| Relationship | PlantUML Macro | Use it when | Typical pair |
+|---|---|---|---|
+| Serving | `Rel_Serving` | One element offers its functionality to another | Application Service → Business Process |
+| Access | `Rel_Access` | Behavior reads or writes passive data | Function → Data Object |
+| Influence | `Rel_Influence` | An element affects another without providing it | Motivation elements, Requirements |
+
+### Dynamic Relationships
+
+| Relationship | PlantUML Macro | Use it when | Typical pair |
+|---|---|---|---|
+| Triggering | `Rel_Triggering` | A temporal or causal chain | Process → Process, Event → Function |
+| Flow | `Rel_Flow` | Something (data, goods) moves between elements | Component → Component |
+
+### Everything Else
+
+| Relationship | PlantUML Macro | Use it when |
+|---|---|---|
+| Association | `Rel_Association` | An unspecified connection you refine later |
+| Specialization | `Rel_Specialization` | One element is a specific kind of another |
+
+**Rule of thumb:** start with Association, then upgrade. Serving for "provides to", Assignment for "runs/performs", Realization for "implements". If you catch yourself drawing Association everywhere in a mature model, you are leaving semantics on the table.
+
+**Direction trap:** Serving and Access read "from provider to consumer" in ArchiMate notation. Getting the arrow backwards inverts the meaning of the diagram — and it is the first thing a reviewer with ArchiMate training will spot.
+
+---
+
+## Troubleshooting
+
+The full catalog lives at [PlantUML Troubleshooting: Every Error I Have Hit](troubleshooting/). The five that cause 90% of pain:
+
+**1. "Your diagram is too large" on the public online server.**
+The hosted PlantUML server caps image size. Fix: render locally, use [Kroki.io](https://kroki.io/) (higher limits), or split the diagram into views. A view per stakeholder question beats one mega-diagram anyway.
+
+**2. `!include <archimate/Archimate>` fails.**
+The include comes from the PlantUML standard library, which ships with the jar. If it fails, your PlantUML is ancient or something shadows the include path. Update PlantUML first; the stdlib needs no manual download.
+
+**3. The layout is a plate of spaghetti.**
+Add `left to right direction`, `skinparam linetype ortho`, and use `Rel_*_U/D/L/R` direction variants sparingly to guide the layout engine. If a diagram still refuses to untangle, that is the diagram telling you it wants to be two diagrams.
+
+**4. Exports look blurry in PowerPoint.**
+`skinparam dpi 300` before rendering, or export SVG and let the slide tool scale it. Raster at screen DPI in a printed deck is how you spot who skipped this paragraph.
+
+**5. A theme overrides your ArchiMate shapes.**
+Some themes fight the ArchiMate sprite definitions. Use `!theme plain` combined with `!global $ARCH_SPECIAL_SHAPES = %true()` and apply your own `skinparam` styling after the includes, not before.
+
+---
+
+## A Real-World Enterprise Case
+
+A scenario I see repeatedly: a company acquires another, and leadership asks the architecture team one question — *"What do we actually own now, and what breaks if we touch it?"*
+
+The winning move is not a single giant model. It is a small set of ArchiMate views, each answering one question, all generated from text files in a Git repo:
+
+1. **Business capability view** — Business Capability and Business Process elements, one diagram per affected domain. This is the slide leadership reads.
+2. **Application landscape view** — Application Components, Application Services, and Serving relationships. This is where the duplicated CRM systems show up.
+3. **Technology view** — Nodes, System Software, Communication Networks. This is the one that reveals the acquired company still runs on an end-of-life database nobody mentioned in due diligence.
+4. **Migration view** — Triggering and Flow relationships between current and target elements, one view per wave. This becomes the program plan.
+
+Every view is a `.puml` file. Changes are pull requests. The architecture review happens in Git, and the diagram in the steering deck is always the one that was reviewed — not a stale export from three weeks ago.
+
+Ready-made starting points for each of these views: [PlantUML ArchiMate Templates](templates/).
+
+---
+
+## Working with PlantUML in 2026
+
+A few things have settled since this guide was first written, and they are worth stating plainly:
+
+**CI rendering is the default now.** The question is no longer whether diagrams render in the pipeline but which job does it. `plantuml -pipe` in a CI step, or a Kroki container next to your build, turns "the docs are stale" into a build failure. If your diagrams are still exported by hand, that is the one practice to adopt this year.
+
+**The VS Code extension won.** Local preview while typing, with the bundled PlantUML jar, is how most teams work now. Desktop drawing tools survive for stakeholder workshops — but the source of truth lives in text.
+
+**Kroki is the pragmatic online path.** The public PlantUML server still has size limits that matter for real ArchiMate models. Kroki handles larger diagrams and speaks dozens of diagram languages if your team mixes notations.
+
+**The ArchiMate stdlib is bundled.** No downloads, no include paths, no excuses: `!include <archimate/Archimate>` works out of the box with any current PlantUML. If it does not, your PlantUML version is the problem, not the include.
+
+**Diagrams-as-code survived the AI wave.** Text-based diagrams turn out to be the format LLMs handle best — generating a first-draft PlantUML view from a system description and then reviewing it like code is now a legitimate workflow. The review step is not optional. AI draws confidently wrong arrows just as well as correct ones.
+
+---
+
+## Templates and Further Reading
+
+- **[PlantUML ArchiMate Templates](templates/)** — copy-paste starting points: application landscape, technology layer, business view, migration view
+- **[PlantUML Troubleshooting](troubleshooting/)** — the full error catalog with fixes
+- **[PlantUML vs. Mermaid](plantuml-vs-mermaid/)** — an honest comparison for architecture work
+- **[Building jArchi 1.11.0 for Archi 5.6](https://mohammed-brueckner.com/jArchi-Build/)** — when you want scripting inside Archi itself
+- **[MLOps with Databricks on Azure](https://mohammed-brueckner.com/mlopswithdatabricks/)** — the cloud and ML pipeline patterns from the examples above, in book form
 
 ---
 

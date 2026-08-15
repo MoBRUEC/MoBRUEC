@@ -1,3 +1,8 @@
+---
+title: "Architecture as Code: Why Your Diagrams Deserve Better"
+description: "Stop drawing architecture diagrams like it is 1995. PlantUML and ArchiMate bring version control, automation and CI/CD discipline to enterprise architecture documentation."
+---
+
 # Architecture as Code: Why Your Diagrams Deserve Better
 
 Enterprise architecture has reached an absurd contradiction. We treat infrastructure as code. We version control API specifications. We automate deployment pipelines. We demand reproducibility, traceability, and automation at every layer of our technology stack.
