@@ -2,6 +2,9 @@
 
 ### [Need a Ballpark Cost Estimate? Try the Azure Data & ML Platform Cost Calculator →](./cost-calculator/azure-cost-calculator.html)
 
+BY THE WAY:
+**Platform Economies** — launching September 1, 2026. [**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle now; paperback September 1 ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5)). Efficiency over headcount, value over volume, platforms over features — three rule shifts that decide who survives the next five years. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
+
 ---
 
 # Databricks Architecture Overview

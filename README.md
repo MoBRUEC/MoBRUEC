@@ -6,7 +6,17 @@ Welcome to my digital workspace. I'm Mohammed Brueckner (or Mohammed BRÜCKNER a
 
 **Platform Economies** — launching September 1, 2026. The middle ground didn't erode slowly. It disappeared overnight. A strategic-operational guide for leaders building or surviving in platform economies, covering three rule shifts that reshape business: efficiency over headcount, value over volume, and platforms over features.
 
-[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).
+[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5). Full details, ISBN, and what is inside: [Platform Economies book page](https://mohammed-brueckner.com/platform-economies/).
+
+## Most-Read Resources
+
+The pages below draw the most readers on this site. If you work with architecture diagrams, start here:
+
+- **[PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/)** — the most-read page on this site: local setup, export, styling, business domain views, and full ArchiMate examples.
+- **[Architecture as Code: Why Your Diagrams Deserve Better](https://mohammed-brueckner.com/archimate/)** — why manual drawing tools fail modern engineering, and what replaces them.
+- **[Building jArchi 1.11.0 for Archi 5.6 from Source](https://mohammed-brueckner.com/jArchi-Build/)** — a verified, repeatable build procedure with all eight traps documented.
+- **[Databricks Architecture Overview](https://mohammed-brueckner.com/databricks/)** — the lakehouse building blocks, visually explained (with a cost calculator).
+- **[Change Management never really changes... Now wait.](https://mohammed-brueckner.com/changemanagement/)** — the Double Trinity Pyramid model for why 70% of projects fail.
 
 ## Highlighted Publications
 

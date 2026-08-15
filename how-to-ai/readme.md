@@ -8,6 +8,9 @@ Nadella frames 2026 as the year AI transitions from discovery to diffusion — f
 
 So you see, interesting times ahead. The main question will be, can you afford not to be part of this (r)evolution?
 
+BY THE WAY:
+**Platform Economies** — launching September 1, 2026. [**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle now; paperback September 1 ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5)). What the capex numbers on this page mean for platforms, APIs, and partnerships — the structural view behind the AI headlines. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
+
 ## The Two-Speed AI World
 
 A "two-speed AI world" is now undeniable. On one track, labs and tech companies race ahead: new models with ten-million token windows, humanoid robots in factories, AI agents orchestrating complex workflows. On the other track, mainstream enterprises struggle. While 71% of companies are using or piloting AI, only 30% are ready to scale. While 94% of IT leaders report measurable Copilot benefits, only 6% have completed global rollouts. While 87% report their AI initiatives met ROI expectations, only 12% of AI projects reached full enterprise-wide deployment.

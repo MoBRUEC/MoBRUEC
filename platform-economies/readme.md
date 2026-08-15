@@ -71,6 +71,17 @@ M. Brückner is a Senior Enterprise Architect and Digital Transformation Strateg
 
 ---
 
+### Further Reading on This Site
+
+The ideas in the book connect to work already published here:
+
+- **[Internal Developer Platforms: From Tools to Products in 2026](https://mohammed-brueckner.com/developer-platforms/)** — why 80% of IDPs fail, and the product mindset that separates survivors from statistics.
+- **[From Discovery to Deployment with AI, a reality check as of 2026](https://mohammed-brueckner.com/how-to-ai/)** — the capex numbers, the adoption gap, and the model overhang problem behind the headlines.
+- **[Change Management never really changes... Now wait.](https://mohammed-brueckner.com/changemanagement/)** — platform compression is a change program; the Double Trinity Pyramid explains why most fail.
+- **[Architecture as Code: Why Your Diagrams Deserve Better](https://mohammed-brueckner.com/archimate/)** and the **[PlantUML with ArchiMate guide](https://mohammed-brueckner.com/plantuml-how-to/)** — the APIOps and documentation-as-code discipline from Part Four, applied.
+
+---
+
 ### Stay in the Loop
 
 The book drops September 2026. In the meantime, the only links you need are the Amazon marketplaces above.

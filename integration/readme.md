@@ -1,6 +1,6 @@
 # Integration in a serverless world
 
-I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** and **["The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts."](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)**, both available via Amazon.
+I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** and **["The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts."](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)**, both available via Amazon. My next book, **["Platform Economies"](https://mohammed-brueckner.com/platform-economies/)**, launches September 1, 2026 — [pre-order the Kindle edition on Amazon](https://www.amazon.com/dp/B0GXN4PRB5) now.
 
 [![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
 [![Dall-E Cookbook](https://m.media-amazon.com/images/I/91ff7xcipwL._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)
