@@ -82,12 +82,12 @@ The stage everyone skips is the feedback loop from 6 back to 1. APIs that never 
 
 Four stages, and most organizations sit at stage two believing they are at stage four:
 
-1. **Ad hoc.** APIs happen inside projects. No spec, no catalog, no owner after launch. Discovery means asking around.
-2. **Standardized.** OpenAPI specs exist. There is a style guide. Compliance is manual and therefore optional in practice.
-3. **Automated.** Specs are linted in CI. Breaking changes fail builds. The catalog publishes itself from the repo. This is where APIOps begins.
-4. **Product-managed.** APIs have owners, roadmaps, consumers who pay (with money or with internal commitment), and success metrics tied to business value — revenue per API call, not requests per second.
+1. **Ad hoc.** APIs happen inside projects. Discovery means asking around.
+2. **Standardized.** Specs and a style guide exist. Compliance is manual — and therefore optional in practice.
+3. **Automated.** Specs are linted in CI, breaking changes fail builds, the catalog publishes itself.
+4. **Product-managed.** APIs have owners, roadmaps, and success metrics tied to business value.
 
-The jump from 3 to 4 is not technical. It is the moment the organization starts treating APIs as products with customers instead of plumbing with consumers. That jump is a business-model decision, which is why it is a chapter in a book about platform economics and not a chapter in a Jenkins manual.
+What each stage looks like from the inside, how to tell where you actually are (as opposed to where the slide deck says you are), and what the jump from 3 to 4 costs — that is the measurement chapter of the book. One thing worth knowing now: the jump is not technical. It is the moment the organization starts treating APIs as products with customers instead of plumbing with consumers. That jump is a business-model decision, which is why it is a chapter in a book about platform economics and not a chapter in a Jenkins manual.
 
 ## Documenting the Pipeline as Code
 

@@ -49,25 +49,27 @@ The middle ground did not erode slowly. It disappeared in a single investment cy
 
 ## Three Rule Shifts
 
-The compression follows three rule shifts:
+The compression follows three rule shifts. Their names are simple. Their consequences are not:
 
-1. **Efficiency over headcount.** Growth no longer means hiring. Microsoft grew operating income while cutting thousands. The organizations that win do more with the people they have, not more with more people.
-2. **Value over volume.** Shipping more endpoints, more features, more content is a losing game when a platform can absorb any volume. Revenue per API call beats requests per second.
-3. **Platforms over features.** A product with an API is not a platform. The difference is structural — and it determines who survives the next five years.
+1. **Efficiency over headcount.**
+2. **Value over volume.**
+3. **Platforms over features.**
+
+What they mean in practice — who already lives by them, what they did to the companies that did not, and which of the three your organization is violating right now — is the core of the book. One hint: most executives who nod at the third shift are building a product with an API, and the difference is structural.
 
 ## Frequently Asked Questions
 
 ### Is my company a platform if it has an API?
 
-No. Most executives believe they are building a platform. They are building a product with an API. A platform is defined by what others build on it and what the owner earns from that — not by having endpoints. The test: would developers pay if you charged? Would partners build businesses on top of you? If the answer is no, you have a product. That is fine — but it is a different strategic position with different rules.
+No. Most executives believe they are building a platform. They are building a product with an API. A platform is defined by what others build on it and what the owner earns from that — not by having endpoints. The test: would developers pay if you charged? Would partners build businesses on top of you? If the answer is no, you have a product. That is fine — but it is a different strategic position with different rules. The book has a full chapter on telling the two apart before the market does it for you.
 
 ### What is the Status-Quo Trap?
 
-The Status-Quo Trap is responding to compression by optimizing the current model instead of changing it. Seventy-two percent of organizations adopted AI in at least one business function; only twenty-one percent report measurable bottom-line impact. The fifty-one-point gap is the trap in action: AI deployed as a productivity tool for the old model instead of a transformation engine for a new one.
+The Status-Quo Trap is responding to compression by optimizing the current model instead of changing it. Seventy-two percent of organizations adopted AI in at least one business function; only twenty-one percent report measurable bottom-line impact. The fifty-one-point gap is the trap in action: AI deployed as a productivity tool for the old model instead of a transformation engine for a new one. Why smart organizations fall into it anyway — and the two response models that avoid it — is where the book goes next.
 
 ### Can a company escape being a feature?
 
-Yes, but the paths are narrow. The book describes three response models: the Platform Pivot (become the foundation others build on), the Hybrid AI Play (use AI to move up the stack before the stack absorbs you), and the Status-Quo Trap (the default, and the one to avoid). The first step is diagnostic: read the signals before the market reads them for you. The [Platform Compression Scorecard](https://mohammed-brueckner.com/scorecard/) is the five-minute version.
+Yes, but the paths are narrower than the keynote slides suggest. There are three response models — one that works for almost nobody, one that works for more organizations than you'd think, and one that is less a strategy than an epitaph. Which is which, and how to choose between them, is the strategic heart of the book. The first step is diagnostic: read the signals before the market reads them for you. The [Platform Compression Scorecard](https://mohammed-brueckner.com/scorecard/) is the five-minute version.
 
 ### Is platform compression only a tech-industry problem?
 
