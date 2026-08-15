@@ -1,3 +1,8 @@
+---
+title: "Building jArchi 1.11.0 for Archi 5.6 from Source: Complete Guide"
+description: "Verified, repeatable procedure to compile the jArchi scripting plugin from source and install it into Archi 5.6 — all 8 traps documented, no Patreon binary required."
+---
+
 # Building jArchi 1.11.0 for Archi 5.6 from Source: Complete Guide
 
 A verified, repeatable procedure for compiling the jArchi scripting plugin from source and installing it into Archi 5.6 — no Patreon binary required.
@@ -546,6 +551,10 @@ No — always install via `Help > Manage Plug-ins > Install New...`. Manual copy
 > - 🚀 [**Platform Economies**](https://www.amazon.com/dp/B0GXN4PRB5) — launching September 1, 2026. Pre-order the Kindle edition now ([US](https://www.amazon.com/dp/B0GXN4PRB5) · [UK](https://www.amazon.co.uk/dp/B0GXN4PRB5) · [DE](https://www.amazon.de/dp/B0GXN4PRB5) · [JP](https://www.amazon.co.jp/dp/B0GXN4PRB5) · [CA](https://www.amazon.ca/dp/B0GXN4PRB5)) and visit the [Platform Economies Site](https://platformeconomies.com) for extended materials.
 >
 > **Full catalog:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications)
+
+---
+
+**Related:** [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/) · [ArchiMate Templates](https://mohammed-brueckner.com/plantuml-how-to/templates/) · [PlantUML Troubleshooting](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/)
 
 ---
 

@@ -1,3 +1,8 @@
+---
+title: "Enterprise Technology Leadership Insights"
+description: "Curated strategic frameworks for cloud architecture, analytics platforms, and AI implementation — the reads worth your time, filtered by an enterprise architect."
+---
+
 # Enterprise Technology Leadership Insights
 
 *Strategic frameworks for cloud architecture, analytics platforms, and AI implementation*

@@ -1,3 +1,8 @@
+---
+title: "The Platform Economist Podcast"
+description: "Podcast episodes on platform economics, cloud transformation, AI in enterprise architecture, and digital transformation — practical takes, no fluff."
+---
+
 # 🎧 The Platform Economist
 
 ![The Platform Economist](https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo/42335916/42335916-1730223882481-fd60742f62b52.jpg)

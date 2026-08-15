@@ -1,3 +1,8 @@
+---
+title: "Change Management Never Really Changes... Now Wait."
+description: "Why more than 70% of projects still fail, and the Double Trinity Pyramid model that explains it: people, processes, technology meets motivated people."
+---
+
 # Change Management never really changes... Now wait.
 
 Yes of course, even the academia behind Change Management is evolving. It is true though some underlying principles do not go away. Even **ChatGPT** was eventually kind enough to [admit that the change management efforts required for a "Tech" project is comparable to any other change management project to the greatest extent](https://www.linkedin.com/posts/mbrueckner_chatgpt-on-change-management-and-why-do-not-activity-7028610804652371968-3gok).
