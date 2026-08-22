@@ -28,6 +28,20 @@ Explore my full collection of publications at [mohammed-brueckner.com/publicatio
 &gt;
 &gt; — **Tobias Zwingmann**, AI expert
 
+Certifications to date as follow.
+
+* [Aprimo ARM](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537643/moassets/AB4_ARM_Certificate.pdf)
+* [APM Group: Prince 2 Practitioner](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/AB1_P2.pdf)
+* [Togaf 9](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537643/moassets/AB2_TogafF.pdf)
+* [AWS Solution Architect Associate](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537645/moassets/awsSolutionsArchitect_AE.pdf)
+* [Architecting Microsoft Azure Solutions (70-534)](https://www.credly.com/badges/b1921aed-a23e-45dd-833b-d2ee52925f00/public_url)
+* [APMG International: Change Management Practitioner](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/2000690216-CMP15.pdf)
+* ["Security in Google Cloud Platform" Coursera Certificate](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1598464557/moassets/security%20gcp.jpg)
+* [Various Google Cloud Coursera Certificates](https://res.cloudinary.com/dm5qhwg4t/image/upload/v1595537644/moassets/cloudera-courses.jpg)
+
+
+__
+
 
 [**Machine Learning Operations (MLOps) with Databricks on Azure End-To-End**](https://www.amazon.com/dp/B0FTSY78DR) is your hands-on guide to mastering Databricks in 2025. Whether you're a data engineer, analyst, or ML enthusiast, this book shows you how to build scalable pipelines, harness Delta Lake, deploy reproducible ML models, and avoid common pitfalls — all with real-world clarity and speed.
 
