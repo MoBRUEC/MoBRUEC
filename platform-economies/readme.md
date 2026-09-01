@@ -20,6 +20,10 @@ image: /platform-economies/platform-economies-cover-lowres.jpg
   "isbn": "979-8-1954-5157-8",
   "numberOfPages": 241,
   "bookFormat": "https://schema.org/Paperback",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Independently published"
+  },
   "inLanguage": "en",
   "datePublished": "2026-09-01",
   "image": "https://mohammed-brueckner.com/platform-economies/platform-economies-cover-lowres.jpg",
