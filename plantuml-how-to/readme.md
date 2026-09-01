@@ -9,9 +9,9 @@ description: "Create ArchiMate diagrams as code with PlantUML: local setup, expo
 A comprehensive guide for using PlantUML with ArchiMate extensions for enterprise architecture modeling.
 
 BY THE WAY:
-**Platform Economies** — launching September 1, 2026.  
-[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).
-The middle ground didn’t fade; it vanished in a single cycle. A strategic‑operational guide for leaders building or surviving in platform economies, built around three irreversible rule shifts: efficiency over headcount, value over volume, and platforms over features.  
+**Platform Economies** — out now.  
+[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).
+If you write your architecture as code, you have already accepted the premise: the diagram is not the deliverable, the model is. The same shift is happening one level up. Your **API stopped being an integration detail and became the product** — and, increasingly, the only interface an AI agent will ever see. This book is about what that does to platforms, partnerships, and the people who maintain them: three rule shifts — efficiency over headcount, value over volume, platforms over features — and the **APIOps cycle** that runs on top of them. Part Four is the one that will look familiar from here.  
 Full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
 
 > 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) (production-grade MLOps systems).

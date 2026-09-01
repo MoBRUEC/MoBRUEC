@@ -9,8 +9,8 @@ description: "The PlantUML error catalog: include failures, size limits, linetyp
 Years of PlantUML in real projects, condensed into a catalog. Organized by symptom, because that is how you actually search for these things. If your error is not here, the answer is almost always: update PlantUML first, then come back.
 
 BY THE WAY:
-**Platform Economies** — launching September 1, 2026.  
-[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
+**Platform Economies** — out now.  
+[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
 Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
 
 > 📚 Companion pages: [PlantUML with ArchiMate Guide](https://mohammed-brueckner.com/plantuml-how-to/) · [Templates](../templates/) · [PlantUML vs. Mermaid](../plantuml-vs-mermaid/)

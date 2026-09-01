@@ -9,8 +9,8 @@ permalink: /apiops/
 CI/CD automated how we ship code. APIOps automates how we ship APIs — the design, review, publish, and deprecate cycle that most organizations still run on meetings and wiki pages. This guide covers the lifecycle, the maturity stages, and how to document all of it as code.
 
 BY THE WAY:
-**Platform Economies** — launching September 1, 2026.  
-[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5). The APIOps cycle on this page is the operational engine from Part Four of the book.  
+**Platform Economies** — out now.  
+[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5). The APIOps cycle on this page is the operational engine from Part Four of the book.  
 Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
 
 > 📚 Diagrams on this page are PlantUML. New to it? [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/) · [C4 diagrams with PlantUML](https://mohammed-brueckner.com/plantuml-how-to/c4-diagrams/)

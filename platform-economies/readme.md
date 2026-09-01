@@ -1,7 +1,7 @@
 ---
 permalink: /platform-economies/
 title: "Platform Economies: How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships"
-description: "The middle ground did not erode — it vanished. The September 2026 book on platform compression: efficiency over headcount, value over volume, platforms over features."
+description: "The middle ground did not erode — it vanished. Out now: the book on platform compression — efficiency over headcount, value over volume, platforms over features."
 image: /platform-economies/platform-economies-cover-lowres.jpg
 ---
 
@@ -25,11 +25,11 @@ image: /platform-economies/platform-economies-cover-lowres.jpg
   "image": "https://mohammed-brueckner.com/platform-economies/platform-economies-cover-lowres.jpg",
   "url": "https://mohammed-brueckner.com/platform-economies/",
   "offers": [
-    { "@type": "Offer", "url": "https://www.amazon.com/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
-    { "@type": "Offer", "url": "https://www.amazon.co.uk/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
-    { "@type": "Offer", "url": "https://www.amazon.de/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
-    { "@type": "Offer", "url": "https://www.amazon.co.jp/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" },
-    { "@type": "Offer", "url": "https://www.amazon.ca/dp/B0GXN4PRB5", "availability": "https://schema.org/PreOrder" }
+    { "@type": "Offer", "url": "https://www.amazon.com/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.co.uk/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.de/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.co.jp/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.ca/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" }
   ]
 }
 </script>
@@ -44,7 +44,7 @@ image: /platform-economies/platform-economies-cover-lowres.jpg
 
 ---
 
-### Coming September 2026
+### Out Now — September 2026
 
 A book seven years in the making. Four LinkedIn articles. Two thousand readers. Every prediction came true. Every prediction was insufficient.
 

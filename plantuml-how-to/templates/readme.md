@@ -9,8 +9,8 @@ description: "Ready-made PlantUML ArchiMate templates: application landscape, te
 Five templates covering the views I build most often. Every one renders with a current PlantUML out of the box — the ArchiMate standard library is bundled, no downloads needed. Adapt the element names, delete what you do not need, and keep the skeleton.
 
 BY THE WAY:
-**Platform Economies** — launching September 1, 2026.  
-[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
+**Platform Economies** — out now.  
+[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
 Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
 
 > 📚 New here? Start with the [PlantUML with ArchiMate Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/) — setup, export, styling, and full annotated examples.

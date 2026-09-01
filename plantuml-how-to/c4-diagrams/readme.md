@@ -9,8 +9,8 @@ permalink: /plantuml-how-to/c4-diagrams/
 The C4 model is the other notation that dominates architecture-as-code work — and the question I get after every ArchiMate session: "should we use C4 instead?" Short answer: they solve different problems, and PlantUML speaks both fluently. This guide covers the C4 side.
 
 BY THE WAY:
-**Platform Economies** — launching September 1, 2026.  
-[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
+**Platform Economies** — out now.  
+[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
 Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
 
 > 📚 Companion pages: [PlantUML with ArchiMate Guide](../) · [ArchiMate Templates](../templates/) · [Troubleshooting](../troubleshooting/) · [PlantUML vs. Mermaid](../plantuml-vs-mermaid/)

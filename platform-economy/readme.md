@@ -11,8 +11,8 @@ permalink: /platform-economy/
 That is the definition you will find anywhere. The more useful question for 2026 is what AI is doing to it.
 
 BY THE WAY:
-**Platform Economies** — the book behind this page — launches September 1, 2026.  
-[**Pre-order on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle edition available now; paperback follows on September 1. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
+**Platform Economies** — the book behind this page — is out now.  
+[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
 Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
 
 ---
@@ -86,7 +86,7 @@ No. It arrives first where software is the product, but the mechanism — infras
 
 ---
 
-*This page is the short answer. The long answer is 241 pages and launches September 1, 2026.*
+*This page is the short answer. The long answer is 241 pages, out now.*
 
 <script type="application/ld+json">
 {
