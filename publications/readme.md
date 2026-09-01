@@ -12,7 +12,7 @@ The foundation of successful IT delivery remains architecture and team dynamics 
 
 These resources explore leading IT innovation through AI, platform economics, and production-grade MLOps systems.
 
-* **[Platform Economies — How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships](https://www.amazon.com/dp/B0GXN4PRB5)** — **out now in Kindle and paperback**
+* **[Platform Economies — How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships](https://www.amazon.com/dp/B0H3VVNPZ3)** — **out now in Kindle and paperback**
 
 The middle ground didn't erode slowly. It disappeared overnight. A strategic-operational guide for leaders building or surviving in platform economies, built around three irreversible rule shifts: efficiency over headcount, value over volume, and platforms over features. Kindle and paperback editions are out now. Full details: [Platform Economies book page](https://mohammed-brueckner.com/platform-economies/).
 

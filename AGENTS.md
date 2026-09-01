@@ -32,7 +32,7 @@ Jekyll site (`jekyll-theme-architect`) on GitHub Pages, served at https://mohamm
 
 ## Book Promotion Pattern
 
-The site promotes the owner's books, currently **Platform Economies** (launch September 1, 2026, Amazon ASIN B0GXN4PRB5, marketplaces US/UK/DE/JP/CA, book page `/platform-economies/`, external site platformeconomies.com).
+The site promotes the owner's books, currently **Platform Economies** (launch September 1, 2026, Amazon ASIN B0H3VVNPZ3, marketplaces US/UK/DE/JP/CA, book page `/platform-economies/`, external site platformeconomies.com).
 
 Established pattern ("BY THE WAY:" block near the top of high-traffic pages, adapted per page — see `plantuml-how-to/readme.md` or `archimate/readme.md` for the template; compact variant on `databricks/`, `changemanagement/`, `how-to-ai/`, `mlopswithdatabricks/`). New content pages in traffic clusters should carry it. `developer-platforms/index.html` has an amber banner variant matching its own design system.
 

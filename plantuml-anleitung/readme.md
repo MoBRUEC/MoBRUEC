@@ -11,7 +11,7 @@ Architekturdiagramme gehören ins Git-Repository, nicht in Zeichentools. Diese A
 
 ÜBRIGENS:
 **Platform Economies** — mein neues Buch — erscheint am 1. September 2026.  
-[**Auf Amazon.de vorbestellen**](https://www.amazon.de/dp/B0GXN4PRB5) — die Kindle-Ausgabe ist jetzt verfügbar, das Taschenbuch folgt am 1. September. Auch erhältlich bei [🇺🇸 Amazon.com](https://www.amazon.com/dp/B0GXN4PRB5), [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5) und [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).  
+[**Auf Amazon.de vorbestellen**](https://www.amazon.de/dp/B0H3VVNPZ3) — die Kindle-Ausgabe ist jetzt verfügbar, das Taschenbuch folgt am 1. September. Auch erhältlich bei [🇺🇸 Amazon.com](https://www.amazon.com/dp/B0H3VVNPZ3), [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3) und [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3).  
 Buchseite: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
 
 ---

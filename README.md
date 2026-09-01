@@ -6,7 +6,7 @@ Welcome to my digital workspace. I'm Mohammed Brueckner (or Mohammed BRÜCKNER a
 
 **Platform Economies** — out now. The middle ground didn't erode slowly. It disappeared overnight. A strategic-operational guide for leaders building or surviving in platform economies, covering three rule shifts that reshape business: efficiency over headcount, value over volume, and platforms over features.
 
-[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5). Full details, ISBN, and what is inside: [Platform Economies book page](https://mohammed-brueckner.com/platform-economies/). New here? Start with [What Is a Platform Economy?](https://mohammed-brueckner.com/platform-economy/) or try the interactive [Platform Compression Scorecard](https://mohammed-brueckner.com/scorecard/).
+[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3). Full details, ISBN, and what is inside: [Platform Economies book page](https://mohammed-brueckner.com/platform-economies/). New here? Start with [What Is a Platform Economy?](https://mohammed-brueckner.com/platform-economy/) or try the interactive [Platform Compression Scorecard](https://mohammed-brueckner.com/scorecard/).
 
 ## Most-Read Resources
 

@@ -10,7 +10,7 @@ CI/CD automated how we ship code. APIOps automates how we ship APIs — the desi
 
 BY THE WAY:
 **Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5). The APIOps cycle on this page is the operational engine from Part Four of the book.  
+[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3). The APIOps cycle on this page is the operational engine from Part Four of the book.  
 Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
 
 > 📚 Diagrams on this page are PlantUML. New to it? [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/) · [C4 diagrams with PlantUML](https://mohammed-brueckner.com/plantuml-how-to/c4-diagrams/)

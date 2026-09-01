@@ -25,11 +25,11 @@ image: /platform-economies/platform-economies-cover-lowres.jpg
   "image": "https://mohammed-brueckner.com/platform-economies/platform-economies-cover-lowres.jpg",
   "url": "https://mohammed-brueckner.com/platform-economies/",
   "offers": [
-    { "@type": "Offer", "url": "https://www.amazon.com/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "url": "https://www.amazon.co.uk/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "url": "https://www.amazon.de/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "url": "https://www.amazon.co.jp/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "url": "https://www.amazon.ca/dp/B0GXN4PRB5", "availability": "https://schema.org/InStock" }
+    { "@type": "Offer", "url": "https://www.amazon.com/dp/B0H3VVNPZ3", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.co.uk/dp/B0H3VVNPZ3", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.de/dp/B0H3VVNPZ3", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.co.jp/dp/B0H3VVNPZ3", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "url": "https://www.amazon.ca/dp/B0H3VVNPZ3", "availability": "https://schema.org/InStock" }
   ]
 }
 </script>
@@ -60,11 +60,11 @@ This book is the forensic autopsy of what I got wrong, what I got right, and wha
 
 **Amazon Marketplaces**
 
-- **[US](https://www.amazon.com/dp/B0GXN4PRB5)** — https://www.amazon.com/dp/B0GXN4PRB5  
-- **[Germany](https://www.amazon.de/dp/B0GXN4PRB5)** — https://www.amazon.de/dp/B0GXN4PRB5  
-- **[UK](https://www.amazon.co.uk/dp/B0GXN4PRB5)** — https://www.amazon.co.uk/dp/B0GXN4PRB5  
-- **[Japan](https://www.amazon.co.jp/dp/B0GXN4PRB5)** — https://www.amazon.co.jp/dp/B0GXN4PRB5  
-- **[Canada](https://www.amazon.ca/dp/B0GXN4PRB5)** — https://www.amazon.ca/dp/B0GXN4PRB5 
+- **[US](https://www.amazon.com/dp/B0H3VVNPZ3)** — https://www.amazon.com/dp/B0H3VVNPZ3  
+- **[Germany](https://www.amazon.de/dp/B0H3VVNPZ3)** — https://www.amazon.de/dp/B0H3VVNPZ3  
+- **[UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3)** — https://www.amazon.co.uk/dp/B0H3VVNPZ3  
+- **[Japan](https://www.amazon.co.jp/dp/B0H3VVNPZ3)** — https://www.amazon.co.jp/dp/B0H3VVNPZ3  
+- **[Canada](https://www.amazon.ca/dp/B0H3VVNPZ3)** — https://www.amazon.ca/dp/B0H3VVNPZ3 
 
 ---
 

@@ -10,7 +10,7 @@ A verified, repeatable procedure for compiling the jArchi scripting plugin from 
 
 BY THE WAY:
 **Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).
+[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3).
 The middle ground didn't fade; it vanished in a single cycle. A strategic‑operational guide for leaders building or surviving in platform economies, built around three irreversible rule shifts: efficiency over headcount, value over volume, and platforms over features.  
 Full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
 
@@ -549,7 +549,7 @@ No — always install via `Help > Manage Plug-ins > Install New...`. Manual copy
 >
 > - 🏛️ [**IT's not magic, it's architecture**](https://www.amazon.com/dp/B0CVZ1BWPN) — IT leadership & enterprise architecture, from principles to practice.
 > - 🤖 [**Machine Learning Operations (MLOps) with Databricks on Azure End-to-End**](https://www.amazon.com/dp/B0FTSY78DR) — production-grade MLOps systems that survive contact with reality.
-> - 🚀 [**Platform Economies**](https://www.amazon.com/dp/B0GXN4PRB5) — out now. Buy the Kindle or paperback edition ([US](https://www.amazon.com/dp/B0GXN4PRB5) · [UK](https://www.amazon.co.uk/dp/B0GXN4PRB5) · [DE](https://www.amazon.de/dp/B0GXN4PRB5) · [JP](https://www.amazon.co.jp/dp/B0GXN4PRB5) · [CA](https://www.amazon.ca/dp/B0GXN4PRB5)) and visit the [Platform Economies Site](https://platformeconomies.com) for extended materials.
+> - 🚀 [**Platform Economies**](https://www.amazon.com/dp/B0H3VVNPZ3) — out now. Buy the Kindle or paperback edition ([US](https://www.amazon.com/dp/B0H3VVNPZ3) · [UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3) · [DE](https://www.amazon.de/dp/B0H3VVNPZ3) · [JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3) · [CA](https://www.amazon.ca/dp/B0H3VVNPZ3)) and visit the [Platform Economies Site](https://platformeconomies.com) for extended materials.
 >
 > **Full catalog:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications)
 

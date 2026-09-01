@@ -15,7 +15,7 @@ Nadella frames 2026 as the year AI transitions from discovery to diffusion — f
 So you see, interesting times ahead. The main question will be, can you afford not to be part of this (r)evolution?
 
 BY THE WAY:
-**Platform Economies** — out now. [**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback, out now ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5)). What the capex numbers on this page mean for platforms, APIs, and partnerships — the structural view behind the AI headlines. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
+**Platform Economies** — out now. [**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback, out now ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3)). What the capex numbers on this page mean for platforms, APIs, and partnerships — the structural view behind the AI headlines. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
 
 ## The Two-Speed AI World
 

@@ -10,7 +10,7 @@ A comprehensive guide for using PlantUML with ArchiMate extensions for enterpris
 
 BY THE WAY:
 **Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), and [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5).
+[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3).
 If you write your architecture as code, you have already accepted the premise: the diagram is not the deliverable, the model is. The same shift is happening one level up. Your **API stopped being an integration detail and became the product** — and, increasingly, the only interface an AI agent will ever see. This book is about what that does to platforms, partnerships, and the people who maintain them: three rule shifts — efficiency over headcount, value over volume, platforms over features — and the **APIOps cycle** that runs on top of them. Part Four is the one that will look familiar from here.  
 Full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
 

@@ -6,7 +6,7 @@ description: "Why low-code and serverless belong in your integration strategy �
 
 # Integration in a serverless world
 
-I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** and **["The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts."](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)**, both available via Amazon. My latest book, **["Platform Economies"](https://mohammed-brueckner.com/platform-economies/)**, is out now — [buy the Kindle or paperback edition on Amazon](https://www.amazon.com/dp/B0GXN4PRB5).
+I am the author of **["IT's not magic, it's architecture"](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)** and **["The DALL-E Cookbook For Great AI Art: For Artists. For Enthusiasts."](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)**, both available via Amazon. My latest book, **["Platform Economies"](https://mohammed-brueckner.com/platform-economies/)**, is out now — [buy the Kindle or paperback edition on Amazon](https://www.amazon.com/dp/B0H3VVNPZ3).
 
 [![IT is not magic it is architecture](https://m.media-amazon.com/images/I/81SzWfep24L._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVZ1BWPN)
 [![Dall-E Cookbook](https://m.media-amazon.com/images/I/91ff7xcipwL._SY522_.jpg)](https://www.amazon.com/-/de/dp/B0CVVXKSNF/)
@@ -14,7 +14,7 @@ I am the author of **["IT's not magic, it's architecture"](https://www.amazon.co
 One deals with Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI. The other one with the democratiziation of art! (And I mean art in the sense of classic art as well as modern art.)
 
 BY THE WAY:
-**Platform Economies** — out now. [**Buy on Amazon**](https://www.amazon.com/dp/B0GXN4PRB5) — Kindle and paperback, out now ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0GXN4PRB5), [🇩🇪 DE](https://www.amazon.de/dp/B0GXN4PRB5), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0GXN4PRB5), [🇨🇦 CA](https://www.amazon.ca/dp/B0GXN4PRB5)). Integration is how platforms eat industries — the book is the map. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
+**Platform Economies** — out now. [**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback, out now ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3)). Integration is how platforms eat industries — the book is the map. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
 
 **Thanks for your interest in my take on modern integration. And why lowcode and serverless are part of the equation.**
 
