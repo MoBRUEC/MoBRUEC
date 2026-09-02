@@ -1,4 +1,8 @@
-title: "Mohammed Brueckner, passionate Leader, Advisor and IT Architect"
+# jekyll-seo-tag appends this to every page title as "Page | site.title".
+# The old value added a 44-character suffix, pushing page titles to 112-152 chars
+# and the name itself past Google's ~60-char truncation on all 51 pages. The
+# visible header renders its own <h1>, so this affects the <title> tag only.
+title: "Mohammed Brueckner"
 lang: en
 description: "Enterprise architect and author in Munich: PlantUML and ArchiMate guides, platform economics, MLOps with Databricks, and practical AI adoption — hands-on, no hype."
 
