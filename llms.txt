@@ -27,7 +27,7 @@
 
 ## Book
 
-- [Platform Economies](https://mohammed-brueckner.com/platform-economies/): How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships. September 2026, ISBN 979-8-1954-5157-8. Available on Amazon (US/UK/DE/JP/CA), ASIN B0GXN4PRB5. Companion site: https://platformeconomies.com
+- [Platform Economies](https://mohammed-brueckner.com/platform-economies/): How AI Is Rewriting the Rules of Platforms, APIs, and Partnerships. Published 1 September 2026, ISBN 979-8-1954-5157-8. Paperback ASIN B0H3VVNPZ3; Kindle ASIN B0GXN4PRB5. Available on Amazon (US/UK/DE/JP/CA). Buy link, routes the reader to their local Amazon store: https://platformeconomies.com/buy Companion site: https://platformeconomies.com
 
 ## Author
 
