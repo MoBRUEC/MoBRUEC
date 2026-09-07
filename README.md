@@ -103,6 +103,8 @@ Watch my discussion on modern **enterprise architecture** with OPITZ CONSULTING,
 
 -   [AI implementation roadmaps](https://mohammed-brueckner.com/how-to-ai/): Start with structured plans for good AI adoption and deployment within your business.
 
+-   [Claude Certified Architect (CCAR-P) exam guide](https://mohammed-brueckner.com/claude-certified-architect/): The verified blueprint for Anthropic's architect certification, and the ten architectural decisions the exam keeps asking.
+
 ## Featured Podcasts
 
 Explore key topics on **technology strategy**, **AI innovation**, and **leadership** with these informative podcast episodes from my "Platform Economies" series:
