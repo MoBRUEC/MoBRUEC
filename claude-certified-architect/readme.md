@@ -36,7 +36,7 @@ Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueck
 
 Every figure here comes from the **Claude Certified Architect – Professional Exam Guide, version 1.0, effective July 2026**, published by Anthropic. Third-party summaries of this exam are circulating with invented numbers. These are the real ones.
 
-| | |
+| Item | Value |
 |---|---|
 | **Exam code** | CCAR-P |
 | **Items** | 63 |
@@ -251,7 +251,7 @@ Two honest limits, because certification content attracts confident nonsense and
 
 **The scaled score cannot be reconstructed from outside.** Anthropic does not publish the scaling function that maps raw performance onto 100–1,000, and the cut score of 720 was set by a formal standard-setting study with subject matter experts judging minimally-qualified performance. Any practice tool claiming to predict your scaled score is guessing. Percentage correct on a practice set is a readiness signal, not an exam-equivalent number, and anyone telling you "38 out of 50 means you will pass" has invented a conversion that does not exist.
 
-**Roughly a third of the material has a shelf life.** Cache multipliers and TTLs, batch limits, model tiers, context editing, MCP transports, Claude Code permission behaviour — all of it moves. Every specific figure on this page was checked against first-party sources in **September 2026**. The architectural principles in the ten decisions above do not expire; the numbers attached to them absolutely do. Re-verify anything version-sensitive against current documentation before you rely on it, and be sceptical of any preparation material that does not date-stamp its claims.
+**A substantial slice of the material has a shelf life.** Cache multipliers and TTLs, batch limits, model tiers, context editing, MCP transports, Claude Code permission behaviour — all of it moves, and none of it is in the published objectives, which name capabilities rather than numbers. Every specific figure on this page was checked against first-party sources in **September 2026**. The architectural principles in the ten decisions above do not expire; the numbers attached to them absolutely do. Re-verify anything version-sensitive against current documentation before you rely on it, and be sceptical of any preparation material that does not date-stamp its claims.
 
 The twelve-month validity period is Anthropic telling you the same thing.
 
