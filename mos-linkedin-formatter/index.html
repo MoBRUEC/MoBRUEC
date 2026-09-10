@@ -84,8 +84,8 @@ kbd { background: var(--bg); border: 1px solid var(--border2); border-radius: 4p
 .empty-state { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; pointer-events: none; text-align: center; padding: 48px; color: var(--placeholder); }
 .empty-icon { font-size: 2rem; opacity: 0.25; }
 .empty-state p { font-size: 0.8rem; line-height: 1.6; max-width: 180px; }
-#output-render { padding: 20px 22px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 0.95rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; }
-#output-render .post-line { margin-bottom: 10px; display: block; }
+#output-render { padding: 20px 22px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 0.95rem; line-height: 1.7; color: var(--text); white-space: normal; }
+#output-render .post-line { margin-bottom: 10px; display: block; white-space: pre-wrap; }
 #output-render .post-break { height: 4px; display: block; }
 
 #warnings { display: none; flex-shrink: 0; padding: 7px 22px; font-size: 0.73rem; font-weight: 500; color: var(--amber-txt); background: var(--amber-bg); border-top: 1px solid var(--amber-bdr); }
@@ -517,6 +517,17 @@ function optimizeForLinkedIn(text, warnings) {
   // Collapse 4+ blank lines to a maximum of 3 (2 real + 1 visual gap)
   optimized = optimized.replace(/\n{4,}/g, '\n\n\n');
 
+  // LinkedIn's composer is a rich-text editor and it DISCARDS genuinely empty
+  // lines when content is pasted in. Typing Enter twice by hand still works, which
+  // is why the same post spaces correctly when typed and collapses when pasted.
+  // A line holding one zero-width space is not empty, so the composer keeps it.
+  // Verified in the live composer 2026-09-10: bare blank line collapsed, U+200B
+  // line rendered as exactly one blank line, two of them rendered as two.
+  optimized = optimized.trim();
+  optimized = optimized.split('\n')
+    .map(line => (line.trim() === '' ? '\u200B' : line))
+    .join('\n');
+
   if (optimized.length > 3000) {
     warnings.push('Post is quite long (' + optimized.length + ' chars). Consider splitting into multiple posts.');
   }
@@ -529,7 +540,7 @@ function optimizeForLinkedIn(text, warnings) {
     warnings.push('Heavy Unicode formatting may impact accessibility for screen readers.');
   }
 
-  return optimized.trim();
+  return optimized;
 }
 
 // ---------------------------------------------------------------------------
@@ -695,7 +706,11 @@ function convert() {
   renderDiv.innerHTML = outputText.split('\n').map(line => {
     if (!line.trim()) return '<span class="post-break"></span>';
     return '<span class="post-line">' + escapeHtml(line) + '</span>';
-  }).join('');
+  }).join('\n');
+  // Joined with a real newline, not an empty string. The spans are display:block so
+  // the layout is unchanged, but the DOM now contains the line breaks, which means
+  // selecting the pane with the mouse copies the same text as the Copy button.
+  // Previously a mouse selection yielded zero newlines and pasted as one run-on block.
 
   showWarnings(result.warnings);
   updateStats(outputText);
