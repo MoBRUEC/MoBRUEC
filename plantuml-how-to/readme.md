@@ -716,6 +716,8 @@ The Miro PlantUML plugin renders diagrams as images (not editable models).
 
 ## Styling and Customization
 
+*Looking for `skinparam linetype ortho` specifically, or wondering why it does nothing? That is a layout question rather than a styling one, and it has its own page: [PlantUML skinparam: linetype, rectangle, dpi](skinparam/). This section is about ArchiMate style sheets.*
+
 ### Modern Style Sheets
 
 **Note:** Requires latest PlantUML version (Nov 2025+). Older versions use deprecated `skinparam`.
@@ -1053,6 +1055,7 @@ A few things have settled since this guide was first written, and they are worth
 
 - **[PlantUML ArchiMate Templates](templates/)** — copy-paste starting points: application landscape, technology layer, business view, migration view
 - **[PlantUML Troubleshooting](troubleshooting/)** — the full error catalog with fixes
+- **[skinparam: linetype, rectangle, dpi](skinparam/)** — why `linetype ortho` is silently ignored, and the rest of the layout debugging reference
 - **[PlantUML vs. Mermaid](plantuml-vs-mermaid/)** — an honest comparison for architecture work
 - **[PlantUML C4 Diagrams](c4-diagrams/)** — context, container, and component diagrams with the C4-PlantUML library
 - **[Deutsche Anleitung](https://mohammed-brueckner.com/plantuml-anleitung/)** — the compact German version of this guide
