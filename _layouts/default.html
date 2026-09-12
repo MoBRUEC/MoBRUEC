@@ -19,8 +19,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="https://raw.githubusercontent.com/MoBRUEC/MoBRUEC/refs/heads/master/mohammed-brueckner-fav.ico" type="image/x-icon">
     
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-    
+    <!-- mermaid is loaded on demand, only on pages that actually contain a diagram.
+         The library is ~2.9 MB and was previously render-blocking on every page. -->
+
     <style>
       /* Social Links Styles */
       .social-links { list-style-type: none; padding: 0; margin: 20px 0; }
@@ -71,13 +72,23 @@
 
     {% seo %}
 
+    {%- comment -%}
+      Language alternates. Any page that exists in more than one language declares the
+      full set (including itself and x-default) in its own front matter, because
+      hreflang annotations must be reciprocal and self-referential to be honoured.
+    {%- endcomment -%}
+    {%- for alt in page.alternates %}
+    <link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.href }}" />
+    {%- endfor %}
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Mohammed Brueckner",
-      "alternateName": ["Mohammed Brückner", "M. Brückner"],
-      "jobTitle": "Passionate Leader, Advisor and IT Architect",
+      "@id": "https://mohammed-brueckner.com/#person",
+      "name": "Mohammed Brückner",
+      "alternateName": ["Mohammed Brueckner", "M. Brückner"],
+      "jobTitle": "Enterprise Architect and Author",
       "description": "{{ site.description | escape }}",
       "url": "https://mohammed-brueckner.com",
       "image": "https://m.media-amazon.com/images/S/amzn-author-media-prod/6u2sv6ns24vdsr9c9r7r15amtm._SX300_CR0%2C0%2C300%2C300_.jpg",
@@ -159,8 +170,19 @@
 
     <script>
       window.addEventListener('load', function() {
+        var MERMAID_SELECTOR = '.language-mermaid, .mermaid, pre code.language-mermaid';
+        if (!document.querySelector(MERMAID_SELECTOR)) { return; }
+
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js';
+        s.onerror = function() { console.error('Mermaid failed to load'); };
+        s.onload = function() { renderMermaid(MERMAID_SELECTOR); };
+        document.head.appendChild(s);
+      });
+
+      function renderMermaid(selector) {
         mermaid.initialize({
-          startOnLoad: true,
+          startOnLoad: false,
           theme: 'base',
           themeVariables: {
             primaryColor: '#FFE66D',
@@ -185,9 +207,9 @@
         });
         
         try {
-          mermaid.run({ querySelector: '.language-mermaid, .mermaid, pre code.language-mermaid' });
+          mermaid.run({ querySelector: selector });
         } catch (e) { console.error('Mermaid rendering error:', e); }
-      });
+      }
 
       document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('a[href^="http"]').forEach(function(anchor) {

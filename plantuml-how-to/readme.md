@@ -2,19 +2,70 @@
 permalink: /plantuml-how-to/
 title: "PlantUML with ArchiMate: Complete Guide (2026)"
 description: "Create ArchiMate diagrams as code with PlantUML: local setup, export, styling, business domain views, troubleshooting and copy-paste enterprise examples."
+alternates:
+  - lang: en
+    href: https://mohammed-brueckner.com/plantuml-how-to/
+  - lang: de
+    href: https://mohammed-brueckner.com/plantuml-anleitung/
+  - lang: x-default
+    href: https://mohammed-brueckner.com/plantuml-how-to/
 ---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "PlantUML with ArchiMate: Complete Guide",
+  "description": "Create ArchiMate diagrams as code with PlantUML: local setup, export, styling, business domain views, troubleshooting and copy-paste enterprise examples.",
+  "url": "https://mohammed-brueckner.com/plantuml-how-to/",
+  "inLanguage": "en",
+  "proficiencyLevel": "Beginner",
+  "dependencies": "Java runtime, PlantUML, Graphviz (optional), the ArchiMate PlantUML extension",
+  "author": {
+    "@type": "Person",
+    "name": "Mohammed Brueckner",
+    "url": "https://mohammed-brueckner.com"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Mohammed Brueckner",
+    "url": "https://mohammed-brueckner.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mohammed-brueckner.com/plantuml-how-to/"
+  },
+  "about": [
+    { "@type": "Thing", "name": "PlantUML" },
+    { "@type": "Thing", "name": "ArchiMate" },
+    { "@type": "Thing", "name": "Enterprise Architecture" },
+    { "@type": "Thing", "name": "Diagrams as Code" }
+  ],
+  "hasPart": [
+    { "@type": "WebPage", "name": "PlantUML ArchiMate Templates", "url": "https://mohammed-brueckner.com/plantuml-how-to/templates/" },
+    { "@type": "WebPage", "name": "PlantUML Troubleshooting", "url": "https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/" },
+    { "@type": "WebPage", "name": "PlantUML vs Mermaid", "url": "https://mohammed-brueckner.com/plantuml-how-to/plantuml-vs-mermaid/" },
+    { "@type": "WebPage", "name": "PlantUML C4 Diagrams", "url": "https://mohammed-brueckner.com/plantuml-how-to/c4-diagrams/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mohammed-brueckner.com/" },
+    { "@type": "ListItem", "position": 2, "name": "PlantUML with ArchiMate", "item": "https://mohammed-brueckner.com/plantuml-how-to/" }
+  ]
+}
+</script>
 
 # PlantUML with ArchiMate: Complete Guide
 
 A comprehensive guide for using PlantUML with ArchiMate extensions for enterprise architecture modeling.
 
-BY THE WAY:
-**Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3).
-If you write your architecture as code, you have already accepted the premise: the diagram is not the deliverable, the model is. The same shift is happening one level up. Your **API stopped being an integration detail and became the product** — and, increasingly, the only interface an AI agent will ever see. This book is about what that does to platforms, partnerships, and the people who maintain them: three rule shifts — efficiency over headcount, value over volume, platforms over features — and the **APIOps cycle** that runs on top of them. Part Four is the one that will look familiar from here.  
-Full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
-
-> 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) (production-grade MLOps systems).
+I also wrote a book about what happens one level up, when the API becomes the product: [Platform Economies](https://platformeconomies.com).
 
 ---
 
@@ -41,16 +92,9 @@ Full context and extended materials: **[Platform Economies Site](https://platfor
 
 PlantUML is a powerful tool for creating diagrams from plain text descriptions. When combined with ArchiMate extensions, it becomes an effective solution for enterprise architecture modeling. This guide covers both local and online usage scenarios.
 
-If you want to master not only your diagrams but IT Architecture overall, check out:
-[“IT’s not magic, it’s architecture”](https://www.amazon.com/dp/B0CVZ1BWPN) *today*!
-
-For the full collection of architecture and MLOps resources, visit [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications).
-
 ---
 
 ## Quick Start Examples
-
-> 💡 The cloud and ML pipeline patterns below align with concepts explored in [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR).
 
 ### Simple Example
 
@@ -354,8 +398,6 @@ java -jar plantuml.jar file.puml
 ---
 
 ## Advanced Features
-
-> 🏛️ Deepening your ArchiMate and enterprise architecture practice? [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) covers the principles and patterns that complement these modeling techniques.
 
 ### ArchiMate Library 🏛️
 
@@ -818,8 +860,6 @@ Rel_Flow(secureInterZone, privateVNET, "Secures")
 
 ## Business Domain Views
 
-> 📊 Business architecture, capability mapping, and IT service design are core themes in [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN).
-
 When standard ArchiMate business components aren't available, use stereotype rectangles:
 
 ```plantuml
@@ -989,6 +1029,8 @@ Every view is a `.puml` file. Changes are pull requests. The architecture review
 
 Ready-made starting points for each of these views: [PlantUML ArchiMate Templates](templates/).
 
+If you write your architecture as code, you have already accepted the premise: the diagram is not the deliverable, the model is. The same shift is happening one level up, where the API stops being an integration detail and becomes the product — and, increasingly, the only interface an AI agent will ever see. That is the subject of [Platform Economies](https://platformeconomies.com), which I wrote in 2026. Part Four is the one that will look familiar from here.
+
 ---
 
 ## Working with PlantUML in 2026
@@ -1022,7 +1064,6 @@ A few things have settled since this guide was first written, and they are worth
 
 ## Resources
 
-- [Author Publications — Mohammed Brückner](https://mohammed-brueckner.com/publications) — IT architecture, MLOps, and enterprise integration resources
 - [PlantUML Official Site](https://plantuml.com)
 - [PlantUML Download](https://plantuml.com/download)
 - [Graphviz](https://graphviz.org)
@@ -1033,4 +1074,12 @@ A few things have settled since this guide was first written, and they are worth
 
 ---
 
-**Last Updated:** August 2026
+## About the author
+
+Mohammed Brückner is an enterprise architect in Munich, working on IT strategy, enterprise architecture and digital transformation in global organisations. He writes about platforms, APIs and the architecture practice at [mohammed-brueckner.com](https://mohammed-brueckner.com).
+
+Books: [Platform Economies](https://platformeconomies.com) (2026), on what happens when the API becomes the product; [*IT's not magic, it's architecture*](https://mohammed-brueckner.com/publications); and [*MLOps with Databricks on Azure End-to-End*](https://mohammed-brueckner.com/mlopswithdatabricks/).
+
+---
+
+**Last Updated:** September 2026

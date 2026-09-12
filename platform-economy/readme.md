@@ -2,6 +2,8 @@
 title: "What Is a Platform Economy? Definition, Compression, and Why It Matters in 2026"
 description: "Platform economy explained: how AI is collapsing the middle ground between infrastructure, platform, and feature owners — and what platform compression means for your business."
 permalink: /platform-economy/
+redirect_from:
+  - /AMaaS/
 ---
 
 # What Is a Platform Economy?

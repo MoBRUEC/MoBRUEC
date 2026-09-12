@@ -3,6 +3,13 @@ title: "PlantUML mit ArchiMate: Die kompakte deutsche Anleitung (2026)"
 description: "PlantUML und ArchiMate auf Deutsch: Architekturdiagramme als Code — Installation, Export, Styling, Vorlagen und die häufigsten Fehler im Überblick."
 permalink: /plantuml-anleitung/
 lang: de
+alternates:
+  - lang: en
+    href: https://mohammed-brueckner.com/plantuml-how-to/
+  - lang: de
+    href: https://mohammed-brueckner.com/plantuml-anleitung/
+  - lang: x-default
+    href: https://mohammed-brueckner.com/plantuml-how-to/
 ---
 
 # PlantUML mit ArchiMate: Die kompakte deutsche Anleitung

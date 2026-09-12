@@ -11,6 +11,14 @@ url: "https://mohammed-brueckner.com"
 baseurl: ""  # leave empty for root of the domain
 theme: jekyll-theme-architect
 
+# jekyll-seo-tag arrives as a dependency of the theme, but list it explicitly so an
+# added plugins key cannot silently drop it. jekyll-redirect-from emits stub pages at
+# retired URLs; the redirect targets are declared in the destination page front matter.
+# Deliberately NOT jekyll-sitemap: sitemap.xml is hand-maintained (see AGENTS.md).
+plugins:
+  - jekyll-seo-tag
+  - jekyll-redirect-from
+
 # Markdown processing - ADDED FOR MERMAID SUPPORT
 markdown: kramdown
 kramdown:
