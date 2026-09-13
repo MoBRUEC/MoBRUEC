@@ -44,6 +44,14 @@ include:
   - "**/*.png"
   - "**/*.json"
 
+# Agent settings are for the people and agents who maintain the site, not for visitors.
+# GitHub Pages renders every .md file, so before this list /AGENTS.md and /AGENTS.html were
+# served publicly at HTTP 200 (found 2026-09-13). Any new root-level runbook or agent file
+# goes here in the same commit that adds it.
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+
 # Default front matter: every page gets an og:image unless it sets its own
 defaults:
   - scope:
