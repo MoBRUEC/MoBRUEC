@@ -8,6 +8,8 @@ Welcome to my digital workspace. I'm Mohammed Brueckner (or Mohammed BRÜCKNER a
 
 [**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3). Full details, ISBN, and what is inside: [Platform Economies book page](https://mohammed-brueckner.com/platform-economies/). New here? Start with [What Is a Platform Economy?](https://mohammed-brueckner.com/platform-economy/) or try the interactive [Platform Compression Scorecard](https://mohammed-brueckner.com/scorecard/).
 
+Just published: **[The Threshold Test](https://mohammed-brueckner.com/threshold-test/)** — five questions that separate AI value from AI activity, with a free one-page diagnostic sheet (PDF) to run against every AI pilot you fund.
+
 ## Most-Read Resources
 
 The pages below draw the most readers on this site. If you work with architecture diagrams, start here:
