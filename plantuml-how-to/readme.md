@@ -1058,6 +1058,7 @@ A few things have settled since this guide was first written, and they are worth
 - **[skinparam: linetype, rectangle, dpi](skinparam/)** — why `linetype ortho` is silently ignored, and the rest of the layout debugging reference
 - **[PlantUML vs. Mermaid](plantuml-vs-mermaid/)** — an honest comparison for architecture work
 - **[PlantUML C4 Diagrams](c4-diagrams/)** — context, container, and component diagrams with the C4-PlantUML library
+- **[Archify: diagrams your agent has to prove](../archify/)** — AI-generated architecture diagrams with repository evidence and validation gates — where it fits next to PlantUML and Mermaid
 - **[Deutsche Anleitung](https://mohammed-brueckner.com/plantuml-anleitung/)** — the compact German version of this guide
 - **[APIOps as Code](https://mohammed-brueckner.com/apiops/)** — the API lifecycle, documented with the same diagrams-as-code discipline
 - **[Building jArchi 1.11.0 for Archi 5.6](https://mohammed-brueckner.com/jArchi-Build/)** — when you want scripting inside Archi itself
