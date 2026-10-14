@@ -128,10 +128,9 @@ Explore my thoughts on **technology**, **society**, and **economics** in my Medi
 
 Connect on [LinkedIn](https://linkedin.com/in/mbrueckner) to discuss **enterprise transformation**, **technology strategy**, and **new solutions** that drive lasting business growth and market advantage.
 
-### Speaking Engagements
+### Speaking & Workshops
 
-- **AI in Product: IT Community Workshop — Munich, 5 May**  
-  I joined the practitioner‑led **AI in Product** IT Community Workshop in Munich to open a panel discussion on practical AI adoption in product and platform teams. The workshop brought together over 50 practitioners for peer‑to‑peer conversations about real‑world challenges — from hallucinations and ego‑driven adoption to the persistent people and change management issues that determine AI success. Read more and view materials from the talk: https://mohammed-brueckner.com/aicommunity/
+I give talks and run hands-on workshops on **platform economies**, **enterprise AI**, and **architecture** — at conferences like TDWI and Heise Digital, at community events like the practitioner-led **AI in Product** IT Community Workshop in Munich ([materials](https://mohammed-brueckner.com/aicommunity/)), and inside companies. Topics, formats, and booking: **[mohammed-brueckner.com/speaking](https://mohammed-brueckner.com/speaking/)**.
 
 ---
 
