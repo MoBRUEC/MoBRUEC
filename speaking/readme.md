@@ -79,7 +79,7 @@ One example, anonymized: an **AI and sustainability envisioning workshop for a g
 
 ## Booking
 
-The fastest way to reach me is [LinkedIn](https://www.linkedin.com/in/mbrueckner/). Email works too: [mo@mohammed-brueckner.com](mailto:mo@mohammed-brueckner.com).
+The fastest way to reach me is [LinkedIn](https://www.linkedin.com/in/mbrueckner/).
 
 Tell me the audience, the occasion, and what should be different afterwards. I will tell you honestly whether I am the right person for it — and if I am not, I probably know who is.
 
