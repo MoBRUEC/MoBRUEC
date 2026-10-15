@@ -12,6 +12,7 @@ Jekyll site (`jekyll-theme-architect`) on GitHub Pages, served at https://mohamm
 - The broad codespace `GITHUB_TOKEN` must NOT be used for this repo.
 - The remote URL is token-free. PAT resolution order: (1) `$MOBRUEC_SITE_PAT` env var — injected into every NEW codespace from the Codespaces secret, use it as-is; (2) ONLY in codespaces that predate the secret: `~/.mobr_site_pat` (chmod 600, transient — delete it when the session's work ends, never recreate it if the env var exists). Usage without printing: `MOBRUEC_SITE_PAT=${MOBRUEC_SITE_PAT:-$(cat ~/.mobr_site_pat)}; git push "https://x-access-token:${MOBRUEC_SITE_PAT}@github.com/MoBRUEC/MoBRUEC.git" <branch>`. NEVER write the literal token into commands, chat output, files inside a repo, or logs.
 - Deploy verification loop after every push: poll `gh api repos/MoBRUEC/MoBRUEC/pages/builds/latest` until `built` for the pushed commit SHA (check the SHA — "built" alone may be the previous build), then `curl` the changed pages and assert HTTP 200 + content markers. Rollback: `git revert` + push, never force-push.
+- **Stale tracking-ref trap (hit 2026-10-15):** pushing via the token URL (`git push "https://x-access-token:...@github.com/..." master`) does NOT update the local `origin/master` ref, so `git status` falsely reports "ahead N" / unpushed commits afterward. Always `git fetch origin` before trusting any unpushed-commits count in this clone.
 
 ## Hard Rules
 
