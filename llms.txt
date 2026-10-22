@@ -4,6 +4,10 @@
 
 ## Core content
 
+- [Enterprise Architecture](https://mohammed-brueckner.com/enterprise-architecture/): connected practitioner guides on modeling, governance, AI accountability, and operating evidence
+- [Modeling AI Agents in ArchiMate 4](https://mohammed-brueckner.com/enterprise-architecture/archimate-ai-agents/): separate software behavior and assigned roles from human accountability
+- [TOGAF, COBIT, ITIL 4, and NIST CSF 2.0](https://mohammed-brueckner.com/enterprise-architecture/togaf-cobit-itil-nist/): trace one decision from business objective to operating evidence without an artificial framework crosswalk
+- [Archify](https://mohammed-brueckner.com/archify/): validated architecture diagrams with repository evidence, including a real run and four documented failures
 - [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/): the site's most-read resource — setup, export, styling, ArchiMate examples, troubleshooting
 - [PlantUML ArchiMate Templates](https://mohammed-brueckner.com/plantuml-how-to/templates/): copy-paste starting points for application, technology, business, and migration views
 - [PlantUML Troubleshooting](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/): the error catalog with fixes

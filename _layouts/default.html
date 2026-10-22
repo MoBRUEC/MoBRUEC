@@ -68,6 +68,18 @@
         max-width: 100%;
         height: auto;
       }
+
+      .home-imprint { font-size: 12px; line-height: 1.5; color: #666; }
+      .home-imprint p { margin-bottom: 0; }
+
+      @media only screen and (max-width: 767px) {
+        body { font-size: 18px; line-height: 1.6; }
+        aside#sidebar { font-size: 16px; line-height: 1.5; }
+        blockquote { font-size: 1rem; }
+        .nav-links a { display: flex; align-items: center; min-height: 44px; }
+        .nav-links i { flex: 0 0 16px; }
+        #main-content, aside#sidebar { overflow-wrap: break-word; }
+      }
     </style>
 
     {% seo %}
@@ -153,8 +165,8 @@
               <li><a href="{{ '/publications/' | relative_url }}"><i class="fas fa-book"></i> Publications</a></li>
               <li><a href="{{ '/curation/' | relative_url }}"><i class="fas fa-book"></i> Curation</a></li>
               <li><a href="{{ '/changemanagement/' | relative_url }}"><i class="fas fa-sync-alt"></i> Change Management</a></li>
-              <li><a href="{{ '/power-automate-recipes/' | relative_url }}"><i class="fas fa-cogs"></i> Power Automate Recipes</a></li>
-              <li><a href="{{ '/won-contests-mohammed-brueckner/' | relative_url }}"><i class="fas fa-trophy"></i> Achievements</a></li>
+              <li><a href="{{ '/archimate/' | relative_url }}"><i class="fas fa-drafting-compass"></i> Architecture as Code</a></li>
+              <li><a href="{{ '/databricks/' | relative_url }}"><i class="fas fa-database"></i> Databricks</a></li>
               <li><a href="{{ '/podcast/' | relative_url }}"><i class="fas fa-podcast"></i> Podcast</a></li>
             </ul>
           </div>

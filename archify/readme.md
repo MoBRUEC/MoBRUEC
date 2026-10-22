@@ -16,7 +16,7 @@ image: /archify/s4-monitor-architecture.png
   "proficiencyLevel": "Intermediate",
   "dependencies": "Node.js 18+, archify 3.0 (MIT), optional Chromium for browser QA",
   "author": { "@id": "https://mohammed-brueckner.com/#person" },
-  "isPartOf": { "@type": "WebPage", "@id": "https://mohammed-brueckner.com/plantuml-how-to/" },
+  "isPartOf": { "@type": "CollectionPage", "@id": "https://mohammed-brueckner.com/enterprise-architecture/#page" },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://mohammed-brueckner.com/archify/" }
 }
 </script>
@@ -27,7 +27,7 @@ image: /archify/s4-monitor-architecture.png
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mohammed-brueckner.com/" },
-    { "@type": "ListItem", "position": 2, "name": "PlantUML with ArchiMate", "item": "https://mohammed-brueckner.com/plantuml-how-to/" },
+    { "@type": "ListItem", "position": 2, "name": "Enterprise Architecture", "item": "https://mohammed-brueckner.com/enterprise-architecture/" },
     { "@type": "ListItem", "position": 3, "name": "Archify", "item": "https://mohammed-brueckner.com/archify/" }
   ]
 }
@@ -64,6 +64,8 @@ flowchart LR
 That evidence step is the part worth paying attention to. Every node in my diagram carries a small `SRC` badge linking back to the file it came from. The validator refused to let me pin evidence to a directory that was not the git top level — which is annoying in a monorepo and also exactly the "prove it" behavior you want. Compare that to a Mermaid block you pasted from a chat window: nothing in that pipeline ever checks whether the boxes are real.
 
 Where does that leave [PlantUML](../plantuml-how-to/) and [Mermaid](../plantuml-how-to/plantuml-vs-mermaid/)? Not replaced. **PlantUML stays the right tool for versioned, diffable diagrams that live in a repo next to the code** — text in, text out, readable in a pull request. **Archify is for the audit and the explainer**: the diagram you hand to a reviewer, a reader, or your future self, where "the agent invented two of these boxes" is a bug and not a vibe. And if you do enterprise architecture rather than runtime architecture, [ArchiMate with jArchi](../archimate/) is still its own discipline.
+
+For the wider practice beyond diagramming, the [Enterprise Architecture hub](../enterprise-architecture/) connects model evidence to governance decisions, service operation, and human accountability.
 
 ---
 

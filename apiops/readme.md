@@ -8,10 +8,7 @@ permalink: /apiops/
 
 CI/CD automated how we ship code. APIOps automates how we ship APIs — the design, review, publish, and deprecate cycle that most organizations still run on meetings and wiki pages. This guide covers the lifecycle, the maturity stages, and how to document all of it as code.
 
-BY THE WAY:
-**Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3). The APIOps cycle on this page is the operational engine from Part Four of the book.  
-Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
+The APIOps cycle also drives Part Four of my book [Platform Economies](https://platformeconomies.com), where the lifecycle becomes part of the operating model.
 
 > 📚 Diagrams on this page are PlantUML. New to it? [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/) · [C4 diagrams with PlantUML](https://mohammed-brueckner.com/plantuml-how-to/c4-diagrams/)
 
@@ -31,7 +28,7 @@ Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueck
 
 CI/CD answered: how do we get code from laptop to production safely? APIOps answers a harder question: how do we get an API from idea to a managed, versioned, monetizable product — repeatedly, at scale, without a committee?
 
-The gap is real. Most organizations have pipelines for code and process theater for APIs. Design happens in documents. Review happens in meetings. Publication happens when someone remembers. Deprecation happens never. The result: seventy percent of organizations track API volume, less than ten percent track API business value. They measure motion, not direction.
+The gap is real. Many organizations have pipelines for code and process theater for APIs. Design happens in documents. Review happens in meetings. Publication happens when someone remembers. Deprecation happens never. The result is activity without evidence of value: teams count calls and releases while avoiding the harder question of which APIs deserve to exist.
 
 APIOps treats the API lifecycle like a pipeline: versioned specifications, automated linting and breaking-change detection, contract tests, catalog publication, and retirement policies — all as code, all in Git, all reviewable.
 
@@ -134,6 +131,8 @@ If you want the diagnostic version of this: the [Platform Compression Scorecard]
 ## Further Reading
 
 - **[Platform Economies — the book](https://mohammed-brueckner.com/platform-economies/)** — Part Four covers the APIOps cycle, maturity measurement, and where agentic AI fits the pipeline
+- [Enterprise Architecture](https://mohammed-brueckner.com/enterprise-architecture/) — connect API decisions to models, governance, and operating evidence
+- [TOGAF, COBIT, ITIL 4, and NIST CSF 2.0](https://mohammed-brueckner.com/enterprise-architecture/togaf-cobit-itil-nist/) — a practical traceability method for decisions that cross organizational boundaries
 - [PlantUML with ArchiMate: Complete Guide](https://mohammed-brueckner.com/plantuml-how-to/) — model the architecture around your APIs
 - [PlantUML C4 Diagrams](https://mohammed-brueckner.com/plantuml-how-to/c4-diagrams/) — the notation used for the toolchain diagram
 - [Internal Developer Platforms: From Tools to Products](https://mohammed-brueckner.com/developer-platforms/) — the product mindset applied to platforms
@@ -141,4 +140,4 @@ If you want the diagnostic version of this: the [Platform Compression Scorecard]
 
 ---
 
-**Last Updated:** August 2026
+**Last Updated:** October 2026

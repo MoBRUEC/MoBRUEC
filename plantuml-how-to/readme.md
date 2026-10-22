@@ -1053,6 +1053,7 @@ A few things have settled since this guide was first written, and they are worth
 
 ## Templates and Further Reading
 
+- **[Enterprise Architecture](../enterprise-architecture/)** — connected guides on modeling, governance, AI accountability, and operating evidence
 - **[PlantUML ArchiMate Templates](templates/)** — copy-paste starting points: application landscape, technology layer, business view, migration view
 - **[PlantUML Troubleshooting](troubleshooting/)** — the full error catalog with fixes
 - **[skinparam: linetype, rectangle, dpi](skinparam/)** — why `linetype ortho` is silently ignored, and the rest of the layout debugging reference

@@ -20,6 +20,14 @@ The pages below draw the most readers on this site. If you work with architectur
 - **[Databricks Architecture Overview](https://mohammed-brueckner.com/databricks/)** — the lakehouse building blocks, visually explained (with a cost calculator).
 - **[Change Management never really changes... Now wait.](https://mohammed-brueckner.com/changemanagement/)** — the Double Trinity Pyramid model for why 70% of projects fail.
 
+## Enterprise Architecture That Survives Contact with Delivery
+
+Architecture only earns its keep when it survives delivery. My EA guides connect strategy to models, governance, and operating evidence. That includes an [Archify diagram](https://mohammed-brueckner.com/archify/) whose boxes link back to repository files rather than an agent's imagination.
+
+- **[Enterprise Architecture](https://mohammed-brueckner.com/enterprise-architecture/)** — start here for the connected guides.
+- **[Modeling AI Agents in ArchiMate 4](https://mohammed-brueckner.com/enterprise-architecture/archimate-ai-agents/)** — separate task execution from human accountability.
+- **[TOGAF, COBIT, ITIL 4, and NIST CSF 2.0](https://mohammed-brueckner.com/enterprise-architecture/togaf-cobit-itil-nist/)** — a practical traceability method, not another framework beauty contest.
+
 ## Highlighted Publications
 
 Explore my full collection of publications at [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications).
@@ -85,6 +93,8 @@ My career shows a strong commitment to **innovation**, **strategic guidance**, a
 
 -   I keep learning and developing, particularly in new tech platforms and **AI innovation**, which my [Credly profile](https://www.credly.com/users/mohammed-bruckner/badges) displays.
 
+For the contest entries and related milestones, see [Achievements and Development](https://mohammed-brueckner.com/won-contests-mohammed-brueckner/).
+
 ## Innovation Leadership
 
 ### Platform Economics
@@ -106,6 +116,8 @@ Watch my discussion on modern **enterprise architecture** with OPITZ CONSULTING,
 -   [AI implementation roadmaps](https://mohammed-brueckner.com/how-to-ai/): Start with structured plans for good AI adoption and deployment within your business.
 
 -   [Claude Certified Architect (CCAR-P) exam guide](https://mohammed-brueckner.com/claude-certified-architect/): The verified blueprint for Anthropic's architect certification, and the ten architectural decisions the exam keeps asking.
+
+-   [Power Automate recipes](https://mohammed-brueckner.com/power-automate-recipes/): Practical automation guides for To Do, OneNote, newsletters, and invoice attachments.
 
 ## Featured Podcasts
 
@@ -138,4 +150,6 @@ I give talks and run hands-on workshops on **platform economies**, **enterprise 
 
 ---
 
-Imprint / Impressum -- This website is operated by: Mohammed Brückner | Sachsenkamstr 15, Munich | Email: impressum@mohammed-brueckner.com
+<footer class="home-imprint">
+<p>Imprint / Impressum -- This website is operated by: Mohammed Brückner | Sachsenkamstr 15, Munich | Email: impressum@mohammed-brueckner.com</p>
+</footer>

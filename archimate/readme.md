@@ -8,11 +8,7 @@ description: "Stop drawing architecture diagrams like it is 1995. PlantUML and A
 
 Enterprise architecture has reached an absurd contradiction. We treat infrastructure as code. We version control API specifications. We automate deployment pipelines. We demand reproducibility, traceability, and automation at every layer of our technology stack.
 
-BY THE WAY:
-**Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3).
-The middle ground didn't fade; it vanished in a single cycle. A strategic-operational guide for leaders building or surviving in platform economies, built around three irreversible rule shifts: efficiency over headcount, value over volume, and platforms over features.  
-Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)** — full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
+I examine the market consequences of that shift in [Platform Economies](https://platformeconomies.com); this guide stays with the architecture workflow.
 
 ---
 
@@ -56,7 +52,13 @@ Suddenly, your enterprise architecture lives as readable text files. You describ
 
 The transformation from manual diagramming to architecture as code isn't optional anymore. It's the logical extension of everything we've learned about treating infrastructure, configuration, and specifications as code.
 
-[Find hands-on guides for getting started with ArchiMate using PlantUML](/plantuml-how-to) — and when you are building, go straight to the [ArchiMate templates](https://mohammed-brueckner.com/plantuml-how-to/templates/) or the [troubleshooting catalog](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/). Working on APIs? See [APIOps as Code](https://mohammed-brueckner.com/apiops/).
+[Find hands-on guides for getting started with ArchiMate using PlantUML](/plantuml-how-to/) — and when you are building, go straight to the [ArchiMate templates](https://mohammed-brueckner.com/plantuml-how-to/templates/) or the [troubleshooting catalog](https://mohammed-brueckner.com/plantuml-how-to/troubleshooting/). Working on APIs? See [APIOps as Code](https://mohammed-brueckner.com/apiops/).
+
+## Text Is Reviewable; Evidence Is Stronger
+
+A text diagram gives you a diff. It does not prove that the boxes exist. In my [Archify field test](https://mohammed-brueckner.com/archify/), an agent had to attach repository evidence to every node before rendering the diagram. The first 4,241-byte candidate passed nine validation checks, and the four failures along the way stayed in the write-up because they are more useful than a spotless demo.
+
+Use the two approaches together: PlantUML for reviewable source, Archify when the diagram itself needs an evidence trail. The [Enterprise Architecture hub](https://mohammed-brueckner.com/enterprise-architecture/) connects those tools to governance and operations, including [how to model AI agents without inventing accountability](https://mohammed-brueckner.com/enterprise-architecture/archimate-ai-agents/).
 
 ## Why This Matters Now
 

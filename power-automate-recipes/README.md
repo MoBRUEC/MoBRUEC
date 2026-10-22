@@ -1,3 +1,10 @@
+---
+permalink: /power-automate-recipes/
+title: "Power Automate Recipes for Everyone"
+description: "Practical Power Automate recipes for To Do, OneNote, newsletters, and invoice attachments, with concise implementation guidance."
+lang: en
+---
+
 # Power Automate Recipes for Everyone
 
 * [Clean ToDo Tasks](./clean-microsoft-to-do-task-lists/)
