@@ -10,11 +10,6 @@ Most certification pages tell you the syllabus. That is the easy half, and Anthr
 
 I went through the blueprint objective by objective and built a full scenario set against it. What follows is what that exercise surfaced: the verified format, the domain weights, and — the part nobody publishes — the recurring decision archetypes that the objectives imply.
 
-BY THE WAY:
-**Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3). Domain 3 of this exam is nineteen percent integration — MCP, tool contracts, agent-to-agent. That is the same structural argument the book makes about APIs and partnerships, one abstraction level up.  
-Book page: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
-
 > 📚 Adjacent reading on this site: [What Is a Platform Economy?](https://mohammed-brueckner.com/platform-economy/) · [From Discovery to Deployment with AI](https://mohammed-brueckner.com/how-to-ai/) · [APIOps as Code](https://mohammed-brueckner.com/apiops/)
 
 ---

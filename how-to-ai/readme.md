@@ -19,9 +19,6 @@ So you see, interesting times ahead. The main question will be, can you afford n
 
 If the answer is no, the skills question follows immediately. Anthropic now certifies the role: see [what the Claude Certified Architect (CCAR-P) exam actually tests](https://mohammed-brueckner.com/claude-certified-architect/) — orchestration, cost control, and governance, which is exactly the gap described below.
 
-BY THE WAY:
-**Platform Economies** — out now. [**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback, out now ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3)). What the capex numbers on this page mean for platforms, APIs, and partnerships — the structural view behind the AI headlines. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
-
 ## The Two-Speed AI World
 
 A "two-speed AI world" is now undeniable. On one track, labs and tech companies race ahead: new models with ten-million token windows, humanoid robots in factories, AI agents orchestrating complex workflows. On the other track, mainstream enterprises struggle. While 71% of companies are using or piloting AI, only 30% are ready to scale. While 94% of IT leaders report measurable Copilot benefits, only 6% have completed global rollouts. While 87% report their AI initiatives met ROI expectations, only 12% of AI projects reached full enterprise-wide deployment.

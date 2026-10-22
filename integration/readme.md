@@ -13,9 +13,6 @@ I am the author of **["IT's not magic, it's architecture"](https://www.amazon.co
 
 One deals with Leading, Aligning, and Innovating IT & Business with Principles, Agility, and AI. The other one with the democratiziation of art! (And I mean art in the sense of classic art as well as modern art.)
 
-BY THE WAY:
-**Platform Economies** — out now. [**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback, out now ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3)). Integration is how platforms eat industries — the book is the map. Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
-
 **Thanks for your interest in my take on modern integration. And why lowcode and serverless are part of the equation.**
 
 Some books you should love and cherish with regards to integration and organizing value chain across (diverse) teams are as follow.

@@ -8,14 +8,6 @@ description: "Verified, repeatable procedure to compile the jArchi scripting plu
 
 A verified, repeatable procedure for compiling the jArchi scripting plugin from source and installing it into Archi 5.6 — no Patreon binary required.
 
-BY THE WAY:
-**Platform Economies** — out now.  
-[**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback. Also available in [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), and [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3).
-The middle ground didn't fade; it vanished in a single cycle. A strategic‑operational guide for leaders building or surviving in platform economies, built around three irreversible rule shifts: efficiency over headcount, value over volume, and platforms over features.  
-Full context and extended materials: **[Platform Economies Site](https://platformeconomies.com)**.
-
-> 📚 **Explore the author's publications:** [mohammed-brueckner.com/publications](https://mohammed-brueckner.com/publications) — featuring [*IT's not magic, it's architecture*](https://www.amazon.com/dp/B0CVZ1BWPN) (IT leadership & enterprise architecture) and [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) (production-grade MLOps systems).
-
 ---
 
 ## Table of Contents

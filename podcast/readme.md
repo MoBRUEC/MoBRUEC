@@ -5,9 +5,6 @@ description: "Podcast episodes on platform economics, cloud transformation, AI i
 ---
 
 # 🎧 The Platform Economist
-BY THE WAY:
-**Platform Economies** — out now. [**Buy on Amazon**](https://www.amazon.com/dp/B0H3VVNPZ3) — Kindle and paperback, out now ([🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇩🇪 DE](https://www.amazon.de/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3), [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3)). Book page: [mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/).
-
 
 ![The Platform Economist](https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo/42335916/42335916-1730223882481-fd60742f62b52.jpg)
 

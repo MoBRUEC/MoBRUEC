@@ -16,11 +16,6 @@ alternates:
 
 Architekturdiagramme gehören ins Git-Repository, nicht in Zeichentools. Diese Anleitung fasst auf Deutsch zusammen, wie Sie mit PlantUML und der ArchiMate-Erweiterung Unternehmensarchitektur als Code erstellen. Die ausführlichen englischen Original-Guides sind unten verlinkt.
 
-ÜBRIGENS:
-**Platform Economies** — mein neues Buch — ist jetzt erhältlich.  
-[**Bei Amazon.de kaufen**](https://www.amazon.de/dp/B0H3VVNPZ3) — Taschenbuch und Kindle-Ausgabe. Auch erhältlich bei [🇺🇸 Amazon.com](https://www.amazon.com/dp/B0H3VVNPZ3), [🇬🇧 UK](https://www.amazon.co.uk/dp/B0H3VVNPZ3), [🇯🇵 JP](https://www.amazon.co.jp/dp/B0H3VVNPZ3) und [🇨🇦 CA](https://www.amazon.ca/dp/B0H3VVNPZ3).  
-Buchseite: **[mohammed-brueckner.com/platform-economies](https://mohammed-brueckner.com/platform-economies/)**.
-
 ---
 
 ## Inhaltsverzeichnis
