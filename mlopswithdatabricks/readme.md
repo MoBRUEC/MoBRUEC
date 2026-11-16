@@ -1319,6 +1319,8 @@ Mohammed Brückner is an enterprise architect in Munich, building production mac
 
 Books: [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR), the book this page grew out of; [Platform Economies](https://platformeconomies.com) (2026), on what happens when the API becomes the product; and [*IT's not magic, it's architecture*](https://mohammed-brueckner.com/publications).
 
+New to Databricks entirely? Start with the [Free Edition tutorial](https://mohammed-brueckner.com/databricks/free-edition-tutorial/) — twenty hands-on labs on the free tier, no credit card required.
+
 ---
 
 **License**: All code samples are provided for reference and learning purposes. Please review the book's license terms for usage rights.

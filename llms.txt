@@ -21,6 +21,7 @@
 - [From Discovery to Deployment with AI](https://mohammed-brueckner.com/how-to-ai/): enterprise AI adoption reality check
 - [Change Management / Double Trinity Pyramid](https://mohammed-brueckner.com/changemanagement/): why 70% of projects fail
 - [Databricks Architecture Overview](https://mohammed-brueckner.com/databricks/) and [Azure Cost Calculator](https://mohammed-brueckner.com/databricks/cost-calculator/)
+- [Databricks Free Edition Tutorial](https://mohammed-brueckner.com/databricks/free-edition-tutorial/): twenty hands-on labs (manual SQL and Genie agent routes) from CSV ingestion to a served app, with field notes, answer key and offline archive
 
 ## Interactive tools
 

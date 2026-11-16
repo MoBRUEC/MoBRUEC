@@ -18,6 +18,7 @@ The pages below draw the most readers on this site. If you work with architectur
 - **[Architecture as Code: Why Your Diagrams Deserve Better](https://mohammed-brueckner.com/archimate/)** — why manual drawing tools fail modern engineering, and what replaces them.
 - **[Building jArchi 1.11.0 for Archi 5.6 from Source](https://mohammed-brueckner.com/jArchi-Build/)** — a verified, repeatable build procedure with all eight traps documented.
 - **[Databricks Architecture Overview](https://mohammed-brueckner.com/databricks/)** — the lakehouse building blocks, visually explained (with a cost calculator).
+- **[Databricks Free Edition Tutorial](https://mohammed-brueckner.com/databricks/free-edition-tutorial/)** — twenty hands-on labs with the Palmer Penguins: raw CSV to pipelines, dashboards, a Genie agent you can test, and a live app. Free tier, no credit card.
 - **[Change Management never really changes... Now wait.](https://mohammed-brueckner.com/changemanagement/)** — the Double Trinity Pyramid model for why 70% of projects fail.
 
 ## Enterprise Architecture That Survives Contact with Delivery

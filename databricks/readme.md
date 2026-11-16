@@ -6,15 +6,11 @@ title: "Databricks Architecture Overview: A Visual Guide to the Lakehouse"
 description: "Understand Databricks lakehouse architecture at a glance: workspace, Unity Catalog, Photon, MLflow, Delta Live Tables — with an Azure cost calculator."
 ---
 
-## [Check out my book on Amazon for everything MLOps with Databricks →](https://www.amazon.com/dp/B0FTSY78DR)
-
-### [Need a Ballpark Cost Estimate? Try the Azure Data & ML Platform Cost Calculator →](./cost-calculator/azure-cost-calculator.html)
-
----
-
 # Databricks Architecture Overview
 
-A visual guide to understanding the core building blocks of the Databricks platform and how they interconnect to form a unified data lakehouse architecture.
+A visual guide to understanding the core building blocks of the Databricks platform and how they interconnect to form a unified data lakehouse architecture. Prefer learning the platform by doing? Start with the **[Databricks Free Edition tutorial](./free-edition-tutorial/)** — twenty hands-on labs from a raw CSV to a live app, no credit card required.
+
+Need a ballpark cost estimate? Try the [Azure Data & ML Platform Cost Calculator](./cost-calculator/azure-cost-calculator.html).
 
 ## [**View Interactive Version →**](./databricks-architecture.html)
 
@@ -89,6 +85,10 @@ The lakehouse architecture combines the best aspects of data warehouses and data
 - **Governance**: Centralized security and compliance through Unity Catalog
 - **Scalability**: Cloud-native architecture that scales compute and storage independently
 - **Open Standards**: Built on open-source technologies like Apache Spark and Delta Lake
+
+---
+
+**Going to production?** [*MLOps with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR) is the hands-on book version of this platform — scalable pipelines, Delta Lake, reproducible models, deployment. Its free [code companion](https://mohammed-brueckner.com/mlopswithdatabricks/) lives on this site, and the [Free Edition tutorial](./free-edition-tutorial/) is the from-zero on-ramp.
 
 ---
 
