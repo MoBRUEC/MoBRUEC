@@ -23,6 +23,7 @@ I went through the blueprint objective by objective and built a full scenario se
 - [The ten decisions the exam keeps asking](#the-ten-decisions-the-exam-keeps-asking)
 - [The three official sample questions](#the-three-official-sample-questions)
 - [Logistics: fee, retakes, validity](#logistics-fee-retakes-validity)
+- [Frequently asked questions](#frequently-asked-questions)
 - [What nobody can tell you](#what-nobody-can-tell-you)
 
 ---
@@ -240,6 +241,40 @@ Note the structure of the rationales: the guide explains why each *wrong* option
 
 ---
 
+## Frequently asked questions
+
+The questions people actually type into search, answered from the official exam guide (version 1.0, effective July 2026) — the same source as every figure above.
+
+### Is the CCAR-P exam proctored?
+
+Yes. Delivery is proctored, either online or at a Pearson VUE test center. Registration runs through the Anthropic Partner Academy, and you need government-issued photo ID matching your registration name exactly.
+
+### What is the exam format?
+
+63 items in 120 minutes, multiple-choice and multiple-response — each item states how many options to select. Stems are short; the difficulty sits in discriminating between near-neighbour options. The passing score is 720 on a scaled range of 100–1,000.
+
+### How much does the exam cost?
+
+$175 USD. The fee shown at checkout reflects any partner-tier discount. Cancel or reschedule up to 24 hours before the appointment; inside 24 hours the fee is forfeit.
+
+### Are there prerequisites?
+
+None. Anthropic recommends three or more years in systems architecture or platform engineering plus six or more months of hands-on production work with Claude or comparable LLM systems — but the credential is awarded on exam performance alone.
+
+### How long is the certification valid?
+
+Twelve months from the award date. That is short for an architecture credential, and deliberately so: a meaningful share of the content is product mechanics with a shelf life.
+
+### Can I retake it if I fail?
+
+Yes: 14 days after a first failure, 30 days after a second, 90 days after a third — with a maximum of four attempts per exam in a rolling twelve months.
+
+### Are there official practice questions or a mock exam?
+
+The exam guide contains three official sample items with full rationale (covered [above](#the-three-official-sample-questions)); there is no official mock exam. Treat "dumps" and score-predicting practice tools with scepticism: the scaling function is not public, so no external tool can convert a practice percentage into a scaled score, and third-party summaries of this exam circulate with invented numbers.
+
+---
+
 ## What nobody can tell you
 
 Two honest limits, because certification content attracts confident nonsense and this page should not add to it.
@@ -266,4 +301,54 @@ The twelve-month validity period is Anthropic telling you the same thing.
 
 ---
 
+## About the author
+
+Mohammed Brückner is an enterprise architect in Munich, working on IT strategy, enterprise architecture and digital transformation in global organisations. More at [mohammed-brueckner.com](https://mohammed-brueckner.com) — and if your team or conference wants this material live, see [Speaking & Workshops](https://mohammed-brueckner.com/speaking/).
+
+---
+
 *Official source for every exam figure on this page: the Claude Certified Architect – Professional Exam Guide, version 1.0, effective July 2026, published by Anthropic. This page is independent preparation commentary and is not affiliated with or endorsed by Anthropic.*
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the CCAR-P exam proctored?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Claude Certified Architect – Professional exam is proctored, delivered either online or at a Pearson VUE test center. Registration runs through the Anthropic Partner Academy, and government-issued photo ID matching the registration name is required." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the CCAR-P exam format?",
+      "acceptedAnswer": { "@type": "Answer", "text": "63 items in 120 minutes, multiple-choice and multiple-response; each item states how many options to select. The passing score is 720 on a scaled range of 100–1,000." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does the CCAR-P exam cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "$175 USD, with any partner-tier discount reflected at checkout. Cancellation or rescheduling is free up to 24 hours before the appointment; inside 24 hours the fee is forfeit." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there prerequisites for CCAR-P?",
+      "acceptedAnswer": { "@type": "Answer", "text": "None. Anthropic recommends three or more years in systems architecture or platform engineering plus six or more months of hands-on production work with Claude or comparable LLM systems, but the credential is awarded on exam performance alone." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long is the CCAR-P certification valid?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Twelve months from the award date." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I retake the CCAR-P exam if I fail?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes: 14 days after a first failure, 30 days after a second, 90 days after a third, with a maximum of four attempts per exam in a rolling twelve months." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there official CCAR-P practice questions or a mock exam?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The official exam guide contains three sample items with full rationale; there is no official mock exam. The scaling function is not public, so no practice tool can predict a scaled score, and third-party summaries of this exam circulate with invented numbers." }
+    }
+  ]
+}
+</script>

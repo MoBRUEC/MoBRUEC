@@ -100,7 +100,7 @@ Related tool on this site: **[the Platform Compression Scorecard](https://mohamm
 
 ## About the author
 
-**Mohammed Brückner** is a Senior Enterprise Architect and Digital Transformation Strategist based in Munich, working across large-scale European and international organisations. He writes about platform strategy, API operations, and what AI does to both. His other books are listed on the [publications page](https://mohammed-brueckner.com/publications/).
+**Mohammed Brückner** is a Senior Enterprise Architect and Digital Transformation Strategist based in Munich, working across large-scale European and international organisations. He writes about platform strategy, API operations, and what AI does to both. His other books are listed on the [publications page](https://mohammed-brueckner.com/publications/), and he speaks and runs workshops on platform economies and enterprise AI — see [Speaking & Workshops](https://mohammed-brueckner.com/speaking/).
 
 ---
 

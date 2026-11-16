@@ -1315,7 +1315,7 @@ These eight points are the skeleton; the field notes above are where the bruises
 
 ## About the author
 
-Mohammed Brückner is an enterprise architect in Munich, building production machine learning platforms on Azure and Databricks. More at [mohammed-brueckner.com](https://mohammed-brueckner.com).
+Mohammed Brückner is an enterprise architect in Munich, building production machine learning platforms on Azure and Databricks. More at [mohammed-brueckner.com](https://mohammed-brueckner.com); he also speaks and runs workshops on enterprise AI and architecture — see [Speaking & Workshops](https://mohammed-brueckner.com/speaking/).
 
 Books: [*Machine Learning Operations (MLOps) with Databricks on Azure End-to-End*](https://www.amazon.com/dp/B0FTSY78DR), the book this page grew out of; [Platform Economies](https://platformeconomies.com) (2026), on what happens when the API becomes the product; and [*IT's not magic, it's architecture*](https://mohammed-brueckner.com/publications).
 

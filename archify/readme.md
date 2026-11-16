@@ -123,4 +123,4 @@ Archify is the first diagramming tool I have used where **"the agent said so" is
 
 ---
 
-**About the author:** Mohammed Brückner writes about platform economics, diagrams that tell the truth, and the tools that keep them honest. He is the author of [Platform Economies](https://platformeconomies.com) (2026) and maintains the [PlantUML with ArchiMate](../plantuml-how-to/) cluster on this site.
+**About the author:** Mohammed Brückner writes about platform economics, diagrams that tell the truth, and the tools that keep them honest. He is the author of [Platform Economies](https://platformeconomies.com) (2026), maintains the [PlantUML with ArchiMate](../plantuml-how-to/) cluster on this site, and speaks and runs workshops on these topics — see [Speaking & Workshops](https://mohammed-brueckner.com/speaking/).

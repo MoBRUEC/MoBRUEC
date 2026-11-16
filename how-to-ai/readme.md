@@ -126,7 +126,7 @@ Whether you're attempting to move from pilot to production, struggling with the 
 
 If you're working through talent scarcity, cost unpredictability, data readiness challenges, or simply need someone who understands both the business strategy and technical execution required to make $405 billion in capex defensible — let's talk.
 
-**Connect with me on LinkedIn:** [Mohammed Brueckner](https://www.linkedin.com/in/mbrueckner/)
+**Connect with me on LinkedIn:** [Mohammed Brueckner](https://www.linkedin.com/in/mbrueckner/) — or bring this reality check to your stage or team: [Speaking & Workshops](https://mohammed-brueckner.com/speaking/)
 
 ---
 

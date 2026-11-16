@@ -1,7 +1,7 @@
 ---
 permalink: /plantuml-how-to/plantuml-vs-mermaid/
-title: "PlantUML vs. Mermaid: An Honest Comparison for Architecture Work (2026)"
-description: "PlantUML or Mermaid? A practitioner's comparison for architecture diagrams: notation depth, ArchiMate support, layout control, tooling, CI, and when to use which."
+title: "PlantUML vs Mermaid: Which Should You Use? (2026)"
+description: "The short answer: Mermaid for READMEs and inline docs, PlantUML for the architecture repository. The full comparison: notation depth, ArchiMate support, layout control, scale and CI — and the three questions that decide it."
 ---
 
 # PlantUML vs. Mermaid: An Honest Comparison for Architecture Work
@@ -72,4 +72,8 @@ Both are text, so both are LLM-friendly — paste a system description, get a fi
 
 ---
 
-**Last Updated:** August 2026
+**About the author:** Mohammed Brückner is an enterprise architect in Munich and the author of [Platform Economies](https://platformeconomies.com) (2026). He speaks and runs workshops on architecture and platform economics — see [Speaking & Workshops](https://mohammed-brueckner.com/speaking/).
+
+---
+
+**Last Updated:** November 2026

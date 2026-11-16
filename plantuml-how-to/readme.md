@@ -1081,10 +1081,10 @@ A few things have settled since this guide was first written, and they are worth
 
 ## About the author
 
-Mohammed Brückner is an enterprise architect in Munich, working on IT strategy, enterprise architecture and digital transformation in global organisations. He writes about platforms, APIs and the architecture practice at [mohammed-brueckner.com](https://mohammed-brueckner.com).
+Mohammed Brückner is an enterprise architect in Munich, working on IT strategy, enterprise architecture and digital transformation in global organisations. He writes about platforms, APIs and the architecture practice at [mohammed-brueckner.com](https://mohammed-brueckner.com), and speaks and runs workshops on these topics — see [Speaking & Workshops](https://mohammed-brueckner.com/speaking/).
 
-Books: [Platform Economies](https://platformeconomies.com) (2026), on what happens when the API becomes the product; [*IT's not magic, it's architecture*](https://mohammed-brueckner.com/publications); and [*MLOps with Databricks on Azure End-to-End*](https://mohammed-brueckner.com/mlopswithdatabricks/).
+Books: [Platform Economies](https://platformeconomies.com) (2026), on what happens when the API becomes the product — new to that topic? Start with [What Is a Platform Economy?](https://mohammed-brueckner.com/platform-economy/); [*IT's not magic, it's architecture*](https://mohammed-brueckner.com/publications); and [*MLOps with Databricks on Azure End-to-End*](https://mohammed-brueckner.com/mlopswithdatabricks/).
 
 ---
 
-**Last Updated:** September 2026
+**Last Updated:** November 2026
